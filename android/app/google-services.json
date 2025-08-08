@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "510131261228",
+    "project_id": "cinemamaxapp-be698",
+    "storage_bucket": "cinemamaxapp-be698.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510131261228:android:5c79e851aa9b126a4c6689",
+        "android_client_info": {
+          "package_name": "com.example.cinemax_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cinemax_app",
+            "certificate_hash": "c04b66c1f67c7bc04f0baf19409270edc2524e6c"
+          }
+        },
+        {
+          "client_id": "510131261228-vg4qpdibormulojhrgnq7okpvhjuc9tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuosLn4dJtNxTCjDGcpFnkjJuz96FdCM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510131261228-vg4qpdibormulojhrgnq7okpvhjuc9tp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cinemaxApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

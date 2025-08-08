@@ -11,11 +11,10 @@ class FetchNowPlayingMoviesCubit
   final FetchNowPlayingMovieUseCase fetchNowPlayingMovieUseCase;
 
   FetchNowPlayingMoviesCubit(this.fetchNowPlayingMovieUseCase)
-    : super(
-        BasePaginatedInitial<BaseCardModel>()
-            as BasePaginatedStates<BaseCardModel>,
-        _createPageLoader(fetchNowPlayingMovieUseCase),
-      );
+      : super(
+          BasePaginatedInitial<BaseCardModel>(),
+          _createPageLoader(fetchNowPlayingMovieUseCase),
+        );
 
   static PageLoader<BaseCardModel, NowPlayingParams> _createPageLoader(
     FetchNowPlayingMovieUseCase useCase,

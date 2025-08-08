@@ -12,11 +12,10 @@ part 'fetch_popular_tv_shows_state.dart';
 class FetchPopularTvShowsCubit
     extends BasePaginatedCubit<BaseCardModel, PopularParams> {
   FetchPopularTvShowsCubit(this.fetchPopularTvShowsUseCase)
-    : super(
-        BasePaginatedInitial<BaseCardModel>()
-            as BasePaginatedStates<BaseCardModel>,
-        _createPageLoader(fetchPopularTvShowsUseCase),
-      );
+      : super(
+          BasePaginatedInitial<BaseCardModel>(),
+          _createPageLoader(fetchPopularTvShowsUseCase),
+        );
   final FetchPopularTvShowsUseCase fetchPopularTvShowsUseCase;
   static PageLoader<BaseCardModel, PopularParams> _createPageLoader(
     FetchPopularTvShowsUseCase useCase,

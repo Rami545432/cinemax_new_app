@@ -9,11 +9,10 @@ import '../../../domain/use_cases/fetch_tv_airing_today.use_case.dart';
 class FetchAiringTodayCubit
     extends BasePaginatedCubit<BaseCardModel, AiringTodayParams> {
   FetchAiringTodayCubit(this.fetchTvAiringTodayUseCase)
-    : super(
-        BasePaginatedInitial<BaseCardModel>()
-            as BasePaginatedStates<BaseCardModel>,
-        _createPageLoader(fetchTvAiringTodayUseCase),
-      );
+      : super(
+          BasePaginatedInitial<BaseCardModel>(),
+          _createPageLoader(fetchTvAiringTodayUseCase),
+        );
   final FetchTvAiringTodayUseCase fetchTvAiringTodayUseCase;
   static PageLoader<BaseCardModel, AiringTodayParams> _createPageLoader(
     FetchTvAiringTodayUseCase useCase,

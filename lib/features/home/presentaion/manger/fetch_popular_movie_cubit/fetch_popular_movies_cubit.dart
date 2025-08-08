@@ -15,11 +15,10 @@ class FetchPopularMoviesCubit
   final FetchPopularUseCase fetchPopularUseCase;
 
   FetchPopularMoviesCubit(this.fetchPopularUseCase)
-    : super(
-        BasePaginatedInitial<BaseCardModel>()
-            as BasePaginatedStates<BaseCardModel>,
-        _createPageLoader(fetchPopularUseCase),
-      );
+      : super(
+          BasePaginatedInitial<BaseCardModel>(),
+          _createPageLoader(fetchPopularUseCase),
+        );
 
   static PageLoader<BaseCardModel, PopularParams> _createPageLoader(
     FetchPopularUseCase useCase,

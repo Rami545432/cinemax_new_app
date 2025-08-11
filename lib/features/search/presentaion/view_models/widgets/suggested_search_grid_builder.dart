@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../data/models/search_result.dart';
 import 'animated_search_result_item.dart';
 import 'search_animation_controller.dart';
-import 'search_grid_config.dart';
+import 'custom_grid_config.dart';
 
 class SuggestedSearchGridBuilder extends StatefulWidget {
   const SuggestedSearchGridBuilder({super.key, required this.results});
@@ -40,31 +40,27 @@ class _SuggestedSearchGridBuilderState
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = SearchGridConfig.getCrossAxisCount(context);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: ListenableBuilder(
         listenable: _animationController,
         builder: (context, child) {
-          return GridView.builder(
-            itemCount: widget.results.length,
-            itemBuilder: (context, index) {
-              final result = widget.results[index];
-              return _buildAnimatedItem(result, index, crossAxisCount);
-            },
-            gridDelegate: SearchGridConfig.getDelegate(context, crossAxisCount),
+          return RepaintBoundary(
+            child: GridView.builder(
+              itemCount: widget.results.length,
+              itemBuilder: (context, index) {
+                final result = widget.results[index];
+                return _buildAnimatedItem(result, index);
+              },
+              gridDelegate: CustomGridConfig.getDelegate(context),
+            ),
           );
         },
       ),
     );
   }
 
-  Widget _buildAnimatedItem(
-    SearchResult result,
-    int index,
-    int crossAxisCount,
-  ) {
+  Widget _buildAnimatedItem(SearchResult result, int index) {
     final isFirstSearch = _animationController.isFirstSearch;
     final shouldAnimate =
         isFirstSearch || _animationController.isNewItem(result);
@@ -72,7 +68,7 @@ class _SuggestedSearchGridBuilderState
     return AnimatedSearchResultItem(
       result: result,
       index: index,
-      crossAxisCount: crossAxisCount,
+
       shouldAnimate: shouldAnimate,
       isFirstSearch: isFirstSearch,
     );

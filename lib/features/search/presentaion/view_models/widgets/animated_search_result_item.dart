@@ -5,12 +5,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../../../home/presentaion/views_models/widgets/search_vertical_card.dart';
 import '../../../data/models/search_result.dart';
+import 'custom_grid_config.dart';
 import 'simple_animated_card.dart';
 
 class AnimatedSearchResultItem extends StatelessWidget {
   final SearchResult result;
   final int index;
-  final int crossAxisCount;
+
   final bool shouldAnimate;
   final bool isFirstSearch;
 
@@ -18,7 +19,7 @@ class AnimatedSearchResultItem extends StatelessWidget {
     super.key,
     required this.result,
     required this.index,
-    required this.crossAxisCount,
+
     required this.shouldAnimate,
     required this.isFirstSearch,
   });
@@ -34,7 +35,7 @@ class AnimatedSearchResultItem extends StatelessWidget {
       child: AnimationConfiguration.staggeredGrid(
         position: index,
         duration: Duration(milliseconds: isFirstSearch ? 500 : 400),
-        columnCount: crossAxisCount,
+        columnCount: CustomGridConfig.getCrossAxisCount(context),
         child: SlideAnimation(
           verticalOffset: isFirstSearch ? 50.0 : 30.0,
           curve: isFirstSearch ? Curves.easeOutQuart : Curves.easeOutCubic,

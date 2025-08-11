@@ -8,25 +8,28 @@ class SearchHistoryAppBar extends StatelessWidget {
   final VoidCallback onClear;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Search History',
-          style: AppStyles.textStyle18(
-            context,
-          ).copyWith(fontWeight: FontWeight.w600),
-        ),
-        TextButton(
-          onPressed: onClear,
-          child: Text(
-            'Clear',
-            style: AppStyles.textStyle16(
+    return Padding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Search History',
+            style: AppStyles.textStyle18(
               context,
-            ).copyWith(color: AppPrimaryColors.blueAccent),
+            ).copyWith(fontWeight: FontWeight.w600),
           ),
-        ),
-      ],
+          TextButton(
+            onPressed: onClear,
+            child: Text(
+              'Clear',
+              style: AppStyles.textStyle16(
+                context,
+              ).copyWith(color: AppPrimaryColors.blueAccent),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

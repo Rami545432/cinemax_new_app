@@ -2,6 +2,7 @@ import 'package:cinemax_app_new/features/favorite/data/models/favorite_model.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/animations/animated_button.dart';
 import '../../../../core/utils/functions/show_snack_bar.dart';
 import '../../domain/entities/favorite_entity.dart';
 import '../cubit/favorite_cubit.dart';
@@ -75,7 +76,6 @@ class _FavoriteButtonState extends State<FavoriteButton>
     });
 
     if (_isFavorite) {
-      // Pass both id and contentType for proper context
       cubit.removeFavorite(model.id, model.contentType);
     } else {
       cubit.addFavorite(
@@ -109,20 +109,28 @@ class _FavoriteButtonState extends State<FavoriteButton>
         key: ValueKey('Loading-$uniqueId'),
         width: 24,
         height: 24,
-        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+        child: Icon(Icons.favorite_border, color: Colors.grey),
       );
     }
-    if (_isFavorite) {
-      return Icon(
-        Icons.favorite,
-        color: Colors.red,
-        key: ValueKey('Favorite-$uniqueId'),
-      );
-    }
-    return Icon(
-      Icons.favorite_border,
-      color: Colors.grey,
-      key: ValueKey('NotFavorite-$uniqueId'),
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 300),
+      transitionBuilder: (child, animation) {
+        return ScaleTransition(
+          scale: animation,
+          child: FadeTransition(opacity: animation, child: child),
+        );
+      },
+      child: _isFavorite
+          ? Icon(
+              Icons.favorite,
+              color: Colors.red,
+              key: ValueKey('Favorite-$uniqueId'),
+            )
+          : Icon(
+              Icons.favorite_border,
+              color: Colors.grey,
+              key: ValueKey('NotFavorite-$uniqueId'),
+            ),
     );
   }
 
@@ -157,30 +165,14 @@ class _FavoriteButtonState extends State<FavoriteButton>
           showSnackBar(context, color: Colors.red, text: state.message);
         }
       },
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _sizeAnimation.value,
-            child: AnimatedOpacity(
-              opacity: _opacityAnimation.value,
-              duration: Duration(milliseconds: 300),
-              child: IconButton(
-                onPressed: _isLoading ? null : _handleFavoriteToggle,
-                icon: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return ScaleTransition(
-                      scale: animation,
-                      child: FadeTransition(opacity: animation, child: child),
-                    );
-                  },
-                  child: _buildFavoriteIcon(uniqueId),
-                ),
-              ),
-            ),
-          );
-        },
+      child: AnimatedButton(
+        onPressed: _isLoading ? null : _handleFavoriteToggle,
+        entranceAnimation: ButtonAnimationType.fade,
+        pressAnimation: ButtonAnimationType.ripple,
+        animationDuration: const Duration(seconds: 1),
+        entranceDelay: const Duration(seconds: 1),
+        autoAnimate: true,
+        child: _buildFavoriteIcon(uniqueId),
       ),
     );
   }

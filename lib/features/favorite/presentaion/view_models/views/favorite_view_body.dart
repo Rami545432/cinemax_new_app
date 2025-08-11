@@ -1,11 +1,10 @@
-import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinemax_app_new/core/utils/animations/generic_animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../constant.dart';
 import '../../../../../core/utils/enums/content_type.dart';
+import '../../../../home/presentaion/views_models/widgets/card_image_and_rating.dart';
 import '../../../../home/presentaion/views_models/widgets/details_widgets/custom_tab_bar.dart';
+import '../../../data/models/favorite_model.dart';
 import '../../../presentation/cubit/favorite_cubit.dart';
 
 class FavoriteBody extends StatefulWidget {
@@ -34,7 +33,6 @@ class _FavoriteBodyState extends State<FavoriteBody>
     tabController.addListener(() {
       if (tabController.indexIsChanging) return;
       final selectedType = ContentType.values[tabController.index];
-      log(selectedType.name);
 
       BlocProvider.of<FavoriteCubit>(context).getFavoritesByType(selectedType);
     });
@@ -48,20 +46,12 @@ class _FavoriteBodyState extends State<FavoriteBody>
 
   @override
   Widget build(BuildContext context) {
-    final data = BlocProvider.of<FavoriteCubit>(
-      context,
-    ).getFavoritesByType(ContentType.movies);
-    log(data.toString());
     return DefaultTabController(
       length: ContentType.values.length,
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxScrolled) {
           return [
-            SliverAppBar(
-              title: const Text('WishList'),
-              pinned: true,
-              floating: true,
-            ),
+            SliverAppBar(title: const Text('Favorites'), pinned: true),
             CustomTabBar(
               tabs: ContentType.values.map((e) => e.tab).toList(),
               controller: tabController,
@@ -91,16 +81,13 @@ class _FavoriteBodyState extends State<FavoriteBody>
           if (state.favorites.isEmpty) {
             return Center(child: Text('No ${type.name} in favorites'));
           }
-          return ListView.builder(
-            itemCount: state.favorites.length,
-            itemBuilder: (context, index) {
-              return CachedNetworkImage(
-                imageUrl: '$baseImageUrl${state.favorites[index].imageUrl}',
-                width: 100,
-                height: 150,
-                fit: BoxFit.cover,
-              );
-            },
+          return GenericAnimatedWidget<FavoriteModel>(
+            widgetType: GenericAnimatedWidgetType.grid,
+
+            items: state.favorites,
+            itemBuilder: (item, onRemove) => CardImage(imageUrl: item.imageUrl),
+            onItemRemoved: (item) =>
+                context.read<FavoriteCubit>().removeFavorite(item.id, type),
           );
         }
 

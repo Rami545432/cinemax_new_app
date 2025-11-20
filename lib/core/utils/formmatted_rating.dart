@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FormattedRating extends StatelessWidget {
-  const FormattedRating({
-    super.key,
-    required this.rating,
-  });
+  const FormattedRating({super.key, required this.rating});
 
   final num rating;
 

@@ -1,15 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../constant.dart';
 import '../../../../features/series/domain/entites/series_entity.dart';
 
 class GenerTvCubit extends Cubit<int> {
   GenerTvCubit() : super(0);
 
-  final List<List<SeriesEntity>> seriesLists = List.generate(
-    buttonTexts.length,
-    (_) => [],
-  );
+  final List<List<SeriesEntity>> seriesLists = List.generate(5, (_) => []);
   void selectTvGener(int index) {
     emit(index);
   }

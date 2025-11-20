@@ -1,67 +1,61 @@
 import 'dart:async';
 
+import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 import '../manger/search_cubit/search_cubit.dart';
 
-class SearchBarTextFiled extends StatefulWidget {
+class SearchBarTextFiled extends HookWidget {
   const SearchBarTextFiled({super.key});
 
   @override
-  State<SearchBarTextFiled> createState() => _SearchBarTextFiledState();
-}
-
-class _SearchBarTextFiledState extends State<SearchBarTextFiled> {
-  late SearchController _searchController;
-  Timer? _debounce;
-  void _onChangedQuery(String query) {
-    BlocProvider.of<SearchCubit>(context).searchItems(query);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _searchController = SearchController();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    _debounce?.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    void onChangedQuery(String query) {
+      BlocProvider.of<SearchCubit>(context).searchItems(query);
+    }
+
+    final searchController = useSearchController();
+    final debounceTimer = useRef<Timer?>(null);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: SearchBar(
+        backgroundColor: WidgetStateProperty.all(
+          Theme.of(context).colorScheme.primary,
+        ),
         onChanged: (query) {
-          if (_debounce?.isActive ?? false) {
-            _debounce?.cancel();
+          if (debounceTimer.value?.isActive ?? false) {
+            debounceTimer.value?.cancel();
           }
-          _debounce = Timer(const Duration(milliseconds: 500), () {
-            _onChangedQuery(query);
+          debounceTimer.value = Timer(const Duration(milliseconds: 500), () {
+            onChangedQuery(query);
           });
         },
         autoFocus: true,
-        controller: _searchController,
-        hintText: 'Search for movies, series, etc',
+        controller: searchController,
+        hintText: l10n.searchHint,
 
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
           icon: const Icon(Icons.arrow_back),
         ),
         trailing: [
           IconButton(
             onPressed: () {
-              _searchController.clear();
+              searchController.clear();
             },
             icon: const Icon(Icons.close),
           ),

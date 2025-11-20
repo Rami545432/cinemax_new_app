@@ -45,15 +45,13 @@ class _SuggestedSearchGridBuilderState
       child: ListenableBuilder(
         listenable: _animationController,
         builder: (context, child) {
-          return RepaintBoundary(
-            child: GridView.builder(
-              itemCount: widget.results.length,
-              itemBuilder: (context, index) {
-                final result = widget.results[index];
-                return _buildAnimatedItem(result, index);
-              },
-              gridDelegate: CustomGridConfig.getDelegate(context),
-            ),
+          return GridView.builder(
+            itemCount: widget.results.length,
+            itemBuilder: (context, index) {
+              final result = widget.results[index];
+              return _buildAnimatedItem(result, index);
+            },
+            gridDelegate: CustomGridConfig.getDelegate(context),
           );
         },
       ),

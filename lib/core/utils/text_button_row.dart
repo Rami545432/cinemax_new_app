@@ -1,9 +1,9 @@
+import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'app_colors.dart';
 import 'app_styles.dart';
-import 'go_router.dart';
 import 'secondry_button.dart';
 
 class TextAndButtonRow extends StatelessWidget {
@@ -29,7 +29,7 @@ class TextAndButtonRow extends StatelessWidget {
         SizedBox(width: 5),
         SecondaryButton(
           onTap: () {
-            GoRouter.of(context).push(AppRouter.kSignInView);
+            context.pushNamed(RouteName.signIn);
           },
           text: buttonText,
           style: AppStyles.textStyle16(

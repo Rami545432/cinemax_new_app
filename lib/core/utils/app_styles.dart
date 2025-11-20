@@ -7,6 +7,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 18),
       fontWeight: FontWeight.w600,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -14,6 +15,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 14),
       fontWeight: FontWeight.w500,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -21,6 +23,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 12),
       fontWeight: FontWeight.w500,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -28,6 +31,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 24),
       fontWeight: FontWeight.w600,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -35,6 +39,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 28),
       fontWeight: FontWeight.w600,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -42,6 +47,7 @@ abstract class AppStyles {
     return TextStyle(
       fontSize: getResponsiveText(context, 16),
       fontWeight: FontWeight.w600,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 }

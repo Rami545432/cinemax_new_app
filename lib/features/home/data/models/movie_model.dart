@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
   bool? adult;

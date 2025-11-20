@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/utils/app_styles.dart';
 
 class SearchNotFind extends StatelessWidget {
   const SearchNotFind({super.key});

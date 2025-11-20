@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../../../../home/presentaion/views_models/widgets/search_vertical_card.dart';
+import '../../../../home/presentation/views_models/widgets/search_vertical_card.dart';
 import '../../../data/models/search_result.dart';
 import 'custom_grid_config.dart';
 import 'simple_animated_card.dart';

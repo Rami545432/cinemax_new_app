@@ -1,29 +1,28 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
+import 'package:cinemax_app_new/core/routing/route_name.dart';
+import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/bloc_provieders_views/search_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchBarButton extends StatelessWidget {
   const SearchBarButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SearchMultiProviders(),
-            ),
-          );
+          context.pushNamed(RouteName.search);
         },
         child: Container(
           height: 56,
           decoration: BoxDecoration(
-            color: AppPrimaryColors.soft,
-            borderRadius: BorderRadius.circular(24),
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           child: Row(
             children: [
@@ -31,7 +30,7 @@ class SearchBarButton extends StatelessWidget {
               const Icon(Icons.search),
               const SizedBox(width: 12),
               Text(
-                'Search for movies, series, etc',
+                l10n.searchHint,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),

@@ -28,12 +28,6 @@ class PaginationController<Cubit extends BasePaginatedCubit> {
           cubit.fetchNextPage();
         }
       }
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent * 0.7) {
-        if (!cubit.isFetching) {
-          cubit.fetchNextPage();
-        }
-      }
     });
   }
 

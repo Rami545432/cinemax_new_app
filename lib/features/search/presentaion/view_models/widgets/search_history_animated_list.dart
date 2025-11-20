@@ -1,8 +1,10 @@
+import 'package:cinemax_app_new/core/types/animation_types.dart';
+import 'package:cinemax_app_new/core/utils/animations/animated_button.dart';
+import 'package:cinemax_app_new/core/utils/animations/generic_animated_widget.dart';
+import 'package:cinemax_app_new/core/utils/animations/remove_animation_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/animations/generic_animated_widget.dart';
-import '../../../../../core/utils/animations/remove_animation_builder.dart';
 import '../../../data/models/search_history_model.dart';
 import '../manger/search_cubit/search_cubit.dart';
 import 'search_history_app_bar.dart';
@@ -16,10 +18,15 @@ class SearchHistoryAnimatedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GenericAnimatedWidget<SearchHistoryModel>(
       widgetType: GenericAnimatedWidgetType.list,
-      removeAnimationType: RemoveAnimationType.slideFromBottom,
+      removeAnimationType: RemoveAnimationType.slideDown,
       items: searchHistory,
-      itemBuilder: (item, onRemove) =>
-          SearchHistoryListTile(searchHistory: item, onDelete: onRemove),
+      itemBuilder: (item, onRemove) => AnimatedListItem(
+        entranceAnimation: ButtonAnimationType.fade,
+        entranceDelay: Durations.long1,
+        autoAnimate: true,
+
+        child: SearchHistoryListTile(searchHistory: item, onDelete: onRemove),
+      ),
       onItemRemoved: (item) =>
           context.read<SearchCubit>().deleteSearchHistory(item.id),
       onAllItemsRemoved: () => context.read<SearchCubit>().clearSearchHistory(),

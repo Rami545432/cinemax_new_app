@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -43,47 +44,84 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB8yzuEiuWRo7-bmt-_Fx7LT1ZC7F5h4HI',
-    appId: '1:510131261228:web:2184e9303345e11c4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    authDomain: 'cinemamaxapp-be698.firebaseapp.com',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
-    measurementId: 'G-VG01DK2JKQ',
+  static FirebaseOptions get web => FirebaseOptions(
+    apiKey:
+        dotenv.env['FIREBASE_WEB_API_KEY'] ??
+        'AIzaSyB8yzuEiuWRo7-bmt-_Fx7LT1ZC7F5h4HI',
+    appId:
+        dotenv.env['FIREBASE_WEB_APP_ID'] ??
+        '1:510131261228:web:2184e9303345e11c4c6689',
+    messagingSenderId:
+        dotenv.env['FIREBASE_WEB_MESSAGING_SENDER_ID'] ?? '510131261228',
+    projectId: dotenv.env['FIREBASE_WEB_PROJECT_ID'] ?? 'cinemamaxapp-be698',
+    authDomain:
+        dotenv.env['FIREBASE_WEB_AUTH_DOMAIN'] ??
+        'cinemamaxapp-be698.firebaseapp.com',
+    storageBucket:
+        dotenv.env['FIREBASE_WEB_STORAGE_BUCKET'] ??
+        'cinemamaxapp-be698.appspot.com',
+    measurementId: dotenv.env['FIREBASE_WEB_MEASUREMENT_ID'] ?? 'G-VG01DK2JKQ',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCuosLn4dJtNxTCjDGcpFnkjJuz96FdCM4',
-    appId: '1:510131261228:android:5c79e851aa9b126a4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
+  static FirebaseOptions get android => FirebaseOptions(
+    apiKey:
+        dotenv.env['FIREBASE_ANDROID_API_KEY'] ??
+        'AIzaSyCuosLn4dJtNxTCjDGcpFnkjJuz96FdCM4',
+    appId:
+        dotenv.env['FIREBASE_ANDROID_APP_ID'] ??
+        '1:510131261228:android:5c79e851aa9b126a4c6689',
+    messagingSenderId:
+        dotenv.env['FIREBASE_ANDROID_MESSAGING_SENDER_ID'] ?? '510131261228',
+    projectId:
+        dotenv.env['FIREBASE_ANDROID_PROJECT_ID'] ?? 'cinemamaxapp-be698',
+    storageBucket:
+        dotenv.env['FIREBASE_ANDROID_STORAGE_BUCKET'] ??
+        'cinemamaxapp-be698.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
-    appId: '1:510131261228:ios:e803a7651e9657ea4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
+  static FirebaseOptions get ios => FirebaseOptions(
+    apiKey:
+        dotenv.env['FIREBASE_IOS_API_KEY'] ??
+        'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
+    appId:
+        dotenv.env['FIREBASE_IOS_APP_ID'] ??
+        '1:510131261228:ios:e803a7651e9657ea4c6689',
+    messagingSenderId:
+        dotenv.env['FIREBASE_IOS_MESSAGING_SENDER_ID'] ?? '510131261228',
+    projectId: dotenv.env['FIREBASE_IOS_PROJECT_ID'] ?? 'cinemamaxapp-be698',
+    storageBucket:
+        dotenv.env['FIREBASE_IOS_STORAGE_BUCKET'] ??
+        'cinemamaxapp-be698.appspot.com',
     androidClientId:
+        dotenv.env['FIREBASE_IOS_ANDROID_CLIENT_ID'] ??
         '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
     iosClientId:
+        dotenv.env['FIREBASE_IOS_IOS_CLIENT_ID'] ??
         '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.cinemaxApp',
+    iosBundleId:
+        dotenv.env['FIREBASE_IOS_BUNDLE_ID'] ?? 'com.example.cinemaxApp',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
-    appId: '1:510131261228:ios:e803a7651e9657ea4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
+  static FirebaseOptions get macos => FirebaseOptions(
+    apiKey:
+        dotenv.env['FIREBASE_MACOS_API_KEY'] ??
+        'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
+    appId:
+        dotenv.env['FIREBASE_MACOS_APP_ID'] ??
+        '1:510131261228:ios:e803a7651e9657ea4c6689',
+    messagingSenderId:
+        dotenv.env['FIREBASE_MACOS_MESSAGING_SENDER_ID'] ?? '510131261228',
+    projectId: dotenv.env['FIREBASE_MACOS_PROJECT_ID'] ?? 'cinemamaxapp-be698',
+    storageBucket:
+        dotenv.env['FIREBASE_MACOS_STORAGE_BUCKET'] ??
+        'cinemamaxapp-be698.appspot.com',
     androidClientId:
+        dotenv.env['FIREBASE_MACOS_ANDROID_CLIENT_ID'] ??
         '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
     iosClientId:
+        dotenv.env['FIREBASE_MACOS_IOS_CLIENT_ID'] ??
         '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.cinemaxApp',
+    iosBundleId:
+        dotenv.env['FIREBASE_MACOS_BUNDLE_ID'] ?? 'com.example.cinemaxApp',
   );
 }

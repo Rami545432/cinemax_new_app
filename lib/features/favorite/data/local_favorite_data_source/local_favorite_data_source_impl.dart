@@ -1,11 +1,12 @@
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/core/utils/hive/hive_box_names.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../core/utils/enums/content_type.dart';
 import '../models/favorite_model.dart';
 import 'local_favorite_data_source.dart';
 
 class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
-  static const String _boxName = 'favoritestsss';
+  static const String _boxName = HiveBoxNames.favoriteBox;
 
   Box<FavoriteModel> get box => Hive.box<FavoriteModel>(_boxName);
 
@@ -14,6 +15,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
     final favorites = box.values
         .where((favorite) => favorite.contentType == contentType)
         .toList();
+
     return favorites;
   }
 
@@ -27,8 +29,11 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
     final key = box.keys.firstWhere(
       (key) =>
           box.get(key)?.id == id && box.get(key)?.contentType == contentType,
+      orElse: () => null,
     );
-    await box.delete(key);
+    if (key != null) {
+      await box.delete(key);
+    }
   }
 
   @override
@@ -61,7 +66,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
     if (favorite != null) {
       await box.put(id, favorite.copyWith(isSynced: isSynced));
       // Return updated list of favorites for the same user
-      return getFavorites(favorite.contentType);
+      return await getFavorites(favorite.contentType);
     }
     return [];
   }
@@ -69,8 +74,14 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
   @override
   Future<bool> isFavorite(int id, ContentType contentType) async {
     final favorite = box.values.any(
-      (element) => element.id == id && element.contentType == contentType,
+      (element) =>
+          element.specificId == id && element.contentType == contentType,
     );
     return favorite;
+  }
+
+  @override
+  Future<List<FavoriteModel>> getAllFavorites() async {
+    return box.values.toList();
   }
 }

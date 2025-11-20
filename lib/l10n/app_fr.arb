@@ -1,0 +1,289 @@
+{
+  "@@locale": "fr",
+  "welcomeUser": "Bienvenue, {username} !",
+  "@welcomeUser": {
+    "description": "Message de bienvenue après la connexion de l'utilisateur",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "Rami"
+      }
+    }
+  },
+  "authLogin": "Connexion",
+  "@authLogin": {
+    "description": "Bouton de connexion"
+  },
+  "authRegister": "S'inscrire",
+  "@authRegister": {
+    "description": "Bouton pour créer un nouveau compte"
+  },
+  "authEmail": "E-mail",
+  "@authEmail": {
+    "description": "Étiquette du champ e-mail"
+  },
+  "authPassword": "Mot de passe",
+  "@authPassword": {
+    "description": "Étiquette du champ mot de passe"
+  },
+  "authForgotPassword": "Mot de passe oublié ?",
+  "@authForgotPassword": {
+    "description": "Lien pour réinitialiser le mot de passe"
+  },
+  "authResetPassword": "Réinitialiser le mot de passe",
+  "@authResetPassword": {
+    "description": "Bouton pour confirmer la réinitialisation du mot de passe"
+  },
+  "authResetPasswordSuccess": "Mot de passe réinitialisé avec succès",
+  "@authResetPasswordSuccess": {
+    "description": "Message de succès lors de la réinitialisation du mot de passe"
+  },
+  "authResetPasswordError": "Échec de la réinitialisation du mot de passe",
+  "@authResetPasswordError": {
+    "description": "Message d'erreur si la réinitialisation échoue"
+  },
+  "authSignInWith": "Ou se connecter avec",
+  "@authSignInWith": {
+    "description": "Texte pour les options de connexion tierces"
+  },
+  "authLogout": "Déconnexion",
+  "@authLogout": {
+    "description": "Bouton pour déconnexion"
+  },
+  "popular": "Populaire",
+  "@popular": {
+    "description": "Section pour les films ou séries populaires en cours de diffusion"
+  },
+  "nowPlaying": "En cours",
+  "@nowPlaying": {
+    "description": "Section pour les films ou séries en cours de diffusion"
+  },
+  "topRated": "Les mieux notés",
+  "@topRated": {
+    "description": "Section pour les films ou séries les mieux notés"
+  },
+  "upcoming": "À venir",
+  "@upcoming": {
+    "description": "Section pour les films ou séries à venir"
+  },
+  "trending": "Tendance",
+  "@trending": {
+    "description": "Section pour le contenu tendance"
+  },
+  "search": "Rechercher",
+  "@search": {
+    "description": "Titre ou bouton de recherche"
+  },
+  "searchHint": "Rechercher un film ou une série...",
+  "@searchHint": {
+    "description": "Texte d'aide dans le champ de recherche"
+  },
+  "searchHistory": "Historique de recherche",
+  "@searchHistory": {
+    "description": "Titre pour l'historique des recherches précédentes"
+  },
+  "clearHistory": "Effacer l'historique",
+  "@clearHistory": {
+    "description": "Bouton pour effacer l'historique des recherches"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "Titre de la page À propos"
+  },
+  "cast": "Distribution",
+  "@cast": {
+    "description": "Section pour les acteurs du film ou de la série"
+  },
+  "similar": "Similaire",
+  "@similar": {
+    "description": "Section pour le contenu similaire"
+  },
+  "recommended": "Recommandé",
+  "@recommended": {
+    "description": "Section pour le contenu recommandé"
+  },
+  "reviews": "Avis",
+  "@reviews": {
+    "description": "Section pour les avis des utilisateurs"
+  },
+  "seasons": "Saisons",
+  "@seasons": {
+    "description": "Label pour le nombre de saisons"
+  },
+  "episodes": "Épisodes",
+  "@episodes": {
+    "description": "Label pour le nombre d'épisodes"
+  },
+  "network": "Réseau",
+  "@network": {
+    "description": "Chaîne ou réseau de diffusion"
+  },
+  "productionCompany": "Société de production",
+  "@productionCompany": {
+    "description": "Entreprise produisant le contenu"
+  },
+  "movieGenres": "Genres de films",
+  "@movieGenres": {
+    "description": "Genres de films"
+  },
+  "tvGenres": "Genres de séries",
+  "@tvGenres": {
+    "description": "Genres de séries télévisées"
+  },
+  "all": "Tout",
+  "@all": {
+    "description": "Texte générique représentant tous les éléments"
+  },
+  "movies": "Films",
+  "@movies": {
+    "description": "Section pour les films"
+  },
+  "tvShows": "Séries TV",
+  "@tvShows": {
+    "description": "Section pour les séries télévisées"
+  },
+  "originalTitle": "Titre original",
+  "@originalTitle": {
+    "description": "Titre original du contenu"
+  },
+  "releaseDate": "Date de sortie",
+  "@releaseDate": {
+    "description": "Date de sortie du film ou de l'épisode"
+  },
+  "runtime": "Durée",
+  "@runtime": {
+    "description": "Durée du film ou de l'épisode"
+  },
+  "status": "Statut",
+  "@status": {
+    "description": "Statut du contenu (en cours, terminé, etc.)"
+  },
+  "language": "Langue",
+  "@language": {
+    "description": "Langue du contenu"
+  },
+  "budget": "Budget",
+  "@budget": {
+    "description": "Coût de production"
+  },
+  "revenue": "Revenus",
+  "@revenue": {
+    "description": "Revenus ou gains totaux"
+  },
+  "overview": "Résumé",
+  "@overview": {
+    "description": "Section pour le résumé du contenu"
+  },
+  "storyLine": "Synopsis",
+  "@storyLine": {
+    "description": "Section décrivant l'histoire ou l'intrigue"
+  },
+  "noDescriptionAvailable": "Aucune description disponible",
+  "@noDescriptionAvailable": {
+    "description": "Message affiché lorsqu'aucune description n'est disponible"
+  },
+  "less": "Moins",
+  "@less": {
+    "description": "Bouton pour afficher moins de contenu"
+  },
+  "more": "Plus",
+  "@more": {
+    "description": "Bouton pour afficher plus de contenu"
+  },
+  "geners": "Genres",
+  "@geners": {
+    "description": "Genres du contenu"
+  },
+  "countries": "Pays",
+  "@countries": {
+    "description": "Pays du contenu"
+  },
+  "informations": "Informations",
+  "@informations": {
+    "description": "Informations du contenu"
+  },
+  "trailers": "Trailers",
+  "@trailers": {
+    "description": "Trailers du contenu"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Profil de l'utilisateur"
+  },
+  "theme": "Thème",
+  "@theme": {
+    "description": "Mode thème de l'application"
+  },
+  "system": "Mode système",
+  "@system": {
+    "description": "Mode système de l'application"
+  },
+  "light": "Mode clair",
+  "@light": {
+    "description": "Mode clair de l'application"
+  },
+  "dark": "Mode sombre",
+  "@dark": {
+    "description": "Mode sombre de l'application"
+  },
+  "favorites": "Favoris",
+  "@favorites": {
+    "description": "Favoris de l'application"
+  },
+  "myProfile": "Mon profil",
+  "@myProfile": {
+    "description": "Mon profil de l'application"
+  },
+  "noItemsFound": "Aucun élément disponible",
+  "@noItemsFound": {
+    "description": "Texte affiché lorsqu'aucun élément n'est disponible"
+  },
+  "retry": "Réessayer",
+  "@retry": {
+    "description": "Bouton pour réessayer"
+  },
+  "noInternetConnection": "Aucune connexion internet",
+  "@noInternetConnection": {
+    "description": "Texte affiché lorsqu'aucune connexion internet n'est disponible"
+  },
+  "nofavorites": "Aucun {type} dans les favoris",
+  "@nofavorites": {
+    "description": "Texte affiché lorsqu'aucun {type} dans les favoris n'est disponible",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "film"
+      }
+    }
+  },
+    "startAddingYourFavorite": "Commencez à ajouter votre {type} favori",
+  "@startAddingYourFavorite": {
+    "description": "Texte affiché lorsqu'aucun {type} dans les favoris n'est disponible",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "film"
+      }
+    }
+  },
+  "noTrailersAvailable": "Aucun trailer disponible",
+  "@noTrailersAvailable": {
+    "description": "Texte affiché lorsqu'aucun trailer n'est disponible"
+  },
+  "noSeasonsAvailable": "Aucune saison disponible",
+  "@noSeasonsAvailable": {
+    "description": "Texte affiché lorsqu'aucune saison n'est disponible"
+  },
+  "noEpisodesAvailable": "Aucun épisode disponible",
+  "@noEpisodesAvailable": {
+    "description": "Texte affiché lorsqu'aucun épisode n'est disponible"
+  },
+  "noReviewsAvailable": "Aucune review disponible",
+  "@noReviewsAvailable": {
+    "description": "Texte affiché lorsqu'aucune review n'est disponible"
+  },
+  "signInHint": "Connectez-vous pour synchroniser vos films et séries favorites et utiliser plus de fonctionnalités",
+  "@signInHint": {
+    "description": "Texte affiché lorsqu'aucune connexion n'est disponible"
+  }
+}

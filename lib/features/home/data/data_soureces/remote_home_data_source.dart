@@ -1,78 +1,69 @@
-import 'dart:developer';
-
+import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
+import 'package:cinemax_app_new/core/types/data_source_types.dart';
+import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/utils/services/api_service.dart';
-import '../../../../models/base_card_model.dart';
-import '../../../../models/movie_details_model/movie_details_model.dart';
-import '../../../../models/movie_model.dart';
-import '../../../series/data/models/series_model.dart';
-import '../../domian/entites/entity.dart';
-
 abstract class RemoteHomeDataSource {
-  Future<List<MovieEntity>> fetchPopularMovies(
+  RemoteDataSourceListMovieEntity fetchPopularMovies(
     dynamic generId, {
     int page = 1,
     CancelToken? cancelToken,
+    String? region,
   });
-  Future<List<MovieEntity>> fetchUpcomingMovies({
+  RemoteDataSourceListMovieEntity fetchUpcomingMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<MovieDetailsModel> fetchMovieDetails(
-    int movieId,
-    CancelToken? cancelToken,
-  );
-  Future<List<MovieEntity>> fetchTrendingMovies({
+
+  RemoteDataSourceListMovieEntity fetchTrendingMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<List<MovieEntity>> fetchTopRatedMovies({
+  RemoteDataSourceListMovieEntity fetchTopRatedMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<List<MovieEntity>> fetchNowPlayingMovies({
+  RemoteDataSourceListMovieEntity fetchNowPlayingMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<List<BaseCardModel>> fetchRecommmendedItems(
-    int id,
-    String type,
-    CancelToken? cancelToken,
-  );
 }
 
 class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   final ApiService apiService;
+  Map<String, dynamic> jsondecode = {};
 
   RemoteHomeDataSourceImpl({required this.apiService});
   @override
-  Future<List<MovieEntity>> fetchPopularMovies(
+  RemoteDataSourceListMovieEntity fetchPopularMovies(
     dynamic generId, {
     int page = 1,
     CancelToken? cancelToken,
+    String? region,
   }) async {
-    List<MovieEntity> movies = [];
-    log(page.toString());
+    List<MovieModel> movies = [];
+
     var data = await apiService.getPopular(
-      genreId: generId,
+      type: 'movie',
       page: page,
       cancelToken: cancelToken,
+      genreId: generId,
     );
     for (var movie in data['results']) {
       if (movie['poster_path'] != null) {
         movies.add(MovieModel.fromJson(movie));
       }
     }
+
     return movies;
   }
 
   @override
-  Future<List<MovieEntity>> fetchUpcomingMovies({
+  RemoteDataSourceListMovieEntity fetchUpcomingMovies({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<MovieEntity> movies = [];
+    List<MovieModel> movies = [];
     var data = await apiService.getUpcoming(
       type: 'movie',
       page: page,
@@ -88,25 +79,11 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   }
 
   @override
-  Future<MovieDetailsModel> fetchMovieDetails(
-    int movieId,
-    CancelToken? cancelToken,
-  ) async {
-    var data = await apiService.getDetails(
-      id: movieId,
-      type: 'movie',
-      cancelToken: cancelToken,
-    );
-
-    return MovieDetailsModel.fromJson(data);
-  }
-
-  @override
-  Future<List<MovieEntity>> fetchNowPlayingMovies({
+  RemoteDataSourceListMovieEntity fetchNowPlayingMovies({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<MovieEntity> movies = [];
+    List<MovieModel> movies = [];
     var data = await apiService.getNowPlaying(
       type: 'movie',
       page: page,
@@ -121,11 +98,11 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> fetchTopRatedMovies({
+  RemoteDataSourceListMovieEntity fetchTopRatedMovies({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<MovieEntity> movies = [];
+    List<MovieModel> movies = [];
     var data = await apiService.getTopRated(
       type: 'movie',
       page: page,
@@ -136,15 +113,16 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
         movies.add(MovieModel.fromJson(movie));
       }
     }
+    jsondecode = data;
     return movies;
   }
 
   @override
-  Future<List<MovieEntity>> fetchTrendingMovies({
+  RemoteDataSourceListMovieEntity fetchTrendingMovies({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<MovieEntity> movies = [];
+    List<MovieModel> movies = [];
     var data = await apiService.getTrending(
       type: 'movie',
       cancelToken: cancelToken,
@@ -152,28 +130,6 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
     for (var movie in data['results']) {
       if (movie['poster_path'] != null) {
         movies.add(MovieModel.fromJson(movie));
-      }
-    }
-    return movies;
-  }
-
-  @override
-  Future<List<BaseCardModel>> fetchRecommmendedItems(
-    int movieId,
-    String type,
-    CancelToken? cancelToken,
-  ) async {
-    List<BaseCardModel> movies = [];
-    var data = await apiService.getRecommendations(
-      movieId: movieId,
-      type: type,
-      cancelToken: cancelToken,
-    );
-    for (var movie in data['results']) {
-      if (movie['poster_path'] != null) {
-        type == 'movie'
-            ? movies.add(MovieModel.fromJson(movie))
-            : movies.add(SeriesModel.fromJson(movie));
       }
     }
     return movies;

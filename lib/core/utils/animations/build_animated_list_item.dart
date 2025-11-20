@@ -8,6 +8,7 @@ enum ListItemAnimationType {
   fade,
   scale,
   slideAndFade,
+  bounce,
 }
 
 class BuildAnimatedListItem extends StatelessWidget {
@@ -18,7 +19,7 @@ class BuildAnimatedListItem extends StatelessWidget {
     required this.index,
     this.animationType = ListItemAnimationType.slideFromBottom,
     this.curve = Curves.easeOutCubic,
-    this.staggerDelay = 50,
+    this.staggerDelay = 100,
   });
 
   final Widget child;
@@ -26,14 +27,14 @@ class BuildAnimatedListItem extends StatelessWidget {
   final int index;
   final ListItemAnimationType animationType;
   final Curve curve;
-  final int staggerDelay; // milliseconds
+  final int staggerDelay;
 
   @override
   Widget build(BuildContext context) {
     final delayedAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: animation,
-        curve: Interval((index * staggerDelay) / 1000.0, 1.0, curve: curve),
+        curve: Interval((index * staggerDelay) / 100, 1.0, curve: curve),
       ),
     );
 
@@ -79,6 +80,15 @@ class BuildAnimatedListItem extends StatelessWidget {
           begin: const Offset(0, 0.3),
           end: Offset.zero,
         ).animate(delayedAnimation),
+        child: FadeTransition(opacity: delayedAnimation, child: child),
+      ),
+      ListItemAnimationType.bounce => ScaleTransition(
+        scale: Tween<double>(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: delayedAnimation,
+            curve: Curves.elasticOut, // ← Creates bounce effect
+          ),
+        ),
         child: FadeTransition(opacity: delayedAnimation, child: child),
       ),
     };

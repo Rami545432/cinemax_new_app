@@ -1,0 +1,289 @@
+{
+  "@@locale": "tr",
+  "welcomeUser": "Hoş geldin, {username} !",
+  "@welcomeUser": {
+    "description": "Kullanıcı giriş yaptıktan sonra gösterilen karşılama mesajı",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "Rami"
+      }
+    }
+  },
+  "authLogin": "Giriş Yap",
+  "@authLogin": {
+    "description": "Giriş yapma butonu"
+  },
+  "authRegister": "Kayıt Ol",
+  "@authRegister": {
+    "description": "Yeni hesap oluşturma butonu"
+  },
+  "authEmail": "E-posta",
+  "@authEmail": {
+    "description": "E-posta giriş alanı"
+  },
+  "authPassword": "Şifre",
+  "@authPassword": {
+    "description": "Şifre giriş alanı"
+  },
+  "authForgotPassword": "Şifreni mi unuttun?",
+  "@authForgotPassword": {
+    "description": "Şifre sıfırlama bağlantısı"
+  },
+  "authResetPassword": "Şifreyi Sıfırla",
+  "@authResetPassword": {
+    "description": "Şifre sıfırlama işlemini onaylama butonu"
+  },
+  "authResetPasswordSuccess": "Şifre başarıyla sıfırlandı",
+  "@authResetPasswordSuccess": {
+    "description": "Şifre sıfırlama işlemi başarı mesajı"
+  },
+  "authResetPasswordError": "Şifre sıfırlama başarısız oldu",
+  "@authResetPasswordError": {
+    "description": "Şifre sıfırlama işlemi hata mesajı"
+  },
+  "authSignInWith": "Veya ile giriş yap",
+  "@authSignInWith": {
+    "description": "Alternatif giriş yöntemleri metni"
+  },
+  "authLogout": "Çıkış Yap",
+  "@authLogout": {
+    "description": "Çıkış yapma butonu"
+  },
+  "popular": "Popüler",
+  "@popular": {
+    "description": "Popüler filmler veya diziler bölümü"
+  },
+  "nowPlaying": "Şu Anda Gösterimde",
+  "@nowPlaying": {
+    "description": "Şu anda yayınlanan içerikler"
+  },
+  "topRated": "En Yüksek Puanlı",
+  "@topRated": {
+    "description": "En yüksek puan alan filmler veya diziler"
+  },
+  "upcoming": "Yakında",
+  "@upcoming": {
+    "description": "Yakında çıkacak içerikler"
+  },
+  "trending": "Trend",
+  "@trending": {
+    "description": "En çok konuşulan içerikler"
+  },
+  "search": "Ara",
+  "@search": {
+    "description": "Arama düğmesi veya başlığı"
+  },
+  "searchHint": "Film veya dizi ara...",
+  "@searchHint": {
+    "description": "Arama alanındaki ipucu metni"
+  },
+  "searchHistory": "Arama Geçmişi",
+  "@searchHistory": {
+    "description": "Önceki aramaların listesi başlığı"
+  },
+  "clearHistory": "Geçmişi Temizle",
+  "@clearHistory": {
+    "description": "Arama geçmişini silme düğmesi"
+  },
+  "about": "Hakkında",
+  "@about": {
+    "description": "Uygulama hakkında sayfa"
+  },
+  "cast": "Oyuncular",
+  "@cast": {
+    "description": "Oyuncu listesi"
+  },
+  "similar": "Benzer",
+  "@similar": {
+    "description": "Benzer veya önerilen içerikler"
+  },
+  "recommended": "Önerilen",
+  "@recommended": {
+    "description": "Önerilen içerikler bölümü"
+  },
+  "reviews": "Yorumlar",
+  "@reviews": {
+    "description": "Kullanıcı yorumları bölümü"
+  },
+  "seasons": "Sezonlar",
+  "@seasons": {
+    "description": "Bir dizinin sezon sayısı"
+  },
+  "episodes": "Bölümler",
+  "@episodes": {
+    "description": "Bir sezonun bölüm sayısı"
+  },
+  "network": "Yayıncı",
+  "@network": {
+    "description": "Yayın yapan ağ veya platform"
+  },
+  "productionCompany": "Yapım Şirketi",
+  "@productionCompany": {
+    "description": "İçeriği üreten yapım şirketi"
+  },
+  "movieGenres": "Film Türleri",
+  "@movieGenres": {
+    "description": "Filmlerin tür kategorileri"
+  },
+  "tvGenres": "Dizi Türleri",
+  "@tvGenres": {
+    "description": "Dizilerin tür kategorileri"
+  },
+  "all": "Tümü",
+  "@all": {
+    "description": "Tüm öğeleri gösteren genel metin"
+  },
+  "movies": "Filmler",
+  "@movies": {
+    "description": "Film bölümü"
+  },
+  "tvShows": "Diziler",
+  "@tvShows": {
+    "description": "Televizyon dizileri bölümü"
+  },
+  "originalTitle": "Orijinal Başlık",
+  "@originalTitle": {
+    "description": "İçeriğin orijinal başlığı"
+  },
+  "releaseDate": "Yayın Tarihi",
+  "@releaseDate": {
+    "description": "Filmin veya bölümün çıkış tarihi"
+  },
+  "runtime": "Süre",
+  "@runtime": {
+    "description": "İçeriğin süresi"
+  },
+  "status": "Durum",
+  "@status": {
+    "description": "İçeriğin durumu (devam ediyor, tamamlandı vb.)"
+  },
+  "language": "Dil",
+  "@language": {
+    "description": "İçeriğin dili"
+  },
+  "budget": "Bütçe",
+  "@budget": {
+    "description": "Yapım maliyeti"
+  },
+  "revenue": "Gelir",
+  "@revenue": {
+    "description": "Kazanç miktarı"
+  },
+  "overview": "Özet",
+  "@overview": {
+    "description": "İçeriğin kısa açıklaması"
+  },
+  "storyLine": "Konu",
+  "@storyLine": {
+    "description": "İçeriğin ana hikayesi"
+  },
+  "noDescriptionAvailable": "Açıklama mevcut değil",
+  "@noDescriptionAvailable": {
+    "description": "Açıklama olmadığında gösterilen metin"
+  },
+  "less": "Daha Az",
+  "@less": {
+    "description": "Daha az metin göster butonu"
+  },
+  "more": "Daha Fazla",
+  "@more": {
+    "description": "Daha fazla metin göster butonu"
+  },
+  "geners": "Türler",
+  "@geners": {
+    "description": "Türleri"
+  },
+  "countries": "Ülkeler",
+  "@countries": {
+    "description": "Ülkeleri"
+  },
+  "informations": "Bilgiler",
+  "@informations": {
+    "description": "Bilgileri"
+  },
+  "trailers": "Trailerler",
+  "@trailers": {
+    "description": "Trailerleri"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Profil sayfası"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Tema seçimi"
+  },
+  "system": "Sistem",
+  "@system": {
+    "description": "Sistem seçimi"
+  },
+  "light": "Açık",
+  "@light": {
+    "description": "Açık tema seçimi"
+  },
+  "dark": "Koyu",
+  "@dark": {
+    "description": "Koyu tema seçimi"
+  },
+  "favorites": "Favoriler",
+  "@favorites": {
+    "description": "Favoriler bölümü"
+  },
+  "myProfile": "Benim Profilim",
+  "@myProfile": {
+    "description": "Benim profilim de la application"
+  },
+  "noItemsFound": "No items found",
+  "@noItemsFound": {
+    "description": "Metin gösterilirken öğeler bulunamadı"
+  },
+  "retry": "Tekrar Dene",
+  "@retry": {
+    "description": "Tekrar deneme butonu"
+  },
+  "noInternetConnection": "İnternet bağlantısı yok",
+  "@noInternetConnection": {
+    "description": "Metin gösterilirken internet bağlantısı yok"
+  },
+  "nofavorites": "Favorilerde {type} yok",
+  "@nofavorites": {
+    "description": "Metin gösterilirken {type} favorilerde yok",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "film"
+      }
+    }
+  },
+  "startAddingYourFavorite": "Favorilere {type} eklemeye başla",
+  "@startAddingYourFavorite": {
+    "description": "Metin gösterilirken {type} favorilerde yok",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "film"
+      }
+    }
+  },
+  "noTrailersAvailable": "Trailerler mevcut değil",
+  "@noTrailersAvailable": {
+    "description": "Metin gösterilirken trailerler yok"
+  },
+  "noSeasonsAvailable": "Sezonlar mevcut değil",
+  "@noSeasonsAvailable": {
+    "description": "Metin gösterilirken sezonlar yok"
+  },
+  "noEpisodesAvailable": "Bölümler mevcut değil",
+  "@noEpisodesAvailable": {
+    "description": "Metin gösterilirken bölümler yok"
+  },
+  "noReviewsAvailable": "Yorumlar mevcut değil",
+  "@noReviewsAvailable": {
+    "description": "Metin gösterilirken yorumlar yok"
+  },
+  "signInHint": "Giriş yapınızın Favori Filmlerinizi ve Dizilerinizi Senkronize Edin ve Daha Fazla Özellik Kullanın",
+  "@signInHint": {
+    "description": "Metin gösterilirken giriş yapınız yok"
+  }
+}

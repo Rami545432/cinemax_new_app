@@ -1,0 +1,150 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main animated group -->
+    <g id="cameraOnWheels">
+      <!-- Horizontal movement animation -->
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        values="0 0; 12 0; 0 0"
+        dur="0.8s"
+        repeatCount="indefinite"
+      />
+      
+      <!-- Old film camera body - main rectangular body -->
+      <rect x="200" y="180" width="100" height="70" fill="#12CDD9" rx="4"/>
+      
+      <!-- Camera lens protruding on right -->
+      <rect x="295" y="195" width="35" height="40" fill="#12CDD9" rx="3"/>
+      <circle cx="312" cy="215" r="18" fill="#ffffff"/>
+      <circle cx="312" cy="215" r="12" fill="#FF9800"/>
+      
+      <!-- Top film reels -->
+      <g>
+        <!-- Left reel -->
+        <circle cx="220" cy="165" r="28" fill="#1a1a1a"/>
+        <circle cx="220" cy="165" r="22" fill="none" stroke="#ffffff" stroke-width="3"/>
+        <circle cx="220" cy="165" r="10" fill="#FF9800"/>
+        <!-- Reel holes -->
+        <circle cx="220" cy="148" r="4" fill="#ffffff"/>
+        <circle cx="234" cy="158" r="4" fill="#ffffff"/>
+        <circle cx="234" cy="172" r="4" fill="#ffffff"/>
+        <circle cx="220" cy="182" r="4" fill="#ffffff"/>
+        <circle cx="206" cy="172" r="4" fill="#ffffff"/>
+        <circle cx="206" cy="158" r="4" fill="#ffffff"/>
+        
+        <!-- Right reel -->
+        <circle cx="280" cy="165" r="28" fill="#1a1a1a"/>
+        <circle cx="280" cy="165" r="22" fill="none" stroke="#ffffff" stroke-width="3"/>
+        <circle cx="280" cy="165" r="10" fill="#FF9800"/>
+        <!-- Reel holes -->
+        <circle cx="280" cy="148" r="4" fill="#ffffff"/>
+        <circle cx="294" cy="158" r="4" fill="#ffffff"/>
+        <circle cx="294" cy="172" r="4" fill="#ffffff"/>
+        <circle cx="280" cy="182" r="4" fill="#ffffff"/>
+        <circle cx="266" cy="172" r="4" fill="#ffffff"/>
+        <circle cx="266" cy="158" r="4" fill="#ffffff"/>
+        
+        <!-- Reels rotation animation -->
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 250 165"
+          to="360 250 165"
+          dur="1.5s"
+          repeatCount="indefinite"
+        />
+      </g>
+      
+      <!-- Camera details/buttons -->
+      <rect x="210" y="195" width="15" height="8" fill="#FF9800" rx="2"/>
+      <circle cx="220" cy="220" r="5" fill="#ffffff"/>
+      <circle cx="240" cy="220" r="5" fill="#ffffff"/>
+      <circle cx="260" cy="220" r="5" fill="#ffffff"/>
+      
+      <!-- Viewfinder on top -->
+      <rect x="235" y="170" width="30" height="12" fill="#FF9800" rx="2"/>
+      
+      <!-- Car wheels at bottom -->
+      <!-- Back wheel -->
+      <circle cx="220" cy="270" r="22" fill="#1a1a1a"/>
+      <circle cx="220" cy="270" r="17" fill="none" stroke="#12CDD9" stroke-width="3"/>
+      <circle cx="220" cy="270" r="7" fill="#FF9800"/>
+      
+      <!-- Front wheel -->
+      <circle cx="295" cy="270" r="22" fill="#1a1a1a"/>
+      <circle cx="295" cy="270" r="17" fill="none" stroke="#12CDD9" stroke-width="3"/>
+      <circle cx="295" cy="270" r="7" fill="#FF9800"/>
+      
+      <!-- Wheel spokes with rotation -->
+      <g>
+        <line x1="220" y1="256" x2="220" y2="284" stroke="#12CDD9" stroke-width="2"/>
+        <line x1="206" y1="270" x2="234" y2="270" stroke="#12CDD9" stroke-width="2"/>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 220 270"
+          to="360 220 270"
+          dur="0.6s"
+          repeatCount="indefinite"
+        />
+      </g>
+      
+      <g>
+        <line x1="295" y1="256" x2="295" y2="284" stroke="#12CDD9" stroke-width="2"/>
+        <line x1="281" y1="270" x2="309" y2="270" stroke="#12CDD9" stroke-width="2"/>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 295 270"
+          to="360 295 270"
+          dur="0.6s"
+          repeatCount="indefinite"
+        />
+      </g>
+      
+      <!-- Connection between body and wheels -->
+      <rect x="215" y="248" width="85" height="6" fill="#12CDD9" rx="3"/>
+    </g>
+    
+    <!-- Speed lines (horizontal motion lines) -->
+    <g opacity="0.7">
+      <rect x="100" y="165" width="70" height="4" fill="#12CDD9" rx="2">
+        <animate attributeName="x" values="100; 50; 100" dur="0.4s" repeatCount="indefinite"/>
+        <animate attributeName="width" values="70; 40; 70" dur="0.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7; 0; 0.7" dur="0.4s" repeatCount="indefinite"/>
+      </rect>
+      
+      <rect x="90" y="185" width="80" height="4" fill="#12CDD9" rx="2">
+        <animate attributeName="x" values="90; 40; 90" dur="0.5s" repeatCount="indefinite"/>
+        <animate attributeName="width" values="80; 45; 80" dur="0.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7; 0; 0.7" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      
+      <rect x="95" y="205" width="75" height="4" fill="#12CDD9" rx="2">
+        <animate attributeName="x" values="95; 45; 95" dur="0.45s" repeatCount="indefinite"/>
+        <animate attributeName="width" values="75; 42; 75" dur="0.45s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7; 0; 0.7" dur="0.45s" repeatCount="indefinite"/>
+      </rect>
+      
+      <rect x="85" y="225" width="85" height="4" fill="#12CDD9" rx="2">
+        <animate attributeName="x" values="85; 35; 85" dur="0.55s" repeatCount="indefinite"/>
+        <animate attributeName="width" values="85; 48; 85" dur="0.55s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7; 0; 0.7" dur="0.55s" repeatCount="indefinite"/>
+      </rect>
+      
+      <rect x="100" y="245" width="70" height="4" fill="#12CDD9" rx="2">
+        <animate attributeName="x" values="100; 50; 100" dur="0.4s" repeatCount="indefinite"/>
+        <animate attributeName="width" values="70; 40; 70" dur="0.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7; 0; 0.7" dur="0.4s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    
+    <!-- Brand name -->
+    <text x="250" y="380" font-family="'Arial Black', Arial, sans-serif" font-size="52" font-weight="900" fill="#12CDD9" text-anchor="middle">
+      Flixora
+    </text>
+  </svg>

@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/features/profile/presentaion/views/profile_body.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,12 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: ProfileViewBody()));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile', style: AppStyles.textStyle24(context)),
+        centerTitle: true,
+      ),
+      body: SafeArea(child: ProfileViewBody()),
+    );
   }
 }

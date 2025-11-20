@@ -1,5 +1,5 @@
 import 'package:cinemax_app_new/core/utils/errors/errors.dart';
-import 'package:cinemax_app_new/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/movie_entity.dart';
 import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';

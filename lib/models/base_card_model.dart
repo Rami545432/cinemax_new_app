@@ -8,7 +8,6 @@ class BaseCardModel {
   final String cardImage;
   final String? horizontalCardImage;
   final String? type;
-  final String overView;
   final List<int>? cardGeners;
   final num? cardPopularity;
   final ContentType? contentType;
@@ -21,7 +20,6 @@ class BaseCardModel {
     this.cardDate,
     this.type,
     this.horizontalCardImage,
-    required this.overView,
     this.cardGeners,
     this.cardPopularity,
     this.contentType,

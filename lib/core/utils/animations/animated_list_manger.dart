@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../types/ui_types.dart';
+
 /// Generic animated list manager that can handle any type of item
 class AnimatedListManager<T> {
   final GlobalKey _animatedKey;
@@ -20,7 +22,7 @@ class AnimatedListManager<T> {
   /// Remove a single item with animation
   void removeItem(
     int index,
-    Widget Function(T item, Animation<double> animation) removedItemBuilder,
+    ItemBuilderWithAnimation<T> removedItemBuilder,
     VoidCallback? onRemoved,
   ) {
     if (index < 0 || index >= _items.length) return;
@@ -46,7 +48,7 @@ class AnimatedListManager<T> {
 
   /// Remove all items with staggered animation
   void removeAllItems(
-    Widget Function(T item, Animation<double> animation) removedItemBuilder,
+    ItemBuilderWithAnimation<T> removedItemBuilder,
     VoidCallback? onAllRemoved,
   ) {
     if (_items.isEmpty) {

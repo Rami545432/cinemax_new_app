@@ -1,36 +1,32 @@
+import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
+import 'package:cinemax_app_new/core/types/data_source_types.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/utils/services/api_service.dart';
-import '../../domain/entites/series_entity.dart';
-import '../../domain/entites/series_season_details_entitiy.dart';
-import '../models/series_details_model/series_details_model.dart';
+import '../../../details/domain/entites/series_season_details_entitiy.dart';
 import '../models/series_model.dart';
-import '../models/series_season_details/series_season_details.dart';
+import '../../../details/data/models/series_season_details_model.dart';
 
 abstract class RemoteSeiresTvDataSource {
-  Future<List<SeriesEntity>> fetchTrendingTvShows({
+  RemoteDataSourceListSeriesEntity fetchTrendingTvShows({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<List<SeriesEntity>> fetchPopularTvShows(
+  RemoteDataSourceListSeriesEntity fetchPopularTvShows(
     dynamic generId, {
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<List<SeriesEntity>> fetchTopRatedTvShows({
+  RemoteDataSourceListSeriesEntity fetchTopRatedTvShows({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<SeriesDetailsModel> fetchTvShowDetail({
-    required int tvid,
-    CancelToken? cancelToken,
-  });
+
   Future<SeriesSeasonDetailsEntitiy> fetchTvShowSeasonDetails({
     required int tvid,
     required num season,
     CancelToken? cancelToken,
   });
-  Future<List<SeriesEntity>> fetchAiringTvShows({
+  RemoteDataSourceListSeriesEntity fetchAiringTvShows({
     int page = 1,
     CancelToken? cancelToken,
   });
@@ -41,20 +37,21 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
 
   RemoteSeiresTvDataSourceImpl({required this.apiService});
   @override
-  Future<List<SeriesEntity>> fetchPopularTvShows(
+  RemoteDataSourceListSeriesEntity fetchPopularTvShows(
     generId, {
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<SeriesEntity> tvShows = [];
+    List<SeriesModel> tvShows = [];
 
-    var data = await apiService.getGeneralTv(
+    var data = await apiService.getPopular(
+      genreId: generId,
       type: 'tv',
       page: page,
       cancelToken: cancelToken,
     );
-    for (var show in data["results"]) {
-      if (show['poster_path'] != null && show['original_language'] != 'ja') {
+    for (var show in data['results']) {
+      if (show['poster_path'] != null) {
         tvShows.add(SeriesModel.fromJson(show));
       }
     }
@@ -62,11 +59,11 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
   }
 
   @override
-  Future<List<SeriesEntity>> fetchTopRatedTvShows({
+  RemoteDataSourceListSeriesEntity fetchTopRatedTvShows({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<SeriesEntity> tvShows = [];
+    List<SeriesModel> tvShows = [];
     var data = await apiService.getTopRated(
       type: 'tv',
       page: page,
@@ -81,11 +78,11 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
   }
 
   @override
-  Future<List<SeriesEntity>> fetchTrendingTvShows({
+  RemoteDataSourceListSeriesEntity fetchTrendingTvShows({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<SeriesEntity> tvShows = [];
+    List<SeriesModel> tvShows = [];
     var data = await apiService.getTrending(
       type: 'tv',
       cancelToken: cancelToken,
@@ -102,20 +99,6 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
   }
 
   @override
-  Future<SeriesDetailsModel> fetchTvShowDetail({
-    required int tvid,
-    CancelToken? cancelToken,
-  }) async {
-    var data = await apiService.getDetails(
-      id: tvid,
-      type: 'tv',
-      cancelToken: cancelToken,
-    );
-
-    return (SeriesDetailsModel.fromJson(data));
-  }
-
-  @override
   Future<SeriesSeasonDetailsEntitiy> fetchTvShowSeasonDetails({
     required int tvid,
     required num season,
@@ -127,15 +110,15 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
       cancelToken: cancelToken,
     );
 
-    return SeriesSeasonDetails.fromJson(data);
+    return SeriesSeasonDetailsModel.fromJson(data);
   }
 
   @override
-  Future<List<SeriesEntity>> fetchAiringTvShows({
+  RemoteDataSourceListSeriesEntity fetchAiringTvShows({
     int page = 1,
     CancelToken? cancelToken,
   }) async {
-    List<SeriesEntity> series = [];
+    List<SeriesModel> series = [];
     var data = await apiService.getAiringToday(
       type: 'tv',
       page: page,

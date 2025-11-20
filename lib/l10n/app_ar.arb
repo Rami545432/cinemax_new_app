@@ -1,0 +1,289 @@
+{
+  "@@locale": "ar",
+  "welcomeUser": "مرحباً، {username} !",
+  "@welcomeUser": {
+    "description": "رسالة ترحيب بالمستخدم بعد تسجيل الدخول",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "رامي"
+      }
+    }
+  },
+  "authLogin": "تسجيل الدخول",
+  "@authLogin": {
+    "description": "زر تسجيل الدخول"
+  },
+  "authRegister": "إنشاء حساب",
+  "@authRegister": {
+    "description": "زر إنشاء حساب جديد"
+  },
+  "authEmail": "البريد الإلكتروني",
+  "@authEmail": {
+    "description": "حقل إدخال البريد الإلكتروني"
+  },
+  "authPassword": "كلمة المرور",
+  "@authPassword": {
+    "description": "حقل إدخال كلمة المرور"
+  },
+  "authForgotPassword": "هل نسيت كلمة المرور؟",
+  "@authForgotPassword": {
+    "description": "رابط لاستعادة كلمة المرور"
+  },
+  "authResetPassword": "إعادة تعيين كلمة المرور",
+  "@authResetPassword": {
+    "description": "زر تأكيد إعادة تعيين كلمة المرور"
+  },
+  "authResetPasswordSuccess": "تمت إعادة تعيين كلمة المرور بنجاح",
+  "@authResetPasswordSuccess": {
+    "description": "رسالة نجاح عند إعادة تعيين كلمة المرور"
+  },
+  "authResetPasswordError": "فشل في إعادة تعيين كلمة المرور",
+  "@authResetPasswordError": {
+    "description": "رسالة خطأ عند فشل عملية إعادة التعيين"
+  },
+  "authSignInWith": "أو تسجيل الدخول بواسطة",
+  "@authSignInWith": {
+    "description": "نص لخيارات تسجيل الدخول عبر وسائل أخرى"
+  },
+  "authLogout": "تسجيل الخروج",
+  "@authLogout": {
+    "description": "زر تسجيل الخروج"
+  },
+  "popular": "الأكثر شهرة",
+  "@popular": {
+    "description": "قسم للأفلام أو المسلسلات الأكثر شهرة"
+  },
+  "nowPlaying": "قيد العرض",
+  "@nowPlaying": {
+    "description": "الأفلام أو المسلسلات المعروضة حالياً"
+  },
+  "topRated": "الأعلى تقييماً",
+  "@topRated": {
+    "description": "الأفلام أو المسلسلات الأعلى تقييماً"
+  },
+  "upcoming": "قريباً",
+  "@upcoming": {
+    "description": "الأفلام أو المسلسلات القادمة"
+  },
+  "trending": "الشائع",
+  "@trending": {
+    "description": "العناصر الأكثر تداولاً"
+  },
+  "search": "بحث",
+  "@search": {
+    "description": "زر أو عنوان البحث"
+  },
+  "searchHint": "ابحث عن فيلم أو مسلسل...",
+  "@searchHint": {
+    "description": "نص مساعد في حقل البحث"
+  },
+  "searchHistory": "سجل البحث",
+  "@searchHistory": {
+    "description": "عنوان سجل عمليات البحث السابقة"
+  },
+  "clearHistory": "مسح السجل",
+  "@clearHistory": {
+    "description": "زر لمسح سجل البحث"
+  },
+  "about": "حول",
+  "@about": {
+    "description": "صفحة حول التطبيق"
+  },
+  "cast": "طاقم التمثيل",
+  "@cast": {
+    "description": "قائمة الممثلين"
+  },
+  "similar": "مماثل",
+  "@similar": {
+    "description": "العناصر المماثلة أو المقترحة"
+  },
+  "recommended": "موصى به",
+  "@recommended": {
+    "description": "قسم المحتوى الموصى به"
+  },
+  "reviews": "المراجعات",
+  "@reviews": {
+    "description": "قسم تقييمات المستخدمين"
+  },
+  "seasons": "المواسم",
+  "@seasons": {
+    "description": "عدد المواسم لمسلسل"
+  },
+  "episodes": "الحلقات",
+  "@episodes": {
+    "description": "عدد الحلقات في الموسم"
+  },
+  "network": "الشبكة",
+  "@network": {
+    "description": "القناة أو الشبكة المنتجة"
+  },
+  "productionCompany": "شركة الإنتاج",
+  "@productionCompany": {
+    "description": "الشركة المنتجة للعمل"
+  },
+  "movieGenres": "أنواع الأفلام",
+  "@movieGenres": {
+    "description": "تصنيفات الأفلام"
+  },
+  "tvGenres": "أنواع المسلسلات",
+  "@tvGenres": {
+    "description": "تصنيفات المسلسلات"
+  },
+  "all": "الكل",
+  "@all": {
+    "description": "نص عام لجميع العناصر"
+  },
+  "movies": "الأفلام",
+  "@movies": {
+    "description": "قسم الأفلام"
+  },
+  "tvShows": "المسلسلات",
+  "@tvShows": {
+    "description": "قسم المسلسلات التلفزيونية"
+  },
+  "originalTitle": "العنوان الأصلي",
+  "@originalTitle": {
+    "description": "العنوان الأصلي للعمل الفني"
+  },
+  "releaseDate": "تاريخ الإصدار",
+  "@releaseDate": {
+    "description": "تاريخ إصدار الفيلم أو الحلقة"
+  },
+  "runtime": "المدة الزمنية",
+  "@runtime": {
+    "description": "مدة تشغيل العمل الفني"
+  },
+  "status": "الحالة",
+  "@status": {
+    "description": "حالة العمل (جاري - مكتمل - قادم...)"
+  },
+  "language": "اللغة",
+  "@language": {
+    "description": "لغة المحتوى"
+  },
+  "budget": "الميزانية",
+  "@budget": {
+    "description": "تكلفة إنتاج العمل"
+  },
+  "revenue": "الإيرادات",
+  "@revenue": {
+    "description": "دخل العمل الفني"
+  },
+  "overview": "الوصف",
+  "@overview": {
+    "description": "ملخص العمل الفني"
+  },
+  "storyLine": "القصة",
+  "@storyLine": {
+    "description": "القصة الرئيسية للعمل الفني"
+  },
+  "noDescriptionAvailable": "لا يوجد وصف متاح",
+  "@noDescriptionAvailable": {
+    "description": "نص يظهر عند غياب الوصف"
+  },
+  "less": "أقل",
+  "@less": {
+    "description": "زر لعرض نص أقل"
+  },
+  "more": "أكثر",
+  "@more": {
+    "description": "زر لعرض نص أكثر"
+  },
+  "geners": "الفئات",
+  "@geners": {
+    "description": "الفئات المتاحة للعمل الفني"
+  },
+  "countries": "الدول المنتجة",
+  "@countries": {
+    "description": "الدول المنتجة للعمل الفني"
+  },
+  "informations": "المعلومات",
+  "@informations": {
+    "description": "المعلومات المتاحة للعمل الفني"
+  },
+  "trailers": "المقاطع الترويجية",
+  "@trailers": {
+    "description": "المقاطع الترويجية المتاحة للعمل الفني"
+  },
+  "theme": "السمة",
+  "@theme": {
+    "description": "السمة المتاحة للتطبيق"
+  },
+  "system": "النظام",
+  "@system": {
+    "description": "النظام المتاح للتطبيق"
+  },
+  "light": "وضع الاضاءة ",
+  "@light": {
+    "description": "وضع الاضاءة المتاح للتطبيق"
+  },
+  "dark": "الوضع الليلي",
+  "@dark": {
+    "description": "وضع الوضع الليلي المتاح للتطبيق"
+  },
+  "favorites": "المفضلة",
+  "@favorites": {
+    "description": "المفضلة المتاحة للتطبيق"
+  },
+  "profile": "الحساب",
+  "@profile": {
+    "description": "الحساب المتاح للتطبيق"
+  },
+  "myProfile": "حسابي",
+  "@myProfile": {
+    "description": "حسابي المتاح للتطبيق"
+  },
+  "noItemsFound": "لا يوجد عناصر متاحة",
+  "@noItemsFound": {
+    "description": "نص يظهر عند غياب العناصر"
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "description": "زر لإعادة المحاولة"
+  },
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+  "@noInternetConnection": {
+    "description": "نص يظهر عند غياب الاتصال بالإنترنت"
+  },
+  "nofavorites": "لا يوجد {type} في المفضلة",
+  "@nofavorites": {
+    "description": "نص يظهر عند غياب ال{type} في المفضلة",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "فيلم"
+      }
+    }
+  },
+  "startAddingYourFavorite": "ابدأ بإضافة {type} المفضلة",
+  "@startAddingYourFavorite": {
+    "description": "نص يظهر عند غياب ال{type} المفضلة",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "فيلم"
+      }
+    }
+  },
+  "noTrailersAvailable": "لا يوجد مقاطع ترويجية متاحة",
+  "@noTrailersAvailable": {
+    "description": "نص يظهر عند غياب المقاطع الترويجية"
+  },
+  "noSeasonsAvailable": "لا يوجد مواسم متاحة",
+  "@noSeasonsAvailable": {
+    "description": "نص يظهر عند غياب المواسم"
+  },
+  "noEpisodesAvailable": "لا يوجد حلقات متاحة",
+  "@noEpisodesAvailable": {
+    "description": "نص يظهر عند غياب الحلقات"
+  },
+  "noReviewsAvailable": "لا يوجد مراجعات متاحة",
+  "@noReviewsAvailable": {
+    "description": "نص يظهر عند غياب المراجعات"
+  },
+  "signInHint": "سجل الدخول لمزامنة المفضلة والمسلسلات والاستخدام المزيد من الميزات",
+  "@signInHint": {
+    "description": "نص يظهر عند غياب التسجيل لمزامنة المفضلة والمسلسلات والاستخدام المزيد من الميزات"
+  }
+}

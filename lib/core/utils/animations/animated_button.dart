@@ -86,7 +86,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
   void _handleTapUp(TapUpDetails details) {
     if (widget.pressAnimation != null) {
-      _pressController.reverse();
+      Future.delayed(const Duration(milliseconds: 300), () {
+        _pressController.reverse();
+      });
     }
     widget.onPressed?.call();
   }
@@ -106,7 +108,6 @@ class _AnimatedButtonState extends State<AnimatedButton>
       child: _buildPressAnimation(),
     );
 
-    // Add entrance animation if specified
     if (widget.entranceAnimation != null) {
       button = _buildEntranceAnimation(button);
     }
@@ -131,8 +132,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
             scale: 1.0 + (_pressController.value * 0.1),
             child: widget.child,
           ),
-          ButtonAnimationType.ripple => Container(
-            color: Colors.red.withValues(green: _pressController.value * 0.3),
+          ButtonAnimationType.ripple => Transform.scale(
+            scale: 1.0 + (_pressController.value * 0.1),
+
             child: widget.child,
           ),
           _ => widget.child,
@@ -142,7 +144,6 @@ class _AnimatedButtonState extends State<AnimatedButton>
   }
 
   Widget _buildEntranceAnimation(Widget child) {
-    // Reuse your existing BuildAnimatedListItem for entrance animations
     final animationType = switch (widget.entranceAnimation!) {
       ButtonAnimationType.slideUp => ListItemAnimationType.slideFromBottom,
       ButtonAnimationType.slideDown => ListItemAnimationType.slideFromTop,
@@ -150,9 +151,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
       ButtonAnimationType.slideRight => ListItemAnimationType.slideFromLeft,
       ButtonAnimationType.fade => ListItemAnimationType.fade,
       ButtonAnimationType.scale => ListItemAnimationType.scale,
-      ButtonAnimationType.bounce =>
-        ListItemAnimationType
-            .scale, // You can add bounce to BuildAnimatedListItem
+      ButtonAnimationType.bounce => ListItemAnimationType.bounce,
       _ => ListItemAnimationType.fade,
     };
 

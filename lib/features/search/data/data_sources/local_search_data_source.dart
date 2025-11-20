@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/utils/hive/hive_box_names.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../models/search_history_model.dart';
@@ -10,7 +11,7 @@ abstract class LocalSearchDataSource {
 }
 
 class LocalSearchDataSourceImpl implements LocalSearchDataSource {
-  static const _boxName = 'searchHistoryBoxx';
+  static const _boxName = HiveBoxNames.searchHistoryBox;
   @override
   Future<void> addToSearchHistory(SearchHistoryModel searchHistory) async {
     final box = await Hive.openBox<SearchHistoryModel>(_boxName);

@@ -30,7 +30,7 @@ class SuggestedSearchBlocBuilder extends StatelessWidget {
             tvShows: state.tvShows,
           );
         } else if (state is SearchFailure) {
-          return Center(child: Text('Error: ${state.errorMessage}'));
+          return Center(child: Text(state.errorMessage));
         }
         return const Center(child: Text("Type to search..."));
       },

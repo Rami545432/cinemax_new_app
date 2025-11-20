@@ -8,9 +8,7 @@ class HorizentalSeprator extends StatelessWidget {
     return const SizedBox(
       child: Text(
         '___________',
-        style: TextStyle(
-          color: Color.fromARGB(255, 44, 44, 46),
-        ),
+        style: TextStyle(color: Color.fromARGB(255, 44, 44, 46)),
       ),
     );
   }

@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/size_config.dart';
 
 class CustomGridConfig {
   static SliverGridDelegateWithFixedCrossAxisCount getDelegate(
@@ -9,7 +8,7 @@ class CustomGridConfig {
     final width = MediaQuery.sizeOf(context).width;
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: getCrossAxisCount(context),
-      childAspectRatio: width > SizeConfig.mobile ? 0.6 : 0.43,
+      childAspectRatio: width > SizeConfig.mobile ? 0.6 : 0.5,
       crossAxisSpacing: width > SizeConfig.mobile ? 30 : 20,
     );
   }

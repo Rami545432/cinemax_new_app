@@ -1,168 +1,198 @@
-import 'dart:developer';
-
+import 'package:cinemax_app_new/core/utils/errors/errors.dart';
+import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_local_data_source.dart';
+import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_remote_data_source.dart';
+import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
+import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../core/utils/errors/errors.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/repos/auth_repo.dart';
-
-class AuthRepoImpl extends AuthRepo {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
-  final fireBaseUser = FirebaseAuth.instance;
+class AuthRepoImpl implements AuthRepo {
+  final AuthLocalDataSource localDataSource;
+  final AuthRemoteDataSource remoteDataSource;
+  AuthRepoImpl({required this.localDataSource, required this.remoteDataSource});
   @override
-  Future<Either<Failure, UserEntity>> signUp({
-    required String email,
-    required String password,
-  }) async {
+  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
     try {
-      UserCredential userCredential = await _firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      final fireBaseUser = userCredential.user;
-
-      if (fireBaseUser != null) {
-        final userData = UserEntity(
-          email: fireBaseUser.email!,
-          id: fireBaseUser.uid,
-          emailVerify: fireBaseUser.emailVerified,
-        );
-        return right(userData);
-      } else {
-        return left(FireBaseFailure(errorMessage: 'User not found'));
-      }
+      final user = await remoteDataSource.signInWithGoogle();
+      await localDataSource.cacheUser(user);
+      await localDataSource.setFirstTime(false);
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      if (e is FirebaseAuthException) {
-        return left(FireBaseFailure.fromAuthException(e));
-      }
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<Either<Failure, bool>> checkAuthStatus() async {
     try {
-      UserCredential userCredential = await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      final fireBaseUser = userCredential.user;
-
-      if (fireBaseUser != null) {
-        final userData = UserEntity(
-          email: fireBaseUser.email!,
-          id: fireBaseUser.uid,
-          emailVerify: fireBaseUser.emailVerified,
-        );
-        return right(userData);
-      } else {
-        return left(FireBaseFailure(errorMessage: 'User not found'));
+      final isGuest = await localDataSource.getGuestMode();
+      if (isGuest) {
+        return right(true);
       }
-    } on FirebaseAuthException catch (e) {
-      return left(
-        FireBaseFailure(errorMessage: e.message ?? 'An error occurred'),
-      );
+      final user = await remoteDataSource.getCurrentUser();
+      if (user != null) {
+        return right(true);
+      }
+      return right(false);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signInWithGoolge() async {
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
+  Future<Either<Failure, UserEntity>> continueAsGuest() async {
     try {
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithCredential(credential);
-      var fireBaseUser = userCredential.user;
-      if (fireBaseUser != null) {
-        final userdata = UserEntity(
-          emailVerify: fireBaseUser.emailVerified,
-          email: fireBaseUser.email!,
-          id: fireBaseUser.uid,
-        );
-        log(fireBaseUser.uid);
-        return right(userdata);
-      } else {
-        return left(FireBaseFailure(errorMessage: 'User Not Found'));
-      }
-    } on FirebaseAuthException catch (e) {
-      return left(FireBaseFailure.fromAuthException(e));
+      final user = await remoteDataSource.continueAsGuest();
+      await localDataSource.cacheUser(user);
+      await localDataSource.setGuestMode(true);
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity?>> getCurrentUser() async {
+    try {
+      final isGuest = await localDataSource.getGuestMode();
+      if (isGuest) {
+        return right(UserEntity.guest());
+      }
+      final user = await remoteDataSource.getCurrentUser();
+      if (user != null) {
+        await localDataSource.cacheUser(user);
+        return right(user);
+      }
+      return right(null);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPassword(String email) async {
+    try {
+      await remoteDataSource.resetPassword(email);
+      return right(null);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = await remoteDataSource.signInWithEmail(
+        email: email,
+        password: password,
+      );
+      await localDataSource.cacheUser(user);
+      await localDataSource.setFirstTime(false);
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login(
-      permissions: ['email', 'public_profile'],
-    );
-
     try {
-      final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
-
-      UserCredential userCredential = await _firebaseAuth.signInWithCredential(
-        facebookAuthCredential,
-      );
-
-      var fireBaseUser = userCredential.user;
-      if (fireBaseUser != null) {
-        final userData = await FacebookAuth.instance.getUserData(
-          fields: "id,name,picture.width(200)",
-        );
-        final String profilePictureUrl = userData['picture']['data']['url'];
-        final userdata = UserEntity(
-          emailVerify: fireBaseUser.emailVerified,
-          email: fireBaseUser.email ?? fireBaseUser.uid,
-          id: fireBaseUser.uid,
-        );
-        log(fireBaseUser.uid);
-        _firebaseAuth.currentUser!.updatePhotoURL(profilePictureUrl);
-        return right(userdata);
-      } else {
-        return left(FireBaseFailure(errorMessage: 'User Not Found'));
-      }
-    } on FirebaseAuthException catch (e) {
-      return left(FireBaseFailure.fromAuthException(e));
+      final user = await remoteDataSource.signInWithFacebook();
+      await localDataSource.cacheUser(user);
+      await localDataSource.setFirstTime(false);
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, void>> updateDisplayName({
-    required String name,
-  }) async {
+  Future<Either<Failure, void>> signOut() async {
     try {
-      final newName = await fireBaseUser.currentUser!.updateDisplayName(name);
-      return right(newName);
+      await remoteDataSource.signOut();
+      await localDataSource.clearCache();
+      await localDataSource.setGuestMode(false);
+      return right(null);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, void>> verficationEmailBeforeUpdated({
+  Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
+    required String password,
+    required String displayName,
   }) async {
     try {
-      final newEmail = await fireBaseUser.currentUser!.verifyBeforeUpdateEmail(
-        email,
+      final user = await remoteDataSource.signUpWithEmail(
+        email: email,
+        password: password,
+        displayName: displayName,
       );
-      return right(newEmail);
+      await localDataSource.cacheUser(user);
+      await localDataSource.setFirstTime(false);
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
     } catch (e) {
-      return left(FireBaseFailure(errorMessage: e.toString()));
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> disableGuestMode() async {
+    try {
+      await localDataSource.clearGuestMode();
+      return right(null);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> enableGuestMode() async {
+    try {
+      await localDataSource.setGuestMode(true);
+      final user = UserEntity.guest();
+
+      return right(user);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isGuestMode() async {
+    try {
+      final isGuest = await localDataSource.getGuestMode();
+      return right(isGuest);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 }

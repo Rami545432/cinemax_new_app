@@ -1,4 +1,4 @@
-import '../../../../../../constants/assets.dart';
+import '../../../../../constants/assets.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(

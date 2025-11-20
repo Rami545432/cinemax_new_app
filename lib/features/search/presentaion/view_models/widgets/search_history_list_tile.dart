@@ -1,8 +1,8 @@
+import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/go_router.dart';
 import '../../../data/models/search_history_model.dart';
 
 class SearchHistoryListTile extends StatelessWidget {
@@ -26,10 +26,11 @@ class SearchHistoryListTile extends StatelessWidget {
       leading: Icon(Icons.history),
       trailing: IconButton(onPressed: onDelete, icon: const Icon(Icons.delete)),
       onTap: () {
-        GoRouter.of(context).push(
-          '${AppRouter.kMovieDetailView}?from=search',
-          extra: searchHistory,
-        );
+        // GoRouter.of(context).push(
+        //   '${AppRouter.kMovieDetailView}?from=search',
+        //   extra: searchHistory,
+        // );
+        context.pushNamed(RouteName.detail, extra: searchHistory);
       },
     );
   }

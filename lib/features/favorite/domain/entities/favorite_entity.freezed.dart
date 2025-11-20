@@ -12,7 +12,8 @@ part of 'favorite_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 FavoriteEntity _$FavoriteEntityFromJson(Map<String, dynamic> json) {
   return _FavoriteEntity.fromJson(json);
@@ -28,6 +29,11 @@ mixin _$FavoriteEntity {
   String get date => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   bool get isSynced => throw _privateConstructorUsedError;
+  int get seasonNumber => throw _privateConstructorUsedError;
+  int get specificId => throw _privateConstructorUsedError;
+  String get seasonPosterUrl => throw _privateConstructorUsedError;
+  String get backGroundImage => throw _privateConstructorUsedError;
+  int get episodeNumber => throw _privateConstructorUsedError;
 
   /// Serializes this FavoriteEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,18 +48,25 @@ mixin _$FavoriteEntity {
 /// @nodoc
 abstract class $FavoriteEntityCopyWith<$Res> {
   factory $FavoriteEntityCopyWith(
-          FavoriteEntity value, $Res Function(FavoriteEntity) then) =
-      _$FavoriteEntityCopyWithImpl<$Res, FavoriteEntity>;
+    FavoriteEntity value,
+    $Res Function(FavoriteEntity) then,
+  ) = _$FavoriteEntityCopyWithImpl<$Res, FavoriteEntity>;
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      String imageUrl,
-      List<String> gener,
-      ContentType contentType,
-      String date,
-      String userId,
-      bool isSynced});
+  $Res call({
+    int id,
+    String title,
+    String imageUrl,
+    List<String> gener,
+    ContentType contentType,
+    String date,
+    String userId,
+    bool isSynced,
+    int seasonNumber,
+    int specificId,
+    String seasonPosterUrl,
+    String backGroundImage,
+    int episodeNumber,
+  });
 }
 
 /// @nodoc
@@ -79,61 +92,96 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
     Object? date = null,
     Object? userId = null,
     Object? isSynced = null,
+    Object? seasonNumber = null,
+    Object? specificId = null,
+    Object? seasonPosterUrl = null,
+    Object? backGroundImage = null,
+    Object? episodeNumber = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gener: null == gener
-          ? _value.gener
-          : gener // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      contentType: null == contentType
-          ? _value.contentType
-          : contentType // ignore: cast_nullable_to_non_nullable
-              as ContentType,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      isSynced: null == isSynced
-          ? _value.isSynced
-          : isSynced // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            imageUrl: null == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                      as String,
+            gener: null == gener
+                ? _value.gener
+                : gener // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            contentType: null == contentType
+                ? _value.contentType
+                : contentType // ignore: cast_nullable_to_non_nullable
+                      as ContentType,
+            date: null == date
+                ? _value.date
+                : date // ignore: cast_nullable_to_non_nullable
+                      as String,
+            userId: null == userId
+                ? _value.userId
+                : userId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            isSynced: null == isSynced
+                ? _value.isSynced
+                : isSynced // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            seasonNumber: seasonNumber == null
+                ? _value.seasonNumber
+                : seasonNumber // ignore: cast_nullable_to_non_nullable
+                      as int,
+            specificId: specificId == null
+                ? _value.specificId
+                : specificId // ignore: cast_nullable_to_non_nullable
+                      as int,
+            seasonPosterUrl: seasonPosterUrl == null
+                ? _value.seasonPosterUrl
+                : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
+                      as String,
+            backGroundImage: backGroundImage == null
+                ? _value.backGroundImage
+                : backGroundImage // ignore: cast_nullable_to_non_nullable
+                      as String,
+            episodeNumber: episodeNumber == null
+                ? _value.episodeNumber
+                : episodeNumber // ignore: cast_nullable_to_non_nullable
+                      as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$FavoriteEntityImplCopyWith<$Res>
     implements $FavoriteEntityCopyWith<$Res> {
-  factory _$$FavoriteEntityImplCopyWith(_$FavoriteEntityImpl value,
-          $Res Function(_$FavoriteEntityImpl) then) =
-      __$$FavoriteEntityImplCopyWithImpl<$Res>;
+  factory _$$FavoriteEntityImplCopyWith(
+    _$FavoriteEntityImpl value,
+    $Res Function(_$FavoriteEntityImpl) then,
+  ) = __$$FavoriteEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      String imageUrl,
-      List<String> gener,
-      ContentType contentType,
-      String date,
-      String userId,
-      bool isSynced});
+  $Res call({
+    int id,
+    String title,
+    String imageUrl,
+    List<String> gener,
+    ContentType contentType,
+    String date,
+    String userId,
+    bool isSynced,
+    int seasonNumber,
+    int specificId,
+    String seasonPosterUrl,
+    String backGroundImage,
+    int episodeNumber,
+  });
 }
 
 /// @nodoc
@@ -141,8 +189,9 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
     extends _$FavoriteEntityCopyWithImpl<$Res, _$FavoriteEntityImpl>
     implements _$$FavoriteEntityImplCopyWith<$Res> {
   __$$FavoriteEntityImplCopyWithImpl(
-      _$FavoriteEntityImpl _value, $Res Function(_$FavoriteEntityImpl) _then)
-      : super(_value, _then);
+    _$FavoriteEntityImpl _value,
+    $Res Function(_$FavoriteEntityImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of FavoriteEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -157,57 +206,89 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
     Object? date = null,
     Object? userId = null,
     Object? isSynced = null,
+    Object? seasonNumber = null,
+    Object? specificId = null,
+    Object? seasonPosterUrl = null,
+    Object? backGroundImage = null,
+    Object? episodeNumber = null,
   }) {
-    return _then(_$FavoriteEntityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gener: null == gener
-          ? _value._gener
-          : gener // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      contentType: null == contentType
-          ? _value.contentType
-          : contentType // ignore: cast_nullable_to_non_nullable
-              as ContentType,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      isSynced: null == isSynced
-          ? _value.isSynced
-          : isSynced // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$FavoriteEntityImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        imageUrl: null == imageUrl
+            ? _value.imageUrl
+            : imageUrl // ignore: cast_nullable_to_non_nullable
+                  as String,
+        gener: null == gener
+            ? _value._gener
+            : gener // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        contentType: null == contentType
+            ? _value.contentType
+            : contentType // ignore: cast_nullable_to_non_nullable
+                  as ContentType,
+        date: null == date
+            ? _value.date
+            : date // ignore: cast_nullable_to_non_nullable
+                  as String,
+        userId: null == userId
+            ? _value.userId
+            : userId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        isSynced: null == isSynced
+            ? _value.isSynced
+            : isSynced // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        seasonNumber: seasonNumber == null
+            ? _value.seasonNumber
+            : seasonNumber // ignore: cast_nullable_to_non_nullable
+                  as int,
+        specificId: specificId == null
+            ? _value.specificId
+            : specificId // ignore: cast_nullable_to_non_nullable
+                  as int,
+        seasonPosterUrl: seasonPosterUrl == null
+            ? _value.seasonPosterUrl
+            : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
+                  as String,
+        backGroundImage: backGroundImage == null
+            ? _value.backGroundImage
+            : backGroundImage // ignore: cast_nullable_to_non_nullable
+                  as String,
+        episodeNumber: episodeNumber == null
+            ? _value.episodeNumber
+            : episodeNumber // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FavoriteEntityImpl implements _FavoriteEntity {
-  const _$FavoriteEntityImpl(
-      {required this.id,
-      required this.title,
-      required this.imageUrl,
-      required final List<String> gener,
-      required this.contentType,
-      required this.date,
-      this.userId = 'guest',
-      this.isSynced = false})
-      : _gener = gener;
+  const _$FavoriteEntityImpl({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required final List<String> gener,
+    required this.contentType,
+    required this.date,
+    this.userId = 'guest',
+    this.isSynced = false,
+    required this.seasonNumber,
+    required this.specificId,
+    required this.seasonPosterUrl,
+    required this.backGroundImage,
+    required this.episodeNumber,
+  }) : _gener = gener;
 
   factory _$FavoriteEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FavoriteEntityImplFromJson(json);
@@ -236,7 +317,17 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
   @override
   @JsonKey()
   final bool isSynced;
-
+  @override
+  final int seasonNumber;
+  @override
+  final int specificId;
+  @override
+  final String seasonPosterUrl;
+  @override
+  final String backGroundImage;
+  @override
+  final int episodeNumber;
+  @override
   @override
   String toString() {
     return 'FavoriteEntity(id: $id, title: $title, imageUrl: $imageUrl, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced)';
@@ -257,21 +348,37 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.isSynced, isSynced) ||
-                other.isSynced == isSynced));
+                other.isSynced == isSynced) &&
+            (identical(other.seasonNumber, seasonNumber) ||
+                other.seasonNumber == seasonNumber) &&
+            (identical(other.specificId, specificId) ||
+                other.specificId == specificId) &&
+            (identical(other.seasonPosterUrl, seasonPosterUrl) ||
+                other.seasonPosterUrl == seasonPosterUrl) &&
+            (identical(other.backGroundImage, backGroundImage) ||
+                other.backGroundImage == backGroundImage) &&
+            (identical(other.episodeNumber, episodeNumber) ||
+                other.episodeNumber == episodeNumber));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      imageUrl,
-      const DeepCollectionEquality().hash(_gener),
-      contentType,
-      date,
-      userId,
-      isSynced);
+    runtimeType,
+    id,
+    title,
+    imageUrl,
+    const DeepCollectionEquality().hash(_gener),
+    contentType,
+    date,
+    userId,
+    isSynced,
+    seasonNumber,
+    specificId,
+    seasonPosterUrl,
+    backGroundImage,
+    episodeNumber,
+  );
 
   /// Create a copy of FavoriteEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -280,26 +387,32 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
   @pragma('vm:prefer-inline')
   _$$FavoriteEntityImplCopyWith<_$FavoriteEntityImpl> get copyWith =>
       __$$FavoriteEntityImplCopyWithImpl<_$FavoriteEntityImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FavoriteEntityImplToJson(
-      this,
-    );
+    return _$$FavoriteEntityImplToJson(this);
   }
 }
 
 abstract class _FavoriteEntity implements FavoriteEntity {
-  const factory _FavoriteEntity(
-      {required final int id,
-      required final String title,
-      required final String imageUrl,
-      required final List<String> gener,
-      required final ContentType contentType,
-      required final String date,
-      final String userId,
-      final bool isSynced}) = _$FavoriteEntityImpl;
+  const factory _FavoriteEntity({
+    required final int id,
+    required final String title,
+    required final String imageUrl,
+    required final List<String> gener,
+    required final ContentType contentType,
+    required final String date,
+    final String userId,
+    final bool isSynced,
+    required final int seasonNumber,
+    required final int specificId,
+    required final String seasonPosterUrl,
+    required final String backGroundImage,
+    required final int episodeNumber,
+  }) = _$FavoriteEntityImpl;
 
   factory _FavoriteEntity.fromJson(Map<String, dynamic> json) =
       _$FavoriteEntityImpl.fromJson;
@@ -320,6 +433,16 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   String get userId;
   @override
   bool get isSynced;
+  @override
+  int get seasonNumber;
+  @override
+  int get specificId;
+  @override
+  String get seasonPosterUrl;
+  @override
+  String get backGroundImage;
+  @override
+  int get episodeNumber;
 
   /// Create a copy of FavoriteEntity
   /// with the given fields replaced by the non-null parameter values.

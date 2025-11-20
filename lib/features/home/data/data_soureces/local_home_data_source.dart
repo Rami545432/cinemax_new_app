@@ -1,7 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../../constant.dart';
-import '../../domian/entites/entity.dart';
+import '../../domian/entites/movie_entity.dart';
 
 abstract class LocalHomeDataSource {
   Future<List<MovieEntity>> fetchMostPopularMovies({int page = 10});
@@ -14,7 +13,7 @@ class LocalHomeDataSourceImpl extends LocalHomeDataSource {
   Future<List<MovieEntity>> fetchMostPopularMovies({int page = 10}) async {
     int startIndex = (page - 1) * 20;
     int endIndex = startIndex + 20;
-    var cachedPopMovies = Hive.box<MovieEntity>(popularBox);
+    var cachedPopMovies = Hive.box<MovieEntity>('');
 
     var length = cachedPopMovies.values.length;
     if (startIndex >= length) {
@@ -28,7 +27,7 @@ class LocalHomeDataSourceImpl extends LocalHomeDataSource {
 
   @override
   Future<List<MovieEntity>> fetchNewsetMovies() async {
-    var cachedNewsetMovies = Hive.box<MovieEntity>(newsetBox);
+    var cachedNewsetMovies = Hive.box<MovieEntity>('');
     return cachedNewsetMovies.values.toList();
   }
 

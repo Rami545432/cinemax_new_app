@@ -1,4 +1,5 @@
-import '../../../../core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+
 import '../models/favorite_model.dart';
 
 abstract class LocalFavoriteDataSource {
@@ -9,4 +10,5 @@ abstract class LocalFavoriteDataSource {
   Future<List<FavoriteModel>> clearGuestFavorites();
   Future<List<FavoriteModel>> updateFavoriteSyncStatus(int id, bool isSynced);
   Future<bool> isFavorite(int id, ContentType contentType);
+  Future<List<FavoriteModel>> getAllFavorites();
 }

@@ -1,41 +1,22 @@
-import 'package:dartz/dartz.dart';
+import 'package:cinemax_app_new/core/types/domain_types.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/utils/errors/errors.dart';
-import '../../../../models/base_card_model.dart';
-import '../../../../models/movie_details_model/movie_details_model.dart';
-import '../entites/entity.dart';
-
 abstract class HomeRepo {
-  Future<Either<Failure, List<MovieEntity>>> fetchPopularMovies(
+  MovieListResult fetchPopularMovies(
     dynamic generId, {
     int page = 1,
+    String? region,
     CancelToken? cancelToken,
   });
-  Future<Either<Failure, List<MovieEntity>>> fetchUpcomingMovies({
+  MovieListResult fetchUpcomingMovies({int page = 1, CancelToken? cancelToken});
+  MovieListResult fetchTrendingMovies({
+    int page = 1,
+    CancelToken? cancelToken,
+    String? region,
+  });
+  MovieListResult fetchTopRatedMovies({int page = 1, CancelToken? cancelToken});
+  MovieListResult fetchNowPlayingMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
-  Future<Either<Failure, List<MovieEntity>>> fetchTrendingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  });
-  Future<Either<Failure, List<MovieEntity>>> fetchTopRatedMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  });
-  Future<Either<Failure, List<MovieEntity>>> fetchNowPlayingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  });
-
-  Future<Either<Failure, MovieDetailsModel>> fetchMoviesDetails(
-    int movieid,
-    CancelToken? cancelToken,
-  );
-  Future<Either<Failure, List<BaseCardModel>>> fetchRecommmendedItems(
-    int id,
-    String type,
-    CancelToken? cancelToken,
-  );
 }

@@ -1,0 +1,16 @@
+flutter_native_splash:
+  android: true
+  ios: true
+
+  # Android 12+ compliant splash screen rule (NO background images allowed)
+  color: "#000B1E"   # <- Deep navy (matches your icon background)
+  image: assets/icons/app_icon_foreground.png
+
+  # For Android < 12 (optional gradient background support)
+  background_image: assets/icons/app_icon_background.png
+
+  android_gravity: center
+  ios_content_mode: center
+
+  # Make logo medium size (Option B)
+  branding_mode: "scale"   # allow resizing behavior

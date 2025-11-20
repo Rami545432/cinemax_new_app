@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:cinemax_app_new/models/base_card_model.dart';
 import 'package:hive/hive.dart';
-
-import '../../../../core/utils/enums/content_type.dart' show ContentType;
 
 part 'search_history_model.g.dart';
 
@@ -10,7 +9,7 @@ class SearchHistoryModel implements BaseCardModel {
   @HiveField(0)
   final String query;
   @HiveField(1)
-  final DateTime createdAt;
+  final String date;
   @HiveField(2)
   final String historyType;
   @HiveField(3)
@@ -19,18 +18,21 @@ class SearchHistoryModel implements BaseCardModel {
   final String historyHorizontalCardImage;
   @HiveField(5)
   final String historyVerticalCardImage;
+  @HiveField(6)
+  final ContentType? historyContentType;
 
   SearchHistoryModel({
     required this.query,
-    required this.createdAt,
+    required this.date,
     required this.historyType,
     required this.id,
     required this.historyHorizontalCardImage,
     required this.historyVerticalCardImage,
+    this.historyContentType,
   });
 
   @override
-  String? get cardDate => createdAt.toString();
+  String? get cardDate => date;
 
   @override
   List<int>? get cardGeners => null;
@@ -54,11 +56,8 @@ class SearchHistoryModel implements BaseCardModel {
   String? get horizontalCardImage => historyHorizontalCardImage;
 
   @override
-  String get overView => '';
-
-  @override
   String? get type => historyType;
 
   @override
-  ContentType? get contentType => null;
+  ContentType? get contentType => historyContentType;
 }

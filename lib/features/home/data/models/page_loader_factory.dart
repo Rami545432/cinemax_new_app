@@ -1,14 +1,15 @@
+import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/core/utils/helper/base_pagination_cubit/base_paginated_cubit.dart';
 import 'package:cinemax_app_new/core/utils/use_case/use_case.dart';
 import 'package:cinemax_app_new/models/base_card_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../../core/utils/get_it.dart';
-import '../../../../core/utils/helper/base_pagination_cubit/base_paginated_cubit.dart';
+
 import '../../../series/data/repos/series_repo_impl.dart';
 import '../repos/home_repo_impl.dart';
 
 class PageLoaderFactory {
-  static PageLoader<BaseCardModel, NoParam> createPageLoader({
+  static PageLoader<BaseCardModel, NoParams> createPageLoader({
     required String type,
     required String title,
   }) {
@@ -22,9 +23,9 @@ class PageLoaderFactory {
     }
   }
 
-  static PageLoader<BaseCardModel, NoParam> _createDefaultPageLoader() {
+  static PageLoader<BaseCardModel, NoParams> _createDefaultPageLoader() {
     return ({
-      required NoParam params,
+      required NoParams params,
       int? page,
       CancelToken? cancelToken,
     }) async {
@@ -32,11 +33,11 @@ class PageLoaderFactory {
     };
   }
 
-  static PageLoader<BaseCardModel, NoParam> _createPageLoaderForMovie({
+  static PageLoader<BaseCardModel, NoParams> _createPageLoaderForMovie({
     required String title,
   }) {
     final homeRepo = getIt<HomeRepoImpl>();
-    return ({NoParam? params, int? page, CancelToken? cancelToken}) async {
+    return ({NoParams? params, int? page, CancelToken? cancelToken}) async {
       switch (title) {
         case 'NOW PLAYING':
           return await homeRepo.fetchNowPlayingMovies(
@@ -65,11 +66,11 @@ class PageLoaderFactory {
     };
   }
 
-  static PageLoader<BaseCardModel, NoParam> _createPageLoaderForTv({
+  static PageLoader<BaseCardModel, NoParams> _createPageLoaderForTv({
     required String title,
   }) {
     final seriesRepo = getIt<SeriesRepoImpl>();
-    return ({NoParam? params, int? page, CancelToken? cancelToken}) async {
+    return ({NoParams? params, int? page, CancelToken? cancelToken}) async {
       switch (title) {
         case 'POPULAR':
           return await seriesRepo.fetchPopularTvShows(

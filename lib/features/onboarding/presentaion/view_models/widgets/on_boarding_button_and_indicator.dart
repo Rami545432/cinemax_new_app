@@ -1,7 +1,7 @@
 import 'package:cinemax_app_new/core/utils/helper/responsive_padding.dart';
+import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/smoth_indicator_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../home/presentaion/views_models/widgets/smoth_indicator_card.dart';
 import 'next_button.dart';
 
 class OnboardingButtonAndInicator extends StatelessWidget {

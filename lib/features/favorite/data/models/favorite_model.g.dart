@@ -25,13 +25,18 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       date: fields[6] as String,
       userId: fields[7] as String,
       isSynced: fields[8] as bool,
+      seasonNumber: fields[9] as int,
+      specificId: fields[10] as int,
+      seasonPosterUrl: fields[11] as String,
+      backGroundImage: fields[12] as String,
+      episodeNumber: fields[13] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoriteModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(13)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -47,7 +52,17 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       ..writeByte(7)
       ..write(obj.userId)
       ..writeByte(8)
-      ..write(obj.isSynced);
+      ..write(obj.isSynced)
+      ..writeByte(9)
+      ..write(obj.seasonNumber)
+      ..writeByte(10)
+      ..write(obj.specificId)
+      ..writeByte(11)
+      ..write(obj.seasonPosterUrl)
+      ..writeByte(12)
+      ..write(obj.backGroundImage)
+      ..writeByte(13)
+      ..write(obj.episodeNumber);
   }
 
   @override
@@ -75,6 +90,11 @@ _$FavoriteModelImpl _$$FavoriteModelImplFromJson(Map<String, dynamic> json) =>
       date: json['date'] as String,
       userId: json['userId'] as String? ?? 'guest',
       isSynced: json['isSynced'] as bool? ?? false,
+      seasonNumber: (json['seasonNumber'] as num).toInt(),
+      specificId: (json['specificId'] as num).toInt(),
+      seasonPosterUrl: json['seasonPosterUrl'] as String,
+      backGroundImage: json['backGroundImage'] as String,
+      episodeNumber: (json['episodeNumber'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$FavoriteModelImplToJson(_$FavoriteModelImpl instance) =>
@@ -87,6 +107,11 @@ Map<String, dynamic> _$$FavoriteModelImplToJson(_$FavoriteModelImpl instance) =>
       'date': instance.date,
       'userId': instance.userId,
       'isSynced': instance.isSynced,
+      'seasonNumber': instance.seasonNumber,
+      'specificId': instance.specificId,
+      'seasonPosterUrl': instance.seasonPosterUrl,
+      'backGroundImage': instance.backGroundImage,
+      'episodeNumber': instance.episodeNumber,
     };
 
 const _$ContentTypeEnumMap = {

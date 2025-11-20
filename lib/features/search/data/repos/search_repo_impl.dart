@@ -1,5 +1,5 @@
 import 'package:cinemax_app_new/core/utils/errors/errors.dart';
-import 'package:cinemax_app_new/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/movie_entity.dart';
 import 'package:cinemax_app_new/features/search/data/data_sources/local_search_data_source.dart';
 import 'package:cinemax_app_new/features/search/data/data_sources/remote_search_data_source.dart';
 import 'package:cinemax_app_new/features/search/data/models/search_history_model.dart';
@@ -25,10 +25,9 @@ class SearchRepoImpl implements SearchRepo {
     try {
       var suggestions = await remoteDataSource.searchMovies(query, cancelToken);
       return right(suggestions);
+    } on DioException catch (e) {
+      return left(ServerFailure.fromDioError(e));
     } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
@@ -41,10 +40,9 @@ class SearchRepoImpl implements SearchRepo {
     try {
       var suggestions = await remoteDataSource.searchActors(query, cancelToken);
       return right(suggestions);
+    } on DioException catch (e) {
+      return left(ServerFailure.fromDioError(e));
     } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
@@ -57,10 +55,9 @@ class SearchRepoImpl implements SearchRepo {
     try {
       var results = await remoteDataSource.searchTvShows(query, cancelToken);
       return right(results);
+    } on DioException catch (e) {
+      return left(ServerFailure.fromDioError(e));
     } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }

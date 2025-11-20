@@ -1,8 +1,9 @@
+import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
+import 'package:cinemax_app_new/core/utils/helper/sorting_methods.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../../core/utils/helper/sorting_methods.dart';
 import '../../../../data/models/search_history_model.dart';
 import '../../../../data/models/search_result.dart';
 
@@ -24,17 +25,19 @@ class SearchCubit extends Cubit<SearchState> {
   CancelToken? cancelToken;
 
   Future<void> searchItems(String query) async {
+    cancelToken?.cancel();
+    cancelToken = CancelToken();
     var movieResult = await searchMovieUseCase.call(query, cancelToken);
     var tvShowsResults = await searchTvShowUseCase.call(query, cancelToken);
 
     movieResult.fold(
       (failure) {
-        emit(SearchFailure(errorMessage: failure.errorMessage));
+        safeEmit(SearchFailure(errorMessage: failure.errorMessage));
       },
       (movies) {
         tvShowsResults.fold(
           (failure) {
-            emit(SearchFailure(errorMessage: failure.errorMessage));
+            safeEmit(SearchFailure(errorMessage: failure.errorMessage));
           },
           (tvshows) {
             final combinedResults = <SearchResult>[
@@ -51,7 +54,7 @@ class SearchCubit extends Cubit<SearchState> {
               tvshows.map((tvshow) => TvShowResult(tvshow)).toList(),
             );
 
-            emit(
+            safeEmit(
               SearchSuccess(
                 results: sortedResults,
                 movies: sortedMoviesResults,
@@ -80,7 +83,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   Future<void> getSearchHistory() async {
     final searchHistory = await searchHistoryUseCase.getSearchHistory();
-    emit(SearchHistorySuccess(searchHistory: searchHistory));
+    safeEmit(SearchHistorySuccess(searchHistory: searchHistory));
   }
 
   @override

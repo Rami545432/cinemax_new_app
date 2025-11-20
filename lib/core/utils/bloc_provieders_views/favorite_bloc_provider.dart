@@ -1,27 +1,16 @@
+import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/features/favorite/presentation/views/favorite_view.dart';
+import 'package:cinemax_app_new/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../features/favorite/data/repos/favorite_repo_impl.dart';
-import '../../../features/favorite/domain/use_cases/manage_favorites_use_case.dart';
-import '../../../features/favorite/presentaion/view_models/views/favorite_view.dart';
-import '../../../features/favorite/presentation/cubit/favorite_cubit.dart';
-import '../get_it.dart';
 
 class FavoriteBlocProviders extends StatelessWidget {
   const FavoriteBlocProviders({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => FavoriteCubit(
-            manageFavoritesUseCase: ManageFavoritesUseCase(
-              favoriteRepo: getIt.get<FavoriteRepoImpl>(),
-            ),
-          ),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => getIt.get<FavoriteCubit>()..loadAllFavorites(),
       child: const FavoriteView(),
     );
   }

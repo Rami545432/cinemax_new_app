@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
+import 'package:cinemax_app_new/core/types/domain_types.dart';
+import 'package:cinemax_app_new/core/utils/cubit_parameters/params.dart';
+import 'package:cinemax_app_new/core/utils/use_case/use_case.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/utils/cubit_parameters/params.dart';
-import '../../../../core/utils/errors/errors.dart';
-import '../../../../core/utils/use_case/use_case.dart';
-import '../entites/entity.dart';
+import '../entites/movie_entity.dart';
 import '../repos/home_repo.dart';
 
 class FetchPopularUseCase extends UseCase<List<MovieEntity>, PopularParams> {
@@ -12,7 +11,7 @@ class FetchPopularUseCase extends UseCase<List<MovieEntity>, PopularParams> {
 
   FetchPopularUseCase({required this.homeRepo});
   @override
-  Future<Either<Failure, List<MovieEntity>>> call([
+  MovieListResult call([
     PopularParams? params,
     int? page,
     CancelToken? cancelToken,

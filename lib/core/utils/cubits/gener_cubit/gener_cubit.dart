@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../features/home/domian/entites/entity.dart';
+import '../../../../features/home/domian/entites/movie_entity.dart';
 
 class GenerCubit extends Cubit<int> {
   GenerCubit() : super(0);

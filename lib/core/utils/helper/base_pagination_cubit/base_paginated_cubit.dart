@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,12 +16,13 @@ typedef PageLoader<T, P> =
 abstract class BasePaginatedCubit<T, P> extends Cubit<BasePaginatedStates<T>> {
   BasePaginatedCubit(super.initialState, this.pageLoader);
   PageLoader<T, P> pageLoader;
-  final List<T> items = [];
+  List<T> items = [];
   bool isFetching = false;
   bool isLastPage = false;
   int currentPage = 1;
   CancelToken? _cancelToken;
-  late P _params;
+  P? _params;
+
   Future<void> fetchInitialData({required P params}) async {
     if (isFetching) {
       return;
@@ -42,39 +44,35 @@ abstract class BasePaginatedCubit<T, P> extends Cubit<BasePaginatedStates<T>> {
     isFetching = true;
     _cancelToken?.cancel();
     _cancelToken = CancelToken();
-    emit(
+
+    safeEmit(
       BasePaginatedLoading<T>(
-            oldData: List.unmodifiable(items),
-            isFirstFetch: currentPage == 1,
-          )
-          as BasePaginatedStates<T>,
+        oldData: List.unmodifiable(items),
+        isFirstFetch: currentPage == 1,
+      ),
     );
+
     final result = await pageLoader(
-      params: _params,
+      params: _params as P,
       page: currentPage,
       cancelToken: _cancelToken,
     );
+
     result.fold(
       (failure) {
-        if (!isClosed) {
-          emit(
-            BasePaginatedError<T>(
-                  errorMessage: failure.errorMessage,
-                  oldData: List.unmodifiable(items),
-                )
-                as BasePaginatedStates<T>,
-          );
-        }
+        safeEmit(
+          BasePaginatedError<T>(
+            errorMessage: failure.errorMessage,
+            oldData: List.unmodifiable(items),
+          ),
+        );
       },
       (newItems) {
-        items.addAll(newItems);
+        items = [...items, ...newItems];
         isLastPage = newItems.isEmpty;
-        if (!isClosed) {
-          emit(
-            BasePaginatedSuccess<T>(newData: items, isLastPage: isLastPage)
-                as BasePaginatedStates<T>,
-          );
-        }
+        safeEmit(
+          BasePaginatedSuccess<T>(newData: items, isLastPage: isLastPage),
+        );
       },
     );
     isFetching = false;

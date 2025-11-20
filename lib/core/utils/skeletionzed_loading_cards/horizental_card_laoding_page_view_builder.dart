@@ -6,10 +6,10 @@ import 'horizental_stack_container_loading.dart';
 class HorizentalCardLoadingPageViewBuilder extends StatelessWidget {
   const HorizentalCardLoadingPageViewBuilder({
     super.key,
-    required PageController pageController,
-  }) : _pageController = pageController;
+    required this.pageController,
+  });
 
-  final PageController _pageController;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HorizentalCardLoadingPageViewBuilder extends StatelessWidget {
       child: SizedBox(
         height: 180,
         child: PageView.builder(
-          controller: _pageController,
+          controller: pageController,
           scrollDirection: Axis.horizontal,
           itemCount: 20,
           itemBuilder: (context, index) {

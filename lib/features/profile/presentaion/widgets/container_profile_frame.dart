@@ -10,9 +10,7 @@ class ContainerProfileFrame extends StatelessWidget {
       width: 327,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: const Color(0xff252836),
-        ),
+        border: Border.all(color: const Color(0xff252836)),
       ),
       child: child,
     );

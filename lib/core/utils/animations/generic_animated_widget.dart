@@ -1,6 +1,7 @@
 import 'package:cinemax_app_new/features/search/presentaion/view_models/widgets/custom_grid_config.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/animations/remove_animation_builder.dart';
+import '../../types/ui_types.dart';
 import 'animated_list_manger.dart';
 import 'build_animated_list_item.dart';
 
@@ -8,12 +9,12 @@ enum GenericAnimatedWidgetType { list, grid }
 
 class GenericAnimatedWidget<T> extends StatefulWidget {
   final List<T> items;
-  final Widget Function(T item, VoidCallback onRemove) itemBuilder;
+  final ItemBuilder<T> itemBuilder;
   final void Function(T item) onItemRemoved;
   final void Function()? onAllItemsRemoved;
   final ListItemAnimationType? animationType;
   final RemoveAnimationType? removeAnimationType;
-  final Widget Function(VoidCallback onClear)? headerWidget;
+  final HeaderBuilder? headerWidget;
   final GenericAnimatedWidgetType widgetType;
   const GenericAnimatedWidget({
     super.key,
@@ -122,11 +123,7 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
           itemBuilder: (context, index, animation) {
             if (index >= _items.length) return const SizedBox.shrink();
             final item = _items[index];
-            return BuildAnimatedListItem(
-              index: index,
-              animation: animation,
-              child: widget.itemBuilder(item, () => _removeItem(index)),
-            );
+            return widget.itemBuilder(item, () => _removeItem(index));
           },
         );
       case GenericAnimatedWidgetType.grid:
@@ -137,12 +134,7 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
           itemBuilder: (context, index, animation) {
             if (index >= _items.length) return const SizedBox.shrink();
             final item = _items[index];
-            return BuildAnimatedListItem(
-              animationType: ListItemAnimationType.fade,
-              index: index,
-              animation: animation,
-              child: widget.itemBuilder(item, () => _removeItem(index)),
-            );
+            return widget.itemBuilder(item, () => _removeItem(index));
           },
         );
     }

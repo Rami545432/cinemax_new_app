@@ -1,11 +1,10 @@
-import 'package:cinemax_app_new/core/utils/errors/errors.dart';
+import 'package:cinemax_app_new/core/types/domain_types.dart';
+import 'package:cinemax_app_new/core/utils/cubit_parameters/top_rated_params.dart';
 import 'package:cinemax_app_new/core/utils/use_case/use_case.dart';
-import 'package:cinemax_app_new/features/series/domain/repos/series_repo.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/utils/cubit_parameters/params.dart';
 import '../entites/series_entity.dart';
+import '../repos/series_repo.dart';
 
 class FetchTopRatedTvShowsUseCase
     extends UseCase<List<SeriesEntity>, TopRatedParams> {
@@ -13,7 +12,7 @@ class FetchTopRatedTvShowsUseCase
 
   FetchTopRatedTvShowsUseCase({required this.seriesRepo});
   @override
-  Future<Either<Failure, List<SeriesEntity>>> call([
+  SeriesListResult call([
     TopRatedParams? parameter,
     int? page,
     CancelToken? cancelToken,

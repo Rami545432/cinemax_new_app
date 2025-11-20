@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/utils/services/api_service.dart';
-import 'package:cinemax_app_new/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
+import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/movie_entity.dart';
 import 'package:cinemax_app_new/features/search/data/models/search_actor_model/search_actor_model.dart';
 import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../models/movie_model.dart';
 import '../../../series/data/models/series_model.dart';
 import '../../../series/domain/entites/series_entity.dart';
 

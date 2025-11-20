@@ -1,42 +1,26 @@
+// Use your ORIGINAL NavigationViews (the one that worked!)
+import 'package:cinemax_app_new/constant.dart';
+import 'package:cinemax_app_new/core/routing/route_paths.dart';
 import 'package:flutter/material.dart';
-import '../../constant.dart';
-import '../../features/profile/presentaion/views/profile_view.dart';
-import 'app_colors.dart';
-import 'bloc_provieders_views/home_view_provieder.dart';
-import 'bloc_provieders_views/seires_tv_shows_providers.dart';
-import 'bloc_provieders_views/favorite_bloc_provider.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
-class NavigationViews extends StatefulWidget {
-  const NavigationViews({super.key, this.viewindex});
-
-  final int? viewindex;
-
-  @override
-  State<NavigationViews> createState() => _NavigationViewsState();
-}
-
-class _NavigationViewsState extends State<NavigationViews> {
-  int selectedIndex = 0;
-  List<Widget> body = [
-    HomeViewProviders(),
-    FavoriteBlocProviders(),
-    SeiresTvShowsProviders(),
-    ProfileView(),
-  ];
+class NavigationViews extends HookWidget {
+  const NavigationViews({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body[widget.viewindex ?? selectedIndex],
+      body: child,
       bottomNavigationBar: NavigationBar(
         indicatorColor: Colors.transparent,
-        backgroundColor: AppPrimaryColors.dark,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+
         onDestinationSelected: (value) {
-          setState(() {
-            selectedIndex = value;
-          });
+          _onItemTapped(value, context);
         },
-        selectedIndex: widget.viewindex ?? selectedIndex,
+        selectedIndex: _calculateSelectedIndex(context),
         destinations: [
           for (int i = 0; i < selectedIcons.length; i++)
             NavigationDestination(
@@ -47,5 +31,31 @@ class _NavigationViewsState extends State<NavigationViews> {
         ],
       ),
     );
+  }
+
+  int _calculateSelectedIndex(BuildContext context) {
+    final location = GoRouterState.of(context).uri.path;
+    if (location.startsWith(RoutePaths.home)) return 0;
+    if (location.startsWith(RoutePaths.favorite)) return 1;
+    if (location.startsWith(RoutePaths.series)) return 2;
+    if (location.startsWith(RoutePaths.profile)) return 3;
+    return 0;
+  }
+
+  void _onItemTapped(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        context.go(RoutePaths.home);
+        break;
+      case 1:
+        context.go(RoutePaths.favorite);
+        break;
+      case 2:
+        context.go(RoutePaths.series);
+        break;
+      case 3:
+        context.go(RoutePaths.profile);
+        break;
+    }
   }
 }

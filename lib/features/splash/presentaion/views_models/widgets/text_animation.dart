@@ -1,8 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/app_colors.dart';
 
 class TextAnimation extends StatelessWidget {
   const TextAnimation({super.key});

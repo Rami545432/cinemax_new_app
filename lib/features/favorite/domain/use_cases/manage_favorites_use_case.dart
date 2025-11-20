@@ -1,5 +1,6 @@
-import '../../../../core/utils/enums/content_type.dart';
-import '../../data/models/favorite_model.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+
+import '../entities/favorite_entity.dart';
 import '../repos/favorite_repo.dart';
 
 class ManageFavoritesUseCase {
@@ -8,7 +9,7 @@ class ManageFavoritesUseCase {
   ManageFavoritesUseCase({required FavoriteRepo favoriteRepo})
     : _favoriteRepo = favoriteRepo;
 
-  Future<void> addFavorite(FavoriteModel favorite) async {
+  Future<void> addFavorite(FavoriteEntity favorite) async {
     await _favoriteRepo.addFavorite(favorite);
   }
 
@@ -16,7 +17,7 @@ class ManageFavoritesUseCase {
     await _favoriteRepo.removeFavorite(id, contentType);
   }
 
-  Future<List<FavoriteModel>> getFavoritesByType(
+  Future<List<FavoriteEntity>> getFavoritesByType(
     ContentType contentType,
   ) async {
     return await _favoriteRepo.getFavoritesByType(contentType);
@@ -32,5 +33,9 @@ class ManageFavoritesUseCase {
 
   Future<void> loadUserFavorites(ContentType contentType) async {
     await _favoriteRepo.loadUserFavorites(contentType);
+  }
+
+  Future<List<FavoriteEntity>> getAllFavorites() async {
+    return await _favoriteRepo.getAllFavorites();
   }
 }

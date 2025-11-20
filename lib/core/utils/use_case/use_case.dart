@@ -1,9 +1,7 @@
-import 'package:dartz/dartz.dart';
-
-import '../errors/errors.dart';
+import '../../types/repository_types.dart';
 
 abstract class UseCase<Type, Parameter> {
-  Future<Either<Failure, Type>> call([Parameter parameter]);
+  UseCaseResult<Type> call([Parameter parameter]);
 }
 
-class NoParam {}
+class NoParams {}

@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/core/utils/helper/responsive_padding.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/app_styles.dart';
 
 class OnBoardingTitleAndSubtitle extends StatelessWidget {
   const OnBoardingTitleAndSubtitle({

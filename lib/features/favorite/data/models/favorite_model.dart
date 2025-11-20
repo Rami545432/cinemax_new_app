@@ -1,7 +1,7 @@
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../core/utils/enums/content_type.dart';
 import '../../domain/entities/favorite_entity.dart';
 
 part 'favorite_model.freezed.dart';
@@ -20,6 +20,12 @@ class FavoriteModel with _$FavoriteModel {
     @HiveField(6) required String date,
     @HiveField(7) @Default('guest') String userId,
     @HiveField(8) @Default(false) bool isSynced,
+    @HiveField(9) required int seasonNumber,
+    @HiveField(10) required int specificId,
+    @HiveField(11) required String seasonPosterUrl,
+    @HiveField(12) required String backGroundImage,
+
+    @HiveField(13) required int episodeNumber,
   }) = _FavoriteModel;
 
   factory FavoriteModel.fromJson(Map<String, dynamic> json) =>
@@ -34,6 +40,11 @@ class FavoriteModel with _$FavoriteModel {
     date: entity.date,
     userId: entity.userId,
     isSynced: entity.isSynced,
+    seasonNumber: entity.seasonNumber,
+    specificId: entity.specificId,
+    seasonPosterUrl: entity.seasonPosterUrl,
+    backGroundImage: entity.backGroundImage,
+    episodeNumber: entity.episodeNumber,
   );
 }
 
@@ -47,5 +58,10 @@ extension FavoriteModelX on FavoriteModel {
     date: date,
     userId: userId,
     isSynced: isSynced,
+    seasonNumber: seasonNumber,
+    specificId: specificId,
+    seasonPosterUrl: seasonPosterUrl,
+    backGroundImage: backGroundImage,
+    episodeNumber: episodeNumber,
   );
 }

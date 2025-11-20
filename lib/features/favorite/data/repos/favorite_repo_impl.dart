@@ -1,4 +1,6 @@
-import '../../../../core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+
+import '../../domain/entities/favorite_entity.dart';
 import '../../domain/repos/favorite_repo.dart';
 import '../models/favorite_model.dart';
 import '../remote_favorite_data_source/remote_favorite_data_source.dart';
@@ -15,15 +17,17 @@ class FavoriteRepoImpl implements FavoriteRepo {
        _localDataSource = localDataSource;
 
   @override
-  Future<void> addFavorite(FavoriteModel favorite) async {
+  Future<void> addFavorite(FavoriteEntity favorite) async {
     try {
+      final model = FavoriteModel.fromEntity(favorite);
+
       // Add to local storage and get updated list
-      await _localDataSource.addFavorite(favorite);
+      await _localDataSource.addFavorite(model);
 
       // If user is not guest, sync with remote
       if (favorite.userId != 'guest') {
-        await _remoteDataSource.addFavorite(favorite);
-        await _localDataSource.updateFavoriteSyncStatus(favorite.id, true);
+        await _remoteDataSource.addFavorite(model);
+        await _localDataSource.updateFavoriteSyncStatus(model.id, true);
       }
     } catch (e) {
       throw Exception('Failed to add favorite: $e');
@@ -44,7 +48,7 @@ class FavoriteRepoImpl implements FavoriteRepo {
   }
 
   @override
-  Future<List<FavoriteModel>> getFavoritesByType(
+  Future<List<FavoriteEntity>> getFavoritesByType(
     ContentType contentType,
   ) async {
     try {
@@ -52,6 +56,7 @@ class FavoriteRepoImpl implements FavoriteRepo {
       final favorites = await _localDataSource.getFavorites(contentType);
       return favorites
           .where((favorite) => favorite.contentType == contentType)
+          .map((favorite) => favorite.toEntity())
           .toList();
     } catch (e) {
       throw Exception('Failed to get favorites by type: $e');
@@ -75,6 +80,12 @@ class FavoriteRepoImpl implements FavoriteRepo {
   @override
   Future<void> syncGuestItemsToUser(ContentType contentType) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<FavoriteEntity>> getAllFavorites() async {
+    final favorites = await _localDataSource.getAllFavorites();
+    return favorites.map((favorite) => favorite.toEntity()).toList();
   }
 
   // Future<void> syncGuestItemsToUser(ContentType contentType) async {

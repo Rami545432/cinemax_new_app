@@ -1,5 +1,5 @@
-import '../../../../core/utils/enums/content_type.dart';
-import '../../../../models/base_card_model.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/models/base_card_model.dart';
 
 class SeriesEntity implements BaseCardModel {
   final int tvId;
@@ -49,9 +49,6 @@ class SeriesEntity implements BaseCardModel {
 
   @override
   String? get horizontalCardImage => tvBackDropPath;
-
-  @override
-  String get overView => storyLine;
 
   @override
   String? get type => 'tv';

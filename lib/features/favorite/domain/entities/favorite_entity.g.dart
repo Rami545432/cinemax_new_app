@@ -16,20 +16,30 @@ _$FavoriteEntityImpl _$$FavoriteEntityImplFromJson(Map<String, dynamic> json) =>
       date: json['date'] as String,
       userId: json['userId'] as String? ?? 'guest',
       isSynced: json['isSynced'] as bool? ?? false,
+      seasonNumber: json['seasonNumber'] as int,
+      specificId: json['specificId'] as int,
+      seasonPosterUrl: json['seasonPosterUrl'] as String,
+      backGroundImage: json['backGroundImage'] as String,
+      episodeNumber: json['episodeNumber'] as int,
     );
 
 Map<String, dynamic> _$$FavoriteEntityImplToJson(
-        _$FavoriteEntityImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'imageUrl': instance.imageUrl,
-      'gener': instance.gener,
-      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
-      'date': instance.date,
-      'userId': instance.userId,
-      'isSynced': instance.isSynced,
-    };
+  _$FavoriteEntityImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'imageUrl': instance.imageUrl,
+  'gener': instance.gener,
+  'contentType': _$ContentTypeEnumMap[instance.contentType]!,
+  'date': instance.date,
+  'userId': instance.userId,
+  'isSynced': instance.isSynced,
+  'seasonNumber': instance.seasonNumber,
+  'specificId': instance.specificId,
+  'seasonPosterUrl': instance.seasonPosterUrl,
+  'backGroundImage': instance.backGroundImage,
+  'episodeNumber': instance.episodeNumber,
+};
 
 const _$ContentTypeEnumMap = {
   ContentType.movies: 'movies',

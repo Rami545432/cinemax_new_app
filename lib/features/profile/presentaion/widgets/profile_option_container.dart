@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/app_colors.dart';
 
 class ProfileOptionContainer extends StatelessWidget {
   const ProfileOptionContainer({

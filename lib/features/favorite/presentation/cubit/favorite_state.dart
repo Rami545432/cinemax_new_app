@@ -4,50 +4,52 @@ abstract class FavoriteState extends Equatable {
   const FavoriteState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class FavoriteInitial extends FavoriteState {}
 
-class FavoriteSuccess extends FavoriteState {
-  final int itemId;
-  final ContentType contentType;
+class FavoriteLoading extends FavoriteState {}
 
-  const FavoriteSuccess({required this.itemId, required this.contentType});
+class FavoriteLoaded extends FavoriteState {
+  final Map<String, bool> favoriteStatuses; // key: "contentType_id"
+  final List<FavoriteEntity> allFavorites;
+
+  const FavoriteLoaded({
+    required this.favoriteStatuses,
+    required this.allFavorites,
+  });
 
   @override
-  List<Object> get props => [itemId, contentType];
+  List<Object?> get props => [favoriteStatuses, allFavorites];
+
+  // Helper method to check if item is favorite
+  bool isFavorite(int id, ContentType contentType) {
+    final key = _generateKey(id, contentType);
+    return favoriteStatuses[key] ?? false;
+  }
+
+  static String _generateKey(int id, ContentType contentType) {
+    return '${contentType.name}_$id';
+  }
+
+  // Create a copy with updated status
+  FavoriteLoaded copyWith({
+    Map<String, bool>? favoriteStatuses,
+    List<FavoriteEntity>? allFavorites,
+  }) {
+    return FavoriteLoaded(
+      favoriteStatuses: favoriteStatuses ?? this.favoriteStatuses,
+      allFavorites: allFavorites ?? this.allFavorites,
+    );
+  }
 }
 
 class FavoriteError extends FavoriteState {
   final String message;
 
-  const FavoriteError({required this.message});
+  const FavoriteError(this.message);
 
   @override
-  List<Object> get props => [message];
-}
-
-class FavoritesLoaded extends FavoriteState {
-  final List<FavoriteModel> favorites;
-
-  const FavoritesLoaded({required this.favorites});
-
-  @override
-  List<Object> get props => [favorites];
-}
-
-class FavoriteStatusChecked extends FavoriteState {
-  final bool isFavorite;
-  final int itemId;
-  final ContentType contentType;
-
-  const FavoriteStatusChecked({
-    required this.isFavorite,
-    required this.itemId,
-    required this.contentType,
-  });
-
-  @override
-  List<Object> get props => [isFavorite, itemId, contentType];
+  List<Object?> get props => [message];
 }

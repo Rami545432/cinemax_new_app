@@ -1,0 +1,289 @@
+{
+  "@@locale": "en",
+  "welcomeUser": "Welcome, {username} !",
+  "@welcomeUser": {
+    "description": "Welcome message shown to the user after login",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "Rami"
+      }
+    }
+  },
+  "authLogin": "Login",
+  "@authLogin": {
+    "description": "Login button text"
+  },
+  "authRegister": "Register",
+  "@authRegister": {
+    "description": "Button to create a new account"
+  },
+  "authEmail": "Email",
+  "@authEmail": {
+    "description": "Email input field label"
+  },
+  "authPassword": "Password",
+  "@authPassword": {
+    "description": "Password input field label"
+  },
+  "authForgotPassword": "Forgot password?",
+  "@authForgotPassword": {
+    "description": "Link to reset the password"
+  },
+  "authResetPassword": "Reset Password",
+  "@authResetPassword": {
+    "description": "Button to confirm password reset"
+  },
+  "authResetPasswordSuccess": "Password reset successfully",
+  "@authResetPasswordSuccess": {
+    "description": "Message shown when password reset succeeds"
+  },
+  "authResetPasswordError": "Failed to reset password",
+  "@authResetPasswordError": {
+    "description": "Error message shown when password reset fails"
+  },
+  "authSignInWith": "Or sign in with",
+  "@authSignInWith": {
+    "description": "Text for other sign-in options"
+  },
+  "authLogout": "Log out",
+  "@authLogout": {
+    "description": "Logout button text"
+  },
+  "popular": "Popular",
+  "@popular": {
+    "description": "Section for popular movies or TV shows"
+  },
+  "nowPlaying": "Now Playing",
+  "@nowPlaying": {
+    "description": "Section for currently playing movies or shows"
+  },
+  "topRated": "Top Rated",
+  "@topRated": {
+    "description": "Section for top-rated content"
+  },
+  "upcoming": "Upcoming",
+  "@upcoming": {
+    "description": "Section for upcoming movies or shows"
+  },
+  "trending": "Trending",
+  "@trending": {
+    "description": "Section for trending content"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search button or title"
+  },
+  "searchHint": "Search for a movie or TV show...",
+  "@searchHint": {
+    "description": "Hint text inside the search field"
+  },
+  "searchHistory": "Search History",
+  "@searchHistory": {
+    "description": "Title for previous search history"
+  },
+  "clearHistory": "Clear History",
+  "@clearHistory": {
+    "description": "Button to clear search history"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About page title"
+  },
+  "cast": "Cast",
+  "@cast": {
+    "description": "List of cast members"
+  },
+  "similar": "Similar",
+  "@similar": {
+    "description": "Section for similar or suggested content"
+  },
+  "recommended": "Recommended",
+  "@recommended": {
+    "description": "Section for recommended content"
+  },
+  "reviews": "Reviews",
+  "@reviews": {
+    "description": "Section showing user reviews"
+  },
+  "seasons": "Seasons",
+  "@seasons": {
+    "description": "Number of seasons in a series"
+  },
+  "episodes": "Episodes",
+  "@episodes": {
+    "description": "Number of episodes in a season"
+  },
+  "network": "Network",
+  "@network": {
+    "description": "Broadcast or production network"
+  },
+  "productionCompany": "Production Company",
+  "@productionCompany": {
+    "description": "Company that produced the content"
+  },
+  "movieGenres": "Movie Genres",
+  "@movieGenres": {
+    "description": "Categories of movies"
+  },
+  "tvGenres": "TV Genres",
+  "@tvGenres": {
+    "description": "Categories of TV shows"
+  },
+  "all": "All",
+  "@all": {
+    "description": "Generic label meaning all items"
+  },
+  "movies": "Movies",
+  "@movies": {
+    "description": "Section for movies"
+  },
+  "tvShows": "TV Shows",
+  "@tvShows": {
+    "description": "Section for TV shows"
+  },
+  "originalTitle": "Original Title",
+  "@originalTitle": {
+    "description": "Original title of the content"
+  },
+  "releaseDate": "Release Date",
+  "@releaseDate": {
+    "description": "Release date of the content"
+  },
+  "runtime": "Runtime",
+  "@runtime": {
+    "description": "Duration of the movie or episode"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status of the content (ongoing, completed, etc.)"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language of the content"
+  },
+  "budget": "Budget",
+  "@budget": {
+    "description": "Production budget"
+  },
+  "revenue": "Revenue",
+  "@revenue": {
+    "description": "Earnings or revenue of the content"
+  },
+  "overview": "Overview",
+  "@overview": {
+    "description": "Summary of the content"
+  },
+  "storyLine": "Storyline",
+  "@storyLine": {
+    "description": "Main plot of the content"
+  },
+  "noDescriptionAvailable": "No description available",
+  "@noDescriptionAvailable": {
+    "description": "Text shown when no description exists"
+  },
+  "less": "Less",
+  "@less": {
+    "description": "Button to show less text"
+  },
+  "more": "More",
+  "@more": {
+    "description": "Button to show more text"
+  },
+  "geners": "Geners",
+  "@geners": {
+    "description": "Geners of the content"
+  },
+  "countries": "Countries",
+  "@countries": {
+    "description": "Countries of the content"
+  },
+  "informations": "Informations",
+  "@informations": {
+    "description": "Informations of the content"
+  },
+  "trailers": "Trailers",
+  "@trailers": {
+    "description": "Trailers of the content"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile page title"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme of the app"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System of the app"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light mode of the app"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark mode of the app"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "Favorites of the app"
+  },
+  "myProfile": "My Profile",
+  "@myProfile": {
+    "description": "My profile of the app"
+  },
+  "noItemsFound": "No items found",
+  "@noItemsFound": {
+    "description": "Text shown when no items are found"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "noInternetConnection": "No internet connection",
+  "@noInternetConnection": {
+    "description": "Text shown when no internet connection is found"
+  },
+  "nofavorites": "No {type} in favorites",
+  "@nofavorites": {
+    "description": "Text shown when no {type} in favorites is found",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "movie"
+      }
+    }
+  },
+  "startAddingYourFavorite": "Start adding your favorite {type}",
+  "@startAddingYourFavorite": {
+    "description": "Text shown when no {type} in favorites is found",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "movie"
+      }
+    }
+  },
+  "noTrailersAvailable": "No trailers available",
+  "@noTrailersAvailable": {
+    "description": "Text shown when no trailers are found"
+  },
+  "noSeasonsAvailable": "No seasons available",
+  "@noSeasonsAvailable": {
+    "description": "Text shown when no seasons are found"
+  },
+  "noEpisodesAvailable": "No episodes available",
+  "@noEpisodesAvailable": {
+    "description": "Text shown when no episodes are found"
+  },
+  "noReviewsAvailable": "No reviews available",
+  "@noReviewsAvailable": {
+    "description": "Text shown when no reviews are found"
+  },
+  "signInHint": "Log In To Synchornize Your Favorite Movies And Tv Shows And To Use More Features",
+  "@signInHint": {
+    "description": "Text shown when no sign in is found"
+  }
+}

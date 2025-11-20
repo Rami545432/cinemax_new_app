@@ -20,32 +20,30 @@ class TabletPlayButton extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 12,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomInappView(
-                movieOrTvUrl: type == 'movie'
-                    ? 'https://vidsrc.xyz/embed/movie?tmdb=$id'
-                    : 'https://vidsrc.xyz/embed/tv?tmdb=$id&season=$seasonNumber&episode=$episodeNumber',
-                title: title,
+    return Row(
+      children: [
+        Expanded(flex: 1, child: SizedBox()),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CustomInappView(
+                  movieOrTvUrl: type == 'movie'
+                      ? 'https://vidsrc.xyz/embed/movie?tmdb=$id'
+                      : 'https://vidsrc.xyz/embed/tv?tmdb=$id&season=$seasonNumber&episode=$episodeNumber',
+                  title: title,
+                ),
               ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppPrimaryColors.blueAccent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppPrimaryColors.blueAccent,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
           ),
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 100),
-
           child: Center(
             child: IconTextRow(
               iconData: Icons.play_arrow_rounded,
@@ -54,7 +52,8 @@ class TabletPlayButton extends StatelessWidget {
             ),
           ),
         ),
-      ),
+        Expanded(flex: 1, child: SizedBox()),
+      ],
     );
   }
 }

@@ -22,7 +22,7 @@ class ContentTypeAdapter extends TypeAdapter<ContentType> {
       case 3:
         return ContentType.episodes;
       default:
-        return ContentType.movies; // default fallback
+        return ContentType.movies;
     }
   }
 

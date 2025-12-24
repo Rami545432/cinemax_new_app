@@ -4,11 +4,11 @@ class TmdbConfig {
   static const String includeImageLanguage = 'en,null';
   static const String includeVideoLanguage = 'en,null';
   static const String appendToResponse =
-      'credits,videos,images,translations,keywords,watch/providers,external_ids,reviews,images,keywords';
+      'credits,videos,translations,keywords,watch/providers,external_ids,reviews';
 
   // Excluded genres (News, Talk, Reality, Soap, Romance)
-  static const String excludedGenres = '10763,10764,10767,10766,10749';
-  static const String excludedRomanceGenre = '10749';
+  // static const String excludedGenres = '10763,10764,10767,10766,10749';
+  // static const String excludedRomanceGenre = '10749';
 
   /// Get additional data query string for details endpoints
   static String get additionalData =>
@@ -16,6 +16,6 @@ class TmdbConfig {
 
   /// Default query parameters for TMDB requests
   static Map<String, dynamic> get defaultParams => {
-    'without_genres': excludedGenres,
+    // 'without_genres': excludedGenres,
   };
 }

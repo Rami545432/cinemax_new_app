@@ -13,4 +13,4 @@ typedef SimilarGridView =
       SimilarParams
     >;
 typedef SimilarStateLoaded =
-    CategoryPaginationLoaded<SimilarCategory, BaseCardModel>;
+    CategoryPaginationLoaded<SimilarCategory, BaseCardModel, void>;

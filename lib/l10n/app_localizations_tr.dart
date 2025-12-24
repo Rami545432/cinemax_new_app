@@ -44,19 +44,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get authLogout => 'Çıkış Yap';
 
   @override
-  String get popular => 'Popüler';
+  String get popular => 'POPÜLER';
 
   @override
-  String get nowPlaying => 'Şu Anda Gösterimde';
+  String get nowPlaying => 'ŞU ANDA GÖSTERİMDE';
 
   @override
-  String get topRated => 'En Yüksek Puanlı';
+  String get topRated => 'EN YÜKSEK PUANLI';
 
   @override
-  String get upcoming => 'Yakında';
+  String get upcoming => 'YAKINDA';
 
   @override
-  String get trending => 'Trend';
+  String get trending => 'TREND';
 
   @override
   String get search => 'Ara';
@@ -215,4 +215,94 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get signInHint =>
       'Giriş yapınızın Favori Filmlerinizi ve Dizilerinizi Senkronize Edin ve Daha Fazla Özellik Kullanın';
+
+  @override
+  String get airingToday => 'BUGÜN GÖSTERİMDE';
+
+  @override
+  String get discover => 'Keşfet';
+
+  @override
+  String get genreAction => 'Eylem';
+
+  @override
+  String get genreAdventure => 'Macera';
+
+  @override
+  String get genreAnimation => 'Animasyon';
+
+  @override
+  String get genreComedy => 'Komedi';
+
+  @override
+  String get genreCrime => 'Suç';
+
+  @override
+  String get genreDocumentary => 'Belgesel';
+
+  @override
+  String get genreDrama => 'Drama';
+
+  @override
+  String get genreFamily => 'Aile';
+
+  @override
+  String get genreFantasy => 'Fantasy';
+
+  @override
+  String get genreHistory => 'Tarih';
+
+  @override
+  String get genreHorror => 'Korku';
+
+  @override
+  String get genreMusic => 'Müzik';
+
+  @override
+  String get genreMystery => 'Gizem';
+
+  @override
+  String get genreRomance => 'Romantik';
+
+  @override
+  String get genreSciFi => 'Bilim Kurgu';
+
+  @override
+  String get genreTvMovie => 'TV Dizi';
+
+  @override
+  String get genreThriller => 'Suspans';
+
+  @override
+  String get genreWar => 'War';
+
+  @override
+  String get genreWestern => 'Batı';
+
+  @override
+  String get genreActionAdventure => 'Eylem ve Macera';
+
+  @override
+  String get genreKids => 'Çocuk';
+
+  @override
+  String get genreNews => 'Haber';
+
+  @override
+  String get genreReality => 'Gerçeklik';
+
+  @override
+  String get genreSciFiFantasy => 'Bilim Kurgu ve Fantastik';
+
+  @override
+  String get genreSoap => 'Soap Opera';
+
+  @override
+  String get genreTalk => 'Konuşma';
+
+  @override
+  String get genreWarPolitics => 'Savaş ve Politika';
+
+  @override
+  String get parts => 'Bölümler';
 }

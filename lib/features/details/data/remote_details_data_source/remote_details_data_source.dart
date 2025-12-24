@@ -1,9 +1,11 @@
 import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
+import 'package:cinemax_app_new/features/details/data/models/collection_model/collection_model.dart';
 import 'package:cinemax_app_new/features/details/data/models/movie_details_model.dart';
 import 'package:cinemax_app_new/features/details/data/models/series_details_models/series_details_model.dart';
 import 'package:cinemax_app_new/features/details/data/models/series_season_details_model.dart';
 import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
-import 'package:cinemax_app_new/features/series/data/models/series_model.dart';
+import 'package:cinemax_app_new/features/home/data/models/series_model.dart';
+import 'package:cinemax_app_new/features/home/data/models/test_model.dart';
 import 'package:cinemax_app_new/models/base_card_model.dart';
 import 'package:dio/dio.dart';
 
@@ -21,16 +23,20 @@ abstract class RemoteDetailsDataSource {
     int seasonNumber,
     CancelToken? cancelToken,
   );
-  Future<List<BaseCardModel>> fetchSimilarItems(
+  Future<PagedResult<BaseCardModel>> fetchSimilarItems(
     int id,
     String type,
     int? page,
     CancelToken? cancelToken,
   );
-  Future<List<BaseCardModel>> fetchRecommendations(
+  Future<PagedResult<BaseCardModel>> fetchRecommendations(
     int id,
     String type,
     int? page,
+    CancelToken? cancelToken,
+  );
+  Future<CollectionModel> fetchCollection(
+    int collectionId,
     CancelToken? cancelToken,
   );
 }
@@ -43,7 +49,7 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
     int movieId,
     CancelToken? cancelToken,
   ) async {
-    var data = await apiService.getDetails(
+    var data = await apiService.tmdb.details.getDetails(
       id: movieId,
       type: 'movie',
       cancelToken: cancelToken,
@@ -51,22 +57,20 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
     if (data['overview'] == '') {
       data['overview'] =
           data['translations']['translations'][0]['data']['overview'] ?? '';
-
-      return MovieDetailsModel.fromJson(data);
-    } else {
-      return MovieDetailsModel.fromJson(data);
     }
+
+    return MovieDetailsModel.fromJson(data);
   }
 
   @override
-  Future<List<BaseCardModel>> fetchRecommendations(
+  Future<PagedResult<BaseCardModel>> fetchRecommendations(
     int id,
     String type,
     int? page,
     CancelToken? cancelToken,
   ) async {
     List<BaseCardModel> recommendations = [];
-    var data = await apiService.getRecommendations(
+    var data = await apiService.tmdb.details.getRecommendations(
       id: id,
       type: type,
       page: page,
@@ -79,7 +83,12 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
             : recommendations.add(SeriesModel.fromJson(item));
       }
     }
-    return recommendations;
+    return PagedResult<BaseCardModel>(
+      page: data['page'],
+      totalPages: data['total_pages'],
+      totalResults: data['total_results'],
+      results: recommendations,
+    );
   }
 
   @override
@@ -87,21 +96,16 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
     int seriesId,
     CancelToken? cancelToken,
   ) async {
-    var data = await apiService.getDetails(
+    var data = await apiService.tmdb.details.getDetails(
       id: seriesId,
       type: 'tv',
       cancelToken: cancelToken,
     );
-    if (data['overview'] == '' || data['tagline'] == '') {
+    if (data['overview'] == '') {
       data['overview'] =
           data['translations']['translations'][0]['data']['overview'] ?? '';
-      data['tagline'] =
-          data['translations']['translations'][0]['data']['tagline'] ?? '';
-      data['translations'] = data['translations']['translations'][0]['data'];
-      return SeriesDetailsModel.fromJson(data);
-    } else {
-      return SeriesDetailsModel.fromJson(data);
     }
+    return SeriesDetailsModel.fromJson(data);
   }
 
   @override
@@ -110,23 +114,27 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
     int seasonNumber,
     CancelToken? cancelToken,
   ) async {
-    var data = await apiService.getSeasonDetails(
+    var data = await apiService.tmdb.details.getSeasonDetails(
       tvid: seriesId,
       season: seasonNumber,
       cancelToken: cancelToken,
     );
+    if (data['overview'] == '') {
+      data['overview'] =
+          data['translations']['translations'][0]['data']['overview'] ?? '';
+    }
     return SeriesSeasonDetailsModel.fromJson(data);
   }
 
   @override
-  Future<List<BaseCardModel>> fetchSimilarItems(
+  Future<PagedResult<BaseCardModel>> fetchSimilarItems(
     int id,
     String type,
     int? page,
     CancelToken? cancelToken,
   ) async {
     List<BaseCardModel> similarItems = [];
-    var data = await apiService.getSimilar(
+    var data = await apiService.tmdb.details.getSimilar(
       id: id,
       type: type,
       page: page ?? 1,
@@ -139,6 +147,23 @@ class RemoteDetailsDataSourceImpl implements RemoteDetailsDataSource {
             : similarItems.add(SeriesModel.fromJson(item));
       }
     }
-    return similarItems;
+    return PagedResult<BaseCardModel>(
+      page: data['page'],
+      totalPages: data['total_pages'],
+      totalResults: data['total_results'],
+      results: similarItems,
+    );
+  }
+
+  @override
+  Future<CollectionModel> fetchCollection(
+    int collectionId,
+    CancelToken? cancelToken,
+  ) async {
+    var data = await apiService.tmdb.details.getCollection(
+      id: collectionId,
+      cancelToken: cancelToken,
+    );
+    return CollectionModel.fromJson(data);
   }
 }

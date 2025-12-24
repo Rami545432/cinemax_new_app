@@ -1,6 +1,9 @@
 // lib/core/network/api/services/tmdb/tmdb_content_api.dart
+import 'dart:developer';
+
 import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_base_client.dart';
 import 'package:cinemax_app_new/core/types/api_types.dart';
+import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
@@ -33,7 +36,7 @@ class TmdbContentApi {
     CancelToken? cancelToken,
   }) {
     return client.get(
-      'trending/$type/week',
+      'trending/$type/day',
       queryParams: {'page': page.toString()},
       cancelToken: cancelToken,
     );
@@ -95,6 +98,69 @@ class TmdbContentApi {
     return client.get(
       'tv/airing_today',
       queryParams: {'page': page.toString()},
+      cancelToken: cancelToken,
+      overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    );
+  }
+
+  ApiResposne getItemsKeywords({int page = 1, CancelToken? cancelToken}) {
+    return client.get(
+      'keyword/3149/movies',
+      queryParams: {'page': page.toString()},
+      cancelToken: cancelToken,
+      overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    );
+  }
+
+  ApiResposne getItemsByGenre({
+    required String type,
+    required GenreFilterParams params,
+    CancelToken? cancelToken,
+  }) {
+    log('params: ${params.genreId}');
+    return client.get(
+      'discover/$type',
+      queryParams: {
+        'page': params.page?.toString(),
+        'sort_by': params.sortBy?.name,
+        'with_keywords': params.withKeywords,
+        'with_networks': params.withNetworks,
+        'with_companies': params.withCompanies,
+        'with_providers': params.withProviders,
+        'min_runtime': params.minRuntime?.toString(),
+        'max_runtime': params.maxRuntime?.toString(),
+        'vote_average.gte': params.minRating?.toString(),
+        'vote_average.lte': params.maxRating?.toString(),
+        'first_air_date.gte': params.minYear != null
+            ? '${params.minYear}-01-01'
+            : null,
+        'first_air_date.lte': params.maxYear != null
+            ? '${params.maxYear}-01-01'
+            : null,
+        'release_date.gte': params.minYear != null
+            ? '${params.minYear}-01-01'
+            : null,
+        'release_date.lte': params.maxYear != null
+            ? '${params.maxYear}-01-01'
+            : null,
+        'with_genres': params.genreId?.toString(),
+      },
+      cancelToken: cancelToken,
+      overridePolicy: params.page! <= 5
+          ? CachePolicy.request
+          : CachePolicy.noCache,
+    );
+  }
+
+  ApiResposne getItemCompanies({
+    required String companyId,
+    required String type,
+    int page = 1,
+    CancelToken? cancelToken,
+  }) {
+    return client.get(
+      'discover/$type',
+      queryParams: {'with_companies': companyId, 'page': page.toString()},
       cancelToken: cancelToken,
       overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
     );

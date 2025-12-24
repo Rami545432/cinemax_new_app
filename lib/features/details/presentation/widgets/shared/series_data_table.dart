@@ -58,7 +58,7 @@ class SeriesDataTable extends StatelessWidget {
       return [
         buildDataRow(
           l10n.originalTitle,
-          seriesDetailsEntity.seriresTitle ?? '_',
+          seriesDetailsEntity.seriesTitle ?? '_',
         ),
         buildDataRow('First Air Data', seriesDetailsEntity.firstDate ?? '_'),
         buildDataRow('Last Air Date', seriesDetailsEntity.kLastAirDate ?? '_'),

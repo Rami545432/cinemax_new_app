@@ -4,7 +4,7 @@ import 'package:cinemax_app_new/features/search/domain/entities/search_actor_ent
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../series/domain/entites/series_entity.dart';
+import '../../../home/domian/entites/series_entity.dart';
 import '../../data/models/search_history_model.dart';
 
 abstract class SearchRepo {

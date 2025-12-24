@@ -4,26 +4,24 @@ import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class UsePagintationControllerTest<C extends CategoryPaginationCubit, CAT, P> {
+class UsePagintationControllerTest<C extends CategoryPaginationCubit, CAT> {
   final ScrollController scrollController;
 
   final C cubit;
   final CAT category;
-  final P params;
+
   UsePagintationControllerTest({
     required this.scrollController,
     required this.cubit,
     required this.category,
-    required this.params,
   });
 }
 
 UsePagintationControllerTest
-usePagintationControllerTest<Cubit extends CategoryPaginationCubit, CAT, P>({
+usePagintationControllerTest<Cubit extends CategoryPaginationCubit, CAT>({
   required ScrollController scrollController,
   required Cubit cubit,
   required CAT category,
-  required P params,
 }) {
   final debounceTimer = useRef<Timer?>(null);
 
@@ -52,6 +50,5 @@ usePagintationControllerTest<Cubit extends CategoryPaginationCubit, CAT, P>({
     scrollController: scrollController,
     cubit: cubit,
     category: category,
-    params: params,
   );
 }

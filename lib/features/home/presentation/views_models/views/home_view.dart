@@ -1,32 +1,35 @@
-import 'package:cinemax_app_new/features/home/presentation/cubit/home_view_cubit.dart';
-import 'package:cinemax_app_new/features/home/presentation/cubit/movie_category.dart';
+import 'package:cinemax_app_new/core/utils/app_colors.dart';
+import 'package:cinemax_app_new/core/utils/app_styles.dart';
+import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home_view_body.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
-  void initState() {
-    super.initState();
-    final cubit = context.read<HomeViewCubit>();
-
-    Future.microtask(() {
-      for (var element in MovieCategory.values) {
-        cubit.loadCategory(element);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: HomeViewBody()));
+    final l10n = AppLocalizations.of(context);
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leadingWidth: double.infinity,
+          leading: TabBar(
+            dividerColor: Colors.transparent,
+            labelStyle: AppStyles.textStyle16(context),
+            labelColor: AppPrimaryColors.blueAccent,
+            indicatorColor: AppPrimaryColors.blueAccent,
+            overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]!),
+            tabs: [
+              Tab(text: l10n.movies),
+              Tab(text: l10n.tvShows),
+            ],
+          ),
+        ),
+        body: SafeArea(child: HomeViewBody()),
+      ),
+    );
   }
 }

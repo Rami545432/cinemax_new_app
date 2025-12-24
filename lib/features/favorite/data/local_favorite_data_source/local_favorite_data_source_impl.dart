@@ -1,17 +1,13 @@
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/core/utils/hive/hive_box_names.dart';
-import 'package:hive/hive.dart';
+import 'package:cinemax_app_new/core/utils/hive/hive_service.dart';
 
 import '../models/favorite_model.dart';
 import 'local_favorite_data_source.dart';
 
 class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
-  static const String _boxName = HiveBoxNames.favoriteBox;
-
-  Box<FavoriteModel> get box => Hive.box<FavoriteModel>(_boxName);
-
   @override
   Future<List<FavoriteModel>> getFavorites(ContentType contentType) async {
+    final box = await HiveService.getFavoriteBox();
     final favorites = box.values
         .where((favorite) => favorite.contentType == contentType)
         .toList();
@@ -21,11 +17,13 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
 
   @override
   Future<void> addFavorite(FavoriteModel favorite) async {
+    final box = await HiveService.getFavoriteBox();
     await box.add(favorite);
   }
 
   @override
   Future<void> removeFavorite(int id, ContentType contentType) async {
+    final box = await HiveService.getFavoriteBox();
     final key = box.keys.firstWhere(
       (key) =>
           box.get(key)?.id == id && box.get(key)?.contentType == contentType,
@@ -40,6 +38,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
   Future<List<FavoriteModel>> syncFavorites(
     List<FavoriteModel> favorites,
   ) async {
+    final box = await HiveService.getFavoriteBox();
     for (var favorite in favorites) {
       await box.put(favorite.id, favorite);
     }
@@ -49,6 +48,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
 
   @override
   Future<List<FavoriteModel>> clearGuestFavorites() async {
+    final box = await HiveService.getFavoriteBox();
     final guestKeys = box.keys
         .where((key) => box.get(key)?.userId == 'guest')
         .toList();
@@ -62,6 +62,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
     int id,
     bool isSynced,
   ) async {
+    final box = await HiveService.getFavoriteBox();
     final favorite = box.get(id);
     if (favorite != null) {
       await box.put(id, favorite.copyWith(isSynced: isSynced));
@@ -73,6 +74,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
 
   @override
   Future<bool> isFavorite(int id, ContentType contentType) async {
+    final box = await HiveService.getFavoriteBox();
     final favorite = box.values.any(
       (element) =>
           element.specificId == id && element.contentType == contentType,
@@ -82,6 +84,7 @@ class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
 
   @override
   Future<List<FavoriteModel>> getAllFavorites() async {
+    final box = await HiveService.getFavoriteBox();
     return box.values.toList();
   }
 }

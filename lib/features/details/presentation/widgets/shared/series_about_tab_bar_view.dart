@@ -18,12 +18,12 @@ class SeriesAboutTabBarView extends StatelessWidget {
       children: [
         EpisodeToAir(
           baseEpisodeToAir: seriesDetailsEntity.lastEpisodeAir,
-          imageUrl: seriesDetailsEntity.tvBackDropPath,
+          imageUrl: seriesDetailsEntity.backgroundImage,
           title: 'Last Episode',
         ),
         EpisodeToAir(
           baseEpisodeToAir: seriesDetailsEntity.nextEpisodeAir,
-          imageUrl: seriesDetailsEntity.tvBackDropPath,
+          imageUrl: seriesDetailsEntity.backgroundImage,
           title: 'Next Episode',
         ),
         Divider(),

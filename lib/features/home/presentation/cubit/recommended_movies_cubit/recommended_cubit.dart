@@ -2,6 +2,7 @@ import 'package:cinemax_app_new/core/utils/errors/errors.dart';
 import 'package:cinemax_app_new/core/utils/pagination/config/pagintaion_config.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
 import 'package:cinemax_app_new/features/details/domain/enums/recomended_category.dart';
+import 'package:cinemax_app_new/features/home/data/models/test_model.dart';
 import 'package:cinemax_app_new/models/base_card_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -20,9 +21,10 @@ class FetchRecommendedCubit
   final FetchRecommendedUseCase fetchRecommendedUseCase;
   final Map<RecomendedCategory, RecomendedParams> _paramsByCategory = {};
   @override
-  Future<Either<Failure, List<BaseCardModel>>> fetchCategoryData(
+  Future<Either<Failure, PagedResult<BaseCardModel>>> fetchCategoryData(
     RecomendedCategory category,
     int page,
+    RecomendedParams? params,
     CancelToken? cancelToken,
   ) async {
     final params = _paramsByCategory[category] ?? RecomendedParams(id: 0);

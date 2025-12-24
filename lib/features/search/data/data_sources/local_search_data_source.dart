@@ -1,5 +1,4 @@
-import 'package:cinemax_app_new/core/utils/hive/hive_box_names.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cinemax_app_new/core/utils/hive/hive_service.dart';
 
 import '../models/search_history_model.dart';
 
@@ -11,10 +10,10 @@ abstract class LocalSearchDataSource {
 }
 
 class LocalSearchDataSourceImpl implements LocalSearchDataSource {
-  static const _boxName = HiveBoxNames.searchHistoryBox;
+  // static const _boxName = HiveBoxNames.searchHistoryBox;
   @override
   Future<void> addToSearchHistory(SearchHistoryModel searchHistory) async {
-    final box = await Hive.openBox<SearchHistoryModel>(_boxName);
+    final box = await HiveService.getSearchHistoryBox();
     if (box.values.any((element) => element.query == searchHistory.query)) {
       return;
     }
@@ -23,19 +22,19 @@ class LocalSearchDataSourceImpl implements LocalSearchDataSource {
 
   @override
   Future<List<SearchHistoryModel>> getSearchHistory() async {
-    final box = await Hive.openBox<SearchHistoryModel>(_boxName);
+    final box = await HiveService.getSearchHistoryBox();
     return box.values.toList().reversed.toList();
   }
 
   @override
   Future<void> clearSearchHistory() async {
-    final box = await Hive.openBox<SearchHistoryModel>(_boxName);
+    final box = await HiveService.getSearchHistoryBox();
     await box.clear();
   }
 
   @override
   Future<void> deleteSearchHistory(int id) async {
-    final box = await Hive.openBox<SearchHistoryModel>(_boxName);
+    final box = await HiveService.getSearchHistoryBox();
     final key = box.keys.firstWhere((key) => box.get(key)?.id == id);
     await box.delete(key);
   }

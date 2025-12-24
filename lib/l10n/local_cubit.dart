@@ -1,5 +1,5 @@
 import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/l10n/local_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,15 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Locale Cubit
 class LocaleCubit extends Cubit<LocaleState> {
   static const String _localeKey = 'selected_locale';
-
-  LocaleCubit() : super(const LocaleState(Locale('en'))) {
+  final SharedPreferences sharedPreferences;
+  LocaleCubit({required this.sharedPreferences})
+    : super(const LocaleState(Locale('en'))) {
     _loadSavedLocale();
   }
 
   Future<void> _loadSavedLocale() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final languageCode = prefs.getString(_localeKey);
+      final languageCode = sharedPreferences.getString(_localeKey);
 
       if (languageCode != null) {
         emit(LocaleState(Locale(languageCode)));
@@ -31,8 +31,7 @@ class LocaleCubit extends Cubit<LocaleState> {
   // Change locale and save to SharedPreferences
   Future<void> changeLocale(String languageCode) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_localeKey, languageCode);
+      await sharedPreferences.setString(_localeKey, languageCode);
       emit(LocaleState(Locale(languageCode)));
       _updateApiServiceLanguage(languageCode);
     } catch (e) {

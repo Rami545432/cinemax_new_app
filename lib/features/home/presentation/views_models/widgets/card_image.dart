@@ -10,7 +10,7 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: '$baseImageUrl$imageUrl',
+      imageUrl: imageUrl,
       fit: BoxFit.cover,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
@@ -28,7 +28,7 @@ class CardImage extends StatelessWidget {
 
       errorWidget: (context, url, error) => CachedNetworkImage(
         fit: BoxFit.cover,
-        imageUrl: '$baseImageUrl$defaultImageUrl',
+        imageUrl: defaultImageUrl ?? '',
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),

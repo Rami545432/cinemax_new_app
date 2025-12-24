@@ -44,19 +44,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authLogout => 'Log out';
 
   @override
-  String get popular => 'Popular';
+  String get popular => 'POPULAR';
 
   @override
-  String get nowPlaying => 'Now Playing';
+  String get nowPlaying => 'NOW PLAYING';
 
   @override
-  String get topRated => 'Top Rated';
+  String get topRated => 'TOP RATED';
 
   @override
-  String get upcoming => 'Upcoming';
+  String get upcoming => 'UPCOMING';
 
   @override
-  String get trending => 'Trending';
+  String get trending => 'TRENDING';
 
   @override
   String get search => 'Search';
@@ -110,7 +110,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get movies => 'Movies';
 
   @override
-  String get tvShows => 'TV Shows';
+  String get tvShows => 'Series';
 
   @override
   String get originalTitle => 'Original Title';
@@ -215,4 +215,94 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signInHint =>
       'Log In To Synchornize Your Favorite Movies And Tv Shows And To Use More Features';
+
+  @override
+  String get airingToday => 'AIRING TODAY';
+
+  @override
+  String get discover => 'Discover';
+
+  @override
+  String get genreAction => 'Action';
+
+  @override
+  String get genreAdventure => 'Adventure';
+
+  @override
+  String get genreAnimation => 'Animation';
+
+  @override
+  String get genreComedy => 'Comedy';
+
+  @override
+  String get genreCrime => 'Crime';
+
+  @override
+  String get genreDocumentary => 'Documentary';
+
+  @override
+  String get genreDrama => 'Drama';
+
+  @override
+  String get genreFamily => 'Family';
+
+  @override
+  String get genreFantasy => 'Fantasy';
+
+  @override
+  String get genreHistory => 'History';
+
+  @override
+  String get genreHorror => 'Horror';
+
+  @override
+  String get genreMusic => 'Music';
+
+  @override
+  String get genreMystery => 'Mystery';
+
+  @override
+  String get genreRomance => 'Romance';
+
+  @override
+  String get genreSciFi => 'Science Fiction';
+
+  @override
+  String get genreTvMovie => 'TV Movie';
+
+  @override
+  String get genreThriller => 'Thriller';
+
+  @override
+  String get genreWar => 'War';
+
+  @override
+  String get genreWestern => 'Western';
+
+  @override
+  String get genreActionAdventure => 'Action & Adventure';
+
+  @override
+  String get genreKids => 'Kids';
+
+  @override
+  String get genreNews => 'News';
+
+  @override
+  String get genreReality => 'Reality';
+
+  @override
+  String get genreSciFiFantasy => 'Sci-Fi & Fantasy';
+
+  @override
+  String get genreSoap => 'Soap';
+
+  @override
+  String get genreTalk => 'Talk';
+
+  @override
+  String get genreWarPolitics => 'War & Politics';
+
+  @override
+  String get parts => 'Parts';
 }

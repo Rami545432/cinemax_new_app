@@ -1,6 +1,6 @@
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/features/home/presentation/views_models/views/category_see_all_view.dart';
+import 'package:cinemax_app_new/core/utils/pagination/widgets/category_see_all_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

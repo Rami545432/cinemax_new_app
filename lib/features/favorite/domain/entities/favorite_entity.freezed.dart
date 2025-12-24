@@ -23,7 +23,7 @@ FavoriteEntity _$FavoriteEntityFromJson(Map<String, dynamic> json) {
 mixin _$FavoriteEntity {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get posterImage => throw _privateConstructorUsedError;
   List<String> get gener => throw _privateConstructorUsedError;
   ContentType get contentType => throw _privateConstructorUsedError;
   String get date => throw _privateConstructorUsedError;
@@ -31,9 +31,10 @@ mixin _$FavoriteEntity {
   bool get isSynced => throw _privateConstructorUsedError;
   int get seasonNumber => throw _privateConstructorUsedError;
   int get specificId => throw _privateConstructorUsedError;
-  String get seasonPosterUrl => throw _privateConstructorUsedError;
+  String get posterImageBackup => throw _privateConstructorUsedError;
   String get backGroundImage => throw _privateConstructorUsedError;
   int get episodeNumber => throw _privateConstructorUsedError;
+  num get rating => throw _privateConstructorUsedError;
 
   /// Serializes this FavoriteEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +56,7 @@ abstract class $FavoriteEntityCopyWith<$Res> {
   $Res call({
     int id,
     String title,
-    String imageUrl,
+    String posterImage,
     List<String> gener,
     ContentType contentType,
     String date,
@@ -63,9 +64,10 @@ abstract class $FavoriteEntityCopyWith<$Res> {
     bool isSynced,
     int seasonNumber,
     int specificId,
-    String seasonPosterUrl,
+    String posterImageBackup,
     String backGroundImage,
     int episodeNumber,
+    num rating,
   });
 }
 
@@ -86,7 +88,7 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? imageUrl = null,
+    Object? posterImage = null,
     Object? gener = null,
     Object? contentType = null,
     Object? date = null,
@@ -94,9 +96,10 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
     Object? isSynced = null,
     Object? seasonNumber = null,
     Object? specificId = null,
-    Object? seasonPosterUrl = null,
+    Object? posterImageBackup = null,
     Object? backGroundImage = null,
     Object? episodeNumber = null,
+    Object? rating = null,
   }) {
     return _then(
       _value.copyWith(
@@ -108,9 +111,9 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
                 ? _value.title
                 : title // ignore: cast_nullable_to_non_nullable
                       as String,
-            imageUrl: null == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
+            posterImage: null == posterImage
+                ? _value.posterImage
+                : posterImage // ignore: cast_nullable_to_non_nullable
                       as String,
             gener: null == gener
                 ? _value.gener
@@ -140,9 +143,9 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
                 ? _value.specificId
                 : specificId // ignore: cast_nullable_to_non_nullable
                       as int,
-            seasonPosterUrl: seasonPosterUrl == null
-                ? _value.seasonPosterUrl
-                : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
+            posterImageBackup: posterImageBackup == null
+                ? _value.posterImageBackup
+                : posterImageBackup // ignore: cast_nullable_to_non_nullable
                       as String,
             backGroundImage: backGroundImage == null
                 ? _value.backGroundImage
@@ -152,6 +155,10 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
                 ? _value.episodeNumber
                 : episodeNumber // ignore: cast_nullable_to_non_nullable
                       as int,
+            rating: rating == null
+                ? _value.rating
+                : rating // ignore: cast_nullable_to_non_nullable
+                      as num,
           )
           as $Val,
     );
@@ -170,7 +177,7 @@ abstract class _$$FavoriteEntityImplCopyWith<$Res>
   $Res call({
     int id,
     String title,
-    String imageUrl,
+    String posterImage,
     List<String> gener,
     ContentType contentType,
     String date,
@@ -178,9 +185,10 @@ abstract class _$$FavoriteEntityImplCopyWith<$Res>
     bool isSynced,
     int seasonNumber,
     int specificId,
-    String seasonPosterUrl,
+    String posterImageBackup,
     String backGroundImage,
     int episodeNumber,
+    num rating,
   });
 }
 
@@ -200,7 +208,7 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? imageUrl = null,
+    Object? posterImage = null,
     Object? gener = null,
     Object? contentType = null,
     Object? date = null,
@@ -208,9 +216,10 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
     Object? isSynced = null,
     Object? seasonNumber = null,
     Object? specificId = null,
-    Object? seasonPosterUrl = null,
+    Object? posterImageBackup = null,
     Object? backGroundImage = null,
     Object? episodeNumber = null,
+    Object? rating = null,
   }) {
     return _then(
       _$FavoriteEntityImpl(
@@ -222,9 +231,9 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
             ? _value.title
             : title // ignore: cast_nullable_to_non_nullable
                   as String,
-        imageUrl: null == imageUrl
-            ? _value.imageUrl
-            : imageUrl // ignore: cast_nullable_to_non_nullable
+        posterImage: null == posterImage
+            ? _value.posterImage
+            : posterImage // ignore: cast_nullable_to_non_nullable
                   as String,
         gener: null == gener
             ? _value._gener
@@ -254,9 +263,9 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
             ? _value.specificId
             : specificId // ignore: cast_nullable_to_non_nullable
                   as int,
-        seasonPosterUrl: seasonPosterUrl == null
-            ? _value.seasonPosterUrl
-            : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
+        posterImageBackup: posterImageBackup == null
+            ? _value.posterImageBackup
+            : posterImageBackup // ignore: cast_nullable_to_non_nullable
                   as String,
         backGroundImage: backGroundImage == null
             ? _value.backGroundImage
@@ -266,6 +275,10 @@ class __$$FavoriteEntityImplCopyWithImpl<$Res>
             ? _value.episodeNumber
             : episodeNumber // ignore: cast_nullable_to_non_nullable
                   as int,
+        rating: rating == null
+            ? _value.rating
+            : rating // ignore: cast_nullable_to_non_nullable
+                  as num,
       ),
     );
   }
@@ -277,7 +290,7 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
   const _$FavoriteEntityImpl({
     required this.id,
     required this.title,
-    required this.imageUrl,
+    required this.posterImage,
     required final List<String> gener,
     required this.contentType,
     required this.date,
@@ -285,9 +298,10 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
     this.isSynced = false,
     required this.seasonNumber,
     required this.specificId,
-    required this.seasonPosterUrl,
+    required this.posterImageBackup,
     required this.backGroundImage,
     required this.episodeNumber,
+    required this.rating,
   }) : _gener = gener;
 
   factory _$FavoriteEntityImpl.fromJson(Map<String, dynamic> json) =>
@@ -298,7 +312,7 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
   @override
   final String title;
   @override
-  final String imageUrl;
+  final String posterImage;
   final List<String> _gener;
   @override
   List<String> get gener {
@@ -322,15 +336,17 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
   @override
   final int specificId;
   @override
-  final String seasonPosterUrl;
+  final String posterImageBackup;
   @override
   final String backGroundImage;
   @override
   final int episodeNumber;
   @override
+  final num rating;
+  @override
   @override
   String toString() {
-    return 'FavoriteEntity(id: $id, title: $title, imageUrl: $imageUrl, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced)';
+    return 'FavoriteEntity(id: $id, title: $title, posterImage: $posterImage, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced)';
   }
 
   @override
@@ -340,8 +356,8 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
             other is _$FavoriteEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
+            (identical(other.posterImage, posterImage) ||
+                other.posterImage == posterImage) &&
             const DeepCollectionEquality().equals(other._gener, _gener) &&
             (identical(other.contentType, contentType) ||
                 other.contentType == contentType) &&
@@ -353,12 +369,13 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
                 other.seasonNumber == seasonNumber) &&
             (identical(other.specificId, specificId) ||
                 other.specificId == specificId) &&
-            (identical(other.seasonPosterUrl, seasonPosterUrl) ||
-                other.seasonPosterUrl == seasonPosterUrl) &&
+            (identical(other.posterImageBackup, posterImageBackup) ||
+                other.posterImageBackup == posterImageBackup) &&
             (identical(other.backGroundImage, backGroundImage) ||
                 other.backGroundImage == backGroundImage) &&
             (identical(other.episodeNumber, episodeNumber) ||
-                other.episodeNumber == episodeNumber));
+                other.episodeNumber == episodeNumber) &&
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -367,7 +384,7 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
     runtimeType,
     id,
     title,
-    imageUrl,
+    posterImage,
     const DeepCollectionEquality().hash(_gener),
     contentType,
     date,
@@ -375,9 +392,10 @@ class _$FavoriteEntityImpl implements _FavoriteEntity {
     isSynced,
     seasonNumber,
     specificId,
-    seasonPosterUrl,
+    posterImageBackup,
     backGroundImage,
     episodeNumber,
+    rating,
   );
 
   /// Create a copy of FavoriteEntity
@@ -401,7 +419,7 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   const factory _FavoriteEntity({
     required final int id,
     required final String title,
-    required final String imageUrl,
+    required final String posterImage,
     required final List<String> gener,
     required final ContentType contentType,
     required final String date,
@@ -409,9 +427,10 @@ abstract class _FavoriteEntity implements FavoriteEntity {
     final bool isSynced,
     required final int seasonNumber,
     required final int specificId,
-    required final String seasonPosterUrl,
+    required final String posterImageBackup,
     required final String backGroundImage,
     required final int episodeNumber,
+    required final num rating,
   }) = _$FavoriteEntityImpl;
 
   factory _FavoriteEntity.fromJson(Map<String, dynamic> json) =
@@ -422,7 +441,7 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   @override
   String get title;
   @override
-  String get imageUrl;
+  String get posterImage;
   @override
   List<String> get gener;
   @override
@@ -438,11 +457,13 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   @override
   int get specificId;
   @override
-  String get seasonPosterUrl;
+  String get posterImageBackup;
   @override
   String get backGroundImage;
   @override
   int get episodeNumber;
+  @override
+  num get rating;
 
   /// Create a copy of FavoriteEntity
   /// with the given fields replaced by the non-null parameter values.

@@ -13,7 +13,7 @@ class HomeRepoImpl implements HomeRepo {
   MovieListResult fetchPopularMovies(
     dynamic generId, {
     int page = 1,
-    String? region,
+
     CancelToken? cancelToken,
   }) {
     return safeApiCall(
@@ -21,7 +21,6 @@ class HomeRepoImpl implements HomeRepo {
         generId,
         page: page,
         cancelToken: cancelToken,
-        region: region,
       ),
     );
   }
@@ -73,6 +72,60 @@ class HomeRepoImpl implements HomeRepo {
   }) {
     return safeApiCall(
       () => remoteHomeDataSource.fetchNowPlayingMovies(
+        page: page,
+        cancelToken: cancelToken,
+      ),
+    );
+  }
+
+  @override
+  SeriesListResult fetchPopularTvShows(
+    generId, {
+    int page = 1,
+    CancelToken? cancelToken,
+  }) async {
+    return safeApiCall(
+      () => remoteHomeDataSource.fetchPopularTvShows(
+        generId,
+        page: page,
+        cancelToken: cancelToken,
+      ),
+    );
+  }
+
+  @override
+  SeriesListResult fetchTopRatedTvShows({
+    int page = 1,
+    CancelToken? cancelToken,
+  }) async {
+    return safeApiCall(
+      () => remoteHomeDataSource.fetchTopRatedTvShows(
+        page: page,
+        cancelToken: cancelToken,
+      ),
+    );
+  }
+
+  @override
+  SeriesListResult fetchTrendingTvShows({
+    int page = 1,
+    CancelToken? cancelToken,
+  }) async {
+    return safeApiCall(
+      () => remoteHomeDataSource.fetchTrendingTvShows(
+        page: page,
+        cancelToken: cancelToken,
+      ),
+    );
+  }
+
+  @override
+  SeriesListResult fetchTvAiringToday({
+    int page = 1,
+    CancelToken? cancelToken,
+  }) async {
+    return safeApiCall(
+      () => remoteHomeDataSource.fetchAiringTvShows(
         page: page,
         cancelToken: cancelToken,
       ),

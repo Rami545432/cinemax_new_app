@@ -1,3 +1,6 @@
+import 'package:cinemax_app_new/config/animations/widgets/animated_card.dart';
+import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
+import 'package:cinemax_app_new/config/animations/widgets/shimmer_loading.dart';
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_state.dart';
@@ -83,24 +86,23 @@ class GenericPaginatedSection<
   @override
   Widget build(BuildContext context) {
     final scrollController = useScrollController();
-    final paginationController = usePagintationControllerTest<C, CAT, P>(
+    final paginationController = usePagintationControllerTest<C, CAT>(
       scrollController: scrollController,
       cubit: context.read<C>(),
       category: category,
-      params: params as P,
     );
-    return BlocBuilder<C, CategoryPaginationState<CAT, T>>(
+    return BlocBuilder<C, CategoryPaginationState<CAT, T, P>>(
       buildWhen: (previous, current) {
         // Only rebuild if THIS category's data changed
-        if (previous is CategoryPaginationLoaded<CAT, T> &&
-            current is CategoryPaginationLoaded<CAT, T>) {
+        if (previous is CategoryPaginationLoaded<CAT, T, P> &&
+            current is CategoryPaginationLoaded<CAT, T, P>) {
           return previous.getPaginationInfo(category) !=
               current.getPaginationInfo(category);
         }
         return true;
       },
       builder: (context, state) {
-        if (state is! CategoryPaginationLoaded<CAT, T>) {
+        if (state is! CategoryPaginationLoaded<CAT, T, P>) {
           return const SizedBox.shrink();
         }
 
@@ -177,7 +179,7 @@ class GenericPaginatedSection<
         itemCount: 20,
         separatorBuilder: (_, _) => SizedBox(width: 10),
         itemBuilder: (context, index) {
-          return VerticalFilmCardLoading();
+          return ShimmerLoading(child: VerticalFilmCardLoading());
         },
       ),
     );
@@ -247,7 +249,10 @@ class GenericPaginatedSection<
             );
           }
 
-          return itemBuilder(items[index]);
+          return AnimatedListItem(
+            index: index % 10,
+            child: itemBuilder(items[index]),
+          );
         },
       ),
     );

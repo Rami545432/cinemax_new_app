@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
@@ -30,29 +31,21 @@ class FavoriteVerticalCard extends StatelessWidget {
               switch (item.contentType) {
                 case ContentType.movies:
                   context.pushNamed(
-                    RouteName.detail,
-                    extra: BaseCardModel(
-                      cardId: item.id,
-                      type: item.contentType.text,
-                      cardTitle: item.title,
-                      cardImage: item.imageUrl,
-                      cardDate: item.date,
-                      contentType: item.contentType,
-                      horizontalCardImage: item.backGroundImage,
-                    ),
+                    RouteName.movieDetail,
+                    pathParameters: {'id': item.id.toString()},
+                    queryParameters: {
+                      'heroTag': 'favorite-${item.id}',
+                      'posterImage': item.posterImage,
+                    },
                   );
                 case ContentType.series:
                   context.pushNamed(
-                    RouteName.detail,
-                    extra: BaseCardModel(
-                      cardId: item.id,
-                      type: item.contentType.text,
-                      cardTitle: item.title,
-                      cardImage: item.imageUrl,
-                      cardDate: item.date,
-                      contentType: item.contentType,
-                      horizontalCardImage: item.backGroundImage,
-                    ),
+                    RouteName.tvDetail,
+                    pathParameters: {'id': item.id.toString()},
+                    queryParameters: {
+                      'heroTag': 'favorite-${item.id}',
+                      'posterImage': item.posterImage,
+                    },
                   );
                 case ContentType.episodes:
                   context.pushNamed(
@@ -63,7 +56,7 @@ class FavoriteVerticalCard extends StatelessWidget {
                       tvid: item.id,
                       contentType: item.contentType,
                       seasonPosterPath: item.backGroundImage,
-                      seiresPosterPath: item.seasonPosterUrl,
+                      seiresPosterPath: item.posterImage,
                     ),
                   );
                 case ContentType.seasons:
@@ -75,8 +68,8 @@ class FavoriteVerticalCard extends StatelessWidget {
                       contentType: item.contentType,
                       specificId: item.specificId,
                       backDropImageUrl: item.backGroundImage,
-                      posterImageUrl: item.seasonPosterUrl,
-                      seasonPosterPath: item.imageUrl,
+                      posterImageUrl: item.posterImage,
+                      seasonPosterPath: item.posterImage,
                       seasonName: item.title,
                       seasonDate: item.date,
                     ),
@@ -84,8 +77,11 @@ class FavoriteVerticalCard extends StatelessWidget {
               }
             },
             child: CardImage(
-              imageUrl: item.imageUrl,
-              defaultImageUrl: item.seasonPosterUrl,
+              imageUrl: tmdbImageSize(TmdbImageSize.w300, item.posterImage),
+              defaultImageUrl: tmdbImageSize(
+                TmdbImageSize.w300,
+                item.backGroundImage,
+              ),
             ),
           ),
         ),

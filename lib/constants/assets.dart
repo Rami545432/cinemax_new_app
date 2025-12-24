@@ -38,6 +38,8 @@ class Assets {
 
   static const String imagesGroup = "assets/images/Group.svg";
 
+  static const String imagesHeartFav = "assets/images/Heart_fav.json";
+
   static const String imagesLiveTvBlack24dp1 = "assets/images/live_tv_black_24dp1.svg";
 
   static const String imagesNoInternet = "assets/images/no_internet.json";
@@ -55,5 +57,7 @@ class Assets {
   static const String imagesOptions2 = "assets/images/options-2.svg";
 
   static const String imagesSearch = "assets/images/search.svg";
+
+  static const String imagesSystemRegular48FavoriteHeartMorphSelect = "assets/images/system-regular-48-favorite-heart-morph-select.json";
 }
 

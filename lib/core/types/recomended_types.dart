@@ -13,4 +13,4 @@ typedef RecomendedGridView =
       RecomendedParams
     >;
 typedef RecomendedStateLoaded =
-    CategoryPaginationLoaded<RecomendedCategory, BaseCardModel>;
+    CategoryPaginationLoaded<RecomendedCategory, BaseCardModel, void>;

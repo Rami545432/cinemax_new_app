@@ -56,31 +56,26 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<bool> getFirstTime() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_firstTimeKey) ?? true;
+    return sharedPreferences.getBool(_firstTimeKey) ?? true;
   }
 
   @override
   Future<void> setFirstTime(bool isFirstTime) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_firstTimeKey, isFirstTime);
+    await sharedPreferences.setBool(_firstTimeKey, isFirstTime);
   }
 
   @override
   Future<bool> getGuestMode() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_guestModeKey) ?? false;
+    return sharedPreferences.getBool(_guestModeKey) ?? false;
   }
 
   @override
   Future<void> setGuestMode(bool isGuest) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_guestModeKey, isGuest);
+    await sharedPreferences.setBool(_guestModeKey, isGuest);
   }
 
   @override
   Future<void> clearGuestMode() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_guestModeKey);
+    await sharedPreferences.remove(_guestModeKey);
   }
 }

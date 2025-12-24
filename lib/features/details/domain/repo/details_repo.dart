@@ -24,4 +24,5 @@ abstract class DetailsRepo {
     int? page,
     CancelToken? cancelToken,
   );
+  CollectionResult fetchCollection(int collectionId, CancelToken? cancelToken);
 }

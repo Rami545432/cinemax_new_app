@@ -32,7 +32,7 @@ class AnimatedButton extends StatefulWidget {
     required this.child,
     this.onPressed,
     this.entranceAnimation,
-    this.pressAnimation = ButtonAnimationType.press,
+    this.pressAnimation,
     this.animationDuration = const Duration(milliseconds: 600),
     this.entranceDelay = Duration.zero,
     this.autoAnimate = true,
@@ -126,16 +126,16 @@ class _AnimatedButtonState extends State<AnimatedButton>
         return switch (widget.pressAnimation!) {
           ButtonAnimationType.press => Transform.scale(
             scale: 1.0 - (_pressController.value * 0.05),
-            child: widget.child,
+            child: child,
           ),
           ButtonAnimationType.pulse => Transform.scale(
             scale: 1.0 + (_pressController.value * 0.1),
-            child: widget.child,
+            child: child,
           ),
           ButtonAnimationType.ripple => Transform.scale(
             scale: 1.0 + (_pressController.value * 0.1),
 
-            child: widget.child,
+            child: child,
           ),
           _ => widget.child,
         };

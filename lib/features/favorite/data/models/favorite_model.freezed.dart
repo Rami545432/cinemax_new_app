@@ -26,7 +26,7 @@ mixin _$FavoriteModel {
   @HiveField(2)
   String get title => throw _privateConstructorUsedError;
   @HiveField(3)
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get posterImage => throw _privateConstructorUsedError;
   @HiveField(4)
   List<String> get gener => throw _privateConstructorUsedError;
   @HiveField(5)
@@ -47,6 +47,8 @@ mixin _$FavoriteModel {
   String get backGroundImage => throw _privateConstructorUsedError;
   @HiveField(13)
   int get episodeNumber => throw _privateConstructorUsedError;
+  @HiveField(14)
+  num get rating => throw _privateConstructorUsedError;
 
   /// Serializes this FavoriteModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,7 +70,7 @@ abstract class $FavoriteModelCopyWith<$Res> {
   $Res call({
     @HiveField(1) int id,
     @HiveField(2) String title,
-    @HiveField(3) String imageUrl,
+    @HiveField(3) String posterImage,
     @HiveField(4) List<String> gener,
     @HiveField(5) ContentType contentType,
     @HiveField(6) String date,
@@ -79,6 +81,7 @@ abstract class $FavoriteModelCopyWith<$Res> {
     @HiveField(11) String seasonPosterUrl,
     @HiveField(12) String backGroundImage,
     @HiveField(13) int episodeNumber,
+    @HiveField(14) num rating,
   });
 }
 
@@ -99,7 +102,7 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? imageUrl = null,
+    Object? posterImage = null,
     Object? gener = null,
     Object? contentType = null,
     Object? date = null,
@@ -110,6 +113,7 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
     Object? seasonPosterUrl = null,
     Object? backGroundImage = null,
     Object? episodeNumber = null,
+    Object? rating = null,
   }) {
     return _then(
       _value.copyWith(
@@ -121,9 +125,9 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
                 ? _value.title
                 : title // ignore: cast_nullable_to_non_nullable
                       as String,
-            imageUrl: null == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
+            posterImage: null == posterImage
+                ? _value.posterImage
+                : posterImage // ignore: cast_nullable_to_non_nullable
                       as String,
             gener: null == gener
                 ? _value.gener
@@ -165,6 +169,10 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
                 ? _value.episodeNumber
                 : episodeNumber // ignore: cast_nullable_to_non_nullable
                       as int,
+            rating: rating == null
+                ? _value.rating
+                : rating // ignore: cast_nullable_to_non_nullable
+                      as num,
           )
           as $Val,
     );
@@ -183,7 +191,7 @@ abstract class _$$FavoriteModelImplCopyWith<$Res>
   $Res call({
     @HiveField(1) int id,
     @HiveField(2) String title,
-    @HiveField(3) String imageUrl,
+    @HiveField(3) String posterImage,
     @HiveField(4) List<String> gener,
     @HiveField(5) ContentType contentType,
     @HiveField(6) String date,
@@ -194,6 +202,7 @@ abstract class _$$FavoriteModelImplCopyWith<$Res>
     @HiveField(11) String seasonPosterUrl,
     @HiveField(12) String backGroundImage,
     @HiveField(13) int episodeNumber,
+    @HiveField(14) num rating,
   });
 }
 
@@ -213,7 +222,7 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? imageUrl = null,
+    Object? posterImage = null,
     Object? gener = null,
     Object? contentType = null,
     Object? date = null,
@@ -224,6 +233,7 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
     Object? seasonPosterUrl = null,
     Object? backGroundImage = null,
     Object? episodeNumber = null,
+    Object? rating = null,
   }) {
     return _then(
       _$FavoriteModelImpl(
@@ -235,9 +245,9 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
             ? _value.title
             : title // ignore: cast_nullable_to_non_nullable
                   as String,
-        imageUrl: null == imageUrl
-            ? _value.imageUrl
-            : imageUrl // ignore: cast_nullable_to_non_nullable
+        posterImage: null == posterImage
+            ? _value.posterImage
+            : posterImage // ignore: cast_nullable_to_non_nullable
                   as String,
         gener: null == gener
             ? _value._gener
@@ -279,6 +289,10 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
             ? _value.episodeNumber
             : episodeNumber // ignore: cast_nullable_to_non_nullable
                   as int,
+        rating: rating == null
+            ? _value.rating
+            : rating // ignore: cast_nullable_to_non_nullable
+                  as num,
       ),
     );
   }
@@ -291,7 +305,7 @@ class _$FavoriteModelImpl implements _FavoriteModel {
   const _$FavoriteModelImpl({
     @HiveField(1) required this.id,
     @HiveField(2) required this.title,
-    @HiveField(3) required this.imageUrl,
+    @HiveField(3) required this.posterImage,
     @HiveField(4) required final List<String> gener,
     @HiveField(5) required this.contentType,
     @HiveField(6) required this.date,
@@ -302,6 +316,7 @@ class _$FavoriteModelImpl implements _FavoriteModel {
     @HiveField(11) this.seasonPosterUrl = '',
     @HiveField(12) this.backGroundImage = '',
     @HiveField(13) this.episodeNumber = 0,
+    @HiveField(14) this.rating = 0,
   }) : _gener = gener;
 
   factory _$FavoriteModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -315,7 +330,7 @@ class _$FavoriteModelImpl implements _FavoriteModel {
   final String title;
   @override
   @HiveField(3)
-  final String imageUrl;
+  final String posterImage;
   final List<String> _gener;
   @override
   @HiveField(4)
@@ -354,10 +369,12 @@ class _$FavoriteModelImpl implements _FavoriteModel {
   @override
   @HiveField(13)
   final int episodeNumber;
-
+  @override
+  @HiveField(14)
+  final num rating;
   @override
   String toString() {
-    return 'FavoriteModel(id: $id, title: $title, imageUrl: $imageUrl, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced, seasonNumber: $seasonNumber, specificId: $specificId, seasonPosterUrl: $seasonPosterUrl, backGroundImage: $backGroundImage, episodeNumber: $episodeNumber)';
+    return 'FavoriteModel(id: $id, title: $title, posterImage: $posterImage, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced, seasonNumber: $seasonNumber, specificId: $specificId, seasonPosterUrl: $seasonPosterUrl, backGroundImage: $backGroundImage, episodeNumber: $episodeNumber)';
   }
 
   @override
@@ -367,8 +384,8 @@ class _$FavoriteModelImpl implements _FavoriteModel {
             other is _$FavoriteModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
+            (identical(other.posterImage, posterImage) ||
+                other.posterImage == posterImage) &&
             const DeepCollectionEquality().equals(other._gener, _gener) &&
             (identical(other.contentType, contentType) ||
                 other.contentType == contentType) &&
@@ -385,7 +402,8 @@ class _$FavoriteModelImpl implements _FavoriteModel {
             (identical(other.backGroundImage, backGroundImage) ||
                 other.backGroundImage == backGroundImage) &&
             (identical(other.episodeNumber, episodeNumber) ||
-                other.episodeNumber == episodeNumber));
+                other.episodeNumber == episodeNumber) &&
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -394,7 +412,7 @@ class _$FavoriteModelImpl implements _FavoriteModel {
     runtimeType,
     id,
     title,
-    imageUrl,
+    posterImage,
     const DeepCollectionEquality().hash(_gener),
     contentType,
     date,
@@ -405,6 +423,7 @@ class _$FavoriteModelImpl implements _FavoriteModel {
     seasonPosterUrl,
     backGroundImage,
     episodeNumber,
+    rating,
   );
 
   /// Create a copy of FavoriteModel
@@ -425,7 +444,7 @@ abstract class _FavoriteModel implements FavoriteModel {
   const factory _FavoriteModel({
     @HiveField(1) required final int id,
     @HiveField(2) required final String title,
-    @HiveField(3) required final String imageUrl,
+    @HiveField(3) required final String posterImage,
     @HiveField(4) required final List<String> gener,
     @HiveField(5) required final ContentType contentType,
     @HiveField(6) required final String date,
@@ -436,6 +455,7 @@ abstract class _FavoriteModel implements FavoriteModel {
     @HiveField(11) final String seasonPosterUrl,
     @HiveField(12) final String backGroundImage,
     @HiveField(13) final int episodeNumber,
+    @HiveField(14) final num rating,
   }) = _$FavoriteModelImpl;
 
   factory _FavoriteModel.fromJson(Map<String, dynamic> json) =
@@ -449,7 +469,7 @@ abstract class _FavoriteModel implements FavoriteModel {
   String get title;
   @override
   @HiveField(3)
-  String get imageUrl;
+  String get posterImage;
   @override
   @HiveField(4)
   List<String> get gener;
@@ -480,6 +500,9 @@ abstract class _FavoriteModel implements FavoriteModel {
   @override
   @HiveField(13)
   int get episodeNumber;
+  @override
+  @HiveField(14)
+  num get rating;
 
   /// Create a copy of FavoriteModel
   /// with the given fields replaced by the non-null parameter values.

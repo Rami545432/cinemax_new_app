@@ -47,6 +47,7 @@ class AppTheme {
       colorScheme: ColorScheme.dark(
         primary: _primaryColors[colorScheme]!,
         secondary: _primaryColors[colorScheme]!,
+
         onSurface: Colors.white,
         primaryContainer: AppPrimaryColors.blueAccent,
         onPrimaryContainer: Colors.white,

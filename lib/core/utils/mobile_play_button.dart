@@ -30,8 +30,8 @@ class MobilePlayButton extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => CustomInappView(
                 movieOrTvUrl: type == 'movie'
-                    ? 'https://vidsrc.xyz/embed/movie?tmdb=$id'
-                    : 'https://vidsrc.xyz/embed/tv?tmdb=$id&season=$seasonNumber&episode=$episodeNumber',
+                    ? 'https://vidsrc-embed.ru/embed/movie?tmdb=$id'
+                    : 'https://vidsrc-embed.ru/embed/tv?tmdb=$id&season=$seasonNumber&episode=$episodeNumber',
                 title: title,
               ),
             ),

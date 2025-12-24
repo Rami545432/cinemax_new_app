@@ -1,5 +1,6 @@
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,7 +31,17 @@ class SearchHistoryListTile extends StatelessWidget {
         //   '${AppRouter.kMovieDetailView}?from=search',
         //   extra: searchHistory,
         // );
-        context.pushNamed(RouteName.detail, extra: searchHistory);
+        final routeName = searchHistory.historyContentType == ContentType.movies
+            ? RouteName.movieDetail
+            : RouteName.tvDetail;
+        context.pushNamed(
+          routeName,
+          pathParameters: {'id': searchHistory.id.toString()},
+          queryParameters: {
+            'heroTag': 'search-${searchHistory.id}',
+            'posterImage': searchHistory.historyVerticalCardImage,
+          },
+        );
       },
     );
   }

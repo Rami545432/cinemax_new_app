@@ -5,12 +5,13 @@ import 'package:cinemax_app_new/features/details/domain/enums/similar_category.d
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/reviews_list_view_builder.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/series_about_tab_bar_view.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/similar_tab_bar.dart';
+import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entites/series_details_entity.dart';
 import 'about_tab_bar_view.dart';
-import 'actor_info.dart';
+import 'cast_tab_bar_view.dart';
 import 'recomended_tab_bar_view.dart';
 import 'season_tab_bar_view.dart';
 
@@ -29,13 +30,16 @@ class SeriesDetailsCompoents extends StatelessWidget {
           KeepAliveWrapper(
             child: AboutTabBarView(
               overview: seriesDetailsEntity.overView ?? '',
+              genreCategory: GenreCategory.tv,
               geners: seriesDetailsEntity.geners ?? [],
               child: SeriesAboutTabBarView(),
             ),
           ),
           KeepAliveWrapper(child: SeasonTabBarView()),
           KeepAliveWrapper(
-            child: ActorInfo(actorList: seriesDetailsEntity.actorDetails ?? []),
+            child: CastTabBarView(
+              actorList: seriesDetailsEntity.actorDetails ?? [],
+            ),
           ),
 
           KeepAliveWrapper(

@@ -1,4 +1,6 @@
+import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/routing/route_name.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +18,9 @@ class SearchVerticalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        final routeName = cardModel.contentType == ContentType.movies
+            ? RouteName.movieDetail
+            : RouteName.tvDetail;
         BlocProvider.of<SearchCubit>(context).addToSearchHistory(
           SearchHistoryModel(
             date: cardModel.cardDate ?? '',
@@ -27,13 +32,29 @@ class SearchVerticalCard extends StatelessWidget {
             historyContentType: cardModel.contentType,
           ),
         );
-        context.pushNamed(RouteName.detail, extra: cardModel);
+        context.pushNamed(
+          routeName,
+          pathParameters: {'id': cardModel.cardId.toString()},
+          queryParameters: {
+            'heroTag': 'search-${cardModel.cardId}',
+            'posterImage': cardModel.cardImage,
+          },
+        );
       },
       child: Column(
         spacing: 12,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(flex: 4, child: CardImageAndRating(cardModel: cardModel)),
+          Flexible(
+            flex: 4,
+            child: CardImageAndRating(
+              posterImage: tmdbImageSize(
+                TmdbImageSize.w300,
+                cardModel.cardImage,
+              ),
+              rating: cardModel.cardRating ?? 0,
+            ),
+          ),
           CardTitle(title: cardModel.cardTitle),
           SizedBox(),
         ],

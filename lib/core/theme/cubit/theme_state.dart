@@ -17,7 +17,7 @@ class ThemeState {
   final ThemeMode themeMode;
 
   const ThemeState({
-    this.colorScheme = AppColorScheme.veryDarkBlue,
+    this.colorScheme = AppColorScheme.black,
     this.themeMode = ThemeMode.dark,
   });
   ThemeState copyWith({AppColorScheme? colorScheme, ThemeMode? themeMode}) {

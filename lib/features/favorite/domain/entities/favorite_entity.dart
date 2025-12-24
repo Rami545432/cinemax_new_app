@@ -9,15 +9,16 @@ class FavoriteEntity with _$FavoriteEntity {
   const factory FavoriteEntity({
     required int id,
     required String title,
-    required String imageUrl,
+    required String posterImage,
     required List<String> gener,
     required ContentType contentType,
     required String date,
     required int seasonNumber,
     required int specificId,
-    required String seasonPosterUrl,
+    required String posterImageBackup,
     required String backGroundImage,
     required int episodeNumber,
+    required num rating,
 
     @Default('guest') String userId,
     @Default(false) bool isSynced,

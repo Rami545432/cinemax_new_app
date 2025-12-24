@@ -14,7 +14,7 @@ class FavoriteModel with _$FavoriteModel {
   const factory FavoriteModel({
     @HiveField(1) required int id,
     @HiveField(2) required String title,
-    @HiveField(3) required String imageUrl,
+    @HiveField(3) required String posterImage,
     @HiveField(4) required List<String> gener,
     @HiveField(5) required ContentType contentType,
     @HiveField(6) required String date,
@@ -24,8 +24,8 @@ class FavoriteModel with _$FavoriteModel {
     @HiveField(10) required int specificId,
     @HiveField(11) required String seasonPosterUrl,
     @HiveField(12) required String backGroundImage,
-
     @HiveField(13) required int episodeNumber,
+    @HiveField(14) required num rating,
   }) = _FavoriteModel;
 
   factory FavoriteModel.fromJson(Map<String, dynamic> json) =>
@@ -34,7 +34,7 @@ class FavoriteModel with _$FavoriteModel {
   factory FavoriteModel.fromEntity(FavoriteEntity entity) => FavoriteModel(
     id: entity.id,
     title: entity.title,
-    imageUrl: entity.imageUrl,
+    posterImage: entity.posterImage,
     gener: entity.gener,
     contentType: entity.contentType,
     date: entity.date,
@@ -42,9 +42,10 @@ class FavoriteModel with _$FavoriteModel {
     isSynced: entity.isSynced,
     seasonNumber: entity.seasonNumber,
     specificId: entity.specificId,
-    seasonPosterUrl: entity.seasonPosterUrl,
+    seasonPosterUrl: entity.posterImage,
     backGroundImage: entity.backGroundImage,
     episodeNumber: entity.episodeNumber,
+    rating: entity.rating,
   );
 }
 
@@ -52,7 +53,7 @@ extension FavoriteModelX on FavoriteModel {
   FavoriteEntity toEntity() => FavoriteEntity(
     id: id,
     title: title,
-    imageUrl: imageUrl,
+    posterImage: posterImage,
     gener: gener,
     contentType: contentType,
     date: date,
@@ -60,8 +61,9 @@ extension FavoriteModelX on FavoriteModel {
     isSynced: isSynced,
     seasonNumber: seasonNumber,
     specificId: specificId,
-    seasonPosterUrl: seasonPosterUrl,
+    posterImageBackup: seasonPosterUrl,
     backGroundImage: backGroundImage,
     episodeNumber: episodeNumber,
+    rating: rating,
   );
 }

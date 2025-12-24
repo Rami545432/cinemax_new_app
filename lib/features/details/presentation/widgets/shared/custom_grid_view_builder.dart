@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
 import 'package:cinemax_app_new/core/utils/size_config.dart';
@@ -72,7 +73,10 @@ class CustomGridView<C extends CategoryPaginationCubit<CAT, T, P>, CAT, T, P>
               ),
             );
           }
-          return itemBuilder(data[index]);
+          return AnimatedListItem(
+            index: index,
+            child: itemBuilder(data[index]),
+          );
         },
         gridDelegate: customSilverGridDelegate(context),
       ),

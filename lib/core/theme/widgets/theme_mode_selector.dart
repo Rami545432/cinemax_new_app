@@ -1,5 +1,6 @@
 // lib/core/theme/widgets/theme_mode_selector.dart
 
+import 'package:cinemax_app_new/core/theme/widgets/animated_theme_switcher.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';

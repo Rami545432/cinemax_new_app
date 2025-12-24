@@ -1,5 +1,6 @@
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
 
 class SeasonViewArgument {
   final int id;
@@ -13,6 +14,7 @@ class SeasonViewArgument {
   final double? seasonRating;
   final String? seasonDate;
   final SeriesSeasonDetailsEntitiy? preloadedSeasonDetails;
+
   SeasonViewArgument({
     required this.id,
     this.seasonNumber,
@@ -26,4 +28,21 @@ class SeasonViewArgument {
     this.seasonDate,
     this.preloadedSeasonDetails,
   });
+
+  FavoriteEntity toFavoriteEntity() {
+    return FavoriteEntity(
+      id: id,
+      title: seasonName ?? 'Season $seasonNumber',
+      posterImage: seasonPosterPath ?? '',
+      gener: [],
+      contentType: ContentType.seasons,
+      date: seasonDate ?? '',
+      seasonNumber: seasonNumber ?? 0,
+      specificId: specificId ?? 0,
+      posterImageBackup: posterImageUrl ?? '',
+      backGroundImage: backDropImageUrl ?? seasonPosterPath ?? '',
+      episodeNumber: 0,
+      rating: seasonRating ?? 0,
+    );
+  }
 }

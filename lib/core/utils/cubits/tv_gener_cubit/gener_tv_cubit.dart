@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../features/series/domain/entites/series_entity.dart';
+import '../../../../features/home/domian/entites/series_entity.dart';
 
 class GenerTvCubit extends Cubit<int> {
   GenerTvCubit() : super(0);

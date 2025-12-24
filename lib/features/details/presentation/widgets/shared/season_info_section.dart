@@ -10,11 +10,12 @@ class SeasonInfoSection extends StatelessWidget {
     super.key,
     required this.season,
     required this.defaultImageUrl,
+    required this.heroTag,
   });
 
   final Season season;
   final String defaultImageUrl;
-
+  final String heroTag;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
@@ -25,7 +26,7 @@ class SeasonInfoSection extends StatelessWidget {
         Expanded(
           flex: screenWidth > SizeConfig.mobile ? 1 : 2,
           child: Hero(
-            tag: season.name ?? '',
+            tag: heroTag,
             child: EpisodeImage(episodeImageUrl: image),
           ),
         ),

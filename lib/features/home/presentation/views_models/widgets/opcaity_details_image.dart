@@ -28,6 +28,8 @@ class OpcaityDetailsImage extends StatelessWidget {
       blendMode: BlendMode.dstOut,
       child: CachedNetworkImage(
         fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
         imageUrl: '$baseImageUrl$detailsBackGroundImage',
         errorWidget: (context, url, error) => CachedNetworkImage(
           fit: BoxFit.cover,

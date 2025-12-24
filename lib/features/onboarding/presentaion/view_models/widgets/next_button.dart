@@ -1,6 +1,6 @@
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/functions/show_snack_bar.dart';
-import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_local_data_source.dart';
 import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_cubit.dart';
 import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_state.dart';

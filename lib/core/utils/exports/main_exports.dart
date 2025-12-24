@@ -12,7 +12,7 @@ export 'package:cinemax_app_new/features/auth/domain/use_cases/sign_up_with_emai
 export 'package:cinemax_app_new/core/utils/functions/statues_bar.dart';
 export 'package:cinemax_app_new/core/utils/hive/hive_adapters_registers.dart';
 export 'package:cinemax_app_new/core/utils/hive/hive_open_boxes.dart';
-export 'package:cinemax_app_new/core/utils/get_it.dart';
+export 'package:cinemax_app_new/core/di/service_locator.dart';
 export 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
 export 'package:cinemax_app_new/core/routing/app_router.dart';
 export 'package:cinemax_app_new/core/network/config/app_dio.dart';

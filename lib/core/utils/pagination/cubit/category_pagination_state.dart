@@ -3,24 +3,27 @@ import 'package:equatable/equatable.dart';
 
 /// C = Category enum type
 /// T = Item/Entity type
-abstract class CategoryPaginationState<C, T> extends Equatable {
+abstract class CategoryPaginationState<C, T, P> extends Equatable {
   const CategoryPaginationState();
   @override
   List<Object?> get props => [];
 }
 
-class CategoryPaginationInitial<C, T> extends CategoryPaginationState<C, T> {}
+class CategoryPaginationInitial<C, T, P>
+    extends CategoryPaginationState<C, T, P> {}
 
-class CategoryPaginationLoading<C, T> extends CategoryPaginationState<C, T> {}
+class CategoryPaginationLoading<C, T, P>
+    extends CategoryPaginationState<C, T, P> {}
 
-class CategoryPaginationLoaded<C, T> extends CategoryPaginationState<C, T> {
-  final Map<C, PaginationInfo<T>> categoriesData;
+class CategoryPaginationLoaded<C, T, P>
+    extends CategoryPaginationState<C, T, P> {
+  final Map<C, PaginationInfo<T, P>> categoriesData;
 
   const CategoryPaginationLoaded({required this.categoriesData});
   @override
   List<Object?> get props => [categoriesData];
-  PaginationInfo<T> getPaginationInfo(C category) {
-    return categoriesData[category] ?? PaginationInfo<T>();
+  PaginationInfo<T, P> getPaginationInfo(C category) {
+    return categoriesData[category] ?? PaginationInfo<T, P>();
   }
 
   List<T> getItems(C category) {
@@ -35,6 +38,14 @@ class CategoryPaginationLoaded<C, T> extends CategoryPaginationState<C, T> {
     return getPaginationInfo(category).canLoadMore;
   }
 
+  int getTotalPages(C category) {
+    return getPaginationInfo(category).totalPages ?? 0;
+  }
+
+  int getTotalResults(C category) {
+    return getPaginationInfo(category).totalResults ?? 0;
+  }
+
   bool isInitialLoad(C category) {
     return getPaginationInfo(category).isInitialLoad;
   }
@@ -47,11 +58,11 @@ class CategoryPaginationLoaded<C, T> extends CategoryPaginationState<C, T> {
     return getPaginationInfo(category).error;
   }
 
-  CategoryPaginationLoaded<C, T> copyWithCategory({
+  CategoryPaginationLoaded<C, T, P> copyWithCategory({
     required C category,
-    required PaginationInfo<T> paginationInfo,
+    required PaginationInfo<T, P> paginationInfo,
   }) {
-    final newData = Map<C, PaginationInfo<T>>.from(categoriesData);
+    final newData = Map<C, PaginationInfo<T, P>>.from(categoriesData);
     newData[category] = paginationInfo;
     return CategoryPaginationLoaded(categoriesData: newData);
   }

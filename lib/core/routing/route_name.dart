@@ -16,7 +16,8 @@ class RouteName {
   static const String editProfile = 'editProfile';
   static const String navigation = 'navigation';
   static const String categorySeeAll = 'categorySeeAll';
-  static const String detail = 'detail';
+  static const String movieDetail = 'movieDetail';
+  static const String tvDetail = 'tvDetail';
   static const String season = 'season';
   static const String episode = 'episode';
   static const String onBoarding = 'onBoarding';
@@ -24,4 +25,6 @@ class RouteName {
   static const String youtubePlayer = 'youtubePlayer';
   static const String customWebView = 'customWebView';
   static const String discover = 'discover';
+  static const String chatBot = 'chatBot';
+  static const String genreSeeAll = 'genreSeeAll';
 }

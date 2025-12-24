@@ -8,13 +8,13 @@ class MovieModel extends MovieEntity {
   String? originalLanguage;
   String? originalTitle;
   String? overview;
-  num? popularity;
+  double? popularity;
   String? posterPath;
   String? releaseDate;
   String? title;
   bool? video;
   double? voteAverage;
-  num? voteCount;
+  int? voteCount;
 
   MovieModel({
     this.adult,
@@ -55,13 +55,13 @@ class MovieModel extends MovieEntity {
     originalLanguage: json['original_language'] as String?,
     originalTitle: json['original_title'] as String?,
     overview: json['overview'] as String?,
-    popularity: (json['popularity'] as num?),
+    popularity: (json['popularity'] as double?),
     posterPath: json['poster_path'] as String?,
     releaseDate: json['release_date'] as String?,
     title: json['title'] as String?,
     video: json['video'] as bool?,
     voteAverage: (json['vote_average'] as num?)?.toDouble(),
-    voteCount: json['vote_count'] as num?,
+    voteCount: json['vote_count'] as int?,
   );
 
   Map<String, dynamic> toJson() => {
@@ -75,7 +75,7 @@ class MovieModel extends MovieEntity {
     'popularity': popularity,
     'poster_path': posterPath,
     'release_date': releaseDate,
-    'title': movieTitle,
+    'title': title,
     'video': video,
     'vote_average': voteAverage,
     'vote_count': voteCount,

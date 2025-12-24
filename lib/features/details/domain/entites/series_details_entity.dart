@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:cinemax_app_new/features/details/data/models/shared_details_models/external_ids.dart';
 import 'package:cinemax_app_new/features/details/data/models/shared_details_models/keywords.dart';
 import 'package:cinemax_app_new/features/details/data/models/shared_details_models/reviews.dart';
@@ -5,6 +6,7 @@ import 'package:cinemax_app_new/features/details/data/models/shared_details_mode
 import 'package:cinemax_app_new/features/details/data/models/shared_details_models/watch_providers.dart';
 import 'package:cinemax_app_new/features/details/data/models/series_season_details/images.dart';
 import 'package:cinemax_app_new/features/details/data/models/shared_details_models/genre.dart';
+import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
 
 import '../../data/models/shared_details_models/cast.dart';
 import '../../data/models/shared_details_models/credits.dart';
@@ -19,12 +21,12 @@ import '../../data/models/series_details_models/season.dart';
 class SeriesDetailsEntity {
   final int seiresId;
   final String? kLanguages;
-  final String? seriresTitle;
+  final String? seriesTitle;
   final String? firstDate;
   final num numOfEpisoide;
   final num numOfSeason;
   final List<Season> season;
-  final num rating;
+  final double rating;
   final List<Cast>? actorDetails;
   final List<Genre>? geners;
   final List<Result>? videoKey;
@@ -36,7 +38,8 @@ class SeriesDetailsEntity {
   final String? kLastAirDate;
   final Credits? kCredits;
   final Videos? kVideos;
-  final String? tvBackDropPath;
+  final String? backgroundImage;
+
   final String? posterImage;
   final String? overView;
   final WatchProviders? kWatchProviders;
@@ -66,9 +69,9 @@ class SeriesDetailsEntity {
     this.kCredits,
     this.kVideos,
     this.posterImage,
-    required this.seriresTitle,
+    required this.seriesTitle,
     required this.overView,
-    required this.tvBackDropPath,
+    required this.backgroundImage,
     this.kWatchProviders,
     this.kTranslations,
     this.kExternalIds,
@@ -76,4 +79,21 @@ class SeriesDetailsEntity {
     this.kImages,
     this.kKeywords,
   });
+
+  FavoriteEntity toFavoriteEntity() {
+    return FavoriteEntity(
+      id: seiresId,
+      title: seriesTitle ?? '',
+      posterImage: posterImage ?? '',
+      gener: geners?.map((g) => g.name ?? '').toList() ?? [],
+      contentType: ContentType.series,
+      date: firstDate ?? '',
+      seasonNumber: 0,
+      specificId: seiresId,
+      posterImageBackup: posterImage ?? '',
+      backGroundImage: backgroundImage ?? posterImage ?? '',
+      episodeNumber: 0,
+      rating: rating,
+    );
+  }
 }

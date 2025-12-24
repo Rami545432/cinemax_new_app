@@ -48,7 +48,7 @@ class TmdbDetailsApi {
     return client.get(
       '$type/$id/recommendations',
       queryParams: {
-        'without_genres': TmdbConfig.excludedRomanceGenre,
+        // 'without_genres': TmdbConfig.excludedRomanceGenre,
         if (page != null) 'page': page.toString(),
       },
       cancelToken: cancelToken,
@@ -93,6 +93,12 @@ class TmdbDetailsApi {
       options: requestOptions,
     );
 
+    return response.data;
+  }
+
+  ApiResposne getCollection({required int id, CancelToken? cancelToken}) async {
+    final url = client.buildUrl('collection/$id');
+    final response = await client.dio.get(url, cancelToken: cancelToken);
     return response.data;
   }
 }

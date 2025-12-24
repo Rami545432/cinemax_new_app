@@ -19,7 +19,7 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
     return FavoriteModel(
       id: fields[1] as int,
       title: fields[2] as String,
-      imageUrl: fields[3] as String,
+      posterImage: fields[3] as String,
       gener: (fields[4] as List).cast<String>(),
       contentType: fields[5] as ContentType,
       date: fields[6] as String,
@@ -30,19 +30,20 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       seasonPosterUrl: fields[11] as String,
       backGroundImage: fields[12] as String,
       episodeNumber: fields[13] as int,
+      rating: fields[14] as num,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoriteModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.imageUrl)
+      ..write(obj.posterImage)
       ..writeByte(4)
       ..write(obj.gener)
       ..writeByte(5)
@@ -62,7 +63,9 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       ..writeByte(12)
       ..write(obj.backGroundImage)
       ..writeByte(13)
-      ..write(obj.episodeNumber);
+      ..write(obj.episodeNumber)
+      ..writeByte(14)
+      ..write(obj.rating);
   }
 
   @override
@@ -84,7 +87,7 @@ _$FavoriteModelImpl _$$FavoriteModelImplFromJson(Map<String, dynamic> json) =>
     _$FavoriteModelImpl(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
-      imageUrl: json['imageUrl'] as String,
+      posterImage: json['posterImage'] as String,
       gener: (json['gener'] as List<dynamic>).map((e) => e as String).toList(),
       contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       date: json['date'] as String,
@@ -95,13 +98,14 @@ _$FavoriteModelImpl _$$FavoriteModelImplFromJson(Map<String, dynamic> json) =>
       seasonPosterUrl: json['seasonPosterUrl'] as String,
       backGroundImage: json['backGroundImage'] as String,
       episodeNumber: (json['episodeNumber'] as num).toInt(),
+      rating: (json['rating'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$FavoriteModelImplToJson(_$FavoriteModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'imageUrl': instance.imageUrl,
+      'posterImage': instance.posterImage,
       'gener': instance.gener,
       'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'date': instance.date,
@@ -112,6 +116,7 @@ Map<String, dynamic> _$$FavoriteModelImplToJson(_$FavoriteModelImpl instance) =>
       'seasonPosterUrl': instance.seasonPosterUrl,
       'backGroundImage': instance.backGroundImage,
       'episodeNumber': instance.episodeNumber,
+      'rating': instance.rating,
     };
 
 const _$ContentTypeEnumMap = {

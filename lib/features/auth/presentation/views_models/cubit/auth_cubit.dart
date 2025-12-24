@@ -1,4 +1,3 @@
-import 'package:cinemax_app_new/core/utils/get_it.dart';
 import 'package:cinemax_app_new/core/utils/use_case/use_case.dart';
 import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_local_data_source.dart';
 import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
@@ -13,11 +12,12 @@ import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_face
 import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_out_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_up_with_email_use_case.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
+class AuthCubit extends Cubit<AuthState> with ChangeNotifier {
   final SignInWithGoogleUseCase signInWithGoogleUseCase;
   final SignInWithFacebookUseCase signInWithFacebookUseCase;
   final SignInWithEmailUseCase signInWithEmailUseCase;
@@ -29,6 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
   final EnableGuestModeUseCase enableGuestModeUseCase;
   final DisableGuestModeUseCase disableGuestModeUseCase;
   final IsGuestModeUseCase isGuestModeUseCase;
+  final AuthLocalDataSource authLocalDataSource;
 
   AuthCubit({
     required this.signInWithGoogleUseCase,
@@ -42,14 +43,14 @@ class AuthCubit extends Cubit<AuthState> {
     required this.enableGuestModeUseCase,
     required this.disableGuestModeUseCase,
     required this.isGuestModeUseCase,
+    required this.authLocalDataSource,
   }) : super(AuthInitial());
 
   Future<void> checkAuthStatus() async {
     emit(AuthLoading());
 
     final result = await getCurrentUserUseCase(NoParams());
-    final localDataSource = getIt.get<AuthLocalDataSourceImpl>();
-    final isFirstTime = await localDataSource.getFirstTime();
+    final isFirstTime = await authLocalDataSource.getFirstTime();
     if (isFirstTime) {
       emit(AuthFirstTime());
       return;

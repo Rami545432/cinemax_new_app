@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,11 @@ class SeasonTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final seriesDetailsEntity = context.watch<SeriesDetailsEntity>();
     final List<Season> season = seriesDetailsEntity.season;
+
     return ListView.builder(
       itemCount: season.length,
       itemBuilder: (context, index) {
+        final heroTag = '$seriesDetailsEntity.seiresId-${season[index].id}';
         return Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: InkWell(
@@ -28,7 +31,7 @@ class SeasonTabBarView extends StatelessWidget {
                 extra: SeasonViewArgument(
                   contentType: ContentType.seasons,
                   id: seriesDetailsEntity.seiresId,
-                  backDropImageUrl: seriesDetailsEntity.tvBackDropPath,
+                  backDropImageUrl: seriesDetailsEntity.backgroundImage,
                   posterImageUrl: seriesDetailsEntity.posterImage,
                   seasonDate: season[index].airDate,
                   seasonName: season[index].name,
@@ -37,11 +40,16 @@ class SeasonTabBarView extends StatelessWidget {
                   seasonRating: season[index].voteAverage,
                   specificId: season[index].id,
                 ),
+                queryParameters: {'heroTag': heroTag},
               );
             },
-            child: SeasonInfoSection(
-              season: season[index],
-              defaultImageUrl: seriesDetailsEntity.posterImage!,
+            child: AnimatedListItem(
+              index: index,
+              child: SeasonInfoSection(
+                heroTag: heroTag,
+                season: season[index],
+                defaultImageUrl: seriesDetailsEntity.posterImage!,
+              ),
             ),
           ),
         );

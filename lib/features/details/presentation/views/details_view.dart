@@ -1,50 +1,31 @@
-import 'package:cinemax_app_new/core/utils/cubit_parameters/details_params.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
-import 'package:cinemax_app_new/models/base_card_model.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'details_body.dart';
 
-class DetailsView extends StatefulWidget {
+class DetailsView extends StatelessWidget {
   const DetailsView({
     super.key,
-    required this.cardModel,
+    required this.id,
+    required this.contentType,
     this.fromRoute = 'home',
-    this.title,
+    this.heroTag,
+    required this.posterImage,
   });
 
-  final BaseCardModel cardModel;
+  final int id;
+  final ContentType contentType;
   final String fromRoute;
-  final String? title;
-
-  @override
-  State<DetailsView> createState() => _DetailsViewState();
-}
-
-class _DetailsViewState extends State<DetailsView> {
-  @override
-  void initState() {
-    super.initState();
-    _initializeData();
-  }
-
-  void _initializeData() {
-    final id = widget.cardModel.cardId;
-    final type = widget.cardModel.type ?? '';
-
-    BlocProvider.of<FetchDetailsCubit>(
-      context,
-    ).fetchDetails(DetailsParams(id: id, type: type));
-  }
-
+  final String? heroTag;
+  final String posterImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DetailsBody(
-        cardModel: widget.cardModel,
-        fromRoute: widget.fromRoute,
-        title: widget.title,
+        id: id,
+        contentType: contentType,
+        fromRoute: fromRoute,
+        heroTag: heroTag,
+        posterImage: posterImage,
       ),
     );
   }

@@ -156,7 +156,7 @@ class ChatBubble extends StatelessWidget {
       SnackBar(
         content: Text(
           'Message copied to clipboard',
-          style: AppStyles.textStyle14(context).copyWith(color: Colors.white),
+          style: AppStyles.textStyle14(context),
         ),
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,

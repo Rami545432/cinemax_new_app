@@ -5,7 +5,7 @@ import 'package:cinemax_app_new/features/search/data/data_sources/remote_search_
 import 'package:cinemax_app_new/features/search/data/models/search_history_model.dart';
 import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 import 'package:cinemax_app_new/features/search/domain/repo/search_repo.dart';
-import 'package:cinemax_app_new/features/series/domain/entites/series_entity.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 

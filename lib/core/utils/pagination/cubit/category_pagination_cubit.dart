@@ -3,62 +3,78 @@ import 'package:cinemax_app_new/core/utils/errors/errors.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_state.dart';
 import 'package:cinemax_app_new/core/utils/pagination/config/pagination_info.dart';
 import 'package:cinemax_app_new/core/utils/pagination/config/pagintaion_config.dart';
+import 'package:cinemax_app_new/features/home/data/models/test_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// CAT = Category enum type
 /// T = Item/Entity type
-/// P = Parameters type
+/// P = Parameters type (filters, sorting, anything)
 
 abstract class CategoryPaginationCubit<CAT, T, P>
-    extends Cubit<CategoryPaginationState<CAT, T>> {
+    extends Cubit<CategoryPaginationState<CAT, T, P>> {
   final PaginationConfig config;
+
   final Map<CAT, CancelToken> _cancelTokens = {};
+
   CategoryPaginationCubit(this.config)
-    : super(CategoryPaginationInitial<CAT, T>());
-  Future<Either<Failure, List<T>>> fetchCategoryData(
+    : super(CategoryPaginationInitial<CAT, T, P>());
+
+  /// Fetch method must now receive params
+  Future<Either<Failure, PagedResult<T>>> fetchCategoryData(
     CAT category,
     int page,
+    P? params,
     CancelToken? cancelToken,
   );
 
   List<CAT> get allCategories;
+
   void initialize() {
-    final initialData = <CAT, PaginationInfo<T>>{};
+    final initialData = <CAT, PaginationInfo<T, P>>{};
+
     for (var category in allCategories) {
-      initialData[category] = PaginationInfo<T>();
+      initialData[category] = PaginationInfo<T, P>();
     }
-    safeEmit(CategoryPaginationLoaded<CAT, T>(categoriesData: initialData));
+
+    safeEmit(CategoryPaginationLoaded<CAT, T, P>(categoriesData: initialData));
   }
 
+  /// Initial or refreshed load for a category
   Future<void> loadCategory(CAT category) async {
     final currentState = state;
-    if (currentState is! CategoryPaginationLoaded<CAT, T>) {
+
+    if (currentState is! CategoryPaginationLoaded<CAT, T, P>) {
       initialize();
       return loadCategory(category);
     }
+
     final currentInfo = currentState.getPaginationInfo(category);
-    if (currentInfo.isFetching) {
-      return;
-    }
+
+    if (currentInfo.isFetching) return;
+
     _cancelTokens[category]?.cancel();
     _cancelTokens[category] = CancelToken();
+
     safeEmit(
       currentState.copyWithCategory(
         category: category,
         paginationInfo: currentInfo.copyWith(isFetching: true, error: null),
       ),
     );
+
     try {
       final result = await fetchCategoryData(
         category,
         1,
+        currentInfo.params,
         _cancelTokens[category],
       );
+
       result.fold(
         (failure) {
-          final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+          final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
           safeEmit(
             updatedState.copyWithCategory(
               category: category,
@@ -70,16 +86,17 @@ abstract class CategoryPaginationCubit<CAT, T, P>
           );
         },
         (newItems) {
-          final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+          final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
+
           safeEmit(
             updatedState.copyWithCategory(
               category: category,
               paginationInfo: currentInfo.copyWith(
-                items: newItems,
+                items: newItems.results,
                 isFetching: false,
                 currentPage: 1,
-                isLastPage:
-                    newItems.isEmpty || newItems.length < config.itemsPerPage,
+                totalPages: newItems.totalPages,
+                totalResults: newItems.totalResults,
               ),
             ),
           );
@@ -87,13 +104,13 @@ abstract class CategoryPaginationCubit<CAT, T, P>
       );
     } catch (e) {
       if (e is! DioException || !CancelToken.isCancel(e)) {
-        final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+        final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
         safeEmit(
           updatedState.copyWithCategory(
             category: category,
             paginationInfo: currentInfo.copyWith(
-              isFetching: false,
               error: e.toString(),
+              isFetching: false,
             ),
           ),
         );
@@ -103,27 +120,35 @@ abstract class CategoryPaginationCubit<CAT, T, P>
 
   Future<void> loadNextPage(CAT category) async {
     final currentState = state;
-    if (currentState is! CategoryPaginationLoaded<CAT, T>) return;
+
+    if (currentState is! CategoryPaginationLoaded<CAT, T, P>) return;
+
     final currentInfo = currentState.getPaginationInfo(category);
     if (!currentInfo.canLoadMore) return;
+
     final nextPage = currentInfo.currentPage + 1;
+
     _cancelTokens[category]?.cancel();
     _cancelTokens[category] = CancelToken();
+
     safeEmit(
       currentState.copyWithCategory(
         category: category,
         paginationInfo: currentInfo.copyWith(isFetching: true, error: null),
       ),
     );
+
     try {
       final result = await fetchCategoryData(
         category,
         nextPage,
+        currentInfo.params,
         _cancelTokens[category],
       );
+
       result.fold(
         (failure) {
-          final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+          final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
           safeEmit(
             updatedState.copyWithCategory(
               category: category,
@@ -135,16 +160,17 @@ abstract class CategoryPaginationCubit<CAT, T, P>
           );
         },
         (newItems) {
-          final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+          final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
+
           safeEmit(
             updatedState.copyWithCategory(
               category: category,
               paginationInfo: currentInfo.copyWith(
-                items: [...currentInfo.items, ...newItems],
+                items: [...currentInfo.items, ...newItems.results],
                 isFetching: false,
                 currentPage: nextPage,
-                isLastPage:
-                    newItems.isEmpty || newItems.length < config.itemsPerPage,
+                totalPages: newItems.totalPages,
+                totalResults: newItems.totalResults,
               ),
             ),
           );
@@ -152,7 +178,7 @@ abstract class CategoryPaginationCubit<CAT, T, P>
       );
     } catch (e) {
       if (e is! DioException || !CancelToken.isCancel(e)) {
-        final updatedState = state as CategoryPaginationLoaded<CAT, T>;
+        final updatedState = state as CategoryPaginationLoaded<CAT, T, P>;
         safeEmit(
           updatedState.copyWithCategory(
             category: category,
@@ -166,28 +192,54 @@ abstract class CategoryPaginationCubit<CAT, T, P>
     }
   }
 
-  Future<void> refreshCategory(CAT category) async {
+  /// The key addition:
+  /// Update filters/params and reload category
+  Future<void> updateCategoryParams(CAT category, P params) async {
     final currentState = state;
-    if (currentState is! CategoryPaginationLoaded<CAT, T>) return;
+
+    if (currentState is! CategoryPaginationLoaded<CAT, T, P>) return;
+
+    final currentInfo = currentState.getPaginationInfo(category);
 
     safeEmit(
       currentState.copyWithCategory(
         category: category,
-        paginationInfo: PaginationInfo<T>(),
+        paginationInfo: currentInfo.copyWith(
+          params: params,
+          items: currentInfo.items,
+          currentPage: currentInfo.currentPage,
+          totalPages: currentInfo.totalPages,
+          totalResults: currentInfo.totalResults,
+        ),
       ),
     );
 
     await loadCategory(category);
   }
 
-  /// Load all categories in parallel
-  Future<void> loadAllCategories() async {
-    safeEmit(CategoryPaginationLoading<CAT, T>());
-    initialize();
-    await Future.wait(allCategories.map((category) => loadCategory(category)));
+  Future<void> refreshCategory(CAT category) async {
+    final currentState = state;
+
+    if (currentState is! CategoryPaginationLoaded<CAT, T, P>) return;
+
+    safeEmit(
+      currentState.copyWithCategory(
+        category: category,
+        paginationInfo: PaginationInfo<T, P>(
+          params: currentState.getPaginationInfo(category).params,
+        ),
+      ),
+    );
+
+    await loadCategory(category);
   }
 
-  /// Refresh all categories
+  Future<void> loadAllCategories() async {
+    safeEmit(CategoryPaginationLoading<CAT, T, P>());
+    initialize();
+    await Future.wait(allCategories.map(loadCategory));
+  }
+
   Future<void> refreshAllCategories() async {
     await loadAllCategories();
   }
@@ -198,5 +250,31 @@ abstract class CategoryPaginationCubit<CAT, T, P>
       token.cancel();
     }
     return super.close();
+  }
+
+  void enterCategory(CAT category) {
+    final currentState = state;
+
+    if (currentState is CategoryPaginationLoaded<CAT, T, P>) {
+      final currentInfo = currentState.getPaginationInfo(category);
+
+      if (currentInfo.items.isNotEmpty) {
+        refreshCategory(category);
+        return;
+      }
+
+      emit(
+        currentState.copyWithCategory(
+          category: category,
+          paginationInfo: PaginationInfo<T, P>(
+            items: [],
+            currentPage: 1,
+            isFetching: true,
+          ),
+        ),
+      );
+    }
+
+    loadCategory(category);
   }
 }

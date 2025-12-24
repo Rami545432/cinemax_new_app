@@ -50,23 +50,23 @@
   "@authLogout": {
     "description": "Çıkış yapma butonu"
   },
-  "popular": "Popüler",
+  "popular": "POPÜLER",
   "@popular": {
     "description": "Popüler filmler veya diziler bölümü"
   },
-  "nowPlaying": "Şu Anda Gösterimde",
+  "nowPlaying": "ŞU ANDA GÖSTERİMDE",
   "@nowPlaying": {
     "description": "Şu anda yayınlanan içerikler"
   },
-  "topRated": "En Yüksek Puanlı",
+  "topRated": "EN YÜKSEK PUANLI",
   "@topRated": {
     "description": "En yüksek puan alan filmler veya diziler"
   },
-  "upcoming": "Yakında",
+  "upcoming": "YAKINDA",
   "@upcoming": {
     "description": "Yakında çıkacak içerikler"
   },
-  "trending": "Trend",
+  "trending": "TREND",
   "@trending": {
     "description": "En çok konuşulan içerikler"
   },
@@ -285,5 +285,71 @@
   "signInHint": "Giriş yapınızın Favori Filmlerinizi ve Dizilerinizi Senkronize Edin ve Daha Fazla Özellik Kullanın",
   "@signInHint": {
     "description": "Metin gösterilirken giriş yapınız yok"
+  },
+  "airingToday": "BUGÜN GÖSTERİMDE",
+  "@airingToday": {
+    "description": "Metin gösterilirken bugün gösterimde içerik yok"
+  },
+  "discover": "Keşfet",
+  "@discover": {
+    "description": "Metin gösterilirken keşfet yok"
+  },
+  "genreAction": "Eylem",
+  "@genreAction": {},
+  "genreAdventure": "Macera",
+  "@genreAdventure": {},
+  "genreAnimation": "Animasyon",
+  "@genreAnimation": {},
+  "genreComedy": "Komedi",
+  "@genreComedy": {},
+  "genreCrime": "Suç",
+  "@genreCrime": {},
+  "genreDocumentary": "Belgesel",
+  "@genreDocumentary": {},
+  "genreDrama": "Drama",
+  "@genreDrama": {},
+  "genreFamily": "Aile",
+  "@genreFamily": {},
+  "genreFantasy": "Fantasy",
+  "@genreFantasy": {},
+  "genreHistory": "Tarih",
+  "@genreHistory": {},
+  "genreHorror": "Korku",
+  "@genreHorror": {},
+  "genreMusic": "Müzik",
+  "@genreMusic": {},
+  "genreMystery": "Gizem",
+  "@genreMystery": {},
+  "genreRomance": "Romantik",
+  "@genreRomance": {},
+  "genreSciFi": "Bilim Kurgu",
+  "@genreSciFi": {},
+  "genreTvMovie": "TV Dizi",
+  "@genreTvMovie": {},
+  "genreThriller": "Suspans",
+  "@genreThriller": {},
+  "genreWar": "War",
+  "@genreWar": {},
+  "genreWestern": "Batı",
+  "@genreWestern": {},
+  "genreActionAdventure": "Eylem ve Macera",
+  "@genreActionAdventure": {},
+  "genreKids": "Çocuk",
+  "@genreKids": {},
+  "genreNews": "Haber",
+  "@genreNews": {},
+  "genreReality": "Gerçeklik",
+  "@genreReality": {},
+  "genreSciFiFantasy": "Bilim Kurgu ve Fantastik",
+  "@genreSciFiFantasy": {},
+  "genreSoap": "Soap Opera",
+  "@genreSoap": {},
+  "genreTalk": "Konuşma",
+  "@genreTalk": {},
+  "genreWarPolitics": "Savaş ve Politika",
+  "@genreWarPolitics": {},
+  "parts": "Bölümler",
+  "@parts": {
+    "description": "Bölümlerin açıklaması"
   }
 }

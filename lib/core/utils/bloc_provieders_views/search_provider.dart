@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/features/search/presentaion/view_models/manger/search_cubit/search_cubit.dart';
 import 'package:cinemax_app_new/features/search/presentaion/view_models/views/search_view.dart';
 import 'package:flutter/material.dart';

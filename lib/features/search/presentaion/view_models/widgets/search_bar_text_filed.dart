@@ -34,7 +34,7 @@ class SearchBarTextFiled extends HookWidget {
             onChangedQuery(query);
           });
         },
-        autoFocus: true,
+
         controller: searchController,
         hintText: l10n.searchHint,
 

@@ -16,6 +16,8 @@ class ScrollCollapseResult {
   bool get isCollapsed => isCollapsedNotifier.value;
 }
 
+// ... existing imports ...
+
 ScrollCollapseResult useScrollCollapseDebounced([
   double? customThreshold,
   Duration debounce = const Duration(milliseconds: 16),
@@ -24,6 +26,7 @@ ScrollCollapseResult useScrollCollapseDebounced([
   final isCollapsedNotifier = useMemoized(() => ValueNotifier<bool>(false));
   final context = useContext();
   final debounceTimer = useRef<Timer?>(null);
+  final isDisposed = useRef<bool>(false);
 
   useEffect(() {
     final threshold =
@@ -34,17 +37,38 @@ ScrollCollapseResult useScrollCollapseDebounced([
       debounceTimer.value?.cancel();
 
       debounceTimer.value = Timer(debounce, () {
+        if (isDisposed.value) return;
         if (!scrollController.hasClients) return;
         if (scrollController.positions.isEmpty) return;
 
         try {
-          final offset = scrollController.offset;
-          final shouldCollapse = offset >= threshold;
+          final position = scrollController.position;
 
-          // ✅ Update ValueNotifier instead of useState
-          // This won't trigger DetailsBody rebuild
+          // Use ScrollMetrics instead of directly accessing pixels
+          // This is safer for NestedScrollView
+          if (!position.hasContentDimensions) return;
+          if (!position.isScrollingNotifier.value) return;
+
+          // Get the current scroll offset using metrics
+          // This avoids the activity.isScrolling assertion
+          final metrics = position;
+          final currentOffset = metrics.pixels;
+
+          // Validate the offset is a valid number
+          if (currentOffset.isNaN || currentOffset.isInfinite) return;
+
+          final shouldCollapse = currentOffset >= threshold;
+
           if (shouldCollapse != isCollapsedNotifier.value) {
             isCollapsedNotifier.value = shouldCollapse;
+          }
+        } on AssertionError {
+          // Specifically catch assertion errors and ignore them
+          // This happens when activity.isScrolling is not true
+          if (kDebugMode) {
+            print(
+              'ScrollCollapse: Assertion error caught (scroll activity not active)',
+            );
           }
         } catch (e) {
           if (kDebugMode) {
@@ -54,19 +78,23 @@ ScrollCollapseResult useScrollCollapseDebounced([
       });
     }
 
-    // Initial check
+    // Use SchedulerBinding for more reliable timing
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
-        updateScroll();
-      }
+      Future.microtask(() {
+        if (isDisposed.value) return;
+        if (scrollController.hasClients &&
+            scrollController.positions.isNotEmpty) {
+          updateScroll();
+        }
+      });
     });
 
     scrollController.addListener(updateScroll);
 
     return () {
+      isDisposed.value = true;
       debounceTimer.value?.cancel();
       scrollController.removeListener(updateScroll);
-      isCollapsedNotifier.dispose(); // Clean up notifier
     };
   }, [scrollController, customThreshold, debounce]);
 

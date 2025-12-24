@@ -5,18 +5,28 @@ abstract class HomeRepo {
   MovieListResult fetchPopularMovies(
     dynamic generId, {
     int page = 1,
-    String? region,
     CancelToken? cancelToken,
   });
   MovieListResult fetchUpcomingMovies({int page = 1, CancelToken? cancelToken});
-  MovieListResult fetchTrendingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-    String? region,
-  });
+  MovieListResult fetchTrendingMovies({int page = 1, CancelToken? cancelToken});
   MovieListResult fetchTopRatedMovies({int page = 1, CancelToken? cancelToken});
   MovieListResult fetchNowPlayingMovies({
     int page = 1,
     CancelToken? cancelToken,
   });
+  SeriesListResult fetchTrendingTvShows({
+    int page = 1,
+    CancelToken? cancelToken,
+  });
+  SeriesListResult fetchPopularTvShows(
+    dynamic generId, {
+    int page = 1,
+    CancelToken? cancelToken,
+  });
+  SeriesListResult fetchTopRatedTvShows({
+    int page = 1,
+    CancelToken? cancelToken,
+  });
+
+  SeriesListResult fetchTvAiringToday({int page = 1, CancelToken? cancelToken});
 }

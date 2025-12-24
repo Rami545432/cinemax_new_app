@@ -3,7 +3,7 @@ import 'package:cinemax_app_new/core/utils/use_case/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../series/domain/entites/series_entity.dart';
+import '../../../home/domian/entites/series_entity.dart';
 import '../repo/search_repo.dart';
 
 class SearchTvShowUseCase extends UseCase<List<SeriesEntity>, String> {

@@ -1,5 +1,5 @@
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/details_widgets/custom_descreption.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/details_widgets/custom_descreption.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/about_tab_view_branch.dart';

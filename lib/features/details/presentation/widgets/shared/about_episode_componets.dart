@@ -35,7 +35,7 @@ class AboutEpisodeComponets extends StatelessWidget {
             Row(
               children: [
                 Text('S$episodeNumber/E$seasonNumber  .'),
-                Text(formatDateMonthYear(airDate)),
+                Text(FormattedDateMethods.formatDateMonthYear(airDate)),
               ],
             ),
           ],

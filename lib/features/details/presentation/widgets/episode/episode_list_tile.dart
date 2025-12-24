@@ -25,7 +25,9 @@ class EpisodeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = AppStyles.textStyle18(context);
-    String date = formatDateMonthYear(episode.airDate ?? "Unknown");
+    String date = FormattedDateMethods.formatDateMonthYear(
+      episode.airDate ?? "Unknown",
+    );
     return ListTile(
       leading: Text(episode.episodeNumber.toString(), style: style),
       title: Text(

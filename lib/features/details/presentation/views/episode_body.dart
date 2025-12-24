@@ -1,10 +1,9 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/core/utils/helper/formatted_methods/formatted_episode_season_function.dart';
 import 'package:cinemax_app_new/core/utils/keep_alive_wrapper.dart';
 import 'package:cinemax_app_new/core/utils/tablet_play_button.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_info_section.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_tab_bar_body.dart';
+import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/opcaity_details_image.dart';
 import 'package:cinemax_app_new/hooks/ui/use_scroll_collapse_controller.dart';
 import 'package:cinemax_app_new/hooks/ui/use_tab_controller_animation.dart';
 import 'package:flutter/material.dart';
@@ -39,13 +38,6 @@ class EpisodeBody extends HookWidget {
     );
     final currentIndex = tabControllerResult.currentPage.round();
     final currentEpisode = allEpisodes[currentIndex];
-    final formattedTitle = useMemoized(
-      () => formattedEpisodeSeason(
-        currentEpisode.episodeNumber,
-        currentEpisode.seasonNumber,
-      ),
-      [currentEpisode.episodeNumber, currentEpisode.seasonNumber],
-    );
     final tabs = useMemoized(
       () => List.generate(
         allEpisodes.length,
@@ -78,19 +70,16 @@ class EpisodeBody extends HookWidget {
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           DetailsSliverAppBar(
-            date: currentEpisode.airDate ?? '',
-            backGroundImage: currentEpisode.stillPath,
             isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
-            id: currentEpisode.showId ?? 0,
-            seasonNumber: currentEpisode.seasonNumber ?? 0,
-            episodeNumber: currentEpisode.episodeNumber ?? 0,
-            specificId: currentEpisode.id ?? 0,
-            contentType: ContentType.episodes,
-            defaultDetailsBackGroundImage: seasonPosterPath,
-            seriesBackUpImage: seriesBackUpImage,
-
-            title: '$formattedTitle\n${currentEpisode.name}',
-            posterImage: seasonPosterPath,
+            title: currentEpisode.name ?? 'Episode $episodeNumber',
+            favorite: currentEpisode.toFavoriteEntity(
+              seasonPosterPath: seasonPosterPath,
+              seriesBackUpImage: seriesBackUpImage,
+            ),
+            backgroundWidget: OpcaityDetailsImage(
+              detailsBackGroundImage: currentEpisode.stillPath,
+              defaultDetailsBackGroundImage: seasonPosterPath,
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(

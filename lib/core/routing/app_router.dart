@@ -1,36 +1,30 @@
 import 'dart:developer';
-
-import 'package:cinemax_app_new/core/routing/core/refresh_stream.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/core/routing/route_paths.dart';
 import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_cubit.dart';
 import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_state.dart';
 import 'package:cinemax_app_new/features/auth/routing/auth_routes.dart';
-import 'package:cinemax_app_new/features/home/routing/home_routes.dart';
+import 'package:cinemax_app_new/features/discover/routing/discover_routing.dart';
 import 'package:cinemax_app_new/features/main/presentation/routes/main_routes.dart';
 import 'package:cinemax_app_new/features/search/routing/search_routes.dart';
-import 'package:cinemax_app_new/features/series/routing/series_routes.dart';
-import 'package:flutter/material.dart';
+import 'package:cinemax_app_new/features/details/routing/details_routes.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouters {
-  final AuthCubit authCubit;
-  late final GoRouter router;
-  late final GoRouterRefreshStream _refreshStream;
+  GoRouter createRouter() {
+    final authCubit = getIt.get<AuthCubit>();
 
-  AppRouters({required this.authCubit}) {
-    _refreshStream = GoRouterRefreshStream(authCubit.stream);
-    router = GoRouter(
+    return GoRouter(
       routes: routes,
-      redirect: _redirect,
-      refreshListenable: _refreshStream,
+      redirect: (context, state) =>
+          _redirect(authCubit.state, state.matchedLocation),
+      refreshListenable: authCubit,
       initialLocation: RoutePaths.root,
       debugLogDiagnostics: true,
     );
   }
-  String? _redirect(BuildContext context, GoRouterState state) {
-    final authState = authCubit.state;
-    final currentPath = state.matchedLocation;
 
+  String? _redirect(AuthState authState, String currentPath) {
     log('🔄 ===== REDIRECT CALLED =====');
     log('📍 Current Path: $currentPath');
     log('🔐 Auth State: ${authState.runtimeType}');
@@ -63,11 +57,7 @@ class AppRouters {
 
     // Authenticated or Guest
     if (authState is AuthAuthenticated || authState is AuthGuest) {
-      final authScreens = [
-        RoutePaths.root,
-        RoutePaths.initialAuth,
-        RoutePaths.onBoarding,
-      ];
+      final authScreens = [RoutePaths.root, RoutePaths.onBoarding];
 
       if (authScreens.contains(currentPath)) {
         log('➡️  User is authenticated, redirecting to home');
@@ -82,14 +72,11 @@ class AppRouters {
     return null;
   }
 
-  List<RouteBase> get routes => [
+  List<RouteBase> routes = [
     ...AuthRoutes.routes,
     ...MainRoutes.routes,
+    ...DetailsRoutes.routes,
     ...SearchRoutes.routes,
-    ...SeriesRoutes.routes,
-    ...HomeRoutes.routes,
+    ...DiscoverRouting.routes,
   ];
-  void dispose() {
-    _refreshStream.dispose();
-  }
 }

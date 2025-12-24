@@ -5,8 +5,8 @@ import 'package:cinemax_app_new/features/search/data/models/search_actor_model/s
 import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 import 'package:dio/dio.dart';
 
-import '../../../series/data/models/series_model.dart';
-import '../../../series/domain/entites/series_entity.dart';
+import '../../../home/data/models/series_model.dart';
+import '../../../home/domian/entites/series_entity.dart';
 
 abstract class RemoteSearchDataSource {
   Future<List<MovieEntity>> searchMovies(
@@ -34,8 +34,8 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource {
     CancelToken? cancelToken,
   ) async {
     List<MovieEntity> suggestions = [];
-    var data = await apiService.searchRequest(
-      query: query,
+    var data = await apiService.tmdb.search.searchMovies(
+      query,
       cancelToken: cancelToken,
     );
     for (var movie in data['results']) {
@@ -52,8 +52,8 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource {
     CancelToken? cancelToken,
   ) async {
     List<SearchActorEntity> movies = [];
-    var data = await apiService.searchActor(
-      query: query,
+    var data = await apiService.tmdb.search.searchActors(
+      query,
       cancelToken: cancelToken,
     );
     for (var movie in data['results']) {
@@ -70,9 +70,8 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource {
     CancelToken? cancelToken,
   ) async {
     List<SeriesEntity> suggestions = [];
-    var data = await apiService.searchRequest(
-      type: 'tv',
-      query: query,
+    var data = await apiService.tmdb.search.searchTvShows(
+      query,
       cancelToken: cancelToken,
     );
     for (var suggestion in data["results"]) {

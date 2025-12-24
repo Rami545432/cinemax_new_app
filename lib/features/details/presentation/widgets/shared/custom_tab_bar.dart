@@ -40,11 +40,14 @@ class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
               : TabAlignment.fill;
 
           return TabBar(
+            overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]!),
+
             isScrollable: shouldBeScrollable,
             tabAlignment: tabAlignment,
             controller: controller,
             labelColor: AppPrimaryColors.blueAccent,
             indicatorColor: AppPrimaryColors.blueAccent,
+            dividerColor: Colors.transparent,
             labelStyle: style,
             unselectedLabelStyle: style,
             tabs: tabs,

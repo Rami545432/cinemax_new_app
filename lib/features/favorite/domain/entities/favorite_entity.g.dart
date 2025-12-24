@@ -10,7 +10,7 @@ _$FavoriteEntityImpl _$$FavoriteEntityImplFromJson(Map<String, dynamic> json) =>
     _$FavoriteEntityImpl(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
-      imageUrl: json['imageUrl'] as String,
+      posterImage: json['posterImage'] as String,
       gener: (json['gener'] as List<dynamic>).map((e) => e as String).toList(),
       contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       date: json['date'] as String,
@@ -18,9 +18,10 @@ _$FavoriteEntityImpl _$$FavoriteEntityImplFromJson(Map<String, dynamic> json) =>
       isSynced: json['isSynced'] as bool? ?? false,
       seasonNumber: json['seasonNumber'] as int,
       specificId: json['specificId'] as int,
-      seasonPosterUrl: json['seasonPosterUrl'] as String,
+      posterImageBackup: json['posterImageBackup'] as String,
       backGroundImage: json['backGroundImage'] as String,
       episodeNumber: json['episodeNumber'] as int,
+      rating: (json['rating'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$FavoriteEntityImplToJson(
@@ -28,7 +29,7 @@ Map<String, dynamic> _$$FavoriteEntityImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'title': instance.title,
-  'imageUrl': instance.imageUrl,
+  'posterImage': instance.posterImage,
   'gener': instance.gener,
   'contentType': _$ContentTypeEnumMap[instance.contentType]!,
   'date': instance.date,
@@ -36,9 +37,10 @@ Map<String, dynamic> _$$FavoriteEntityImplToJson(
   'isSynced': instance.isSynced,
   'seasonNumber': instance.seasonNumber,
   'specificId': instance.specificId,
-  'seasonPosterUrl': instance.seasonPosterUrl,
+  'posterImageBackup': instance.posterImageBackup,
   'backGroundImage': instance.backGroundImage,
   'episodeNumber': instance.episodeNumber,
+  'rating': instance.rating,
 };
 
 const _$ContentTypeEnumMap = {

@@ -16,7 +16,7 @@ class HorizontalCard extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: () {
-        context.pushNamed(RouteName.detail, extra: cardModel);
+        context.goNamed(RouteName.movieDetail, extra: cardModel);
       },
       child: AspectRatio(
         aspectRatio: width > SizeConfig.mobile ? 2.1 : 1.8,

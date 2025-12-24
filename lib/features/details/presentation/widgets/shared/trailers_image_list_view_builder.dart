@@ -6,7 +6,7 @@ import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'trailer_thumbnail.dart';
-import 'youtube_trailer_player_dialog.dart';
+import 'youtube_trailer_bottom_sheet.dart';
 
 class TrailersImageListViewBuilder extends StatelessWidget {
   const TrailersImageListViewBuilder({super.key, required this.videos});
@@ -45,9 +45,12 @@ class TrailersImageListViewBuilder extends StatelessWidget {
                     onTap: () {
                       customShowModalBottomSheet(
                         context: context,
-                        builder: (context) => YoutubeTrailerPlayerDialog(
-                          videoKey: videoKey[index] ?? '',
-                        ),
+                        builder: (context, scrollController) =>
+                            TrailersBottomSheet(
+                              name: videos.results?[index].name ?? '',
+                              scrollController: scrollController,
+                              videoKey: videoKey[index]!,
+                            ),
                       );
                     },
                   ),
@@ -64,6 +67,41 @@ class TrailersImageListViewBuilder extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class TrailersBottomSheet extends StatelessWidget {
+  const TrailersBottomSheet({
+    super.key,
+    required this.videoKey,
+    required this.name,
+    required this.scrollController,
+  });
+
+  final String videoKey;
+  final String name;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      controller: scrollController,
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      children: [
+        SizedBox(height: 10),
+        Text(
+          name,
+          style: AppStyles.textStyle18(
+            context,
+          ).copyWith(fontWeight: FontWeight.w600),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
+
+        SizedBox(height: 10),
+        YoutubeTrailerBottomSheet(videoKey: videoKey),
+      ],
     );
   }
 }

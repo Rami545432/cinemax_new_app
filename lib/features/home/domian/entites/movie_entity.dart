@@ -6,7 +6,7 @@ class MovieEntity implements BaseCardModel {
 
   final List<int> gener;
 
-  final num movieRating;
+  final double movieRating;
 
   final String date;
 
@@ -18,7 +18,7 @@ class MovieEntity implements BaseCardModel {
 
   final String storyLine;
 
-  final num moviePopularity;
+  final double moviePopularity;
 
   const MovieEntity({
     required this.movieTitle,

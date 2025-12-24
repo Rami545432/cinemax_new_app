@@ -9,7 +9,7 @@ class SplashBody extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Image.asset(Assets.iconsAppIconForeground)],
+        children: [Image.asset(Assets.iconsAppIcon, width: 300, height: 300)],
       ),
     );
   }

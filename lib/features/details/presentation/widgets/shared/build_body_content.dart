@@ -2,6 +2,7 @@ import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cub
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/cubit_parameters/details_params.dart';
 import 'package:cinemax_app_new/core/utils/retry_button.dart';
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -12,9 +13,13 @@ import 'movie_details_componets.dart';
 import 'series_details_compoents.dart';
 
 class BuildBodyContent extends StatelessWidget {
-  const BuildBodyContent({super.key, required this.id, required this.type});
+  const BuildBodyContent({
+    super.key,
+    required this.id,
+    required this.contentType,
+  });
   final int id;
-  final String type;
+  final ContentType contentType;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class BuildBodyContent extends StatelessWidget {
               return RetryButton(
                 onRetry: () {
                   context.read<FetchDetailsCubit>().fetchDetails(
-                    DetailsParams(id: id, type: type),
+                    DetailsParams(id: id, type: contentType.text),
                   );
                 },
               );

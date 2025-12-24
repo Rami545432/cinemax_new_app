@@ -1,7 +1,6 @@
 import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
-import 'package:cinemax_app_new/core/routing/app_router.dart';
 import 'package:cinemax_app_new/core/theme/cubit/theme_cubit.dart';
-import 'package:cinemax_app_new/core/utils/get_it.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_cubit.dart';
 import 'package:cinemax_app_new/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:cinemax_app_new/l10n/local_cubit.dart';
@@ -11,8 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'custom_material_app.dart';
 
 class MainMultiProvieders extends StatelessWidget {
-  final AppRouters appRouters;
-  const MainMultiProvieders({super.key, required this.appRouters});
+  const MainMultiProvieders({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class MainMultiProvieders extends StatelessWidget {
         BlocProvider.value(value: getIt.get<AuthCubit>()),
         BlocProvider.value(value: getIt.get<LocaleCubit>()),
       ],
-      child: CustomMaterialApp(appRouters: appRouters),
+      child: const CustomMaterialApp(),
     );
   }
 }

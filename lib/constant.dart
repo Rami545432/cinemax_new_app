@@ -1,4 +1,3 @@
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,17 +17,17 @@ const baseImageUrl = 'https://image.tmdb.org/t/p/original/';
 final fireBaseUser = FirebaseAuth.instance;
 
 List<String> lables = ['Full name', 'Email', 'Phone Number'];
-List<String> naviLables = ['Home', 'Favorite', 'Tv Series', 'Profile'];
+List<String> naviLables = ['Home', 'Search', 'Favorite', 'Profile'];
 List<Widget> icons = const [
   Icon(Icons.home),
+  Icon(Icons.search),
   Icon(Icons.favorite),
-  Icon(Icons.live_tv_rounded),
   Icon(Icons.person),
 ];
 List<Widget> selectedIcons = [
   Icon(Icons.home, color: AppPrimaryColors.blueAccent),
-  const Icon(Icons.favorite, color: Colors.redAccent),
-  Icon(Icons.live_tv_rounded, color: AppPrimaryColors.blueAccent),
+  Icon(Icons.search, color: AppPrimaryColors.blueAccent),
+  Icon(Icons.favorite, color: Colors.redAccent),
   Icon(Icons.person, color: AppPrimaryColors.blueAccent),
 ];
 

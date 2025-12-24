@@ -1,7 +1,7 @@
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-enum MovieDetailsEnum { about, cast, reviews, recommended, similar }
+enum MovieDetailsEnum { about, cast, parts, reviews, recommended, similar }
 
 extension MovieDetailsEnumExtension on MovieDetailsEnum {
   String localizedText(BuildContext context) {
@@ -9,6 +9,7 @@ extension MovieDetailsEnumExtension on MovieDetailsEnum {
     return switch (this) {
       MovieDetailsEnum.about => l10n.about,
       MovieDetailsEnum.cast => l10n.cast,
+      MovieDetailsEnum.parts => l10n.parts,
       MovieDetailsEnum.reviews => l10n.reviews,
       MovieDetailsEnum.recommended => l10n.recommended,
       MovieDetailsEnum.similar => l10n.similar,

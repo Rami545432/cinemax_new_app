@@ -1,3 +1,6 @@
+import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
+
 import '../shared_details_models/cast.dart';
 
 class Episode {
@@ -72,4 +75,24 @@ class Episode {
     'crew': crew,
     'guest_stars': guestStars?.map((e) => e.toJson()).toList(),
   };
+
+  FavoriteEntity toFavoriteEntity({
+    required String seasonPosterPath,
+    required String seriesBackUpImage,
+  }) {
+    return FavoriteEntity(
+      id: showId ?? 0,
+      title: name ?? 'Episode $episodeNumber',
+      posterImage: seasonPosterPath,
+      gener: [],
+      contentType: ContentType.episodes,
+      date: airDate ?? '',
+      seasonNumber: seasonNumber ?? 0,
+      specificId: id ?? 0,
+      posterImageBackup: seriesBackUpImage,
+      backGroundImage: stillPath ?? seriesBackUpImage,
+      episodeNumber: episodeNumber ?? 0,
+      rating: voteAverage ?? 0,
+    );
+  }
 }

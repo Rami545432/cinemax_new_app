@@ -50,23 +50,23 @@
   "@authLogout": {
     "description": "Bouton pour déconnexion"
   },
-  "popular": "Populaire",
+  "popular": "POPULAIRE",
   "@popular": {
     "description": "Section pour les films ou séries populaires en cours de diffusion"
   },
-  "nowPlaying": "En cours",
+  "nowPlaying": "EN COURS",
   "@nowPlaying": {
     "description": "Section pour les films ou séries en cours de diffusion"
   },
-  "topRated": "Les mieux notés",
+  "topRated": "LES MIEUX NOTÉS",
   "@topRated": {
     "description": "Section pour les films ou séries les mieux notés"
   },
-  "upcoming": "À venir",
+  "upcoming": "À VENIR",
   "@upcoming": {
     "description": "Section pour les films ou séries à venir"
   },
-  "trending": "Tendance",
+  "trending": "TRENDING",
   "@trending": {
     "description": "Section pour le contenu tendance"
   },
@@ -285,5 +285,71 @@
   "signInHint": "Connectez-vous pour synchroniser vos films et séries favorites et utiliser plus de fonctionnalités",
   "@signInHint": {
     "description": "Texte affiché lorsqu'aucune connexion n'est disponible"
+  },
+  "airingToday": "En cours de diffusion aujourd'hui",
+  "@airingToday": {
+    "description": "Texte affiché lorsqu'aucune série en cours de diffusion aujourd'hui n'est disponible"
+  },
+  "discover": "Découvrir",
+  "@discover": {
+    "description": "Texte affiché lorsqu'aucune découverte n'est disponible"
+  },
+  "genreAction": "Action",
+  "@genreAction": {},
+  "genreAdventure": "Aventure",
+  "@genreAdventure": {},
+  "genreAnimation": "Animation",
+  "@genreAnimation": {},
+  "genreComedy": "Comédie",
+  "@genreComedy": {},
+  "genreCrime": "Criminalité",
+  "@genreCrime": {},
+  "genreDocumentary": "Documentaire",
+  "@genreDocumentary": {},
+  "genreDrama": "Drama",
+  "@genreDrama": {},
+  "genreFamily": "Famille",
+  "@genreFamily": {},
+  "genreFantasy": "Fantasy",
+  "@genreFantasy": {},
+  "genreHistory": "Histoire",
+  "@genreHistory": {},
+  "genreHorror": "Horreur",
+  "@genreHorror": {},
+  "genreMusic": "Musique",
+  "@genreMusic": {},
+  "genreMystery": "Mystère",
+  "@genreMystery": {},
+  "genreRomance": "Romantique",
+  "@genreRomance": {},
+  "genreSciFi": "Science-fiction",
+  "@genreSciFi": {},
+  "genreTvMovie": "Film de télévision",
+  "@genreTvMovie": {},
+  "genreThriller": "Suspense",
+  "@genreThriller": {},
+  "genreWar": "Guerre",
+  "@genreWar": {},
+  "genreWestern": "Western",
+  "@genreWestern": {},
+  "genreActionAdventure": "Action et Aventure",
+  "@genreActionAdventure": {},
+  "genreKids": "Enfants",
+  "@genreKids": {},
+  "genreNews": "Actualités",
+  "@genreNews": {},
+  "genreReality": "Réalité",
+  "@genreReality": {},
+  "genreSciFiFantasy": "Science-fiction et Fantastique",
+  "@genreSciFiFantasy": {},
+  "genreSoap": "Soap Opera",
+  "@genreSoap": {},
+  "genreTalk": "Conversation",
+  "@genreTalk": {},
+  "genreWarPolitics": "Guerre et Politique",
+  "@genreWarPolitics": {},
+  "parts": "Parts",
+  "@parts": {
+    "description": "Parts of the content"
   }
 }

@@ -92,6 +92,8 @@ class MovieDetailsModel extends MovieDetailsEntity {
          overView: overview ?? '',
          kGeners: geners ?? [],
          countries: productionCountry,
+         backgroundImage: backdropPath,
+         posterImage: posterPath,
          kLanguages: originalLanguage,
          kCredits: credits,
          kBudget: budget ?? 0,
@@ -105,6 +107,9 @@ class MovieDetailsModel extends MovieDetailsEntity {
          kWatchProviders: watchProviders,
          kExternalIds: externalIds,
          kTranslations: translations,
+         kBelongsToCollection: belongsToCollection,
+         date: releaseDate,
+         rating: voteAvarege,
        );
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {

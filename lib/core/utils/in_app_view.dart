@@ -44,105 +44,85 @@ class CustomInappViewState extends State<CustomInappView> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        clicked(context);
-      },
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: isClicked
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: isClicked ? AppPrimaryColors.dark : Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: isClicked
               ? AppPrimaryColors.dark
               : Colors.transparent,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: isClicked
-                ? AppPrimaryColors.dark
-                : Colors.transparent,
-            statusBarIconBrightness: Brightness.light,
-          ),
-          title: Text(
-            widget.title,
-            style: const TextStyle(color: Colors.white),
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => clicked(context),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh, color: Colors.white),
-              onPressed: () {
-                webViewController.reload();
-              },
-            ),
-          ],
+          statusBarIconBrightness: Brightness.light,
         ),
-        body: Stack(
-          children: [
-            if (isLoading)
-              const Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              ),
-            if (hasError)
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                      size: 48,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      errorMessage,
-                      style: const TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          hasError = false;
-                          isLoading = true;
-                        });
-                        webViewController.reload();
-                      },
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
-              ),
-            Column(
-              children: [
-                if (loadingProgress < 1.0)
-                  LinearProgressIndicator(
-                    value: loadingProgress,
-                    backgroundColor: Colors.grey[800],
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.white,
-                    ),
+        title: Text(widget.title, style: const TextStyle(color: Colors.white)),
+
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () {
+              webViewController.reload();
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          if (isLoading)
+            const Center(child: CircularProgressIndicator(color: Colors.white)),
+          if (hasError)
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                  const SizedBox(height: 16),
+                  Text(
+                    errorMessage,
+                    style: const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
                   ),
-                Expanded(
-                  child: InAppWebView(
-                    initialUrlRequest: URLRequest(
-                      url: WebUri(widget.movieOrTvUrl),
-                    ),
-                    onWebViewCreated: (controller) {
-                      webViewController = controller;
-                    },
-                    onLoadStart: (controller, url) {
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
                       setState(() {
-                        isLoading = true;
                         hasError = false;
+                        isLoading = true;
                       });
+                      webViewController.reload();
                     },
-                    onLoadStop: (controller, url) async {
-                      setState(() {
-                        isLoading = false;
-                      });
-                      await controller.evaluateJavascript(
-                        source: '''
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          Column(
+            children: [
+              if (loadingProgress < 1.0)
+                LinearProgressIndicator(
+                  value: loadingProgress,
+                  backgroundColor: Colors.grey[800],
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              Expanded(
+                child: InAppWebView(
+                  initialUrlRequest: URLRequest(
+                    url: WebUri(widget.movieOrTvUrl),
+                  ),
+                  onWebViewCreated: (controller) {
+                    webViewController = controller;
+                  },
+                  onLoadStart: (controller, url) {
+                    setState(() {
+                      isLoading = true;
+                      hasError = false;
+                    });
+                  },
+                  onLoadStop: (controller, url) async {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    await controller.evaluateJavascript(
+                      source: '''
                         // Function to hide elements
                         function hideElement(element) {
                           if (element) {
@@ -296,49 +276,41 @@ class CustomInappViewState extends State<CustomInappView> {
                         document.body.style.width = '100%';
                         document.body.style.height = '100%';
                         ''',
-                      );
-                    },
-                    onProgressChanged: (controller, progress) {
-                      setState(() {
-                        loadingProgress = progress / 100;
-                      });
-                    },
-                    onReceivedError: (controller, request, error) {
-                      setState(() {
-                        isLoading = false;
-                        hasError = true;
-                        errorMessage =
-                            'Failed to load video: ${error.description}';
-                      });
-                    },
-                    shouldOverrideUrlLoading:
-                        (controller, navigationAction) async {
-                          final url = navigationAction.request.url.toString();
-                          final allowedDomains = RegExp(
-                            r'^https://(vidsrc\.xyz|yourdomain\.com)',
-                          );
-                          if (!allowedDomains.hasMatch(url)) {
-                            return NavigationActionPolicy.CANCEL;
-                          }
-                          return NavigationActionPolicy.ALLOW;
-                        },
-                    onCreateWindow: (controller, createWindowRequest) async {
-                      return false; // Block new windows to prevent pop-ups
-                    },
-                  ),
+                    );
+                  },
+                  onProgressChanged: (controller, progress) {
+                    setState(() {
+                      loadingProgress = progress / 100;
+                    });
+                  },
+                  onReceivedError: (controller, request, error) {
+                    setState(() {
+                      isLoading = false;
+                      hasError = true;
+                      errorMessage =
+                          'Failed to load video: ${error.description}';
+                    });
+                  },
+                  shouldOverrideUrlLoading:
+                      (controller, navigationAction) async {
+                        final url = navigationAction.request.url.toString();
+                        final allowedDomains = RegExp(
+                          r'^https://(vidsrc\.xyz|yourdomain\.com)',
+                        );
+                        if (!allowedDomains.hasMatch(url)) {
+                          return NavigationActionPolicy.CANCEL;
+                        }
+                        return NavigationActionPolicy.ALLOW;
+                      },
+                  onCreateWindow: (controller, createWindowRequest) async {
+                    return false; // Block new windows to prevent pop-ups
+                  },
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  void clicked(BuildContext context) {
-    setState(() {
-      isClicked = !isClicked;
-      Navigator.maybePop(context);
-    });
   }
 }

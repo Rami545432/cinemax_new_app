@@ -1,7 +1,8 @@
+import 'package:cinemax_app_new/core/di/service_locator.dart';
+import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/types/similar_types.dart';
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/get_it.dart';
 import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_state.dart';
 import 'package:cinemax_app_new/features/details/domain/enums/similar_category.dart';
 import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_similar_use_case.dart';
@@ -31,7 +32,7 @@ class SimilarTabBarView extends StatelessWidget {
       child:
           BlocBuilder<
             FetchSimilarCubit,
-            CategoryPaginationState<SimilarCategory, BaseCardModel>
+            CategoryPaginationState<SimilarCategory, BaseCardModel, void>
           >(
             builder: (context, state) {
               if (state is SimilarStateLoaded) {
@@ -62,7 +63,17 @@ class SimilarTabBarView extends StatelessWidget {
                   data: items,
                   category: category,
                   params: SimilarParams(id: contentId),
-                  itemBuilder: (item) => MainVerticalCard(cardModel: item),
+                  itemBuilder: (item) => MainVerticalCard(
+                    posterImage: tmdbImageSize(
+                      TmdbImageSize.w300,
+                      item.cardImage,
+                    ),
+                    title: item.cardTitle,
+                    rating: item.cardRating ?? 0,
+                    id: item.cardId,
+                    type: item.type,
+                    category: '',
+                  ),
                   isLoading: isLoading,
                   canLoadMore: canLoadMore,
                 );

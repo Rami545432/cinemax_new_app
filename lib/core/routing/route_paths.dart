@@ -22,8 +22,8 @@ class RoutePaths {
   static const String navigation = '/app/navigation';
   static const String categorySeeAll = '/app/categorySeeAll';
   // Details Routes
-  static const String detail = '/details/detail';
-
+  static const String movieDetail = '/movie/:id';
+  static const String tvDetail = '/tv/:id';
   static const String season = '/tv/season';
   static const String episode = '/tv/episode';
   // Onboarding Routes
@@ -35,4 +35,6 @@ class RoutePaths {
   static const String youtubePlayer = '/player/youtubePlayerVideo';
   static const String customWebView = '/customWebView';
   static const String discover = '/discover';
+  static const String chatBot = '/chatBot';
+  static const String genreSeeAll = '/genreSeeAll';
 }

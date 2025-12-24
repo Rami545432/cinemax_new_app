@@ -107,4 +107,14 @@ class DetailsRepoImpl implements DetailsRepo {
       ),
     );
   }
+
+  @override
+  CollectionResult fetchCollection(
+    int collectionId,
+    CancelToken? cancelToken,
+  ) async {
+    return await safeApiCall(
+      () => remoteDetailsDataSource.fetchCollection(collectionId, cancelToken),
+    );
+  }
 }

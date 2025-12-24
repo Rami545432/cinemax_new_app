@@ -1,7 +1,7 @@
-dynamic getGenreId(String genre) {
+int getGenreId(String genre) {
   switch (genre) {
     case "All":
-      return '';
+      return -1;
     case "Action":
       return 28;
     case "Adventure":
@@ -38,8 +38,24 @@ dynamic getGenreId(String genre) {
       return 53;
     case "War":
       return 10752;
+    case "War & Politics":
+      return 10768;
+    case "Talk":
+      return 10767;
+    case "News":
+      return 10763;
+    case "Kids":
+      return 10762;
     case "Western":
       return 37;
+    case "Reality":
+      return 10764;
+    case "Sci-Fi & Fantasy":
+      return 10765;
+    case "Soap Opera":
+      return 10766;
+    case "Action & Adventure":
+      return 10759;
     default:
       return -1; // Unknown Genre
   }

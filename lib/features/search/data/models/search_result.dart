@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/series/domain/entites/series_entity.dart';
+import 'package:cinemax_app_new/features/home/domian/entites/series_entity.dart';
 
 import '../../../home/domian/entites/movie_entity.dart';
 

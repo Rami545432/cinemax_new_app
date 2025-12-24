@@ -1,3 +1,4 @@
+import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_series_season_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,19 +14,19 @@ class FetchSeriesSeasonDetailsCubit
     required int tvid,
     required int season,
   }) async {
-    emit(FetchSeriesSeasonDetailsState.loading());
+    safeEmit(FetchSeriesSeasonDetailsState.loading());
     var data = await fetchSeriesSeasonDetails.call(tvid, season);
     data.fold(
       (failure) {
-        emit(FetchSeriesSeasonDetailsState.failure(failure.errorMessage));
+        safeEmit(FetchSeriesSeasonDetailsState.failure(failure.errorMessage));
       },
       (seasons) {
-        emit(FetchSeriesSeasonDetailsState.success(seasons));
+        safeEmit(FetchSeriesSeasonDetailsState.success(seasons));
       },
     );
   }
 
   void emitPreloadedData(SeriesSeasonDetailsEntitiy data) {
-    emit(FetchSeriesSeasonDetailsState.success(data));
+    safeEmit(FetchSeriesSeasonDetailsState.success(data));
   }
 }

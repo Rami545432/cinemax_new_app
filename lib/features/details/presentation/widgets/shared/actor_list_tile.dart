@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class ActorListTile extends StatelessWidget {
       leading: actorList.profilePath != null
           ? CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(
-                'https://image.tmdb.org/t/p/w200${actorList.profilePath}',
+                tmdbImageSize(TmdbImageSize.w185, actorList.profilePath ?? ''),
               ),
             )
           : const CircleAvatar(child: Icon(Icons.person)),

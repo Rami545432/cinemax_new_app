@@ -1,18 +1,28 @@
 import 'package:intl/intl.dart';
 
-String formatDateMonthYear(String? date) {
-  if (date == 'Unknown' || date == null) {
-    return 'Unknown';
+class FormattedDateMethods {
+  static String formatDateMonthYear(String? date) {
+    if (date == 'Unknown' || date == null || date == '_' || date == '') {
+      return 'Unknown';
+    }
+
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('MMM yyy').format(dateTime);
   }
 
-  DateTime dateTime = DateTime.parse(date);
-  return DateFormat('MMM yyy').format(dateTime);
-}
-
-String formatDateDayMonthYear(String? date) {
-  if (date == 'Unknown' || date == null) {
-    return 'Unknown';
+  static String formatDateDayMonthYear(String? date) {
+    if (date == 'Unknown' || date == null || date == '_' || date == '') {
+      return 'Unknown';
+    }
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('dd MMM yyyy').format(dateTime);
   }
-  DateTime dateTime = DateTime.parse(date);
-  return DateFormat('dd MMM yyyy').format(dateTime);
+
+  static String formatDateYear(String? date) {
+    if (date == 'Unknown' || date == null || date == '_' || date == '') {
+      return 'Unknown';
+    }
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('yyyy').format(dateTime);
+  }
 }

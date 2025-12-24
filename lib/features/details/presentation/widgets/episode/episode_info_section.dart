@@ -21,7 +21,9 @@ class EpisodeInfoSection extends StatelessWidget {
         ),
         IconTextRow(
           iconData: Icons.calendar_month,
-          text: formatDateDayMonthYear(episode.airDate ?? 'Unknown'),
+          text: FormattedDateMethods.formatDateDayMonthYear(
+            episode.airDate ?? 'Unknown',
+          ),
         ),
         if (episode.voteAverage != null)
           Text(

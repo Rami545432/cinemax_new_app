@@ -38,7 +38,10 @@ class EpisodeDetails extends StatelessWidget {
               formattedEpisodeSeason(episodeNumber, seasonNumber),
               style: style,
             ),
-            Text(formatDateDayMonthYear(airDate ?? 'Unknown'), style: style),
+            Text(
+              FormattedDateMethods.formatDateDayMonthYear(airDate ?? 'Unknown'),
+              style: style,
+            ),
           ],
         ),
       ],

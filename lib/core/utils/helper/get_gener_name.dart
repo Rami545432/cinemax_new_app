@@ -1,57 +1,61 @@
-String getGenreName(int id) {
+import 'package:cinemax_app_new/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
+String getGenreName(int id, BuildContext context) {
+  final l10n = AppLocalizations.of(context);
   switch (id) {
     case 10768:
-      return "War & Politics";
+      return l10n.genreWarPolitics;
     case 10767:
-      return "Talk";
+      return l10n.genreTalk;
     case 10763:
-      return "News";
+      return l10n.genreNews;
     case 10762:
-      return "Kids";
+      return l10n.genreKids;
     case 10759:
-      return "Soap";
+      return l10n.genreActionAdventure;
     case 10765:
-      return "Sci-Fi & Fantasy";
+      return l10n.genreSciFiFantasy;
     case 10764:
-      return "Reality";
+      return l10n.genreReality;
     case 28:
-      return "Action";
+      return l10n.genreAction;
     case 12:
-      return "Adventure";
+      return l10n.genreAdventure;
     case 16:
-      return "Animation";
+      return l10n.genreAnimation;
     case 35:
-      return "Comedy";
+      return l10n.genreComedy;
     case 80:
-      return "Crime";
+      return l10n.genreCrime;
     case 99:
-      return "Documentary";
+      return l10n.genreDocumentary;
     case 18:
-      return "Drama";
+      return l10n.genreDrama;
     case 10751:
-      return "Family";
+      return l10n.genreFamily;
     case 14:
-      return "Fantasy";
+      return l10n.genreFantasy;
     case 36:
-      return "History";
+      return l10n.genreHistory;
     case 27:
-      return "Horror";
+      return l10n.genreHorror;
     case 10402:
-      return "Music";
+      return l10n.genreMusic;
     case 9648:
-      return "Mystery";
+      return l10n.genreMystery;
     case 10749:
-      return "Romance";
+      return l10n.genreRomance;
     case 878:
-      return "Science Fiction";
+      return l10n.genreSciFi;
     case 10770:
-      return "TV Movie";
+      return l10n.genreTvMovie;
     case 53:
-      return "Thriller";
+      return l10n.genreThriller;
     case 10752:
-      return "War";
+      return l10n.genreWar;
     case 37:
-      return "Western";
+      return l10n.genreWestern;
     default:
       return "Unknown Genre";
   }

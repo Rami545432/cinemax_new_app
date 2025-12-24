@@ -215,4 +215,94 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get signInHint =>
       'سجل الدخول لمزامنة المفضلة والمسلسلات والاستخدام المزيد من الميزات';
+
+  @override
+  String get airingToday => 'يعرض اليوم';
+
+  @override
+  String get discover => 'اكتشف';
+
+  @override
+  String get genreAction => 'حركة';
+
+  @override
+  String get genreAdventure => 'مغامرة';
+
+  @override
+  String get genreAnimation => 'رسوم متحركة';
+
+  @override
+  String get genreComedy => 'كوميديا';
+
+  @override
+  String get genreCrime => 'جريمة';
+
+  @override
+  String get genreDocumentary => 'وثائقي';
+
+  @override
+  String get genreDrama => 'دراما';
+
+  @override
+  String get genreFamily => 'عائلي';
+
+  @override
+  String get genreFantasy => 'خيالي';
+
+  @override
+  String get genreHistory => 'تاريخي';
+
+  @override
+  String get genreHorror => 'رعب';
+
+  @override
+  String get genreMusic => 'موسيقي';
+
+  @override
+  String get genreMystery => 'غموض';
+
+  @override
+  String get genreRomance => 'رومانسي';
+
+  @override
+  String get genreSciFi => 'خيال علمي';
+
+  @override
+  String get genreTvMovie => 'فيلم تلفزيوني';
+
+  @override
+  String get genreThriller => 'اثارة';
+
+  @override
+  String get genreWar => 'حربي';
+
+  @override
+  String get genreWestern => 'غربي';
+
+  @override
+  String get genreActionAdventure => 'اكشن و مغامرة';
+
+  @override
+  String get genreKids => 'أطفال';
+
+  @override
+  String get genreNews => 'أخبار';
+
+  @override
+  String get genreReality => 'واقعي';
+
+  @override
+  String get genreSciFiFantasy => 'خيال علمي و فانتازيا';
+
+  @override
+  String get genreSoap => 'سوب';
+
+  @override
+  String get genreTalk => 'حوار';
+
+  @override
+  String get genreWarPolitics => 'حرب و سياسة';
+
+  @override
+  String get parts => 'الأجزاء';
 }

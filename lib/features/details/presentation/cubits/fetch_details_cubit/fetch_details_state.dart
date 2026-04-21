@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/features/details/domain/entites/movie_details_entity.dart';
+import 'package:cinemax_app_new/features/details/domain/entites/series_details_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../domain/entites/series_details_entity.dart';
-import '../../../domain/entites/movie_details_entity.dart';
 
 part 'fetch_details_state.freezed.dart';
 

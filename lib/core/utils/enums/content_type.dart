@@ -18,7 +18,7 @@ enum ContentType {
   final String text;
   const ContentType(this.text);
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case ContentType.movies:
         return l10n.movies;
@@ -31,9 +31,7 @@ enum ContentType {
     }
   }
 
-  Tab localizedTab(BuildContext context) {
-    return Tab(text: localizedText(context));
-  }
+  Tab localizedTab(BuildContext context) => Tab(text: localizedText(context));
 
   Tab get tab => Tab(text: text);
 }

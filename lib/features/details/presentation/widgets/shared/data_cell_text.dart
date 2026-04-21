@@ -6,7 +6,7 @@ class DataCellText extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    final rowPadding = EdgeInsets.only(bottom: 20);
+    const rowPadding = EdgeInsets.only(bottom: 20);
     return Padding(
       padding: rowPadding,
       child: Text(text, style: AppStyles.textStyle16(context)),

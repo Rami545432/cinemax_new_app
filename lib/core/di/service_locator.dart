@@ -1,86 +1,97 @@
 // lib/core/di/get_it.dart
 import 'dart:developer';
 
+import 'package:cinemax_app_new/core/language/presentation/cubits/language_cubit.dart';
 import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
 import 'package:cinemax_app_new/core/network/config/app_dio.dart';
 import 'package:cinemax_app_new/core/network/config/network_module.dart';
 import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
 import 'package:cinemax_app_new/core/theme/cubit/theme_cubit.dart';
-
-import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_local_data_source.dart';
-import 'package:cinemax_app_new/features/auth/data/data_soureces/auth_remote_data_source.dart';
+import 'package:cinemax_app_new/features/auth/data/data_sources/local/auth_local_data_source.dart';
+import 'package:cinemax_app_new/features/auth/data/data_sources/local/auth_local_data_source_impl.dart';
+import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source_impl.dart';
 import 'package:cinemax_app_new/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/check_auth_statues_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/continue_as_guest_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/get_current_user_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/is_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/reset_password_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_email_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_facebook_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_up_with_email_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_out_use_case.dart';
-import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_cubit.dart';
-
-import 'package:cinemax_app_new/features/details/data/remote_details_data_source/remote_details_data_source.dart';
-import 'package:cinemax_app_new/features/details/data/repos/details_repo_impl.dart';
-import 'package:cinemax_app_new/features/details/domain/repo/details_repo.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_collections_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_movie_details_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_recommended_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_series_season_details.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_similar_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_tv_show_details_use_case.dart';
+import 'package:cinemax_app_new/features/auth/presentation/cubits/login_cubit.dart';
+import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:cinemax_app_new/features/details/data/data_sources/remote/movies/remote_movie_details_data_source.dart';
+import 'package:cinemax_app_new/features/details/data/data_sources/remote/movies/remote_movie_details_data_source_impl.dart';
+import 'package:cinemax_app_new/features/details/data/data_sources/remote/series/remote_series_details_data_source.dart';
+import 'package:cinemax_app_new/features/details/data/data_sources/remote/series/remote_series_details_data_source_impl.dart';
+import 'package:cinemax_app_new/features/details/data/repos/movie_details_repo_impl.dart';
+import 'package:cinemax_app_new/features/details/data/repos/series_details_repo_impl.dart';
+import 'package:cinemax_app_new/features/details/domain/repo/movie_details_repo.dart';
+import 'package:cinemax_app_new/features/details/domain/repo/series_details_repo.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_collections_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_movie_details_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_movies_recommendations_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_similar_movies_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_series_recommendations_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_series_season_details.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_similar_series_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_tv_show_details_use_case.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_cubit.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_similar_cubit.dart';
-
-import 'package:cinemax_app_new/features/discover/data/data_sourece/discover_remote_data_source.dart';
+import 'package:cinemax_app_new/features/discover/data/data_sources/remote_discover_data_source.dart';
+import 'package:cinemax_app_new/features/discover/data/data_sources/remote_discover_data_source_impl.dart';
 import 'package:cinemax_app_new/features/discover/data/repos/discover_repo_impl.dart';
 import 'package:cinemax_app_new/features/discover/domain/repos/discover_repo.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_case/fetch_genre_content_use_case.dart';
-import 'package:cinemax_app_new/features/discover/presentation/cubit/genre_content_cubit.dart';
-import 'package:cinemax_app_new/features/favorite/data/local_favorite_data_source/local_favorite_data_source.dart';
-
-import 'package:cinemax_app_new/features/favorite/data/local_favorite_data_source/local_favorite_data_source_impl.dart';
-import 'package:cinemax_app_new/features/favorite/data/remote_favorite_data_source/remote_favorite_data_source.dart';
-import 'package:cinemax_app_new/features/favorite/data/remote_favorite_data_source/remote_favorite_data_source_impl.dart';
+import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_genre_use_case.dart';
+import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_keywords_use_case.dart';
+import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_genre_use_case.dart';
+import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_keywords_use_case.dart';
+import 'package:cinemax_app_new/features/discover/presentation/cubits/fetch_items_by_keywords_cubit.dart';
+import 'package:cinemax_app_new/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
+import 'package:cinemax_app_new/features/favorite/data/data_sources/local/local_favorite_data_source_impl.dart';
+import 'package:cinemax_app_new/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
+import 'package:cinemax_app_new/features/favorite/data/data_sources/remote/remote_favorite_data_source_impl.dart';
 import 'package:cinemax_app_new/features/favorite/data/repos/favorite_repo_impl.dart';
 import 'package:cinemax_app_new/features/favorite/domain/repos/favorite_repo.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/manage_favorites_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubit/favorite_cubit.dart';
-
-import 'package:cinemax_app_new/features/home/data/data_soureces/remote_home_data_source.dart';
+import 'package:cinemax_app_new/features/favorite/domain/use_cases/add_favorite_use_case.dart';
+import 'package:cinemax_app_new/features/favorite/domain/use_cases/get_favorite_use_case.dart';
+import 'package:cinemax_app_new/features/favorite/domain/use_cases/merge_guest_favorites_use_case.dart';
+import 'package:cinemax_app_new/features/favorite/domain/use_cases/pull_cloud_favorites_use_case.dart';
+import 'package:cinemax_app_new/features/favorite/domain/use_cases/remove_favorite_use_case.dart';
+import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:cinemax_app_new/features/home/data/data_sources/remote/remote_home_data_source.dart';
+import 'package:cinemax_app_new/features/home/data/data_sources/remote/remote_home_data_source_impl.dart';
 import 'package:cinemax_app_new/features/home/data/repos/home_repo_impl.dart';
 import 'package:cinemax_app_new/features/home/domian/repos/home_repo.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_now_playing_movie.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_popular_use_case.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_top_rated_movies.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_trending_movie_use_case.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_upcoming_movies.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_tv_airing_today.use_case.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_tv_popular_use_case.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_tv_top_rated_use_case.dart';
-import 'package:cinemax_app_new/features/home/domian/uses_cases/fetch_tv_trending_use_case.dart';
-import 'package:cinemax_app_new/features/home/presentation/cubit/movie_view_cubit.dart';
-import 'package:cinemax_app_new/features/home/presentation/cubit/recommended_movies_cubit/recommended_cubit.dart';
-import 'package:cinemax_app_new/features/home/presentation/cubit/series_view_cubit.dart';
-
-import 'package:cinemax_app_new/features/search/data/data_sources/local_search_data_source.dart';
-import 'package:cinemax_app_new/features/search/data/data_sources/remote_search_data_source.dart';
+import 'package:cinemax_app_new/features/home/domian/use_cases/get_movies_use_case.dart';
+import 'package:cinemax_app_new/features/home/domian/use_cases/get_series_use_case.dart';
+import 'package:cinemax_app_new/features/home/presentation/blocs/movie_bloc.dart';
+import 'package:cinemax_app_new/features/home/presentation/blocs/series_bloc.dart';
+import 'package:cinemax_app_new/features/search/data/data_sources/local/local_search_history_data_source.dart';
+import 'package:cinemax_app_new/features/search/data/data_sources/local/local_search_history_data_source_impl.dart';
+import 'package:cinemax_app_new/features/search/data/data_sources/remote/remote_search_data_source.dart';
+import 'package:cinemax_app_new/features/search/data/data_sources/remote/remote_search_data_source_impl.dart';
+import 'package:cinemax_app_new/features/search/data/repos/search_history_repo_impl.dart';
 import 'package:cinemax_app_new/features/search/data/repos/search_repo_impl.dart';
+import 'package:cinemax_app_new/features/search/domain/repo/search_history.dart';
 import 'package:cinemax_app_new/features/search/domain/repo/search_repo.dart';
-import 'package:cinemax_app_new/features/search/domain/use_case/search_history_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_case/search_movie_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_case/search_tv_show_use_case.dart';
-import 'package:cinemax_app_new/features/search/presentaion/view_models/manger/search_cubit/search_cubit.dart';
-
-import 'package:cinemax_app_new/l10n/local_cubit.dart';
-
+import 'package:cinemax_app_new/features/search/domain/use_cases/add_to_history_use_case.dart';
+import 'package:cinemax_app_new/features/search/domain/use_cases/clear_search_history_use_case.dart';
+import 'package:cinemax_app_new/features/search/domain/use_cases/delete_from_search_history_use_case.dart';
+import 'package:cinemax_app_new/features/search/domain/use_cases/get_search_history_use_case.dart';
+import 'package:cinemax_app_new/features/search/domain/use_cases/search_movie_use_case.dart';
+import 'package:cinemax_app_new/features/search/domain/use_cases/search_tv_show_use_case.dart';
+import 'package:cinemax_app_new/features/search/presentation/blocs/search_bloc.dart';
+import 'package:cinemax_app_new/features/search/presentation/cubits/search_history_cubit.dart';
+import 'package:cinemax_app_new/features/settings/data/data_sources/local/settings_local_data_source.dart';
+import 'package:cinemax_app_new/features/settings/data/data_sources/local/settings_local_data_source_impl.dart';
+import 'package:cinemax_app_new/features/settings/data/repos/settings_repo_impl.dart';
+import 'package:cinemax_app_new/features/settings/domain/repos/settings_repo.dart';
+import 'package:cinemax_app_new/features/settings/domain/use_cases/get_is_first_time_use_case.dart';
+import 'package:cinemax_app_new/features/settings/domain/use_cases/set_is_first_time_use_case.dart';
+import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -114,8 +125,11 @@ Future<void> setupDependencies() async {
   // 6) Cubits (including Theme, Home/Series/Search/Favorite, etc.)
   _registerCubits();
 
-  // 7) AuthCubit (depends on use cases)
+  // 7) Session & Auth Cubits
   _registerAuthCubit();
+
+  // 8) Settings
+  _registerSettings();
 
   // 8) Wait for async singletons to be ready (e.g. SharedPreferences)
 
@@ -137,12 +151,10 @@ Future<void> _registerCoreSync() async {
     getIt.registerLazySingleton<ConnectivityCubit>(() => ConnectivityCubit());
   }
 
-  if (!getIt.isRegistered<LocaleCubit>()) {
+  if (!getIt.isRegistered<LanguageCubit>()) {
     // If your LocaleCubit still constructs its own SharedPreferences internally,
     // change this to: () => LocaleCubit()
-    getIt.registerLazySingleton<LocaleCubit>(
-      () => LocaleCubit(sharedPreferences: sharedPrefs),
-    );
+    getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
 
   // Dio
@@ -153,26 +165,22 @@ Future<void> _registerCoreSync() async {
   // ApiService using languageProvider (no snapshot of language)
   if (!getIt.isRegistered<ApiService>()) {
     getIt.registerLazySingleton<ApiService>(
-      () => ApiService(dio: getIt<Dio>(), language: 'en'),
+      () => ApiService(
+        dio: getIt<Dio>(),
+        language: getIt<LanguageCubit>().state.locale.languageCode,
+      ),
+    );
+  }
+
+  if (!getIt.isRegistered<FirebaseFirestore>()) {
+    getIt.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance,
     );
   }
 
   // AppDio – uses ConnectivityCubit
   AppDio.initialize(connectivityCubit: getIt<ConnectivityCubit>());
 }
-
-/// Async singletons (e.g. SharedPreferences)
-// void _registerAsyncExternal() {
-//   log('🧩 Registering async externals');
-
-//   if (!getIt.isRegistered<SharedPreferences>()) {
-//     getIt.registerSingletonAsync<SharedPreferences>(() async {
-//       final sp = await SharedPreferences.getInstance();
-//       log('✅ SharedPreferences ready');
-//       return sp;
-//     });
-//   }
-// }
 
 /// External deps that are sync to obtain
 void _registerExternalDependencies() {
@@ -200,22 +208,19 @@ void _registerDataSources() {
   getIt.registerLazySingleton<RemoteSearchDataSource>(
     () => RemoteSearchDataSourceImpl(apiService: getIt<ApiService>()),
   );
-  getIt.registerLazySingleton<RemoteDetailsDataSource>(
-    () => RemoteDetailsDataSourceImpl(apiService: getIt<ApiService>()),
+  getIt.registerLazySingleton<RemoteMovieDetailsDataSource>(
+    () => RemoteMovieDetailsDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<RemoteSeriesDetailsDataSource>(
+    () => RemoteSeriesDetailsDataSourceImpl(apiService: getIt<ApiService>()),
   );
   getIt.registerLazySingleton<DiscoverRemoteDataSource>(
     () => DiscoverRemoteDataSourceImpl(apiService: getIt<ApiService>()),
   );
 
-  // Local - Register as abstract types
-  getIt.registerLazySingleton<LocalSearchDataSource>(
+  // // Local - Register as abstract types
+  getIt.registerLazySingleton<LocalSearchHistoryDataSource>(
     () => LocalSearchDataSourceImpl(),
-  );
-  getIt.registerLazySingleton<LocalFavoriteDataSource>(
-    () => LocalFavoriteDataSourceImpl(),
-  );
-  getIt.registerLazySingleton<RemoteFavoriteDataSource>(
-    () => RemoteFavoriteDataSourceImpl(),
   );
 
   // Auth local data source depends on SharedPreferences
@@ -229,7 +234,17 @@ void _registerDataSources() {
     () => AuthRemoteDataSourceImpl(
       firebaseAuth: getIt<FirebaseAuth>(),
       googleSignIn: getIt<GoogleSignIn>(),
-      facebookAuth: getIt<FacebookAuth>(),
+    ),
+  );
+  getIt.registerLazySingleton<LocalFavoriteDataSource>(
+    () => LocalFavoriteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<RemoteFavoriteDataSource>(
+    () => RemoteFavoriteDataSourceImpl(firestore: getIt<FirebaseFirestore>()),
+  );
+  getIt.registerLazySingleton<SettingsLocalDataSource>(
+    () => SettingsLocalDataSourceImpl(
+      sharedPreferences: getIt<SharedPreferences>(),
     ),
   );
 }
@@ -240,23 +255,12 @@ void _registerRepositories() {
     () => HomeRepoImpl(remoteHomeDataSource: getIt<RemoteHomeDataSource>()),
   );
 
-  getIt.registerLazySingleton<DetailsRepo>(
-    () => DetailsRepoImpl(
-      remoteDetailsDataSource: getIt<RemoteDetailsDataSource>(),
-    ),
-  );
-
   getIt.registerLazySingleton<SearchRepo>(
-    () => SearchRepoImpl(
-      remoteDataSource: getIt<RemoteSearchDataSource>(),
-      localSearchDataSource: getIt<LocalSearchDataSource>(),
-    ),
+    () => SearchRepoImpl(remoteDataSource: getIt<RemoteSearchDataSource>()),
   );
-
-  getIt.registerLazySingleton<FavoriteRepo>(
-    () => FavoriteRepoImpl(
-      remoteDataSource: getIt<RemoteFavoriteDataSource>(),
-      localDataSource: getIt<LocalFavoriteDataSource>(),
+  getIt.registerLazySingleton<SearchHistoryRepo>(
+    () => SearchHistoryRepoImpl(
+      localSearchDataSource: getIt<LocalSearchHistoryDataSource>(),
     ),
   );
 
@@ -271,6 +275,25 @@ void _registerRepositories() {
       remoteDataSource: getIt<AuthRemoteDataSource>(),
     ),
   );
+  getIt.registerLazySingleton<FavoriteRepo>(
+    () => FavoritesRepositoryImpl(
+      remoteDataSource: getIt<RemoteFavoriteDataSource>(),
+      localDataSource: getIt<LocalFavoriteDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<MovieDetailsRepo>(
+    () => MovieDetailsRepoImpl(
+      remoteDataSource: getIt<RemoteMovieDetailsDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<SeriesDetailsRepo>(
+    () => SeriesDetailsRepoImpl(
+      remoteSeriesDetailsDataSource: getIt<RemoteSeriesDetailsDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<SettingsRepo>(
+    () => SettingsRepoImpl(localDataSource: getIt<SettingsLocalDataSource>()),
+  );
 }
 
 /// Use cases
@@ -278,8 +301,8 @@ void _registerUseCases() {
   _registerAuthUseCases();
   _registerHomeUseCases();
   _registerDetailsUseCases();
-  _registerSeriesUseCases();
   _registerSearchUseCases();
+  _registerSearchHistoryUseCases();
   _registerDiscoverUseCases();
   _registerFavoriteUseCases();
 }
@@ -288,29 +311,11 @@ void _registerAuthUseCases() {
   getIt.registerLazySingleton<SignInWithGoogleUseCase>(
     () => SignInWithGoogleUseCase(getIt<AuthRepo>()),
   );
-  getIt.registerLazySingleton<SignInWithFacebookUseCase>(
-    () => SignInWithFacebookUseCase(authRepo: getIt<AuthRepo>()),
-  );
-  getIt.registerLazySingleton<SignInWithEmailUseCase>(
-    () => SignInWithEmailUseCase(getIt<AuthRepo>()),
-  );
-  getIt.registerLazySingleton<SignUpWithEmailUseCase>(
-    () => SignUpWithEmailUseCase(getIt<AuthRepo>()),
-  );
   getIt.registerLazySingleton<SignOutUseCase>(
     () => SignOutUseCase(getIt<AuthRepo>()),
   );
-  getIt.registerLazySingleton<ContinueAsGuestUseCase>(
-    () => ContinueAsGuestUseCase(getIt<AuthRepo>()),
-  );
   getIt.registerLazySingleton<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(getIt<AuthRepo>()),
-  );
-  getIt.registerLazySingleton<ResetPasswordUseCase>(
-    () => ResetPasswordUseCase(getIt<AuthRepo>()),
-  );
-  getIt.registerLazySingleton<CheckAuthStatusUseCase>(
-    () => CheckAuthStatusUseCase(getIt<AuthRepo>()),
   );
   getIt.registerLazySingleton<EnableGuestModeUseCase>(
     () => EnableGuestModeUseCase(getIt<AuthRepo>()),
@@ -318,118 +323,145 @@ void _registerAuthUseCases() {
   getIt.registerLazySingleton<DisableGuestModeUseCase>(
     () => DisableGuestModeUseCase(getIt<AuthRepo>()),
   );
-  getIt.registerLazySingleton<IsGuestModeUseCase>(
-    () => IsGuestModeUseCase(getIt<AuthRepo>()),
-  );
 }
 
 void _registerHomeUseCases() {
-  getIt.registerLazySingleton<FetchNowPlayingUseCase>(
-    () => FetchNowPlayingUseCase(homeRepo: getIt<HomeRepo>()),
+  getIt.registerLazySingleton<GetMoviesUseCase>(
+    () => GetMoviesUseCase(homeRepo: getIt<HomeRepo>()),
   );
-  getIt.registerLazySingleton<FetchTopRatedMoviesUseCase>(
-    () => FetchTopRatedMoviesUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchPopularUseCase>(
-    () => FetchPopularUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchTrendingMoviesUseCase>(
-    () => FetchTrendingMoviesUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchUpcomingMovieCase>(
-    () => FetchUpcomingMovieCase(homeRepo: getIt<HomeRepo>()),
+  getIt.registerLazySingleton<GetSeriesUseCase>(
+    () => GetSeriesUseCase(homeRepo: getIt<HomeRepo>()),
   );
 }
 
 void _registerDetailsUseCases() {
   getIt.registerLazySingleton<FetchMovieDetailsUseCase>(
-    () => FetchMovieDetailsUseCase(detailsRepo: getIt<DetailsRepo>()),
+    () => FetchMovieDetailsUseCase(movieDetailsRepo: getIt<MovieDetailsRepo>()),
   );
   getIt.registerLazySingleton<FetchTvShowDetailsUseCase>(
-    () => FetchTvShowDetailsUseCase(detailsRepo: getIt<DetailsRepo>()),
+    () => FetchTvShowDetailsUseCase(
+      seriesDetailsRepo: getIt<SeriesDetailsRepo>(),
+    ),
   );
-  getIt.registerLazySingleton<FetchRecommendedUseCase>(
-    () => FetchRecommendedUseCase(detailsRepo: getIt<DetailsRepo>()),
+  getIt.registerLazySingleton<FetchMoviesRecommendationsUseCase>(
+    () => FetchMoviesRecommendationsUseCase(
+      movieDetailsRepo: getIt<MovieDetailsRepo>(),
+    ),
   );
-  getIt.registerLazySingleton<FetchSimilarUseCase>(
-    () => FetchSimilarUseCase(detailsRepo: getIt<DetailsRepo>()),
+  getIt.registerLazySingleton<FetchSeriesRecommendationsUseCase>(
+    () => FetchSeriesRecommendationsUseCase(
+      seriesDetailsRepo: getIt<SeriesDetailsRepo>(),
+    ),
+  );
+  getIt.registerLazySingleton<FetchSimilarMoviesUseCase>(
+    () =>
+        FetchSimilarMoviesUseCase(movieDetailsRepo: getIt<MovieDetailsRepo>()),
+  );
+  getIt.registerLazySingleton<FetchSimilarSeriesUseCase>(
+    () => FetchSimilarSeriesUseCase(
+      seriesDetailsRepo: getIt<SeriesDetailsRepo>(),
+    ),
   );
   getIt.registerLazySingleton<FetchSeriesSeasonDetailsUseCase>(
-    () => FetchSeriesSeasonDetailsUseCase(detailsRepo: getIt<DetailsRepo>()),
+    () => FetchSeriesSeasonDetailsUseCase(
+      seriesDetailsRepo: getIt<SeriesDetailsRepo>(),
+    ),
   );
   getIt.registerLazySingleton<FetchCollectionsUseCase>(
-    () => FetchCollectionsUseCase(detailsRepo: getIt<DetailsRepo>()),
+    () => FetchCollectionsUseCase(movieDetailsRepo: getIt<MovieDetailsRepo>()),
   );
 }
 
-void _registerSeriesUseCases() {
-  getIt.registerLazySingleton<FetchTrendingTvShowUseCase>(
-    () => FetchTrendingTvShowUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchPopularTvShowsUseCase>(
-    () => FetchPopularTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchTopRatedTvShowsUseCase>(
-    () => FetchTopRatedTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-  getIt.registerLazySingleton<FetchAiringTodayTvShowsUseCase>(
-    () => FetchAiringTodayTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
-  );
-}
+// void _registerSeriesUseCases() {
+//   getIt.registerLazySingleton<FetchTrendingTvShowUseCase>(
+//     () => FetchTrendingTvShowUseCase(homeRepo: getIt<HomeRepo>()),
+//   );
+//   getIt.registerLazySingleton<FetchPopularTvShowsUseCase>(
+//     () => FetchPopularTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
+//   );
+//   getIt.registerLazySingleton<FetchTopRatedTvShowsUseCase>(
+//     () => FetchTopRatedTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
+//   );
+//   getIt.registerLazySingleton<FetchAiringTodayTvShowsUseCase>(
+//     () => FetchAiringTodayTvShowsUseCase(homeRepo: getIt<HomeRepo>()),
+//   );
+// }
 
 void _registerSearchUseCases() {
   getIt.registerLazySingleton<SearchMovieUseCase>(
     () => SearchMovieUseCase(searchRepo: getIt<SearchRepo>()),
   );
-  getIt.registerLazySingleton<SearchTvShowUseCase>(
-    () => SearchTvShowUseCase(searchRepo: getIt<SearchRepo>()),
+  getIt.registerLazySingleton<SearchSeriesUseCase>(
+    () => SearchSeriesUseCase(searchRepo: getIt<SearchRepo>()),
   );
-  getIt.registerLazySingleton<SearchHistoryUseCase>(
-    () => SearchHistoryUseCase(searchRepo: getIt<SearchRepo>()),
+}
+
+void _registerSearchHistoryUseCases() {
+  getIt.registerLazySingleton<GetSearchHistoryUseCase>(
+    () =>
+        GetSearchHistoryUseCase(searchHistoryRepo: getIt<SearchHistoryRepo>()),
+  );
+  getIt.registerLazySingleton<AddSearchHistoryUseCase>(
+    () =>
+        AddSearchHistoryUseCase(searchHistoryRepo: getIt<SearchHistoryRepo>()),
+  );
+  getIt.registerLazySingleton<DeleteSearchHistoryUseCase>(
+    () => DeleteSearchHistoryUseCase(
+      searchHistoryRepo: getIt<SearchHistoryRepo>(),
+    ),
+  );
+  getIt.registerLazySingleton<ClearSearchHistoryUseCase>(
+    () => ClearSearchHistoryUseCase(
+      searchHistoryRepo: getIt<SearchHistoryRepo>(),
+    ),
   );
 }
 
 void _registerDiscoverUseCases() {
-  getIt.registerLazySingleton<FetchGenreContentUseCase>(
-    () => FetchGenreContentUseCase(getIt<DiscoverRepo>()),
+  getIt.registerLazySingleton<FetchMoviesByGenreUseCase>(
+    () => FetchMoviesByGenreUseCase(getIt<DiscoverRepo>()),
+  );
+  getIt.registerLazySingleton<FetchSeriesByGenreUseCase>(
+    () => FetchSeriesByGenreUseCase(getIt<DiscoverRepo>()),
+  );
+  getIt.registerLazySingleton<FetchMoviesByKeywordsUseCase>(
+    () => FetchMoviesByKeywordsUseCase(repo: getIt<DiscoverRepo>()),
+  );
+  getIt.registerLazySingleton<FetchSeriesByKeywordsUseCase>(
+    () => FetchSeriesByKeywordsUseCase(repo: getIt<DiscoverRepo>()),
   );
 }
 
 void _registerFavoriteUseCases() {
-  getIt.registerLazySingleton<ManageFavoritesUseCase>(
-    () => ManageFavoritesUseCase(favoriteRepo: getIt<FavoriteRepo>()),
+  getIt.registerLazySingleton(() => GetFavoritesUseCase(getIt<FavoriteRepo>()));
+  getIt.registerLazySingleton(() => AddFavoriteUseCase(getIt<FavoriteRepo>()));
+  getIt.registerLazySingleton(
+    () => RemoveFavoriteUseCase(getIt<FavoriteRepo>()),
+  );
+  getIt.registerLazySingleton(
+    () => MergeGuestFavoritesUseCase(getIt<FavoriteRepo>()),
+  );
+  getIt.registerLazySingleton(
+    () => PullCloudFavoritesUseCase(getIt<FavoriteRepo>()),
   );
 }
 
 /// Cubits (global + factories)
 void _registerCubits() {
-  // ThemeCubit depends on SharedPreferences
-  getIt.registerLazySingleton<ThemeCubit>(
-    () => ThemeCubit(getIt<SharedPreferences>()),
-  );
+  // // ThemeCubit depends on SharedPreferences
+  getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
 
   // Home screen shared cubit
-  getIt.registerLazySingleton<MovieViewCubit>(
-    () => MovieViewCubit(
-      fetchTrendingMovieUseCase: getIt<FetchTrendingMoviesUseCase>(),
-      fetchPopularUseCase: getIt<FetchPopularUseCase>(),
-      fetchUpcomingMovieCase: getIt<FetchUpcomingMovieCase>(),
-      fetchNowPlayingUseCase: getIt<FetchNowPlayingUseCase>(),
-      fetchTopRatedUseCase: getIt<FetchTopRatedMoviesUseCase>(),
-    ),
+  getIt.registerLazySingleton<MovieBloc>(
+    () => MovieBloc(getMoviesUseCase: getIt<GetMoviesUseCase>()),
   );
 
   // Series screen shared cubit
-  getIt.registerLazySingleton<SeriesViewCubit>(
-    () => SeriesViewCubit(
-      fetchTrendingTvShowUseCase: getIt<FetchTrendingTvShowUseCase>(),
-      fetchPopularTvShowsUseCase: getIt<FetchPopularTvShowsUseCase>(),
-      fetchTopRatedTvShowsUseCase: getIt<FetchTopRatedTvShowsUseCase>(),
-      fetchAiringTodayTvShowsUseCase: getIt<FetchAiringTodayTvShowsUseCase>(),
-    ),
+  getIt.registerLazySingleton<SeriesBloc>(
+    () => SeriesBloc(getSeriesUseCase: getIt<GetSeriesUseCase>()),
   );
 
-  // Factory cubits
+  //   Factory cubits
   getIt.registerFactory<FetchDetailsCubit>(
     () => FetchDetailsCubit(
       fetchMovieDetailsUseCase: getIt<FetchMovieDetailsUseCase>(),
@@ -437,11 +469,10 @@ void _registerCubits() {
     ),
   );
 
-  getIt.registerFactory<SearchCubit>(
-    () => SearchCubit(
-      getIt<SearchMovieUseCase>(),
-      getIt<SearchTvShowUseCase>(),
-      getIt<SearchHistoryUseCase>(),
+  getIt.registerFactory<SearchBloc>(
+    () => SearchBloc(
+      searchMovieUseCase: getIt<SearchMovieUseCase>(),
+      searchSeriesUseCase: getIt<SearchSeriesUseCase>(),
     ),
   );
 
@@ -450,26 +481,33 @@ void _registerCubits() {
         FetchSeriesSeasonDetailsCubit(getIt<FetchSeriesSeasonDetailsUseCase>()),
   );
 
-  getIt.registerFactory<FetchRecommendedCubit>(
-    () => FetchRecommendedCubit(getIt<FetchRecommendedUseCase>()),
-  );
-
-  getIt.registerFactory<FetchSimilarCubit>(
-    () => FetchSimilarCubit(getIt<FetchSimilarUseCase>()),
-  );
-
-  getIt.registerLazySingleton<FavoriteCubit>(
-    () =>
-        FavoriteCubit(manageFavoritesUseCase: getIt<ManageFavoritesUseCase>()),
-  );
-
-  getIt.registerFactory<GenreContentCubit>(
-    () =>
-        GenreContentCubit(fetchGenreUseCase: getIt<FetchGenreContentUseCase>()),
-  );
   getIt.registerFactory<FetchCollectionCubit>(
     () => FetchCollectionCubit(
       fetchCollectionsUseCase: getIt<FetchCollectionsUseCase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FavoriteCubit>(
+    () => FavoriteCubit(
+      mergeGuestFavoritesUseCase: getIt<MergeGuestFavoritesUseCase>(),
+      pullCloudFavoritesUseCase: getIt<PullCloudFavoritesUseCase>(),
+      getFavoritesUseCase: getIt<GetFavoritesUseCase>(),
+      addFavoriteUseCase: getIt<AddFavoriteUseCase>(),
+      removeFavoriteUseCase: getIt<RemoveFavoriteUseCase>(),
+    ),
+  );
+  getIt.registerFactory<FetchItemsByKeywordsCubit>(
+    () => FetchItemsByKeywordsCubit(
+      fetchMoviesByKeywordsUseCase: getIt<FetchMoviesByKeywordsUseCase>(),
+      fetchSeriesByKeywordsUseCase: getIt<FetchSeriesByKeywordsUseCase>(),
+    ),
+  );
+  getIt.registerFactory<SearchHistoryCubit>(
+    () => SearchHistoryCubit(
+      getIt<GetSearchHistoryUseCase>(),
+      getIt<AddSearchHistoryUseCase>(),
+      getIt<DeleteSearchHistoryUseCase>(),
+      getIt<ClearSearchHistoryUseCase>(),
     ),
   );
 }
@@ -477,20 +515,32 @@ void _registerCubits() {
 /// AuthCubit registration (global
 /// – do it after all use cases are registered)
 void _registerAuthCubit() {
-  getIt.registerLazySingleton<AuthCubit>(
-    () => AuthCubit(
-      authLocalDataSource: getIt<AuthLocalDataSource>(),
-      signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
-      signInWithFacebookUseCase: getIt<SignInWithFacebookUseCase>(),
-      signInWithEmailUseCase: getIt<SignInWithEmailUseCase>(),
-      signUpWithEmailUseCase: getIt<SignUpWithEmailUseCase>(),
+  getIt.registerLazySingleton<SessionCubit>(
+    () => SessionCubit(
       signOutUseCase: getIt<SignOutUseCase>(),
-      continueAsGuestUseCase: getIt<ContinueAsGuestUseCase>(),
       getCurrentUserUseCase: getIt<GetCurrentUserUseCase>(),
-      resetPasswordUseCase: getIt<ResetPasswordUseCase>(),
       enableGuestModeUseCase: getIt<EnableGuestModeUseCase>(),
       disableGuestModeUseCase: getIt<DisableGuestModeUseCase>(),
-      isGuestModeUseCase: getIt<IsGuestModeUseCase>(),
+    ),
+  );
+  getIt.registerFactory<LoginCubit>(
+    () => LoginCubit(
+      signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
+    ),
+  );
+}
+
+void _registerSettings() {
+  getIt.registerLazySingleton<GetIsFirstTimeUseCase>(
+    () => GetIsFirstTimeUseCase(getIt<SettingsRepo>()),
+  );
+  getIt.registerLazySingleton<SetIsFirstTimeUseCase>(
+    () => SetIsFirstTimeUseCase(getIt<SettingsRepo>()),
+  );
+  getIt.registerLazySingleton<SettingsCubit>(
+    () => SettingsCubit(
+      getIsFirstTimeUseCase: getIt<GetIsFirstTimeUseCase>(),
+      setIsFirstTimeUseCase: getIt<SetIsFirstTimeUseCase>(),
     ),
   );
 }

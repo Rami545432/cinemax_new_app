@@ -12,7 +12,7 @@ class AnimatedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final delay = index != null
         ? Duration(milliseconds: AppAnimations.staggerDelay(index!))
-        : Duration(seconds: 2);
+        : const Duration(seconds: 2);
 
     return Animate(
       effects: [

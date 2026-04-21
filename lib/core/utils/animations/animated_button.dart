@@ -1,5 +1,5 @@
+import 'package:cinemax_app_new/core/utils/animations/build_animated_list_item.dart';
 import 'package:flutter/material.dart';
-import 'build_animated_list_item.dart';
 
 enum ButtonAnimationType {
   // Entrance animations
@@ -64,7 +64,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
     if (widget.autoAnimate && widget.entranceAnimation != null) {
       Future.delayed(widget.entranceDelay, () {
-        if (mounted) _entranceController.forward();
+        if (mounted) {
+          _entranceController.forward();
+        }
       });
     } else if (widget.entranceAnimation == null) {
       _entranceController.value = 1.0; // Skip entrance animation
@@ -122,23 +124,21 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
     return AnimatedBuilder(
       animation: _pressController,
-      builder: (context, child) {
-        return switch (widget.pressAnimation!) {
-          ButtonAnimationType.press => Transform.scale(
-            scale: 1.0 - (_pressController.value * 0.05),
-            child: child,
-          ),
-          ButtonAnimationType.pulse => Transform.scale(
-            scale: 1.0 + (_pressController.value * 0.1),
-            child: child,
-          ),
-          ButtonAnimationType.ripple => Transform.scale(
-            scale: 1.0 + (_pressController.value * 0.1),
+      builder: (context, child) => switch (widget.pressAnimation!) {
+        ButtonAnimationType.press => Transform.scale(
+          scale: 1.0 - (_pressController.value * 0.05),
+          child: child,
+        ),
+        ButtonAnimationType.pulse => Transform.scale(
+          scale: 1.0 + (_pressController.value * 0.1),
+          child: child,
+        ),
+        ButtonAnimationType.ripple => Transform.scale(
+          scale: 1.0 + (_pressController.value * 0.1),
 
-            child: child,
-          ),
-          _ => widget.child,
-        };
+          child: child,
+        ),
+        _ => widget.child,
       },
     );
   }

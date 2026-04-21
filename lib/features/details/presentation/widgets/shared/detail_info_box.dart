@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/detail_info.dart';
 import 'package:flutter/material.dart';
-
-import 'detail_info.dart';
 
 class DetailInfoBox extends StatelessWidget {
   const DetailInfoBox({
@@ -13,10 +12,8 @@ class DetailInfoBox extends StatelessWidget {
   final IconData icons;
   final String text;
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(),
-      child: DetailInfo(info: info, icons: icons, text: text),
-    );
-  }
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: const BoxDecoration(),
+    child: DetailInfo(info: info, icons: icons, text: text),
+  );
 }

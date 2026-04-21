@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/constant.dart';
 import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/review_results.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/details_widgets/more_less_button.dart';
-import 'package:cinemax_app_new/core/utils/rating.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/review_results.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/rating.dart';
 import 'package:flutter/material.dart';
 
 class ReviewListTile extends StatelessWidget {
@@ -16,7 +15,7 @@ class ReviewListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final avatarUrl = review?.authorDetails?.avatarPath;
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
 
       tileColor: Colors.grey.shade700,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

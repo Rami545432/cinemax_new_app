@@ -20,11 +20,19 @@ class RouteName {
   static const String tvDetail = 'tvDetail';
   static const String season = 'season';
   static const String episode = 'episode';
-  static const String onBoarding = 'onBoarding';
   static const String splash = 'splash';
   static const String youtubePlayer = 'youtubePlayer';
   static const String customWebView = 'customWebView';
   static const String discover = 'discover';
   static const String chatBot = 'chatBot';
   static const String genreSeeAll = 'genreSeeAll';
+  static const String boardingOne = 'boardingOne';
+  static const String boardingTwo = 'boardingTwo';
+  static const String boardingThree = 'boardingThree';
+  static const String boardingZero = 'boardingZero';
+  static const String onBoardingPageView = 'onBoardingPageView';
+  static const String testing = 'testing';
+  static const String login = 'login';
+  static const String modeView = 'modeView';
+  static const String notificationTesting = 'notificationTesting';
 }

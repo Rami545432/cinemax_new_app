@@ -3,13 +3,10 @@ import 'dart:developer';
 import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/functions/custom_show_modal_bottom_sheet.dart';
-import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_state.dart';
-import 'package:cinemax_app_new/core/utils/size_config.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/filter_sheet.dart';
+import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_cubit.dart';
+import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_state.dart';
 import 'package:cinemax_app_new/hooks/ui/use_pagintation_controller_test.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,8 +20,9 @@ class CategorySeeAllView<
 >
     extends HookWidget {
   final CAT category;
+  final bool enableHero;
   final String? title;
-  final Widget Function(T item)? itemBuilder;
+  final Widget Function(T item, bool enableHero)? itemBuilder;
   final int crossAxisCount;
   final double childAspectRatio;
   final EdgeInsets? padding;
@@ -37,6 +35,7 @@ class CategorySeeAllView<
     required this.category,
     this.title,
     this.itemBuilder,
+    this.enableHero = true,
     this.crossAxisCount = 2,
     this.childAspectRatio = 0.7,
     this.padding,
@@ -72,20 +71,7 @@ class CategorySeeAllView<
                 if (genreId != null)
                   IconButton(
                     icon: const Icon(FontAwesomeIcons.listUl),
-                    onPressed: () {
-                      customShowModalBottomSheet(
-                        context: context,
-                        builder: (_, scrollController) {
-                          return BlocProvider.value(
-                            value: context.read<C>(),
-                            child: FilterSheet(
-                              scrollController: scrollController,
-                              category: category as GenreCategory,
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    onPressed: () {},
                   ),
               ],
             )
@@ -173,7 +159,7 @@ class CategorySeeAllView<
                   final animationIndex = index % 10;
                   return AnimatedListItem(
                     index: animationIndex,
-                    child: itemBuilder!(item),
+                    child: itemBuilder!(item, enableHero),
                   );
                 }
 
@@ -187,50 +173,46 @@ class CategorySeeAllView<
     );
   }
 
-  Widget _buildLoadingState() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.movie_outlined,
-            size: 80,
-            color: Colors.grey.withValues(alpha: 0.5),
+  Widget _buildLoadingState() => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.movie_outlined,
+          size: 80,
+          color: Colors.grey.withValues(alpha: 0.5),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'No items available',
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.grey.withValues(alpha: 0.7),
           ),
-          const SizedBox(height: 16),
-          Text(
-            'No items available',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.grey.withValues(alpha: 0.7),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 
-  Widget _buildErrorData(String error, BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.error_outline, size: 64, color: Colors.red),
-          const SizedBox(height: 16),
-          Text(
-            error,
-            style: const TextStyle(color: Colors.red),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              context.read<C>().loadCategory(category);
-            },
-            child: const Text('Retry'),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget _buildErrorData(String error, BuildContext context) => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(Icons.error_outline, size: 64, color: Colors.red),
+        const SizedBox(height: 16),
+        Text(
+          error,
+          style: const TextStyle(color: Colors.red),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () {
+            context.read<C>().loadCategory(category);
+          },
+          child: const Text('Retry'),
+        ),
+      ],
+    ),
+  );
 }

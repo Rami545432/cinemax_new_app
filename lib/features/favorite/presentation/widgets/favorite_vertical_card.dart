@@ -1,16 +1,12 @@
 import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
 import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/models/base_card_model.dart';
+import 'package:cinemax_app_new/features/favorite/presentation/widgets/card_title_and_popup_menu.dart';
+import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../home/presentation/views_models/widgets/card_image.dart';
-import '../../../details/data/models/arguments/episode_view_argument.dart';
-import '../../../details/data/models/arguments/season_view_argument.dart';
-
-import 'card_title_and_popup_menu.dart';
 
 class FavoriteVerticalCard extends StatelessWidget {
   const FavoriteVerticalCard({
@@ -21,72 +17,81 @@ class FavoriteVerticalCard extends StatelessWidget {
   final FavoriteEntity item;
   final VoidCallback onRemove;
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 10,
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              switch (item.contentType) {
-                case ContentType.movies:
-                  context.pushNamed(
-                    RouteName.movieDetail,
-                    pathParameters: {'id': item.id.toString()},
-                    queryParameters: {
-                      'heroTag': 'favorite-${item.id}',
-                      'posterImage': item.posterImage,
-                    },
-                  );
-                case ContentType.series:
-                  context.pushNamed(
-                    RouteName.tvDetail,
-                    pathParameters: {'id': item.id.toString()},
-                    queryParameters: {
-                      'heroTag': 'favorite-${item.id}',
-                      'posterImage': item.posterImage,
-                    },
-                  );
-                case ContentType.episodes:
-                  context.pushNamed(
-                    RouteName.episode,
-                    extra: EpisodeViewArgument(
-                      seasonNumber: item.seasonNumber,
-                      episodeNumber: item.episodeNumber,
-                      tvid: item.id,
-                      contentType: item.contentType,
-                      seasonPosterPath: item.backGroundImage,
-                      seiresPosterPath: item.posterImage,
-                    ),
-                  );
-                case ContentType.seasons:
-                  context.pushNamed(
-                    RouteName.season,
-                    extra: SeasonViewArgument(
-                      id: item.id,
-                      seasonNumber: item.seasonNumber,
-                      contentType: item.contentType,
-                      specificId: item.specificId,
-                      backDropImageUrl: item.backGroundImage,
-                      posterImageUrl: item.posterImage,
-                      seasonPosterPath: item.posterImage,
-                      seasonName: item.title,
-                      seasonDate: item.date,
-                    ),
-                  );
-              }
-            },
-            child: CardImage(
-              imageUrl: tmdbImageSize(TmdbImageSize.w300, item.posterImage),
-              defaultImageUrl: tmdbImageSize(
-                TmdbImageSize.w300,
-                item.backGroundImage,
-              ),
+  Widget build(BuildContext context) => Column(
+    spacing: 10,
+    children: [
+      Expanded(
+        child: GestureDetector(
+          onTap: () {
+            switch (item.contentType) {
+              case ContentType.movies:
+                context.pushNamed(
+                  RouteName.movieDetail,
+                  pathParameters: {'id': item.specificId.toString()},
+                  extra: MovieNavData(
+                    tmdbId: item.specificId,
+                    posterImage: item.posterImage,
+                    backdropImage: item.backdropImage,
+                    title: item.title,
+                    date: item.date,
+                    rating: item.rating,
+                    specificId: item.tmbdId,
+                  ),
+                );
+              case ContentType.series:
+                context.pushNamed(
+                  RouteName.tvDetail,
+                  pathParameters: {'id': item.specificId.toString()},
+                  extra: SeriesNavData(
+                    tmdbId: item.specificId,
+                    posterImage: item.posterImage,
+                    backdropImage: item.backdropImage,
+                    title: item.title,
+                    date: item.date,
+                    rating: item.rating,
+                    specificId: item.tmbdId,
+                  ),
+                );
+              case ContentType.episodes:
+                context.pushNamed(
+                  RouteName.episode,
+                  extra: EpisodeNavData(
+                    tmdbId: item.tmbdId,
+                    seasonNumber: item.seasonNumber,
+                    episodeNumber: item.episodeNumber,
+                    posterImage: item.posterImage,
+                    backdropImage: item.backdropImage,
+                    seriesPosterPath: item.posterImage,
+                    rating: item.rating,
+                    specificId: item.specificId,
+                  ),
+                );
+              case ContentType.seasons:
+                context.pushNamed(
+                  RouteName.season,
+                  extra: SeasonNavData(
+                    tmdbId: item.tmbdId,
+                    seasonNumber: item.seasonNumber,
+                    posterImage: item.posterImage,
+                    backdropImage: item.backdropImage,
+                    seasonName: item.title,
+                    date: item.date,
+                    rating: item.rating,
+                    specificId: item.specificId,
+                  ),
+                );
+            }
+          },
+          child: CardImage(
+            imageUrl: tmdbImageSize(TmdbImageSize.w300, item.posterImage),
+            defaultImageUrl: tmdbImageSize(
+              TmdbImageSize.w300,
+              item.backdropImage,
             ),
           ),
         ),
-        CardTitleAndPopUpMenu(item: item, onRemove: onRemove),
-      ],
-    );
-  }
+      ),
+      CardTitleAndPopUpMenu(item: item, onRemove: onRemove),
+    ],
+  );
 }

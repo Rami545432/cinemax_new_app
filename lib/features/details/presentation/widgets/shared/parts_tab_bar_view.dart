@@ -1,9 +1,9 @@
 import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_cubit.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_states.dart';
-import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/main_vertical_card.dart';
+import 'package:cinemax_app_new/features/details/presentation/extensions/part_extension.dart';
+import 'package:cinemax_app_new/features/home/presentation/widgets/main_vertical_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class PartsTabBarView extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           getIt.get<FetchCollectionCubit>()
-            ..fetchCollection(collectionId!, movieId!),
+            ..fetchCollection(collectionId, movieId),
       child: BlocBuilder<FetchCollectionCubit, FetchCollectionState>(
         builder: (context, state) {
           if (state is FetchCollectionLoading) {
@@ -32,25 +32,16 @@ class PartsTabBarView extends StatelessWidget {
           }
           if (state is FetchCollectionSuccess) {
             return GridView.builder(
-              itemCount: state.collection.collectionParts.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              itemCount: state.collection.parts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 0.6,
                 crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
-                final item = state.collection.collectionParts[index];
-                return MainVerticalCard(
-                  posterImage: tmdbImageSize(
-                    TmdbImageSize.w300,
-                    item.cardImage,
-                  ),
-                  title: item.cardTitle,
-                  rating: item.cardRating ?? 0,
-                  id: item.cardId,
-                  type: item.type,
-                  category: '',
-                );
+                final item = state.collection.parts[index];
+                return MainVerticalCard(cardData: item.toCardDisplay());
               },
             );
           }

@@ -1,4 +1,4 @@
-import 'base_pagination_params.dart';
+import 'package:cinemax_app_new/core/utils/cubit_parameters/base_pagination_params.dart';
 
 class PopularParams extends BasePaginationParams {
   final String? sortBy;
@@ -8,12 +8,4 @@ class PopularParams extends BasePaginationParams {
     this.sortBy,
     super.cancelToken,
   });
-  @override
-  Map<String, dynamic> toQueryMap() {
-    final queryMap = super.toQueryMap();
-    if (sortBy != null) queryMap['with_genres'] = sortBy;
-    queryMap['with_out_genres'] = '10749';
-
-    return queryMap;
-  }
 }

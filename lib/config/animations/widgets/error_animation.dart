@@ -8,7 +8,6 @@ class ErrorAnimation extends StatelessWidget {
   const ErrorAnimation({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
-    return Animate(effects: AppAnimations.errorShake, child: child);
-  }
+  Widget build(BuildContext context) =>
+      Animate(effects: AppAnimations.errorShake, child: child);
 }

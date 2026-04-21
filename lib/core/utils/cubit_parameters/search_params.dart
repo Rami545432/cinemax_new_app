@@ -6,14 +6,11 @@ class SearchParams {
 
   const SearchParams({required this.query, this.cancelToken});
 
-  SearchParams copyWith({String? query, CancelToken? cancelToken}) {
-    return SearchParams(
-      query: query ?? this.query,
-      cancelToken: cancelToken ?? this.cancelToken,
-    );
-  }
+  SearchParams copyWith({String? query, CancelToken? cancelToken}) =>
+      SearchParams(
+        query: query ?? this.query,
+        cancelToken: cancelToken ?? this.cancelToken,
+      );
 
-  Map<String, dynamic> toQueryMap() {
-    return {'query': query};
-  }
+  Map<String, dynamic> toQueryMap() => {'query': query};
 }

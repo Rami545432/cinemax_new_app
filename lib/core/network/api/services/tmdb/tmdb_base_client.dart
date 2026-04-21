@@ -12,11 +12,9 @@ class TmdbBaseClient extends BaseApiClient {
     String path, {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? defaultParams,
-  }) {
-    return super.buildUrl(
-      path,
-      queryParams: queryParams,
-      defaultParams: defaultParams ?? TmdbConfig.defaultParams,
-    );
-  }
+  }) => super.buildUrl(
+    path,
+    queryParams: queryParams,
+    defaultParams: defaultParams ?? TmdbConfig.defaultParams,
+  );
 }

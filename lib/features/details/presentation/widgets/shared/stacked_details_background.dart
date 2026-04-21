@@ -1,8 +1,9 @@
 import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/meta_data.dart';
-import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/card_image.dart';
-import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/opcaity_details_image.dart';
+import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
+import 'package:cinemax_app_new/features/home/presentation/widgets/opcaity_details_image.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
 
 class StackedDetailsBackGorund extends StatelessWidget {
@@ -26,6 +27,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
   final Widget? timeBlocSelector;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     final textStyle = AppStyles.textStyle16(context);
     return Stack(
       fit: StackFit.expand,
@@ -52,14 +54,22 @@ class StackedDetailsBackGorund extends StatelessWidget {
           right: 0,
           child: Center(
             child: SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.45,
-              height: MediaQuery.sizeOf(context).height * 0.3,
-              child: Hero(
-                tag: heroTag ?? '',
-                child: CardImage(
-                  imageUrl: tmdbImageSize(
-                    TmdbImageSize.w500,
-                    posterImage ?? '',
+              width: size.width < SizeConfig.mobile
+                  ? size.width * 0.45
+                  : size.width * 0.25,
+              child: AspectRatio(
+                aspectRatio: 2 / 3,
+                child: Hero(
+                  tag: heroTag ?? '',
+                  child: CardImage(
+                    imageUrl: tmdbImageSize(
+                      TmdbImageSize.w500,
+                      posterImage ?? '',
+                    ),
+                    thumbnailUrl: tmdbImageSize(
+                      TmdbImageSize.w300,
+                      posterImage ?? '',
+                    ),
                   ),
                 ),
               ),

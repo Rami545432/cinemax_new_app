@@ -1,74 +1,77 @@
 import 'dart:developer';
+
 import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/views_models/cubit/auth_state.dart';
+import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
 import 'package:cinemax_app_new/features/auth/routing/auth_routes.dart';
-import 'package:cinemax_app_new/features/discover/routing/discover_routing.dart';
-import 'package:cinemax_app_new/features/main/presentation/routes/main_routes.dart';
-import 'package:cinemax_app_new/features/search/routing/search_routes.dart';
 import 'package:cinemax_app_new/features/details/routing/details_routes.dart';
+import 'package:cinemax_app_new/features/discover/routing/discover_routing.dart';
+import 'package:cinemax_app_new/features/onboarding/routing/on_boarding_routes.dart';
+import 'package:cinemax_app_new/features/search/routing/search_routes.dart';
+import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
+import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_state.dart';
+import 'package:cinemax_app_new/shared/presentation/routing/main_routes.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouters {
   GoRouter createRouter() {
-    final authCubit = getIt.get<AuthCubit>();
+    final sessionCubit = getIt.get<SessionCubit>();
+    final settingsCubit = getIt.get<SettingsCubit>();
 
     return GoRouter(
       routes: routes,
-      redirect: (context, state) =>
-          _redirect(authCubit.state, state.matchedLocation),
-      refreshListenable: authCubit,
+      redirect: (context, state) => _redirect(
+        sessionCubit.state,
+        settingsCubit.state,
+        state.matchedLocation,
+      ),
+
       initialLocation: RoutePaths.root,
       debugLogDiagnostics: true,
     );
   }
 
-  String? _redirect(AuthState authState, String currentPath) {
-    log('🔄 ===== REDIRECT CALLED =====');
-    log('📍 Current Path: $currentPath');
-    log('🔐 Auth State: ${authState.runtimeType}');
+  String? _redirect(
+    SessionState sessionState,
+    SettingsState settingsState,
+    String currentPath,
+  ) {
+    log(
+      '🔄 Redirect | Session: ${sessionState.runtimeType} | Settings: ${settingsState.runtimeType} | Path: $currentPath',
+    );
 
-    // While loading, stay put
-    if (authState is AuthInitial || authState is AuthLoading) {
-      log('⏳ Still loading, staying at current path');
-      return null;
+    // 1️⃣ App just started – wait (splash decides)
+    if (sessionState is SessionUnknown || settingsState is SettingsUnknown) {
+      return currentPath == RoutePaths.root ? null : RoutePaths.root;
     }
 
-    // First time user
-    if (authState is AuthFirstTime) {
-      if (currentPath != RoutePaths.onBoarding) {
+    // 2️⃣ First time → onboarding
+    if (settingsState is SettingsLoaded && settingsState.isFirstTime) {
+      final onboardingRoutes = {
+        RoutePaths.boardingZero,
+        RoutePaths.onBoardingPageView,
+        RoutePaths.boardingOne,
+        RoutePaths.boardingTwo,
+        RoutePaths.boardingThree,
+      };
+
+      if (!onboardingRoutes.contains(currentPath)) {
         log('➡️  Redirecting to onboarding');
-        return RoutePaths.onBoarding;
+        return RoutePaths.boardingZero;
       }
       log('✅ Already at onboarding');
       return null;
     }
 
-    // Unauthenticated
-    if (authState is AuthUnauthenticated) {
-      if (currentPath != RoutePaths.initialAuth) {
-        log('➡️  Redirecting to auth');
-        return RoutePaths.initialAuth;
-      }
-      log('✅ Already at auth');
-      return null;
+    // 3️⃣ Guest or authenticated → home
+    if (sessionState is SessionGuest || sessionState is SessionAuthenticated) {
+      final blocked = {RoutePaths.root, RoutePaths.boardingZero};
+
+      return blocked.contains(currentPath) ? RoutePaths.home : null;
     }
 
-    // Authenticated or Guest
-    if (authState is AuthAuthenticated || authState is AuthGuest) {
-      final authScreens = [RoutePaths.root, RoutePaths.onBoarding];
-
-      if (authScreens.contains(currentPath)) {
-        log('➡️  User is authenticated, redirecting to home');
-        return RoutePaths.home;
-      }
-
-      log('✅ User authenticated, allowing navigation to $currentPath');
-      return null;
-    }
-
-    log('❌ Unhandled state, staying at current path');
+    // 4️⃣ Fallback – do nothing
     return null;
   }
 
@@ -78,5 +81,6 @@ class AppRouters {
     ...DetailsRoutes.routes,
     ...SearchRoutes.routes,
     ...DiscoverRouting.routes,
+    ...OnBoardingRoutes.routes,
   ];
 }

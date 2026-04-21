@@ -41,7 +41,7 @@ class ShareButton extends HookWidget {
       },
       child: AnimatedRotation(
         turns: isPressed.value ? 1 : 0,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         child: isPressed.value
             ? const Icon(Icons.share_rounded)
             : const Icon(Icons.share_rounded),

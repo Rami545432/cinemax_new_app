@@ -1,52 +1,32 @@
-import 'dart:convert';
+// lib/features/theme/cubit/theme_cubit.dart
 
 import 'package:cinemax_app_new/core/theme/cubit/theme_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:injectable/injectable.dart';
 
-class ThemeCubit extends Cubit<ThemeState> {
-  static const String _themeKey = 'theme';
-  final SharedPreferences _prefs;
-  ThemeCubit(this._prefs) : super(const ThemeState()) {
-    _loadTheme();
-  }
+@lazySingleton
+class ThemeCubit extends HydratedCubit<ThemeState> {
+  ThemeCubit() : super(ThemeState.initial());
 
-  void _loadTheme() async {
-    final savedTheme = _prefs.getString(_themeKey);
-    if (savedTheme != null) {
-      try {
-        final json = jsonDecode(savedTheme);
-        emit(ThemeState.fromJson(json));
-      } catch (e) {
-        emit(const ThemeState());
-      }
+  void toggleTheme() => emit(
+    state.copyWith(
+      mode: state.mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+    ),
+  );
+
+  void setAccentColor(Color color) => emit(state.copyWith(accentColor: color));
+  void setFontSize(double size) => emit(state.copyWith(fontSize: size));
+
+  @override
+  Map<String, dynamic> toJson(ThemeState state) => state.toJson();
+
+  @override
+  ThemeState? fromJson(Map<String, dynamic> json) {
+    try {
+      return ThemeState.fromJson(json);
+    } catch (_) {
+      return ThemeState.initial();
     }
   }
-
-  Future<void> _saveTheme(ThemeState newState) async {
-    await _prefs.setString(_themeKey, jsonEncode(newState.toJson()));
-    emit(newState);
-  }
-
-  Future<void> toggleTheme() async {
-    final newMode = state.themeMode == ThemeMode.light
-        ? ThemeMode.dark
-        : ThemeMode.light;
-    final newState = state.copyWith(themeMode: newMode);
-    await _saveTheme(newState);
-  }
-
-  Future<void> setColorScheme(AppColorScheme colorScheme) async {
-    final newState = state.copyWith(colorScheme: colorScheme);
-    await _saveTheme(newState);
-  }
-
-  Future<void> setThemeMode(ThemeMode themeMode) async {
-    final newState = state.copyWith(themeMode: themeMode);
-    await _saveTheme(newState);
-  }
-
-  bool get isDark => state.themeMode == ThemeMode.dark;
-  bool get isLight => state.themeMode == ThemeMode.light;
 }

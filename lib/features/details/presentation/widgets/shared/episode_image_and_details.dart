@@ -1,21 +1,20 @@
+import 'package:cinemax_app_new/features/details/presentation/models/episode_to_air_model.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_details.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/models/series_details_models/base_episode_to_air.dart';
-import 'episode_details.dart';
-import 'episode_image.dart';
 
 class EpisodeImageAndDetails extends StatelessWidget {
   const EpisodeImageAndDetails({
     super.key,
-    required this.baseEpisodeToAir,
+    required this.episodeToAirModel,
     required this.imageUrl,
   });
 
-  final BaseEpisodeToAir baseEpisodeToAir;
+  final EpisodeToAirModel episodeToAirModel;
   final String imageUrl;
   @override
   Widget build(BuildContext context) {
-    final image = baseEpisodeToAir.stillPath ?? imageUrl;
+    final image = episodeToAirModel.stillPath ?? imageUrl;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -24,10 +23,10 @@ class EpisodeImageAndDetails extends StatelessWidget {
         Expanded(
           flex: 3,
           child: EpisodeDetails(
-            name: baseEpisodeToAir.name,
-            episodeNumber: baseEpisodeToAir.episodeNumber,
-            seasonNumber: baseEpisodeToAir.seasonNumber,
-            airDate: baseEpisodeToAir.airDate,
+            name: episodeToAirModel.name,
+            episodeNumber: episodeToAirModel.episodeNumber,
+            seasonNumber: episodeToAirModel.seasonNumber,
+            airDate: episodeToAirModel.airDate,
           ),
         ),
         const Icon(Icons.arrow_forward_ios),

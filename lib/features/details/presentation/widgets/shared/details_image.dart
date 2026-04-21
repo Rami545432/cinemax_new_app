@@ -8,20 +8,16 @@ class DetailsImage extends StatelessWidget {
   final String? defaultImageUrl;
   final String? posterPath;
   @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(24),
-      child: CachedNetworkImage(
-        imageUrl: '$baseImageUrl$posterPath',
-        errorWidget: (context, url, error) => CachedNetworkImage(
-          placeholder: (context, url) =>
-              const Center(child: CircularProgressIndicator()),
-          imageUrl: '$baseImageUrl$defaultImageUrl',
-          errorWidget: (context, url, error) {
-            return const Icon(Icons.error);
-          },
-        ),
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: BorderRadius.circular(24),
+    child: CachedNetworkImage(
+      imageUrl: '${Constants.baseImageUrl}$posterPath',
+      errorWidget: (context, url, error) => CachedNetworkImage(
+        placeholder: (context, url) =>
+            const Center(child: CircularProgressIndicator()),
+        imageUrl: '${Constants.baseImageUrl}$defaultImageUrl',
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
-    );
-  }
+    ),
+  );
 }

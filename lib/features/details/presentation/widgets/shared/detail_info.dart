@@ -12,13 +12,11 @@ class DetailInfo extends StatelessWidget {
   final IconData icons;
   final String text;
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icons, color: Colors.white),
-        Text(text, style: AppStyles.textStyle16(context)),
-        Text(info, style: AppStyles.textStyle16(context)),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+    children: [
+      Icon(icons, color: Colors.white),
+      Text(text, style: AppStyles.textStyle16(context)),
+      Text(info, style: AppStyles.textStyle16(context)),
+    ],
+  );
 }

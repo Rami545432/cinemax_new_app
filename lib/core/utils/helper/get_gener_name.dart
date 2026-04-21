@@ -2,7 +2,7 @@ import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 String getGenreName(int id, BuildContext context) {
-  final l10n = AppLocalizations.of(context);
+  final l10n = AppLocalizations.of(context)!;
   switch (id) {
     case 10768:
       return l10n.genreWarPolitics;

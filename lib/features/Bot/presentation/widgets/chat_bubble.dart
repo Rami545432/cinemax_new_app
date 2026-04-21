@@ -9,98 +9,92 @@ class ChatBubble extends StatelessWidget {
   const ChatBubble({super.key, required this.message});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        mainAxisAlignment: message.isUser
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Bot avatar (left side)
-          if (!message.isUser) ...[
-            _buildAvatar(context, isUser: false),
-            const SizedBox(width: 8),
-          ],
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Row(
+      mainAxisAlignment: message.isUser
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Bot avatar (left side)
+        if (!message.isUser) ...[
+          _buildAvatar(context, isUser: false),
+          const SizedBox(width: 8),
+        ],
 
-          // Message bubble
-          Flexible(
-            child: GestureDetector(
-              onLongPress: () => _copyToClipboard(context),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: _getBubbleColor(context),
-                  borderRadius: _getBorderRadius(),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 5,
-                      offset: const Offset(0, 2),
+        // Message bubble
+        Flexible(
+          child: GestureDetector(
+            onLongPress: () => _copyToClipboard(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: _getBubbleColor(context),
+                borderRadius: _getBorderRadius(),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 5,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Message content
+                  Text(
+                    message.content,
+                    style: TextStyle(
+                      color: _getTextColor(context),
+                      fontSize: 15,
+                      height: 1.4,
                     ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Message content
-                    Text(
-                      message.content,
-                      style: TextStyle(
-                        color: _getTextColor(context),
-                        fontSize: 15,
-                        height: 1.4,
-                      ),
-                    ),
+                  ),
 
-                    // Timestamp
-                    const SizedBox(height: 6),
-                    Text(
-                      _formatTime(message.timestamp),
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: message.isUser
-                            ? Colors.white.withValues(alpha: 0.7)
-                            : Colors.grey.shade600,
-                      ),
+                  // Timestamp
+                  const SizedBox(height: 6),
+                  Text(
+                    _formatTime(message.timestamp),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: message.isUser
+                          ? Colors.white.withValues(alpha: 0.7)
+                          : Colors.grey.shade600,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
+        ),
 
-          // User avatar (right side)
-          if (message.isUser) ...[
-            const SizedBox(width: 8),
-            _buildAvatar(context, isUser: true),
-          ],
+        // User avatar (right side)
+        if (message.isUser) ...[
+          const SizedBox(width: 8),
+          _buildAvatar(context, isUser: true),
         ],
-      ),
-    );
-  }
+      ],
+    ),
+  );
 
-  Widget _buildAvatar(BuildContext context, {required bool isUser}) {
-    return Container(
-      width: 36,
-      height: 36,
-      decoration: BoxDecoration(
-        color: isUser
-            ? Theme.of(context).primaryColor
-            : Colors.deepPurple.shade100,
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: isUser
-            ? const Icon(Icons.person, color: Colors.white, size: 20)
-            : Text('🤖', style: const TextStyle(fontSize: 20)),
-      ),
-    );
-  }
+  Widget _buildAvatar(BuildContext context, {required bool isUser}) =>
+      Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          color: isUser
+              ? Theme.of(context).primaryColor
+              : Colors.deepPurple.shade100,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: isUser
+              ? const Icon(Icons.person, color: Colors.white, size: 20)
+              : const Text('🤖', style: TextStyle(fontSize: 20)),
+        ),
+      );
 
   Color _getBubbleColor(BuildContext context) {
     if (message.hasError) {

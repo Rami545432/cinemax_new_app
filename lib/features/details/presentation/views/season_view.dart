@@ -1,13 +1,13 @@
-import 'package:cinemax_app_new/features/details/data/models/arguments/season_view_argument.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
 import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/views/season_body.dart';
+import 'package:cinemax_app_new/features/details/presentation/views/season_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SeasonView extends StatefulWidget {
-  const SeasonView({super.key, required this.seasonViewArgument});
-  final SeasonViewArgument seasonViewArgument;
+  const SeasonView({super.key, required this.seasonDataNav});
+  final SeasonNavData seasonDataNav;
   @override
   State<SeasonView> createState() => _SeasonViewState();
 }
@@ -15,8 +15,8 @@ class SeasonView extends StatefulWidget {
 class _SeasonViewState extends State<SeasonView> {
   @override
   void initState() {
-    int tvid = widget.seasonViewArgument.id;
-    int season = widget.seasonViewArgument.seasonNumber ?? 0;
+    final int tvid = widget.seasonDataNav.tmdbId;
+    final int season = widget.seasonDataNav.seasonNumber;
     BlocProvider.of<FetchSeriesSeasonDetailsCubit>(
       context,
     ).fetchSeriesSeasonDetail(tvid: tvid, season: season);
@@ -24,12 +24,10 @@ class _SeasonViewState extends State<SeasonView> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Provider.value(
-        value: widget.seasonViewArgument,
-        child: SeasonBody(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+    body: Provider.value(
+      value: widget.seasonDataNav,
+      child: const SeasonViewBody(),
+    ),
+  );
 }

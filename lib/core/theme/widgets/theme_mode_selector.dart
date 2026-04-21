@@ -1,12 +1,11 @@
 // lib/core/theme/widgets/theme_mode_selector.dart
 
-import 'package:cinemax_app_new/core/theme/widgets/animated_theme_switcher.dart';
+import 'package:cinemax_app_new/core/theme/cubit/theme_cubit.dart';
+import 'package:cinemax_app_new/core/theme/cubit/theme_state.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/theme_cubit.dart';
-import '../cubit/theme_state.dart';
 
 class ThemeModeSelector extends StatelessWidget {
   const ThemeModeSelector({super.key});
@@ -14,61 +13,59 @@ class ThemeModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style16 = AppStyles.textStyle16(context);
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, state) {
-        return Column(
-          spacing: 10,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title
-            Text(l10n.theme, style: style16),
+      builder: (context, state) => Column(
+        spacing: 10,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Title
+          Text(l10n.theme, style: style16),
 
-            // Three buttons in a row
-            Row(
-              children: [
-                // Light button
-                Expanded(
-                  child: _ThemeModeButton(
-                    label: l10n.light,
-                    icon: Icons.light_mode,
-                    isSelected: state.themeMode == ThemeMode.light,
-                    onTap: () {
-                      context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
-                    },
-                  ),
+          // Three buttons in a row
+          Row(
+            children: [
+              // Light button
+              Expanded(
+                child: _ThemeModeButton(
+                  label: l10n.light,
+                  icon: Icons.light_mode,
+                  isSelected: state.mode == ThemeMode.light,
+                  onTap: () {
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
                 ),
-                const SizedBox(width: 12),
+              ),
+              const SizedBox(width: 12),
 
-                // Dark button
-                Expanded(
-                  child: _ThemeModeButton(
-                    label: l10n.dark,
-                    icon: Icons.dark_mode,
-                    isSelected: state.themeMode == ThemeMode.dark,
-                    onTap: () {
-                      context.read<ThemeCubit>().setThemeMode(ThemeMode.dark);
-                    },
-                  ),
+              // Dark button
+              Expanded(
+                child: _ThemeModeButton(
+                  label: l10n.dark,
+                  icon: Icons.dark_mode,
+                  isSelected: state.mode == ThemeMode.dark,
+                  onTap: () {
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
                 ),
-                const SizedBox(width: 12),
+              ),
+              const SizedBox(width: 12),
 
-                // System button
-                Expanded(
-                  child: _ThemeModeButton(
-                    label: l10n.system,
-                    icon: Icons.settings_suggest,
-                    isSelected: state.themeMode == ThemeMode.system,
-                    onTap: () {
-                      context.read<ThemeCubit>().setThemeMode(ThemeMode.system);
-                    },
-                  ),
+              // System button
+              Expanded(
+                child: _ThemeModeButton(
+                  label: l10n.system,
+                  icon: Icons.settings_suggest,
+                  isSelected: state.mode == ThemeMode.system,
+                  onTap: () {
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
                 ),
-              ],
-            ),
-          ],
-        );
-      },
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

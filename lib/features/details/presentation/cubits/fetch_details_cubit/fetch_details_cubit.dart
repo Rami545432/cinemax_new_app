@@ -1,11 +1,12 @@
 import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
 import 'package:cinemax_app_new/core/utils/cubit_parameters/details_params.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_movie_details_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/fetch_tv_show_details_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_movie_details_use_case.dart';
+import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_tv_show_details_use_case.dart';
+import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
-import 'fetch_details_state.dart';
-
+@injectable
 class FetchDetailsCubit extends Cubit<FetchDetailsState> {
   FetchDetailsCubit({
     required this.fetchMovieDetailsUseCase,
@@ -16,27 +17,30 @@ class FetchDetailsCubit extends Cubit<FetchDetailsState> {
   final FetchTvShowDetailsUseCase fetchTvShowDetailsUseCase;
 
   Future<void> fetchDetails(DetailsParams params) async {
-    safeEmit(FetchDetailsState.loading());
-    if (params.type == 'movie') {
-      final data = await fetchMovieDetailsUseCase.call(params);
-      data.fold(
-        (failure) {
-          safeEmit(FetchDetailsState.failure(failure.errorMessage));
-        },
-        (movie) {
-          safeEmit(FetchDetailsState.successMovie(movie));
-        },
-      );
-    } else if (params.type == 'tv') {
-      final data = await fetchTvShowDetailsUseCase.call(params);
-      data.fold(
-        (failure) {
-          safeEmit(FetchDetailsState.failure(failure.errorMessage));
-        },
-        (series) {
-          safeEmit(FetchDetailsState.successSeries(series));
-        },
-      );
+    safeEmit(const FetchDetailsState.loading());
+    switch (params.type) {
+      case 'movie':
+        final data = await fetchMovieDetailsUseCase.call(params);
+        data.fold(
+          (failure) {
+            safeEmit(FetchDetailsState.failure(failure.errorMessage));
+          },
+          (movie) {
+            safeEmit(FetchDetailsState.successMovie(movie));
+          },
+        );
+        break;
+      case 'tv':
+        final data = await fetchTvShowDetailsUseCase.call(params);
+        data.fold(
+          (failure) {
+            safeEmit(FetchDetailsState.failure(failure.errorMessage));
+          },
+          (series) {
+            safeEmit(FetchDetailsState.successSeries(series));
+          },
+        );
+        break;
     }
   }
 }

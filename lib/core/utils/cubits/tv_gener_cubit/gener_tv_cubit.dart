@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../features/home/domian/entites/series_entity.dart';
 
 class GenerTvCubit extends Cubit<int> {
   GenerTvCubit() : super(0);
@@ -14,7 +13,5 @@ class GenerTvCubit extends Cubit<int> {
     seriesLists[index].add(series);
   }
 
-  List<SeriesEntity> getSeriesForSelectedGener() {
-    return seriesLists[state];
-  }
+  List<SeriesEntity> getSeriesForSelectedGener() => seriesLists[state];
 }

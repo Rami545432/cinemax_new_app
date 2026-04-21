@@ -28,7 +28,6 @@ class RoutePaths {
   static const String episode = '/tv/episode';
   // Onboarding Routes
 
-  static const String onBoarding = '/onboarding';
   static const String splash = '/splashview';
 
   // Utility Routes
@@ -37,4 +36,13 @@ class RoutePaths {
   static const String discover = '/discover';
   static const String chatBot = '/chatBot';
   static const String genreSeeAll = '/genreSeeAll';
+  static const String boardingOne = '/boardingOne';
+  static const String boardingTwo = '/boardingTwo';
+  static const String boardingThree = '/boardingThree';
+  static const String boardingZero = '/boardingZero';
+  static const String onBoardingPageView = '/onBoardingPageView';
+  static const String testing = '/testing';
+  static const String login = '/login';
+  static const String modeView = '/modeView';
+  static const String notificationTesting = '/notificationTesting';
 }

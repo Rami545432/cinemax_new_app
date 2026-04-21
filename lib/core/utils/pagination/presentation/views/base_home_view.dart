@@ -1,0 +1,47 @@
+import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_bloc.dart';
+import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_event.dart';
+import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+abstract class BaseHomeScreen<
+  B extends CategoryPaginationBloc<CAT, T, P>,
+  CAT,
+  T,
+  P
+>
+    extends StatelessWidget {
+  const BaseHomeScreen({super.key});
+
+  Widget buildCategoryRow(BuildContext context, B bloc, CAT category);
+
+  List<CAT> get categories;
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<B>();
+
+    return Scaffold(
+      body: RefreshIndicator(
+        color: Colors.white,
+        onRefresh: () => onRefresh(bloc),
+        child: ListView(
+          children: categories
+              .map((cat) => buildCategoryRow(context, bloc, cat))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  Future<void> onRefresh(B bloc) async {
+    bloc.add(const LoadAllCategoriesEvent());
+    await bloc.stream.firstWhere(
+      (state) =>
+          state is CategoryPaginationLoaded<CAT, T, P> &&
+          categories.every(
+            (cat) => !state.getPaginationInfo(cat).isFetchingFirstPage,
+          ),
+    );
+  }
+}

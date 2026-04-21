@@ -3,7 +3,7 @@ import 'dart:ui';
 abstract class AppPrimaryColors {
   static Color dark = const Color(0xff1F1D2B); // very dark blue
   static Color soft = const Color(0xff242634); // soft blue
-  static Color blueAccent = const Color(0xff12CDD9); // blue accent
+  static Color blueAccent = const Color(0xFF2563EB); // blue accent
 }
 
 abstract class AppSecondryColors {

@@ -1,69 +1,118 @@
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
-
-import '../../domain/entities/favorite_entity.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'favorite_model.freezed.dart';
 part 'favorite_model.g.dart';
 
+/// Favorite Model - Data Layer
+///
+/// Represents a favorite item (movie, series, season, or episode)
+/// Stores in both Hive (local) and Firestore (cloud)
 @freezed
-@HiveType(typeId: 0)
+@HiveType(typeId: 4)
 class FavoriteModel with _$FavoriteModel {
-  @HiveField(0)
+  const FavoriteModel._();
   const factory FavoriteModel({
-    @HiveField(1) required int id,
-    @HiveField(2) required String title,
-    @HiveField(3) required String posterImage,
-    @HiveField(4) required List<String> gener,
-    @HiveField(5) required ContentType contentType,
-    @HiveField(6) required String date,
-    @HiveField(7) @Default('guest') String userId,
-    @HiveField(8) @Default(false) bool isSynced,
-    @HiveField(9) required int seasonNumber,
-    @HiveField(10) required int specificId,
-    @HiveField(11) required String seasonPosterUrl,
-    @HiveField(12) required String backGroundImage,
-    @HiveField(13) required int episodeNumber,
-    @HiveField(14) required num rating,
+    // ========== CONTENT IDENTIFICATION ==========
+
+    /// TMDB ID for this specific content
+    /// - For movies: Movie ID
+    /// - For series: Series ID
+    /// - For seasons: Season ID
+    /// - For episodes: Episode ID
+    @HiveField(1) required int specificId,
+
+    /// Type of content (movie, series, season, episode)
+    @HiveField(2) required ContentType contentType,
+
+    // ========== DISPLAY METADATA ==========
+
+    /// Display title
+    @HiveField(3) required String title,
+
+    /// Poster image URL (main thumbnail)
+    @HiveField(4) required String posterImage,
+
+    /// Backdrop image URL (background)
+    @HiveField(5) required String backdropImage,
+
+    /// Genre IDs (for movies and series only)
+    /// Empty list for seasons and episodes
+    @HiveField(6) required List<int> genres,
+
+    /// Release/air date (ISO string format: "2024-02-17")
+    @HiveField(7) required String date,
+
+    /// Rating (0.0 - 10.0)
+    @HiveField(8) required double rating,
+
+    // ========== SERIES/EPISODE SPECIFIC ==========
+
+    /// Season number (0 for movies/series, 1+ for seasons/episodes)
+    @HiveField(9) @Default(0) int seasonNumber,
+
+    /// Episode number (0 for movies/series/seasons, 1+ for episodes)
+    @HiveField(10) @Default(0) int episodeNumber,
+
+    /// Parent series TMDB ID (0 for movies/series, series ID for seasons/episodes)
+    /// Used for API calls to get full series info
+
+    // ========== SYNC MANAGEMENT ==========
+
+    /// User ID ('guest' for unauthenticated, UID for authenticated)
+    /// Used in Hive key generation for multi-user support
+    @HiveField(11) @Default('guest') String userId,
+
+    /// Sync status (false = pending upload, true = synced to cloud)
+    /// Only used in Hive, not stored in Firestore
+    @HiveField(12) @Default(false) bool isSynced,
+
+    /// Last sync timestamp (when last uploaded/downloaded from cloud)
+    /// Stored as DateTime in Hive, Timestamp in Firestore
+    @HiveField(13) DateTime? lastSyncedAt,
+    @HiveField(14) @Default(0) int tmbdId,
   }) = _FavoriteModel;
 
+  // ========== FACTORY CONSTRUCTORS ==========
+
+  /// Create from JSON (Freezed generated, for Hive)
   factory FavoriteModel.fromJson(Map<String, dynamic> json) =>
       _$FavoriteModelFromJson(json);
 
+  /// Create from Entity (Domain → Data)
   factory FavoriteModel.fromEntity(FavoriteEntity entity) => FavoriteModel(
-    id: entity.id,
+    specificId: entity.specificId,
+    contentType: entity.contentType,
     title: entity.title,
     posterImage: entity.posterImage,
-    gener: entity.gener,
-    contentType: entity.contentType,
+    backdropImage: entity.backdropImage,
+    genres: entity.genres,
     date: entity.date,
-    userId: entity.userId,
-    isSynced: entity.isSynced,
-    seasonNumber: entity.seasonNumber,
-    specificId: entity.specificId,
-    seasonPosterUrl: entity.posterImage,
-    backGroundImage: entity.backGroundImage,
-    episodeNumber: entity.episodeNumber,
     rating: entity.rating,
+    seasonNumber: entity.seasonNumber,
+    episodeNumber: entity.episodeNumber,
+    tmbdId: entity.tmbdId,
+    userId: entity.userId,
   );
-}
 
-extension FavoriteModelX on FavoriteModel {
+  // ========== INSTANCE METHODS ==========
+
+  /// Convert to Entity (Data → Domain)
   FavoriteEntity toEntity() => FavoriteEntity(
-    id: id,
+    specificId: specificId,
+    contentType: contentType,
     title: title,
     posterImage: posterImage,
-    gener: gener,
-    contentType: contentType,
+    backdropImage: backdropImage,
+    genres: genres,
     date: date,
-    userId: userId,
-    isSynced: isSynced,
-    seasonNumber: seasonNumber,
-    specificId: specificId,
-    posterImageBackup: seasonPosterUrl,
-    backGroundImage: backGroundImage,
-    episodeNumber: episodeNumber,
     rating: rating,
+    seasonNumber: seasonNumber,
+    episodeNumber: episodeNumber,
+    tmbdId: tmbdId,
+    userId: userId,
   );
+  String get firestoreDocId => '${specificId}_${contentType.name}';
 }

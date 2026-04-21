@@ -96,7 +96,7 @@ linter:
     - use_key_in_widget_constructors
     - use_full_hex_values_for_flutter_colors
     - sized_box_shrink_expand
-    - avoid_returning_widgets
+    
 
     # Modern Dart Features
     - use_super_parameters

@@ -63,12 +63,13 @@ abstract class BaseApiClient {
       defaultParams: defaultParams,
     );
 
-    final response = await dio.get(
+    final response = await dio.get<JsonMap>(
       url,
       cancelToken: cancelToken,
       options: requestOptions,
     );
-
-    return response.data;
+    log(url);
+    final data = response.data!;
+    return data;
   }
 }

@@ -18,12 +18,12 @@ class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
     };
     return SearchHistoryModel(
       query: fields[0] as String,
-      date: fields[1] as String,
-      historyType: fields[2] as String,
+      searchedAt: fields[1] as DateTime,
+      posterPath: fields[2] as String,
       id: fields[3] as int,
-      historyHorizontalCardImage: fields[4] as String,
-      historyVerticalCardImage: fields[5] as String,
-      historyContentType: fields[6] as ContentType?,
+      historyContentType: fields[4] as ContentType,
+      rating: fields[5] as double,
+      date: fields[6] as String,
     );
   }
 
@@ -34,17 +34,17 @@ class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
       ..writeByte(0)
       ..write(obj.query)
       ..writeByte(1)
-      ..write(obj.date)
+      ..write(obj.searchedAt)
       ..writeByte(2)
-      ..write(obj.historyType)
+      ..write(obj.posterPath)
       ..writeByte(3)
       ..write(obj.id)
       ..writeByte(4)
-      ..write(obj.historyHorizontalCardImage)
+      ..write(obj.historyContentType)
       ..writeByte(5)
-      ..write(obj.historyVerticalCardImage)
+      ..write(obj.rating)
       ..writeByte(6)
-      ..write(obj.historyContentType);
+      ..write(obj.date);
   }
 
   @override

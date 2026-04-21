@@ -1,7 +1,6 @@
+import 'package:cinemax_app_new/core/errors/errors.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-
-import '../../../utils/errors/errors.dart';
 
 Future<Either<Failure, T>> safeApiCall<T>(Future<T> Function() call) async {
   try {

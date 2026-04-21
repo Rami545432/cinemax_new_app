@@ -1,4 +1,4 @@
-import '../utils/animations/animated_button.dart';
+import 'package:cinemax_app_new/core/utils/animations/animated_button.dart';
 
 typedef AnimatedListItem = AnimatedButton;
 typedef AnimatedGridItem = AnimatedButton;

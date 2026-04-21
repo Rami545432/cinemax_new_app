@@ -18,17 +18,17 @@ class AppAnimations {
   static int staggerDelay(int index) => 50 * index;
 
   // Reusable effect configurations
-  static List<Effect> pageTransition = [
-    FadeEffect(duration: normal, curve: standardCurve),
-    SlideEffect(
-      begin: const Offset(0.2, 0),
+  static List<Effect<void>> pageTransition = [
+    const FadeEffect(duration: normal, curve: standardCurve),
+    const SlideEffect(
+      begin: Offset(0.2, 0),
       end: Offset.zero,
       duration: normal,
       curve: emphasizedCurve,
     ),
   ];
 
-  static List<Effect> listItemEntrance(int index) => [
+  static List<Effect<void>> listItemEntrance(int index) => [
     FadeEffect(
       duration: slow,
       delay: Duration(milliseconds: staggerDelay(index)),
@@ -41,27 +41,27 @@ class AppAnimations {
     ),
   ];
 
-  static List<Effect> cardEntrance = [
-    FadeEffect(duration: slow, curve: standardCurve),
-    ScaleEffect(
-      begin: const Offset(0.95, 0.95),
-      end: const Offset(1.0, 1.0),
+  static List<Effect<void>> cardEntrance = [
+    const FadeEffect(duration: slow, curve: standardCurve),
+    const ScaleEffect(
+      begin: Offset(0.95, 0.95),
+      end: Offset(1.0, 1.0),
       duration: slow,
       curve: emphasizedCurve,
     ),
   ];
 
-  static List<Effect> successPulse = [
-    ScaleEffect(
-      begin: const Offset(0.8, 0.8),
-      end: const Offset(1.0, 1.0),
+  static List<Effect<void>> successPulse = [
+    const ScaleEffect(
+      begin: Offset(0.8, 0.8),
+      end: Offset(1.0, 1.0),
       duration: fast,
       curve: bounceCurve,
     ),
-    FadeEffect(duration: fast),
+    const FadeEffect(duration: fast),
   ];
 
-  static List<Effect> errorShake = [
-    ShakeEffect(duration: fast, hz: 4, offset: const Offset(5, 0)),
+  static List<Effect<void>> errorShake = [
+    const ShakeEffect(duration: fast, hz: 4, offset: Offset(5, 0)),
   ];
 }

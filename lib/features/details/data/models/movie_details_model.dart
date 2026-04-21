@@ -1,19 +1,19 @@
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/external_ids.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/keywords.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/reviews.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/translations.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/watch_providers.dart';
-import 'package:cinemax_app_new/features/details/data/models/series_season_details/images.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/movie_details_entity.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/belongs_to_collection.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/credits.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/genre.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/production_company.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/production_country.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/spoken_language.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/videos.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/belongs_to_collection.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/external_ids.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/genre.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/images.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/keywords.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/production_company.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/production_country.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/reviews.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/spoken_language.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/translations.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/watch_providers.dart';
 
-class MovieDetailsModel extends MovieDetailsEntity {
+class MovieDetailsModel {
   bool? adult;
   String? backdropPath;
   BelongsToCollection? belongsToCollection;
@@ -84,102 +84,76 @@ class MovieDetailsModel extends MovieDetailsEntity {
     this.watchProviders,
     this.externalIds,
     this.translations,
-  }) : super(
-         duration: runtime ?? 0,
-         actorName: credits?.cast ?? [],
-         movieStatus: status ?? '',
-         companies: productionCompany,
-         overView: overview ?? '',
-         kGeners: geners ?? [],
-         countries: productionCountry,
-         backgroundImage: backdropPath,
-         posterImage: posterPath,
-         kLanguages: originalLanguage,
-         kCredits: credits,
-         kBudget: budget ?? 0,
-         kRevenue: revenue ?? 0,
-         kVideos: videos,
-         movieTitle: originalTitle ?? '',
-         movieId: id ?? 0,
-         kReviews: reviews,
-         kImages: images,
-         kKeywords: keywords,
-         kWatchProviders: watchProviders,
-         kExternalIds: externalIds,
-         kTranslations: translations,
-         kBelongsToCollection: belongsToCollection,
-         date: releaseDate,
-         rating: voteAvarege,
-       );
+  });
 
-  factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {
-    return MovieDetailsModel(
-      adult: json['adult'] as bool?,
-      backdropPath: json['backdrop_path'] as String?,
-      belongsToCollection: json['belongs_to_collection'] == null
-          ? null
-          : BelongsToCollection.fromJson(
-              json['belongs_to_collection'] as Map<String, dynamic>,
-            ),
-      budget: json['budget'] as int?,
-      geners: (json['genres'] as List<dynamic>?)
-          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      homePage: json['homepage'] as String?,
-      id: json['id'] as int?,
-      imdbId: json['imdb_id'] as String?,
-      originCountry: json['origin_country'] as List<dynamic>?,
-      originalLanguage: json['original_language'] as String?,
-      originalTitle: json['original_title'] as String?,
-      overview: json['overview'] as String?,
-      popularity: (json['popularity'] as num?)?.toDouble(),
-      posterPath: json['poster_path'] as String?,
-      productionCompany: (json['production_companies'] as List<dynamic>?)
-          ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      productionCountry: (json['production_countries'] as List<dynamic>?)
-          ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      releaseDate: json['release_date'] as String?,
-      revenue: json['revenue'] as int?,
-      runtime: json['runtime'] as int?,
-      spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
-          ?.map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      status: json['status'] as String?,
-      tagline: json['tagline'] as String?,
-      title: json['title'] as String?,
-      video: json['video'] as bool?,
-      voteAvarege: (json['vote_average'] as num?)?.toDouble(),
-      voteCount: json['vote_count'] as int?,
-      credits: json['credits'] == null
-          ? null
-          : Credits.fromJson(json['credits'] as Map<String, dynamic>),
-      videos: json['videos'] == null
-          ? null
-          : Videos.fromJson(json['videos'] as Map<String, dynamic>),
-      reviews: json['reviews'] == null
-          ? null
-          : Reviews.fromJson(json['reviews'] as Map<String, dynamic>),
-      images: json['images'] == null
-          ? null
-          : Images.fromJson(json['images'] as Map<String, dynamic>),
-      keywords: json['keywords'] == null
-          ? null
-          : Keywords.fromJson(json['keywords'] as Map<String, dynamic>),
-      watchProviders: json['watch_providers'] == null
-          ? null
-          : WatchProviders.fromJson(
-              json['watch_providers'] as Map<String, dynamic>,
-            ),
-      externalIds: json['external_ids'] == null
-          ? null
-          : ExternalIds.fromJson(json['external_ids'] as Map<String, dynamic>),
-      translations: json['translations'] == null
-          ? null
-          : Translations.fromJson(json['translations'] as Map<String, dynamic>),
-    );
-  }
+  factory MovieDetailsModel.fromJson(
+    Map<String, dynamic> json,
+  ) => MovieDetailsModel(
+    adult: json['adult'] as bool?,
+    backdropPath: json['backdrop_path'] as String?,
+    belongsToCollection: json['belongs_to_collection'] == null
+        ? null
+        : BelongsToCollection.fromJson(
+            json['belongs_to_collection'] as Map<String, dynamic>,
+          ),
+    budget: json['budget'] as int?,
+    geners: (json['genres'] as List<dynamic>?)
+        ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    homePage: json['homepage'] as String?,
+    id: json['id'] as int?,
+    imdbId: json['imdb_id'] as String?,
+    originCountry: json['origin_country'] as List<dynamic>?,
+    originalLanguage: json['original_language'] as String?,
+    originalTitle: json['original_title'] as String?,
+    overview: json['overview'] as String?,
+    popularity: (json['popularity'] as num?)?.toDouble(),
+    posterPath: json['poster_path'] as String?,
+    productionCompany: (json['production_companies'] as List<dynamic>?)
+        ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    productionCountry: (json['production_countries'] as List<dynamic>?)
+        ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    releaseDate: json['release_date'] as String?,
+    revenue: json['revenue'] as int?,
+    runtime: json['runtime'] as int?,
+    spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
+        ?.map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    status: json['status'] as String?,
+    tagline: json['tagline'] as String?,
+    title: json['title'] as String?,
+    video: json['video'] as bool?,
+    voteAvarege: (json['vote_average'] as num?)?.toDouble(),
+    voteCount: json['vote_count'] as int?,
+    credits: json['credits'] == null
+        ? null
+        : Credits.fromJson(json['credits'] as Map<String, dynamic>),
+    videos: json['videos'] == null
+        ? null
+        : Videos.fromJson(json['videos'] as Map<String, dynamic>),
+    reviews: json['reviews'] == null
+        ? null
+        : Reviews.fromJson(json['reviews'] as Map<String, dynamic>),
+    images: json['images'] == null
+        ? null
+        : Images.fromJson(json['images'] as Map<String, dynamic>),
+    keywords: json['keywords'] == null
+        ? null
+        : Keywords.fromJson(json['keywords'] as Map<String, dynamic>),
+    watchProviders: json['watch_providers'] == null
+        ? null
+        : WatchProviders.fromJson(
+            json['watch_providers'] as Map<String, dynamic>,
+          ),
+    externalIds: json['external_ids'] == null
+        ? null
+        : ExternalIds.fromJson(json['external_ids'] as Map<String, dynamic>),
+    translations: json['translations'] == null
+        ? null
+        : Translations.fromJson(json['translations'] as Map<String, dynamic>),
+  );
 
   Map<String, dynamic> toJson() => {
     'adult': adult,
@@ -217,4 +191,31 @@ class MovieDetailsModel extends MovieDetailsEntity {
     'external_ids': externalIds?.toJson(),
     'translations': translations?.toJson(),
   };
+  MovieDetailsEntity toEntity() => MovieDetailsEntity(
+    duration: runtime ?? 0,
+    actorName: credits?.cast ?? [],
+    movieStatus: status ?? '',
+    companies: productionCompany,
+    overView: overview ?? '',
+    kGeners: geners ?? [],
+    countries: productionCountry,
+    backgroundImage: backdropPath,
+    posterImage: posterPath,
+    kLanguages: originalLanguage,
+    kCredits: credits,
+    kBudget: budget ?? 0,
+    kRevenue: revenue ?? 0,
+    kVideos: videos,
+    movieTitle: originalTitle ?? '',
+    movieId: id ?? 0,
+    kReviews: reviews,
+    kImages: images,
+    kKeywords: keywords,
+    kWatchProviders: watchProviders,
+    kExternalIds: externalIds,
+    kTranslations: translations,
+    kBelongsToCollection: belongsToCollection,
+    date: releaseDate,
+    rating: voteAvarege,
+  );
 }

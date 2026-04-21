@@ -48,3 +48,20 @@ app.*.map.json
 .env
 .env.local
 .env.*.local
+
+# Security, API Keys, and Secrets
+*.keystore
+*.jks
+*-key.pepk
+android/key.properties
+android/local.properties
+ios/key.properties
+.keys/
+config.json
+secrets.json
+
+# Note: Firebase configuration files (google-services.json / GoogleService-Info.plist) 
+# usually contain public identifiers and can be committed safely in client apps. 
+# If you wish to exclude them, uncomment the below lines:
+# **/google-services.json
+# **/GoogleService-Info.plist

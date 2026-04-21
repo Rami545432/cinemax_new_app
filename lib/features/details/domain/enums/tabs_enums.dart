@@ -5,7 +5,7 @@ enum MovieDetailsEnum { about, cast, parts, reviews, recommended, similar }
 
 extension MovieDetailsEnumExtension on MovieDetailsEnum {
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return switch (this) {
       MovieDetailsEnum.about => l10n.about,
       MovieDetailsEnum.cast => l10n.cast,
@@ -16,16 +16,14 @@ extension MovieDetailsEnumExtension on MovieDetailsEnum {
     };
   }
 
-  Tab localizedTab(BuildContext context) {
-    return Tab(text: localizedText(context));
-  }
+  Tab localizedTab(BuildContext context) => Tab(text: localizedText(context));
 }
 
 enum SeriesDetailsEnum { about, seasons, cast, reviews, recommended, similar }
 
 extension SeriesDetailsEnumExtension on SeriesDetailsEnum {
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return switch (this) {
       SeriesDetailsEnum.about => l10n.about,
       SeriesDetailsEnum.seasons => l10n.seasons,
@@ -36,16 +34,14 @@ extension SeriesDetailsEnumExtension on SeriesDetailsEnum {
     };
   }
 
-  Tab localizedTab(BuildContext context) {
-    return Tab(text: localizedText(context));
-  }
+  Tab localizedTab(BuildContext context) => Tab(text: localizedText(context));
 }
 
 enum SeasonDetailsEnum { episodes, about, cast }
 
 extension SeasonDetailsEnumExtension on SeasonDetailsEnum {
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return switch (this) {
       SeasonDetailsEnum.episodes => l10n.episodes,
       SeasonDetailsEnum.about => l10n.about,
@@ -53,7 +49,5 @@ extension SeasonDetailsEnumExtension on SeasonDetailsEnum {
     };
   }
 
-  Tab localizedTab(BuildContext context) {
-    return Tab(text: localizedText(context));
-  }
+  Tab localizedTab(BuildContext context) => Tab(text: localizedText(context));
 }

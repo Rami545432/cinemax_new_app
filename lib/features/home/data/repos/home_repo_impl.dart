@@ -1,134 +1,41 @@
 import 'package:cinemax_app_new/core/network/api/services/safe_api_calls.dart';
 import 'package:cinemax_app_new/core/types/domain_types.dart';
+import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
+import 'package:cinemax_app_new/features/home/data/data_sources/remote/remote_home_data_source.dart';
 import 'package:cinemax_app_new/features/home/domian/repos/home_repo.dart';
-import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
-import '../data_soureces/remote_home_data_source.dart';
-
+@LazySingleton(as: HomeRepo)
 class HomeRepoImpl implements HomeRepo {
-  final RemoteHomeDataSource remoteHomeDataSource;
-
   HomeRepoImpl({required this.remoteHomeDataSource});
+  final RemoteHomeDataSource remoteHomeDataSource;
   @override
-  MovieListResult fetchPopularMovies(
-    dynamic generId, {
-    int page = 1,
-
-    CancelToken? cancelToken,
-  }) {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchPopularMovies(
-        generId,
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  MovieListResult fetchUpcomingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchUpcomingMovies(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
+  MovieListResult getMovies({int page = 1, String endPoint = 'popular'}) =>
+      safeApiCall(() async {
+        final modelResult = await remoteHomeDataSource.getMovies(
+          page: page,
+          endPoint: endPoint,
+        );
+        return PageResult(
+          page: modelResult.page,
+          totalPages: modelResult.totalPages,
+          totalResults: modelResult.totalResults,
+          results: modelResult.results.map((e) => e.toEntity()).toList(),
+        );
+      });
 
   @override
-  MovieListResult fetchTopRatedMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchTopRatedMovies(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  MovieListResult fetchTrendingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-    String? region,
-  }) {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchTrendingMovies(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  MovieListResult fetchNowPlayingMovies({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchNowPlayingMovies(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  SeriesListResult fetchPopularTvShows(
-    generId, {
-    int page = 1,
-    CancelToken? cancelToken,
-  }) async {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchPopularTvShows(
-        generId,
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  SeriesListResult fetchTopRatedTvShows({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) async {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchTopRatedTvShows(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  SeriesListResult fetchTrendingTvShows({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) async {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchTrendingTvShows(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
-
-  @override
-  SeriesListResult fetchTvAiringToday({
-    int page = 1,
-    CancelToken? cancelToken,
-  }) async {
-    return safeApiCall(
-      () => remoteHomeDataSource.fetchAiringTvShows(
-        page: page,
-        cancelToken: cancelToken,
-      ),
-    );
-  }
+  SeriesListResult getTvShows({int page = 1, String endPoint = 'popular'}) =>
+      safeApiCall(() async {
+        final modelResult = await remoteHomeDataSource.getTvShows(
+          page: page,
+          endPoint: endPoint,
+        );
+        return PageResult(
+          page: modelResult.page,
+          totalPages: modelResult.totalPages,
+          totalResults: modelResult.totalResults,
+          results: modelResult.results.map((e) => e.toEntity()).toList(),
+        );
+      });
 }

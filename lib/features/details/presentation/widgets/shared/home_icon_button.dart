@@ -6,10 +6,8 @@ class HomeIconButton extends StatelessWidget {
   const HomeIconButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => context.goNamed(RouteName.home),
-      icon: const Icon(Icons.home),
-    );
-  }
+  Widget build(BuildContext context) => IconButton(
+    onPressed: () => context.goNamed(RouteName.home),
+    icon: const Icon(Icons.home),
+  );
 }

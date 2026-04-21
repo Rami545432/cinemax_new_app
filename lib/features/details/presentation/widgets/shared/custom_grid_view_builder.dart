@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/pagination/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/core/utils/size_config.dart';
+import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_cubit.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -34,11 +34,12 @@ class CustomGridView<C extends CategoryPaginationCubit<CAT, T, P>, CAT, T, P>
     final cubit = context.read<C>();
     final debounceTimer = useRef<Timer?>(null);
 
-    useEffect(() {
-      return () {
+    useEffect(
+      () => () {
         debounceTimer.value?.cancel();
-      };
-    }, []);
+      },
+      [],
+    );
 
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
@@ -63,7 +64,9 @@ class CustomGridView<C extends CategoryPaginationCubit<CAT, T, P>, CAT, T, P>
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           if (index == data.length) {
-            if (!showPaginationLoader) return const SizedBox.shrink();
+            if (!showPaginationLoader) {
+              return const SizedBox.shrink();
+            }
             return Container(
               width: 60,
               height: 60,

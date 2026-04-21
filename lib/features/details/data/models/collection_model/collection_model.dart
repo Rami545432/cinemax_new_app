@@ -1,7 +1,7 @@
 import 'package:cinemax_app_new/features/details/data/models/collection_model/part.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/collection_entity.dart';
 
-class CollectionModel extends CollectionEntity {
+class CollectionModel {
   final int? id;
   final String? name;
   final String? originalLanguage;
@@ -20,29 +20,21 @@ class CollectionModel extends CollectionEntity {
     this.backdropPath,
     this.posterPath,
     this.parts,
-  }) : super(
-         collectionId: id ?? 0,
-         collectionName: name ?? '',
-         collectionPosterPath: posterPath ?? '',
-         collectionBackdropPath: backdropPath ?? '',
-         collectionOverview: overview ?? '',
-         collectionParts: parts ?? [],
-       );
+  });
 
-  factory CollectionModel.fromJson(Map<String, dynamic> json) {
-    return CollectionModel(
-      backdropPath: json['backdrop_path'] as String?,
-      posterPath: json['poster_path'] as String?,
-      name: json['name'] as String?,
-      id: json['id'] as int?,
-      originalLanguage: json['original_language'] as String?,
-      originalName: json['original_name'] as String?,
-      overview: json['overview'] as String?,
-      parts: (json['parts'] as List<dynamic>?)
-          ?.map((e) => Parts.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-  }
+  factory CollectionModel.fromJson(Map<String, dynamic> json) =>
+      CollectionModel(
+        backdropPath: json['backdrop_path'] as String?,
+        posterPath: json['poster_path'] as String?,
+        name: json['name'] as String?,
+        id: json['id'] as int?,
+        originalLanguage: json['original_language'] as String?,
+        originalName: json['original_name'] as String?,
+        overview: json['overview'] as String?,
+        parts: (json['parts'] as List<dynamic>?)
+            ?.map((e) => Parts.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
   Map<String, dynamic> toJson() => {
     'backdrop_path': backdropPath,
     'poster_path': posterPath,
@@ -53,4 +45,13 @@ class CollectionModel extends CollectionEntity {
     'overview': overview,
     'parts': parts,
   };
+
+  CollectionEntity toEntity() => CollectionEntity(
+    id: id ?? 0,
+    name: name ?? '',
+    posterPath: posterPath ?? '',
+    backdropPath: backdropPath ?? '',
+    overview: overview ?? '',
+    parts: parts?.map((e) => e.toEntity()).toList() ?? [],
+  );
 }

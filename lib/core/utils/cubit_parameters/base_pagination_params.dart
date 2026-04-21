@@ -13,15 +13,11 @@ class BasePaginationParams {
     String? type,
     int? page,
     CancelToken? cancelToken,
-  }) {
-    return BasePaginationParams(
-      type: type ?? this.type,
-      page: page ?? this.page,
-      cancelToken: cancelToken ?? this.cancelToken,
-    );
-  }
+  }) => BasePaginationParams(
+    type: type ?? this.type,
+    page: page ?? this.page,
+    cancelToken: cancelToken ?? this.cancelToken,
+  );
 
-  Map<String, dynamic> toQueryMap() {
-    return {'type': type, 'page': page};
-  }
+  Map<String, dynamic> toQueryMap() => {'type': type, 'page': page};
 }

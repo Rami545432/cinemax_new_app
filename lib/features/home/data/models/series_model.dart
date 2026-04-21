@@ -1,6 +1,6 @@
-import '../../domian/entites/series_entity.dart';
+import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 
-class SeriesModel extends SeriesEntity {
+class SeriesModel {
   String? backdropPath;
   int? id;
   String? name;
@@ -33,18 +33,7 @@ class SeriesModel extends SeriesEntity {
     this.voteAverage,
     this.voteCount,
     this.originCountry,
-  }) : super(
-         tvId: id ?? 0,
-         tvTitle: name ?? '',
-         tvPosterPath: posterPath ?? '',
-         tvBackDropPath: backdropPath ?? '',
-         tvFirstAirDate: firstAirDate ?? '',
-         tvRating: voteAverage ?? 0,
-         gener: genreIds ?? [],
-         storyLine: overview ?? '',
-         tvPopularity: popularity ?? 0,
-       );
-
+  });
   factory SeriesModel.fromJson(Map<String, dynamic> json) => SeriesModel(
     backdropPath: json['backdrop_path'] as String?,
     id: json['id'] as int?,
@@ -84,4 +73,15 @@ class SeriesModel extends SeriesEntity {
     'vote_count': voteCount,
     'origin_country': originCountry,
   };
+  SeriesEntity toEntity() => SeriesEntity(
+    id: id ?? 0,
+    name: name ?? '',
+    genreIds: genreIds ?? [28],
+    voteAverage: voteAverage ?? 0,
+    firstAirDate: firstAirDate ?? '',
+    posterPath: posterPath ?? '',
+    backdropPath: backdropPath ?? '',
+    overview: overview ?? '',
+    popularity: popularity ?? 0,
+  );
 }

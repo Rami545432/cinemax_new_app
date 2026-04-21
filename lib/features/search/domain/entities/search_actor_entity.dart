@@ -1,4 +1,4 @@
-import '../../data/models/search_actor_model/known_for.dart';
+import 'package:cinemax_app_new/features/search/data/models/search_actor_model/known_for.dart';
 
 class SearchActorEntity {
   final String actorImage;

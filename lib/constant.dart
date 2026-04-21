@@ -1,59 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import 'core/utils/app_colors.dart';
-
-Widget primaryPhoto() {
-  return SvgPicture.asset('assets/images/live_tv_black_24dp1.svg');
+class Constants {
+  static const String defaultProfileImage =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq2k2sI1nZyFTtoaKSXxeVzmAwIPchF4tjwg&s';
+  static const String baseImageUrl = 'https://image.tmdb.org/t/p/original/';
+  static SliverGridDelegateWithFixedCrossAxisCount sliverGridDelegate(
+    double width,
+  ) => SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: width > SizeConfig.mobile ? 4 : 3,
+    childAspectRatio: width > SizeConfig.mobile ? 0.6 : 0.5,
+    crossAxisSpacing: 10,
+    mainAxisSpacing: 20,
+  );
 }
-
-const String defaultProfileImage =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq2k2sI1nZyFTtoaKSXxeVzmAwIPchF4tjwg&s';
-
-final favoriteBox = 'favoriteBox';
-const baseImageUrl = 'https://image.tmdb.org/t/p/original/';
-
-final fireBaseUser = FirebaseAuth.instance;
-
-List<String> lables = ['Full name', 'Email', 'Phone Number'];
-List<String> naviLables = ['Home', 'Search', 'Favorite', 'Profile'];
-List<Widget> icons = const [
-  Icon(Icons.home),
-  Icon(Icons.search),
-  Icon(Icons.favorite),
-  Icon(Icons.person),
-];
-List<Widget> selectedIcons = [
-  Icon(Icons.home, color: AppPrimaryColors.blueAccent),
-  Icon(Icons.search, color: AppPrimaryColors.blueAccent),
-  Icon(Icons.favorite, color: Colors.redAccent),
-  Icon(Icons.person, color: AppPrimaryColors.blueAccent),
-];
-
-List<Tab> seriesTabs = const [
-  Tab(text: 'About'),
-  Tab(text: 'Seasons'),
-  Tab(text: 'Cast'),
-  Tab(text: 'Reviews'),
-  Tab(text: 'Recommended'),
-  Tab(text: 'Similar'),
-];
-List<Tab> seasontabs = const [
-  Tab(text: 'Episodes'),
-  Tab(text: 'About'),
-  Tab(text: 'Cast'),
-];
-List<Tab> searchTabs = const [
-  Tab(text: 'All'),
-  Tab(text: 'Movies'),
-  Tab(text: 'Tv Shows'),
-];
-List<Tab> discoverTabs = const [
-  Tab(text: 'Movies'),
-  Tab(text: 'Tv Shows'),
-  Tab(text: 'Networks'),
-  Tab(text: 'Production Companies'),
-  Tab(text: 'Movie Genres'),
-  Tab(text: 'TV Genres'),
-];

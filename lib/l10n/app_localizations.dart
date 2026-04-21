@@ -70,8 +70,8 @@ abstract class AppLocalizations {
 
   final String localeName;
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
@@ -685,6 +685,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Parts'**
   String get parts;
+
+  /// Button to see all content
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAll;
+
+  /// Button to sort content
+  ///
+  /// In en, this message translates to:
+  /// **'Sort By'**
+  String get sortBy;
+
+  /// Sort by most popular
+  ///
+  /// In en, this message translates to:
+  /// **'Most Popular'**
+  String get sortPopularityDesc;
+
+  /// Sort by least popular
+  ///
+  /// In en, this message translates to:
+  /// **'Least Popular'**
+  String get sortPopularityAsc;
+
+  /// Sort by highest rated
+  ///
+  /// In en, this message translates to:
+  /// **'Highest Rated'**
+  String get sortRatingDesc;
+
+  /// Sort by lowest rated
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest Rated'**
+  String get sortRatingAsc;
+
+  /// Sort by newest
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get sortReleaseDateDesc;
+
+  /// Sort by oldest
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest'**
+  String get sortReleaseDateAsc;
+
+  /// Sort by highest revenue
+  ///
+  /// In en, this message translates to:
+  /// **'Highest Revenue'**
+  String get sortRevenueDesc;
+
+  /// Sort by lowest revenue
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest Revenue'**
+  String get sortRevenueAsc;
+
+  /// Sort by most voted
+  ///
+  /// In en, this message translates to:
+  /// **'Most Voted'**
+  String get sortVoteCountDesc;
+
+  /// Sort by least voted
+  ///
+  /// In en, this message translates to:
+  /// **'Least Voted'**
+  String get sortVoteCountAsc;
+
+  /// Sort by newest
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get sortFirstAirDateDesc;
+
+  /// Sort by oldest
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest'**
+  String get sortFirstAirDateAsc;
+
+  /// Sort by highest rated
+  ///
+  /// In en, this message translates to:
+  /// **'Highest Rated'**
+  String get sortVoteAverageDesc;
+
+  /// Sort by lowest rated
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest Rated'**
+  String get sortVoteAverageAsc;
+
+  /// Home
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// Apply Filters
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get applyFilters;
+
+  /// Clear Filters
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearFilters;
+
+  /// Collections
+  ///
+  /// In en, this message translates to:
+  /// **'Collections'**
+  String get collections;
+
+  /// Cartoons
+  ///
+  /// In en, this message translates to:
+  /// **'Cartoons'**
+  String get cartoons;
+
+  /// Anime
+  ///
+  /// In en, this message translates to:
+  /// **'Anime'**
+  String get anime;
+
+  /// Mafia
+  ///
+  /// In en, this message translates to:
+  /// **'Mafia'**
+  String get maifa;
+
+  /// Marvel
+  ///
+  /// In en, this message translates to:
+  /// **'Marvel'**
+  String get marvel;
+
+  /// Year
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// Rating
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// min
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get min;
+
+  /// Cartoon description
+  ///
+  /// In en, this message translates to:
+  /// **'Colorful fun, cozy laughs, and pure good vibes'**
+  String get cartoonDescreption;
+
+  /// Mafia description
+  ///
+  /// In en, this message translates to:
+  /// **'Power, loyalty, betrayal — the underworld stories.'**
+  String get mafiaDescreption;
+
+  /// Anime description
+  ///
+  /// In en, this message translates to:
+  /// **'Epic worlds, deep emotions, unforgettable battles.'**
+  String get animeDescreption;
+
+  /// Marvel description
+  ///
+  /// In en, this message translates to:
+  /// **'Heroes, villains, and multiverse madness — all in one place.'**
+  String get marvelDescreption;
+
+  /// Logout successfully
+  ///
+  /// In en, this message translates to:
+  /// **'Logout successfully'**
+  String get logoutSuccessfully;
+
+  /// Back Online
+  ///
+  /// In en, this message translates to:
+  /// **'Back Online'**
+  String get backOnline;
+
+  /// No description provided for @durationFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String durationFormat(int hours, int minutes);
+
+  /// Duration
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @noFavoritesContentType.
+  ///
+  /// In en, this message translates to:
+  /// **'No {type} in favorites'**
+  String noFavoritesContentType(String type);
+
+  /// No description provided for @statusReleased.
+  ///
+  /// In en, this message translates to:
+  /// **'Released'**
+  String get statusReleased;
+
+  /// No description provided for @statusEnded.
+  ///
+  /// In en, this message translates to:
+  /// **'Ended'**
+  String get statusEnded;
+
+  /// No description provided for @statusReturningSeries.
+  ///
+  /// In en, this message translates to:
+  /// **'Returning Series'**
+  String get statusReturningSeries;
+
+  /// No description provided for @statusInProduction.
+  ///
+  /// In en, this message translates to:
+  /// **'In Production'**
+  String get statusInProduction;
+
+  /// No description provided for @statusCanceled.
+  ///
+  /// In en, this message translates to:
+  /// **'Canceled'**
+  String get statusCanceled;
+
+  /// No description provided for @statusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get statusUnknown;
+
+  /// No description provided for @numberFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{number}'**
+  String numberFormat(int number);
+
+  /// No description provided for @onboardingTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Your Next Obsession'**
+  String get onboardingTitle1;
+
+  /// No description provided for @onboardingDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Find trending movies and must-watch series in seconds.'**
+  String get onboardingDesc1;
+
+  /// No description provided for @onboardingTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Favorites Close'**
+  String get onboardingTitle2;
+
+  /// No description provided for @onboardingDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'Save movies and shows you love into your personal watchlist.'**
+  String get onboardingDesc2;
+
+  /// No description provided for @onboardingTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Before You Commit'**
+  String get onboardingTitle3;
+
+  /// No description provided for @onboardingDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Check trailers, ratings, and reviews before hitting play.'**
+  String get onboardingDesc3;
+
+  /// No description provided for @onboardingTitle0.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Next Cinematic Obsession Starts Here'**
+  String get onboardingTitle0;
+
+  /// No description provided for @loginSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successfully'**
+  String get loginSuccessfully;
+
+  /// No description provided for @loginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get loginFailed;
+
+  /// No description provided for @loginTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to keep your favorite list'**
+  String get loginTagline;
+
+  /// No description provided for @signWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
+  String get signWithGoogle;
 }
 
 class _AppLocalizationsDelegate

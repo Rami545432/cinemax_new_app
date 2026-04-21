@@ -5,7 +5,6 @@ class DiscoverView extends StatelessWidget {
   const DiscoverView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: SafeArea(child: DiscoverViewBody()));
-  }
+  Widget build(BuildContext context) =>
+      const Scaffold(body: SafeArea(child: DiscoverViewBody()));
 }

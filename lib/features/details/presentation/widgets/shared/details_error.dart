@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/core/utils/retry_button.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/retry_button.dart';
 import 'package:flutter/material.dart';
 
 class DetailsError extends StatelessWidget {
@@ -8,16 +8,14 @@ class DetailsError extends StatelessWidget {
   final VoidCallback onRetry;
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(message ?? 'Something went wrong'),
-          const SizedBox(height: 12),
-          RetryButton(onRetry: onRetry),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(message ?? 'Something went wrong'),
+        const SizedBox(height: 12),
+        RetryButton(onRetry: onRetry),
+      ],
+    ),
+  );
 }

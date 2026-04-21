@@ -1,13 +1,11 @@
 import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/core/utils/helper/formatted_methods/formatted_date_method.dart';
+import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../data/models/arguments/episode_view_argument.dart';
-import '../../../data/models/series_season_details/episode.dart';
 
 class EpisodeListTile extends StatelessWidget {
   const EpisodeListTile({
@@ -21,11 +19,11 @@ class EpisodeListTile extends StatelessWidget {
   final Episode episode;
   final String seiresPosterPath;
   final String seasonPosterPath;
-  final SeriesSeasonDetailsEntitiy? preloadedSeasonDetails;
+  final SeriesSeasonDetailsEntity? preloadedSeasonDetails;
   @override
   Widget build(BuildContext context) {
     final style = AppStyles.textStyle18(context);
-    String date = FormattedDateMethods.formatDateMonthYear(
+    final String date = FormattedDateMethods.formatDateMonthYear(
       episode.airDate ?? "Unknown",
     );
     return ListTile(
@@ -41,14 +39,15 @@ class EpisodeListTile extends StatelessWidget {
       onTap: () {
         context.pushNamed(
           RouteName.episode,
-          extra: EpisodeViewArgument(
-            contentType: ContentType.episodes,
-            episodeNumber: episode.episodeNumber!,
-            seasonNumber: episode.seasonNumber!,
-            tvid: episode.showId!,
-            seasonPosterPath: seasonPosterPath,
-            seiresPosterPath: seiresPosterPath,
-            preloadedSeasonDetails: preloadedSeasonDetails,
+          extra: EpisodeNavData(
+            tmdbId: episode.showId ?? 0,
+            seasonNumber: episode.seasonNumber ?? 0,
+            episodeNumber: episode.episodeNumber ?? 0,
+            posterImage: seasonPosterPath,
+            backdropImage: episode.stillPath,
+            seriesPosterPath: seiresPosterPath,
+            specificId: episode.id ?? 0,
+            rating: episode.voteAverage,
           ),
         );
       },

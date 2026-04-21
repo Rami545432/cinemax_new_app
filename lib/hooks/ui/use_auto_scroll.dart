@@ -13,7 +13,9 @@ void useAutoScroll({
 }) {
   final isMounted = useIsMountedd();
   useEffect(() {
-    if (!isEnabled) return null;
+    if (!isEnabled) {
+      return null;
+    }
 
     final timer = Timer.periodic(interval, (_) {
       if (!controller.hasClients || isUserInteracting.value || !isMounted()) {

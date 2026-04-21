@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QuickSuggestions extends StatelessWidget {
-  final Function(String) onSuggestionTap;
+  final ValueChanged<String> onSuggestionTap;
 
   const QuickSuggestions({super.key, required this.onSuggestionTap});
 
@@ -15,48 +15,48 @@ class QuickSuggestions extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Quick suggestions',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: Colors.grey.shade600,
-                fontWeight: FontWeight.w600,
-              ),
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(16),
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Quick suggestions',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: Colors.grey.shade600,
+              fontWeight: FontWeight.w600,
             ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: _suggestions.map((suggestion) {
-                return ActionChip(
-                  avatar: Text(
-                    suggestion['icon']!,
-                    style: const TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: _suggestions
+                .map(
+                  (suggestion) => ActionChip(
+                    avatar: Text(
+                      suggestion['icon']!,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    label: Text(suggestion['text']!),
+                    onPressed: () => onSuggestionTap(suggestion['text']!),
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade100,
+                    side: BorderSide.none,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                   ),
-                  label: Text(suggestion['text']!),
-                  onPressed: () => onSuggestionTap(suggestion['text']!),
-                  backgroundColor:
-                      Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade800
-                      : Colors.grey.shade100,
-                  side: BorderSide.none,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
-        ),
+                )
+                .toList(),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

@@ -9,12 +9,10 @@ class CustomTabBar extends StatelessWidget {
   final TabController? controller;
 
   @override
-  Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      delegate: _SliverHeaderDelegate(tabs, controller),
-      pinned: true,
-    );
-  }
+  Widget build(BuildContext context) => SliverPersistentHeader(
+    delegate: _SliverHeaderDelegate(tabs, controller),
+    pinned: true,
+  );
 }
 
 class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
@@ -26,36 +24,34 @@ class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
-  ) {
-    return Material(
-      elevation: 2,
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final style = AppStyles.textStyle18(context);
+  ) => Material(
+    elevation: 2,
+    color: Theme.of(context).scaffoldBackgroundColor,
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        final style = AppStyles.textStyle18(context);
 
-          final shouldBeScrollable = tabs.length > 3;
-          final tabAlignment = shouldBeScrollable
-              ? TabAlignment.start
-              : TabAlignment.fill;
+        final shouldBeScrollable = tabs.length > 3;
+        final tabAlignment = shouldBeScrollable
+            ? TabAlignment.start
+            : TabAlignment.fill;
 
-          return TabBar(
-            overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]!),
+        return TabBar(
+          overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]),
 
-            isScrollable: shouldBeScrollable,
-            tabAlignment: tabAlignment,
-            controller: controller,
-            labelColor: AppPrimaryColors.blueAccent,
-            indicatorColor: AppPrimaryColors.blueAccent,
-            dividerColor: Colors.transparent,
-            labelStyle: style,
-            unselectedLabelStyle: style,
-            tabs: tabs,
-          );
-        },
-      ),
-    );
-  }
+          isScrollable: shouldBeScrollable,
+          tabAlignment: tabAlignment,
+          controller: controller,
+          labelColor: AppPrimaryColors.blueAccent,
+          indicatorColor: AppPrimaryColors.blueAccent,
+          dividerColor: Colors.transparent,
+          labelStyle: style,
+          unselectedLabelStyle: style,
+          tabs: tabs,
+        );
+      },
+    ),
+  );
 
   @override
   double get maxExtent => 48;
@@ -64,7 +60,6 @@ class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => 48;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
-  }
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }

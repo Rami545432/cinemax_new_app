@@ -9,6 +9,6 @@ class FetchSeriesSeasonDetailsState with _$FetchSeriesSeasonDetailsState {
   const factory FetchSeriesSeasonDetailsState.failure(String? message) =
       _Failure;
   const factory FetchSeriesSeasonDetailsState.success(
-    SeriesSeasonDetailsEntitiy series,
+    SeriesSeasonDetailsEntity series,
   ) = _Success;
 }

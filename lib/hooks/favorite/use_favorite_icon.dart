@@ -6,18 +6,16 @@ Widget useFavoriteIcon(bool isFavorite, String uniqueId, bool isLoading) {
       key: ValueKey('Loading-$uniqueId'),
       width: 24,
       height: 24,
-      child: Icon(Icons.favorite_border, color: Colors.grey),
+      child: const Icon(Icons.favorite_border, color: Colors.grey),
     );
   }
   return AnimatedSwitcher(
     key: ValueKey('FavoriteIcon-$uniqueId'),
-    duration: Duration(milliseconds: 300),
-    transitionBuilder: (child, animation) {
-      return ScaleTransition(
-        scale: animation,
-        child: FadeTransition(opacity: animation, child: child),
-      );
-    },
+    duration: const Duration(milliseconds: 300),
+    transitionBuilder: (child, animation) => ScaleTransition(
+      scale: animation,
+      child: FadeTransition(opacity: animation, child: child),
+    ),
     child: isFavorite
         ? Icon(
             Icons.favorite,

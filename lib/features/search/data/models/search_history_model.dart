@@ -1,63 +1,52 @@
 import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/models/base_card_model.dart';
+import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
 import 'package:hive/hive.dart';
 
 part 'search_history_model.g.dart';
 
 @HiveType(typeId: 2)
-class SearchHistoryModel implements BaseCardModel {
+class SearchHistoryModel {
   @HiveField(0)
   final String query;
   @HiveField(1)
-  final String date;
+  final DateTime searchedAt;
   @HiveField(2)
-  final String historyType;
+  final String posterPath;
   @HiveField(3)
   final int id;
   @HiveField(4)
-  final String historyHorizontalCardImage;
+  final ContentType historyContentType;
   @HiveField(5)
-  final String historyVerticalCardImage;
+  final double rating;
   @HiveField(6)
-  final ContentType? historyContentType;
+  final String date;
 
   SearchHistoryModel({
     required this.query,
-    required this.date,
-    required this.historyType,
+    required this.searchedAt,
+    required this.posterPath,
     required this.id,
-    required this.historyHorizontalCardImage,
-    required this.historyVerticalCardImage,
-    this.historyContentType,
+    required this.historyContentType,
+    required this.rating,
+    required this.date,
   });
-
-  @override
-  String? get cardDate => date;
-
-  @override
-  List<int>? get cardGeners => null;
-
-  @override
-  int get cardId => id;
-
-  @override
-  String get cardImage => historyVerticalCardImage;
-
-  @override
-  num? get cardPopularity => null;
-
-  @override
-  num? get cardRating => null;
-
-  @override
-  String get cardTitle => query;
-
-  @override
-  String? get horizontalCardImage => historyHorizontalCardImage;
-
-  @override
-  String? get type => historyType;
-
-  @override
-  ContentType? get contentType => historyContentType;
+  SearchHistoryEntity toEntity() => SearchHistoryEntity(
+    id: id,
+    title: query,
+    searchedAt: searchedAt,
+    posterPath: posterPath,
+    historyContentType: historyContentType,
+    rating: rating,
+    date: date,
+  );
+  factory SearchHistoryModel.fromEntity(SearchHistoryEntity entity) =>
+      SearchHistoryModel(
+        id: entity.id,
+        query: entity.title,
+        searchedAt: entity.searchedAt,
+        posterPath: entity.posterPath,
+        historyContentType: entity.historyContentType,
+        rating: entity.rating,
+        date: entity.date,
+      );
 }

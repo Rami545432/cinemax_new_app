@@ -305,4 +305,186 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get parts => 'Bölümler';
+
+  @override
+  String get seeAll => 'Tümünü Gör';
+
+  @override
+  String get sortBy => 'Sırala';
+
+  @override
+  String get sortPopularityDesc => 'En Popüler';
+
+  @override
+  String get sortPopularityAsc => 'En Az Popüler';
+
+  @override
+  String get sortRatingDesc => 'En Yüksek Puanlı';
+
+  @override
+  String get sortRatingAsc => 'En Düşük Puanlı';
+
+  @override
+  String get sortReleaseDateDesc => 'En Yeni';
+
+  @override
+  String get sortReleaseDateAsc => 'En Eski';
+
+  @override
+  String get sortRevenueDesc => 'En Yüksek Gelir';
+
+  @override
+  String get sortRevenueAsc => 'En Düşük Gelir';
+
+  @override
+  String get sortVoteCountDesc => 'En Çok Oy';
+
+  @override
+  String get sortVoteCountAsc => 'En Az Oy';
+
+  @override
+  String get sortFirstAirDateDesc => 'En Yeni';
+
+  @override
+  String get sortFirstAirDateAsc => 'En Eski';
+
+  @override
+  String get sortVoteAverageDesc => 'En Yüksek Puanlı';
+
+  @override
+  String get sortVoteAverageAsc => 'En Düşük Puanlı';
+
+  @override
+  String get home => 'Ana Sayfa';
+
+  @override
+  String get applyFilters => 'Uygula';
+
+  @override
+  String get clearFilters => 'Temizle';
+
+  @override
+  String get collections => 'Koleksiyonlar';
+
+  @override
+  String get cartoons => 'Çizgi Filmler';
+
+  @override
+  String get anime => 'Anime';
+
+  @override
+  String get maifa => 'Mafya';
+
+  @override
+  String get marvel => 'Marvel';
+
+  @override
+  String get year => 'Yıl';
+
+  @override
+  String get rating => 'Puan';
+
+  @override
+  String get min => 'dk';
+
+  @override
+  String get cartoonDescreption =>
+      'Renkli eğlence, rahat kahkahalar ve saf iyi hisler';
+
+  @override
+  String get mafiaDescreption =>
+      'Güç, sadakat, ihanet - yeraltı dünyasının hikayeleri.';
+
+  @override
+  String get animeDescreption =>
+      'Epik dünyalar, derin duygular ve unutulmaz savaşlar.';
+
+  @override
+  String get marvelDescreption =>
+      'Kahramanlar, kötüler ve çoklu evren çılgınlığı - hepsi tek yerde.';
+
+  @override
+  String get logoutSuccessfully => 'Başarıyla çıkış yapıldı';
+
+  @override
+  String get backOnline => 'İnternete geri dönüldü';
+
+  @override
+  String durationFormat(int hours, int minutes) {
+    return '${hours}sa ${minutes}dk';
+  }
+
+  @override
+  String get duration => 'Süre';
+
+  @override
+  String noFavoritesContentType(String type) {
+    return 'Favorilerde $type yok';
+  }
+
+  @override
+  String get statusReleased => 'Yayınlandı';
+
+  @override
+  String get statusEnded => 'Bitti';
+
+  @override
+  String get statusReturningSeries => 'Devam Ediyor';
+
+  @override
+  String get statusInProduction => 'Yapım Aşamasında';
+
+  @override
+  String get statusCanceled => 'İptal Edildi';
+
+  @override
+  String get statusUnknown => 'Bilinmiyor';
+
+  @override
+  String numberFormat(int number) {
+    final intl.NumberFormat numberNumberFormat = intl.NumberFormat.currency(
+      locale: localeName,
+      decimalDigits: 0,
+      symbol: '\$',
+    );
+    final String numberString = numberNumberFormat.format(number);
+
+    return '$numberString';
+  }
+
+  @override
+  String get onboardingTitle1 => 'Bir Sonraki Tutkunu Keşfet';
+
+  @override
+  String get onboardingDesc1 =>
+      'Trend filmleri ve bağımlılık yapan dizileri saniyeler içinde keşfet.';
+
+  @override
+  String get onboardingTitle2 => 'Favorilerini Yakınında Tut';
+
+  @override
+  String get onboardingDesc2 =>
+      'Sevdiğin film ve dizileri kişisel izleme listene kaydet.';
+
+  @override
+  String get onboardingTitle3 => 'Karar Vermeden Önce İzle';
+
+  @override
+  String get onboardingDesc3 =>
+      'Oynatmadan önce fragmanları, puanları ve yorumları kontrol et.';
+
+  @override
+  String get onboardingTitle0 => 'Bir Sonraki Tutkunu Keşfet';
+
+  @override
+  String get loginSuccessfully => 'Başarıyla giriş yapıldı';
+
+  @override
+  String get loginFailed => 'Giriş başarısız';
+
+  @override
+  String get loginTagline => 'Favori listenizi korumak için giriş yapın';
+
+  @override
+  String get signWithGoogle => 'Google ile giriş yap';
 }

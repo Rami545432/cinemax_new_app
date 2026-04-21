@@ -351,5 +351,207 @@
   "parts": "Bölümler",
   "@parts": {
     "description": "Bölümlerin açıklaması"
-  }
+  },
+  "seeAll": "Tümünü Gör",
+  "@seeAll": {
+    "description": "Tümünü gör butonu"
+  },
+  "sortBy": "Sırala",
+  "@sortBy": {
+    "description": "Sırala butonu"
+  },
+  "sortPopularityDesc": "En Popüler",
+  "@sortPopularityDesc": {
+    "description": "Sırala göre en popüler"
+  },
+  "sortPopularityAsc": "En Az Popüler",
+  "@sortPopularityAsc": {
+    "description": "Sırala göre en az popüler"
+  },
+  "sortRatingDesc": "En Yüksek Puanlı",
+  "@sortRatingDesc": {
+    "description": "Sırala göre en yüksek puanlı"
+  },
+  "sortRatingAsc": "En Düşük Puanlı",
+  "@sortRatingAsc": {
+    "description": "Sırala göre en düşük puanlı"
+  },
+  "sortReleaseDateDesc": "En Yeni",
+  "@sortReleaseDateDesc": {
+    "description": "Sırala göre en yeni"
+  },
+  "sortReleaseDateAsc": "En Eski",
+  "@sortReleaseDateAsc": {
+    "description": "Sırala göre en eski"
+  },
+  "sortRevenueDesc": "En Yüksek Gelir",
+  "@sortRevenueDesc": {
+    "description": "Sırala göre en yüksek gelir"
+  },
+  "sortRevenueAsc": "En Düşük Gelir",
+  "@sortRevenueAsc": {
+    "description": "Sırala göre en düşük gelir"
+  },
+  "sortVoteCountDesc": "En Çok Oy",
+  "@sortVoteCountDesc": {
+    "description": "Sırala göre en çok oy"
+  },
+  "sortVoteCountAsc": "En Az Oy",
+  "@sortVoteCountAsc": {
+    "description": "Sırala göre en az oy"
+  },
+  "sortFirstAirDateDesc": "En Yeni",
+  "@sortFirstAirDateDesc": {
+    "description": "Sırala göre en yeni"
+  },
+  "sortFirstAirDateAsc": "En Eski",
+  "@sortFirstAirDateAsc": {
+    "description": "Sırala göre en eski"
+  },
+  "sortVoteAverageDesc": "En Yüksek Puanlı",
+  "@sortVoteAverageDesc": {
+    "description": "Sırala göre en yüksek puanlı"
+  },
+  "sortVoteAverageAsc": "En Düşük Puanlı",
+  "@sortVoteAverageAsc": {
+    "description": "Sırala göre en düşük puanlı"
+  },
+  "home": "Ana Sayfa",
+  "@home": {
+    "description": "Ana sayfa"
+  },
+  "applyFilters": "Uygula",
+  "@applyFilters": {
+    "description": "Uygula"
+  },
+  "clearFilters": "Temizle",
+  "@clearFilters": {
+    "description": "Temizle"
+  },
+  "collections": "Koleksiyonlar",
+  "@collections": {
+    "description": "Koleksiyonlar"
+  },
+  "cartoons": "Çizgi Filmler",
+  "@cartoons": {
+    "description": "Çizgi Filmler"
+  },
+  "anime": "Anime",
+  "@anime": {
+    "description": "Anime"
+  },
+  "maifa": "Mafya",
+  "@maifa": {
+    "description": "Mafya"
+  },
+  "marvel": "Marvel",
+  "@marvel": {
+    "description": "Marvel"
+  },
+  "year": "Yıl",
+  "@year": {
+    "description": "Yıl"
+  },
+  "rating": "Puan",
+  "@rating": {
+    "description": "Puan"
+  },
+  "min": "dk",
+  "@min": {
+    "description": "dk"
+  },
+  "cartoonDescreption": "Renkli eğlence, rahat kahkahalar ve saf iyi hisler",
+  "@cartoonDescreption": {
+    "description": "Çizgi film açıklaması"
+  },
+  "mafiaDescreption": "Güç, sadakat, ihanet - yeraltı dünyasının hikayeleri.",
+  "@mafiaDescreption": {
+    "description": "Mafya açıklaması"
+  },
+  "animeDescreption": "Epik dünyalar, derin duygular ve unutulmaz savaşlar.",
+  "@animeDescreption": {
+    "description": "Anime açıklaması"
+  },
+  "marvelDescreption": "Kahramanlar, kötüler ve çoklu evren çılgınlığı - hepsi tek yerde.",
+  "@marvelDescreption": {
+    "description": "Marvel açıklaması"
+  },
+  "logoutSuccessfully": "Başarıyla çıkış yapıldı",
+  "@logoutSuccessfully": {
+    "description": "Başarıyla çıkış yapıldı"
+  },
+  "backOnline": "İnternete geri dönüldü",
+  "@backOnline": {
+    "description": "İnternete geri dönüldü"
+  },
+  "durationFormat": "{hours}sa {minutes}dk",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "Süre",
+  "@duration": {
+    "description": "Süre"
+  },
+  "noFavoritesContentType": "Favorilerde {type} yok",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "Yayınlandı",
+  "@statusReleased": {},
+  "statusEnded": "Bitti",
+  "@statusEnded": {},
+  "statusReturningSeries": "Devam Ediyor",
+  "@statusReturningSeries": {},
+  "statusInProduction": "Yapım Aşamasında",
+  "@statusInProduction": {},
+  "statusCanceled": "İptal Edildi",
+  "@statusCanceled": {},
+  "statusUnknown": "Bilinmiyor",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "Bir Sonraki Tutkunu Keşfet",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "Trend filmleri ve bağımlılık yapan dizileri saniyeler içinde keşfet.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "Favorilerini Yakınında Tut",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "Sevdiğin film ve dizileri kişisel izleme listene kaydet.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "Karar Vermeden Önce İzle",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "Oynatmadan önce fragmanları, puanları ve yorumları kontrol et.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "Bir Sonraki Tutkunu Keşfet",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "Başarıyla giriş yapıldı",
+  "@loginSuccessfully": {},
+  "loginFailed": "Giriş başarısız",
+  "@loginFailed": {},
+  "loginTagline": "Favori listenizi korumak için giriş yapın",
+  "@loginTagline": {},
+  "signWithGoogle": "Google ile giriş yap",
+  "@signWithGoogle": {}
 }

@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/core/errors/errors.dart';
 import 'package:dartz/dartz.dart';
-
-import '../utils/errors/errors.dart';
 
 typedef RepositoryResult<T> = Future<Either<Failure, T>>;
 typedef ListRepositoryResult<T> = RepositoryResult<List<T>>;

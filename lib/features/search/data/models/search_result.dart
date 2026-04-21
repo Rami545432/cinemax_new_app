@@ -1,6 +1,5 @@
-import 'package:cinemax_app_new/features/home/domian/entites/series_entity.dart';
-
-import '../../../home/domian/entites/movie_entity.dart';
+import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
+import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 
 sealed class SearchResult {}
 

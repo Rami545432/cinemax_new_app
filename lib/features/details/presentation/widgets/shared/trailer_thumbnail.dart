@@ -12,26 +12,21 @@ class TrailerThumbnail extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 12),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Align(
-            alignment: Alignment.center,
-            heightFactor: 0.75,
-            child: CachedNetworkImage(
-              imageUrl: 'https://img.youtube.com/vi/$videoKey/hqdefault.jpg',
-              fit: BoxFit.contain,
-              errorWidget: (context, url, error) {
-                return const Icon(Icons.error);
-              },
-            ),
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: onTap,
+    child: Padding(
+      padding: const EdgeInsets.only(right: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Align(
+          heightFactor: 0.75,
+          child: CachedNetworkImage(
+            imageUrl: 'https://img.youtube.com/vi/$videoKey/hqdefault.jpg',
+            fit: BoxFit.contain,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }

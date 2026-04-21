@@ -256,7 +256,7 @@
       }
     }
   },
-    "startAddingYourFavorite": "Commencez à ajouter votre {type} favori",
+  "startAddingYourFavorite": "Commencez à ajouter votre {type} favori",
   "@startAddingYourFavorite": {
     "description": "Texte affiché lorsqu'aucun {type} dans les favoris n'est disponible",
     "placeholders": {
@@ -351,5 +351,207 @@
   "parts": "Parts",
   "@parts": {
     "description": "Parts of the content"
-  }
+  },
+  "seeAll": "Voir tout",
+  "@seeAll": {
+    "description": "Button to see all content"
+  },
+  "sortBy": "Trier par",
+  "@sortBy": {
+    "description": "Bouton pour trier le contenu"
+  },
+  "sortPopularityDesc": "Le plus populaire",
+  "@sortPopularityDesc": {
+    "description": "Trier par le plus populaire"
+  },
+  "sortPopularityAsc": "Le moins populaire",
+  "@sortPopularityAsc": {
+    "description": "Trier par le moins populaire"
+  },
+  "sortRatingDesc": "Le mieux noté",
+  "@sortRatingDesc": {
+    "description": "Trier par le mieux noté"
+  },
+  "sortRatingAsc": "Le moins bien noté",
+  "@sortRatingAsc": {
+    "description": "Trier par le moins bien noté"
+  },
+  "sortReleaseDateDesc": "Le plus récent",
+  "@sortReleaseDateDesc": {
+    "description": "Trier par le plus récent"
+  },
+  "sortReleaseDateAsc": "Le plus ancien",
+  "@sortReleaseDateAsc": {
+    "description": "Trier par le plus ancien"
+  },
+  "sortRevenueDesc": "Le plus rentable",
+  "@sortRevenueDesc": {
+    "description": "Trier par le plus rentable"
+  },
+  "sortRevenueAsc": "Le moins rentable",
+  "@sortRevenueAsc": {
+    "description": "Trier par le moins rentable"
+  },
+  "sortVoteCountDesc": "Le plus voté",
+  "@sortVoteCountDesc": {
+    "description": "Trier par le plus voté"
+  },
+  "sortVoteCountAsc": "Le moins voté",
+  "@sortVoteCountAsc": {
+    "description": "Trier par le moins voté"
+  },
+  "sortFirstAirDateDesc": "Le plus récent",
+  "@sortFirstAirDateDesc": {
+    "description": "Trier par le plus récent"
+  },
+  "sortFirstAirDateAsc": "Le plus ancien",
+  "@sortFirstAirDateAsc": {
+    "description": "Trier par le plus ancien"
+  },
+  "sortVoteAverageDesc": "Le mieux noté",
+  "@sortVoteAverageDesc": {
+    "description": "Trier par le mieux noté"
+  },
+  "sortVoteAverageAsc": "Le moins bien noté",
+  "@sortVoteAverageAsc": {
+    "description": "Trier par le moins bien noté"
+  },
+  "home": "Accueil",
+  "@home": {
+    "description": "Accueil"
+  },
+  "applyFilters": "Appliquer",
+  "@applyFilters": {
+    "description": "Appliquer"
+  },
+  "clearFilters": "Effacer",
+  "@clearFilters": {
+    "description": "Effacer"
+  },
+  "collections": "Collections",
+  "@collections": {
+    "description": "Collections"
+  },
+  "cartoons": "Dessins animés",
+  "@cartoons": {
+    "description": "Dessins animés"
+  },
+  "anime": "Anime",
+  "@anime": {
+    "description": "Anime"
+  },
+  "maifa": "Mafia",
+  "@maifa": {
+    "description": "Mafia"
+  },
+  "marvel": "Marvel",
+  "@marvel": {
+    "description": "Marvel"
+  },
+  "year": "Année",
+  "@year": {
+    "description": "Année"
+  },
+  "rating": "Note",
+  "@rating": {
+    "description": "Note"
+  },
+  "min": "min",
+  "@min": {
+    "description": "min"
+  },
+  "cartoonDescreption": "Des rires colorés et des moments chaleureux",
+  "@cartoonDescreption": {
+    "description": "Description des dessins animés"
+  },
+  "mafiaDescreption": "Pouvoir, loyauté, trahison - les histoires du monde souterrain.",
+  "@mafiaDescreption": {
+    "description": "Description de la mafia"
+  },
+  "animeDescreption": "Des mondes épiques, des émotions profondes et des batailles inoubliables.",
+  "@animeDescreption": {
+    "description": "Description de l'anime"
+  },
+  "marvelDescreption": "Héros, méchants et folie multiverselle - tout en un seul endroit.",
+  "@marvelDescreption": {
+    "description": "Description de Marvel"
+  },
+  "logoutSuccessfully": "Déconnexion réussie",
+  "@logoutSuccessfully": {
+    "description": "Déconnexion réussie"
+  },
+  "backOnline": "Retour en ligne",
+  "@backOnline": {
+    "description": "Retour en ligne"
+  },
+  "durationFormat": "{hours}h {minutes}m",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "Durée",
+  "@duration": {
+    "description": "Durée"
+  },
+  "noFavoritesContentType": "Aucun {type} dans les favoris",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "Sorti",
+  "@statusReleased": {},
+  "statusEnded": "Terminé",
+  "@statusEnded": {},
+  "statusReturningSeries": "En cours",
+  "@statusReturningSeries": {},
+  "statusInProduction": "En production",
+  "@statusInProduction": {},
+  "statusCanceled": "Annulé",
+  "@statusCanceled": {},
+  "statusUnknown": "Inconnu",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "Trouvez Votre Prochaine Obsession",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "Découvrez les films tendance et les séries captivantes en quelques secondes.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "Gardez Vos Favoris Près De Vous",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "Enregistrez les films et séries que vous aimez dans votre liste personnelle.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "Regardez Avant De Choisir",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "Consultez les bandes-annonces, notes et avis avant de lancer la lecture.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "Votre prochaine obsession cinématographique commence ici",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "Connexion réussie",
+  "@loginSuccessfully": {},
+  "loginFailed": "Échec de la connexion",
+  "@loginFailed": {},
+  "loginTagline": "Connectez-vous pour conserver votre liste de favoris",
+  "@loginTagline": {},
+  "signWithGoogle": "Se connecter avec Google",
+  "@signWithGoogle": {}
 }

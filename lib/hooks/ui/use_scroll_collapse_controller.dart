@@ -37,17 +37,27 @@ ScrollCollapseResult useScrollCollapseDebounced([
       debounceTimer.value?.cancel();
 
       debounceTimer.value = Timer(debounce, () {
-        if (isDisposed.value) return;
-        if (!scrollController.hasClients) return;
-        if (scrollController.positions.isEmpty) return;
+        if (isDisposed.value) {
+          return;
+        }
+        if (!scrollController.hasClients) {
+          return;
+        }
+        if (scrollController.positions.isEmpty) {
+          return;
+        }
 
         try {
           final position = scrollController.position;
 
           // Use ScrollMetrics instead of directly accessing pixels
           // This is safer for NestedScrollView
-          if (!position.hasContentDimensions) return;
-          if (!position.isScrollingNotifier.value) return;
+          if (!position.hasContentDimensions) {
+            return;
+          }
+          if (!position.isScrollingNotifier.value) {
+            return;
+          }
 
           // Get the current scroll offset using metrics
           // This avoids the activity.isScrolling assertion
@@ -55,7 +65,9 @@ ScrollCollapseResult useScrollCollapseDebounced([
           final currentOffset = metrics.pixels;
 
           // Validate the offset is a valid number
-          if (currentOffset.isNaN || currentOffset.isInfinite) return;
+          if (currentOffset.isNaN || currentOffset.isInfinite) {
+            return;
+          }
 
           final shouldCollapse = currentOffset >= threshold;
 
@@ -81,7 +93,9 @@ ScrollCollapseResult useScrollCollapseDebounced([
     // Use SchedulerBinding for more reliable timing
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.microtask(() {
-        if (isDisposed.value) return;
+        if (isDisposed.value) {
+          return;
+        }
         if (scrollController.hasClients &&
             scrollController.positions.isNotEmpty) {
           updateScroll();

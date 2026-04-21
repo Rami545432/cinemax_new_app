@@ -7,30 +7,27 @@ class TmdbSearchApi {
   final TmdbBaseClient client;
 
   TmdbSearchApi(this.client);
-  ApiResposne searchMovies(String query, {CancelToken? cancelToken}) {
-    return client.get(
-      'search/movie',
-      queryParams: {'query': query},
-      cancelToken: cancelToken,
-      overridePolicy: CachePolicy.noCache,
-    );
-  }
+  ApiResponse searchMovies(String query, {CancelToken? cancelToken}) =>
+      client.get(
+        'search/movie',
+        queryParams: {'query': query},
+        cancelToken: cancelToken,
+        overridePolicy: CachePolicy.noCache,
+      );
 
-  ApiResposne searchTvShows(String query, {CancelToken? cancelToken}) {
-    return client.get(
-      'search/tv',
-      queryParams: {'query': query},
-      cancelToken: cancelToken,
-      overridePolicy: CachePolicy.noCache,
-    );
-  }
+  ApiResponse searchSeries(String query, {CancelToken? cancelToken}) =>
+      client.get(
+        'search/tv',
+        queryParams: {'query': query},
+        cancelToken: cancelToken,
+        overridePolicy: CachePolicy.noCache,
+      );
 
-  ApiResposne searchActors(String query, {CancelToken? cancelToken}) {
-    return client.get(
-      'search/person',
-      queryParams: {'query': query},
-      cancelToken: cancelToken,
-      overridePolicy: CachePolicy.noCache,
-    );
-  }
+  ApiResponse searchActors(String query, {CancelToken? cancelToken}) =>
+      client.get(
+        'search/person',
+        queryParams: {'query': query},
+        cancelToken: cancelToken,
+        overridePolicy: CachePolicy.noCache,
+      );
 }

@@ -1,11 +1,13 @@
 import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/core/di/service_locator.dart';
+import 'package:cinemax_app_new/core/di/injection_container.dart';
 import 'package:cinemax_app_new/l10n/local_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Locale Cubit
+@lazySingleton
 class LocaleCubit extends Cubit<LocaleState> {
   static const String _localeKey = 'selected_locale';
   final SharedPreferences sharedPreferences;
@@ -71,12 +73,4 @@ class LocaleCubit extends Cubit<LocaleState> {
         return 'English';
     }
   }
-
-  static const List<Map<String, String>> supportedLanguages = [
-    {'code': 'en', 'name': 'English', 'flag': '🇬🇧'},
-    {'code': 'ar', 'name': 'العربية', 'flag': '🇸🇦'},
-    {'code': 'es', 'name': 'Español', 'flag': '🇪🇸'},
-    {'code': 'fr', 'name': 'Français', 'flag': '🇫🇷'},
-    {'code': 'tr', 'name': 'Türkçe', 'flag': '🇹🇷'},
-  ];
 }

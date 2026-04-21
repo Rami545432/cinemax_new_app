@@ -8,7 +8,6 @@ class SuccessAnimation extends StatelessWidget {
   const SuccessAnimation({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
-    return Animate(effects: AppAnimations.successPulse, child: child);
-  }
+  Widget build(BuildContext context) =>
+      Animate(effects: AppAnimations.successPulse, child: child);
 }

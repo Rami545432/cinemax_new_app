@@ -1,7 +1,10 @@
-import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
 import 'package:cinemax_app_new/features/discover/core/enum/tv_genre.dart';
+import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
+import 'package:cinemax_app_new/features/discover/presentation/core/collection_list_model.dart';
+import 'package:cinemax_app_new/features/discover/presentation/widget/collection_grid_builder.dart';
 import 'package:cinemax_app_new/features/discover/presentation/widget/genre_tab_section.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/sub_bar.dart';
 import 'package:flutter/material.dart';
 
 class SeriesGenreTab extends StatelessWidget {
@@ -9,17 +12,25 @@ class SeriesGenreTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: ListView(
+      child: Column(
         children: [
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           GenreTabSection(
             title: l10n.tvGenres,
             names: TvGenre.values.map((e) => e.localizedText(context)).toList(),
             genreIds: TvGenre.values.map((e) => e.id).toList(),
             category: GenreCategory.tv,
+          ),
+          const SizedBox(height: 24),
+          SubBar(title: l10n.collections),
+          const SizedBox(height: 16),
+          Expanded(
+            child: CollectionGridBuilder(
+              collections: CollectionListModel.tvCollections(context),
+            ),
           ),
         ],
       ),

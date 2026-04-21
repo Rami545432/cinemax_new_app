@@ -330,7 +330,7 @@
   "@genreThriller": {},
   "genreWar": "Guerra",
   "@genreWar": {},
-  "genreWestern": "Western",  
+  "genreWestern": "Western",
   "@genreWestern": {},
   "genreActionAdventure": "Acción y Aventura",
   "@genreActionAdventure": {},
@@ -351,6 +351,207 @@
   "parts": "Partes",
   "@parts": {
     "description": "Partes del contenido"
-  }
-
+  },
+  "seeAll": "Ver todo",
+  "@seeAll": {
+    "description": "Botón para ver todo el contenido"
+  },
+  "sortBy": "Ordenar por",
+  "@sortBy": {
+    "description": "Botón para ordenar el contenido"
+  },
+  "sortPopularityDesc": "Más popular",
+  "@sortPopularityDesc": {
+    "description": "Ordenar por más popular"
+  },
+  "sortPopularityAsc": "Menos popular",
+  "@sortPopularityAsc": {
+    "description": "Ordenar por menos popular"
+  },
+  "sortRatingDesc": "Mejor valorado",
+  "@sortRatingDesc": {
+    "description": "Ordenar por mejor valorado"
+  },
+  "sortRatingAsc": "Menos valorado",
+  "@sortRatingAsc": {
+    "description": "Ordenar por menos valorado"
+  },
+  "sortReleaseDateDesc": "Más reciente",
+  "@sortReleaseDateDesc": {
+    "description": "Ordenar por más reciente"
+  },
+  "sortReleaseDateAsc": "Más antiguo",
+  "@sortReleaseDateAsc": {
+    "description": "Ordenar por más antiguo"
+  },
+  "sortRevenueDesc": "Mayor ingreso",
+  "@sortRevenueDesc": {
+    "description": "Ordenar por mayor ingreso"
+  },
+  "sortRevenueAsc": "Menor ingreso",
+  "@sortRevenueAsc": {
+    "description": "Ordenar por menor ingreso"
+  },
+  "sortVoteCountDesc": "Más votos",
+  "@sortVoteCountDesc": {
+    "description": "Ordenar por más votos"
+  },
+  "sortVoteCountAsc": "Menos votos",
+  "@sortVoteCountAsc": {
+    "description": "Ordenar por menos votos"
+  },
+  "sortFirstAirDateDesc": "Más reciente",
+  "@sortFirstAirDateDesc": {
+    "description": "Ordenar por más reciente"
+  },
+  "sortFirstAirDateAsc": "Más antiguo",
+  "@sortFirstAirDateAsc": {
+    "description": "Ordenar por más antiguo"
+  },
+  "sortVoteAverageDesc": "Mejor valorado",
+  "@sortVoteAverageDesc": {
+    "description": "Ordenar por mejor valorado"
+  },
+  "sortVoteAverageAsc": "Menos valorado",
+  "@sortVoteAverageAsc": {
+    "description": "Ordenar por menos valorado"
+  },
+  "home": "Inicio",
+  "@home": {
+    "description": "Inicio"
+  },
+  "applyFilters": "Aplicar",
+  "@applyFilters": {
+    "description": "Aplicar"
+  },
+  "clearFilters": "Limpiar",
+  "@clearFilters": {
+    "description": "Limpiar"
+  },
+  "collections": "Colecciones",
+  "@collections": {
+    "description": "Colecciones"
+  },
+  "cartoons": "Dibujos animados",
+  "@cartoons": {
+    "description": "Dibujos animados"
+  },
+  "anime": "Anime",
+  "@anime": {
+    "description": "Anime"
+  },
+  "maifa": "Mafia",
+  "@maifa": {
+    "description": "Mafia"
+  },
+  "marvel": "Marvel",
+  "@marvel": {
+    "description": "Marvel"
+  },
+  "year": "Año",
+  "@year": {
+    "description": "Año"
+  },
+  "rating": "Valoración",
+  "@rating": {
+    "description": "Valoración"
+  },
+  "min": "min",
+  "@min": {
+    "description": "min"
+  },
+  "cartoonDescreption": "Diversión colorida, risas acogedoras y vibraciones puras.",
+  "@cartoonDescreption": {
+    "description": "Descripción de dibujos animados"
+  },
+  "mafiaDescreption": "Poder, lealtad, traición: historias del inframundo.",
+  "@mafiaDescreption": {
+    "description": "Descripción de la mafia"
+  },
+  "animeDescreption": "Mundos épicos, emociones profundas y batallas inolvidables.",
+  "@animeDescreption": {
+    "description": "Descripción del anime"
+  },
+  "marvelDescreption": "Héroes, villanos y locura multiversal: todo en un solo lugar.",
+  "@marvelDescreption": {
+    "description": "Descripción de Marvel"
+  },
+  "logoutSuccessfully": "Se cerró la sesión correctamente",
+  "@logoutSuccessfully": {
+    "description": "Se cerró la sesión correctamente"
+  },
+  "backOnline": "Conectado a internet",
+  "@backOnline": {
+    "description": "Conectado a internet"
+  },
+  "durationFormat": "{hours}h {minutes}m",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "Duración",
+  "@duration": {
+    "description": "Duración"
+  },
+  "noFavoritesContentType": "No hay {type} en favoritos",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "Estrenada",
+  "@statusReleased": {},
+  "statusEnded": "Finalizada",
+  "@statusEnded": {},
+  "statusReturningSeries": "En emisión",
+  "@statusReturningSeries": {},
+  "statusInProduction": "En producción",
+  "@statusInProduction": {},
+  "statusCanceled": "Cancelada",
+  "@statusCanceled": {},
+  "statusUnknown": "Desconocido",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "Encuentra Tu Próxima Obsesión",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "Descubre películas en tendencia y series adictivas en segundos.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "Mantén Tus Favoritos Cerca",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "Guarda las películas y series que amas en tu lista personal.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "Mira Antes de Decidir",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "Consulta tráilers, calificaciones y reseñas antes de darle play.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "Tu próxima obsesión cinematográfica comienza aquí.",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "Se cerró la sesión correctamente",
+  "@loginSuccessfully": {},
+  "loginFailed": "Fallo al iniciar sesión",
+  "@loginFailed": {},
+  "loginTagline": "Inicia sesión para mantener tu lista de favoritos",
+  "@loginTagline": {},
+  "signWithGoogle": "Inicia sesión con Google",
+  "@signWithGoogle": {}
 }

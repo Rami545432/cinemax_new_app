@@ -28,7 +28,7 @@ enum MovieGenre {
 
 extension MovieGenreExtension on MovieGenre {
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return switch (this) {
       MovieGenre.action => l10n.genreAction,
       MovieGenre.adventure => l10n.genreAdventure,

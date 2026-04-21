@@ -1,5 +1,5 @@
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/helper/formatted_methods/formatted_date_method.dart';
+import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
 import 'package:flutter/material.dart';
 
 class TextColumnInfo extends StatelessWidget {
@@ -19,7 +19,6 @@ class TextColumnInfo extends StatelessWidget {
     final style = AppStyles.textStyle18(context);
     return Column(
       spacing: 10,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(title, style: style),
         Text(FormattedDateMethods.formatDateMonthYear(date), style: style),

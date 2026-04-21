@@ -9,10 +9,6 @@ class AnimatedListItem extends StatelessWidget {
   const AnimatedListItem({super.key, required this.child, required this.index});
 
   @override
-  Widget build(BuildContext context) {
-    return Animate(
-      effects: AppAnimations.listItemEntrance(index),
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) =>
+      Animate(effects: AppAnimations.listItemEntrance(index), child: child);
 }

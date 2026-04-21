@@ -1,5 +1,8 @@
-import 'package:dio/dio.dart';
+// ignore_for_file: strict_raw_type
+
 import 'dart:developer';
+
+import 'package:dio/dio.dart';
 
 class LoggingInterceptor extends Interceptor {
   @override

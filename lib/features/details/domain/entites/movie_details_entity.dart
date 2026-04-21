@@ -1,18 +1,16 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/data/models/series_season_details/images.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/belongs_to_collection.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/cast.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/credits.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/external_ids.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/genre.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/keywords.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/production_company.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/production_country.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/reviews.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/translations.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/videos.dart';
-import 'package:cinemax_app_new/features/details/data/models/shared_details_models/watch_providers.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/belongs_to_collection.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/external_ids.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/genre.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/images.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/keywords.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/production_company.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/production_country.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/reviews.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/translations.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/watch_providers.dart';
 
 class MovieDetailsEntity {
   final int movieId;
@@ -80,21 +78,4 @@ class MovieDetailsEntity {
     this.backgroundImage,
     this.posterImage,
   });
-
-  FavoriteEntity toFavoriteEntity() {
-    return FavoriteEntity(
-      id: movieId,
-      title: movieTitle,
-      posterImage: posterImage ?? '',
-      gener: kGeners.map((g) => g.name ?? '').toList(),
-      contentType: ContentType.movies,
-      date: date ?? '',
-      seasonNumber: 0,
-      specificId: movieId,
-      posterImageBackup: posterImage ?? '',
-      backGroundImage: backgroundImage ?? posterImage ?? '',
-      episodeNumber: 0,
-      rating: rating ?? 0,
-    );
-  }
 }

@@ -170,7 +170,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get system => 'النظام';
 
   @override
-  String get light => 'وضع الاضاءة ';
+  String get light => 'الوضع النهاري';
 
   @override
   String get dark => 'الوضع الليلي';
@@ -305,4 +305,183 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get parts => 'الأجزاء';
+
+  @override
+  String get seeAll => 'عرض الكل';
+
+  @override
+  String get sortBy => 'ترتيب حسب';
+
+  @override
+  String get sortPopularityDesc => 'الأكثر شهرة';
+
+  @override
+  String get sortPopularityAsc => 'الأقل شهرة';
+
+  @override
+  String get sortRatingDesc => 'الأعلى تقييماً';
+
+  @override
+  String get sortRatingAsc => 'الأقل تقييماً';
+
+  @override
+  String get sortReleaseDateDesc => 'الأحدث';
+
+  @override
+  String get sortReleaseDateAsc => 'الأقدم';
+
+  @override
+  String get sortRevenueDesc => 'الأعلى إيراداً';
+
+  @override
+  String get sortRevenueAsc => 'الأقل إيراداً';
+
+  @override
+  String get sortVoteCountDesc => 'الأكثر تصويتاً';
+
+  @override
+  String get sortVoteCountAsc => 'الأقل تصويتاً';
+
+  @override
+  String get sortFirstAirDateDesc => 'الأحدث';
+
+  @override
+  String get sortFirstAirDateAsc => 'الأقدم';
+
+  @override
+  String get sortVoteAverageDesc => 'الأعلى تقييماً';
+
+  @override
+  String get sortVoteAverageAsc => 'الأقل تقييماً';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get applyFilters => 'تطبيق';
+
+  @override
+  String get clearFilters => 'مسح';
+
+  @override
+  String get collections => 'المجموعات';
+
+  @override
+  String get cartoons => 'رسوم متحركة';
+
+  @override
+  String get anime => 'أنمي';
+
+  @override
+  String get maifa => 'مافيا';
+
+  @override
+  String get marvel => 'مارفل';
+
+  @override
+  String get year => 'سنة';
+
+  @override
+  String get rating => 'تقييم';
+
+  @override
+  String get min => 'دقيقة';
+
+  @override
+  String get cartoonDescreption => 'مرح ملون وضحكات مريحة وأجواء مبهجة';
+
+  @override
+  String get mafiaDescreption => 'قوة وولاء وخيانة - قصص العالم السفلي.';
+
+  @override
+  String get animeDescreption => 'عوالم ملحمية ومشاعر عميقة ومعارك لا تُنسى.';
+
+  @override
+  String get marvelDescreption =>
+      'أبطال وأشرار وجنون الأكوان المتعددة - كل شيء في مكان واحد.';
+
+  @override
+  String get logoutSuccessfully => 'تم تسجيل الخروج بنجاح';
+
+  @override
+  String get backOnline => 'متصل بالإنترنت';
+
+  @override
+  String durationFormat(int hours, int minutes) {
+    return '$hoursس $minutesد';
+  }
+
+  @override
+  String get duration => 'المدة';
+
+  @override
+  String noFavoritesContentType(String type) {
+    return 'لا يوجد في المفضلة $type';
+  }
+
+  @override
+  String get statusReleased => 'تم الاصدار';
+
+  @override
+  String get statusEnded => 'تم الانتهاء';
+
+  @override
+  String get statusReturningSeries => 'يعرض حاليا';
+
+  @override
+  String get statusInProduction => 'قيد الانتاج';
+
+  @override
+  String get statusCanceled => 'تم الالغاء';
+
+  @override
+  String get statusUnknown => 'غير معروف';
+
+  @override
+  String numberFormat(int number) {
+    final intl.NumberFormat numberNumberFormat = intl.NumberFormat.currency(
+      locale: localeName,
+      decimalDigits: 0,
+      symbol: '\$',
+    );
+    final String numberString = numberNumberFormat.format(number);
+
+    return '$numberString';
+  }
+
+  @override
+  String get onboardingTitle1 => 'اكتشف هوسك القادم';
+
+  @override
+  String get onboardingDesc1 =>
+      'اكتشف الأفلام الرائجة والمسلسلات التي تستحق المشاهدة في ثوانٍ.';
+
+  @override
+  String get onboardingTitle2 => 'احتفظ بمفضلاتك قريبًا';
+
+  @override
+  String get onboardingDesc2 =>
+      'احفظ الأفلام والمسلسلات التي تحبها في قائمة المشاهدة الخاصة بك.';
+
+  @override
+  String get onboardingTitle3 => 'شاهد قبل أن تقرر';
+
+  @override
+  String get onboardingDesc3 =>
+      'تحقق من الإعلانات الترويجية والتقييمات والمراجعات قبل البدء بالمشاهدة.';
+
+  @override
+  String get onboardingTitle0 => 'هوسك السينمائي القادم يبدأ من هنا';
+
+  @override
+  String get loginSuccessfully => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get loginFailed => 'فشل تسجيل الدخول';
+
+  @override
+  String get loginTagline => 'سجل دخولك للحفاظ على قائمتك المفضلة';
+
+  @override
+  String get signWithGoogle => 'تسجيل الدخول باستخدام جوجل';
 }

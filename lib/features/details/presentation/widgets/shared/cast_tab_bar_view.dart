@@ -1,8 +1,7 @@
 import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/actor_list_tile.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/models/shared_details_models/cast.dart';
-import 'actor_list_tile.dart';
 
 class CastTabBarView extends StatelessWidget {
   final List<Cast> actorList;
@@ -18,12 +17,10 @@ class CastTabBarView extends StatelessWidget {
     }
     return ListView.builder(
       itemCount: actorList.length,
-      itemBuilder: (context, index) {
-        return AnimatedListItem(
-          index: index,
-          child: ActorListTile(actorList: actorList[index]),
-        );
-      },
+      itemBuilder: (context, index) => AnimatedListItem(
+        index: index,
+        child: ActorListTile(actorList: actorList[index]),
+      ),
     );
   }
 }

@@ -6,16 +6,14 @@ class GenreContainer extends StatelessWidget {
 
   final String name;
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Theme.of(context).colorScheme.onSurface),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Text(name, style: AppStyles.textStyle16(context)),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: Theme.of(context).colorScheme.onSurface),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: Text(name, style: AppStyles.textStyle16(context)),
+    ),
+  );
 }

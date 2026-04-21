@@ -9,23 +9,19 @@ class EpisodeImage extends StatelessWidget {
   final String? episodeImageUrl;
 
   @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: CachedNetworkImage(
-        imageUrl: '$baseImageUrl$episodeImageUrl',
-        placeholder: (context, url) => Center(
-          child: SizedBox(
-            width: 20,
-            height: 20,
-            child: CircularProgressIndicator(
-              color: AppPrimaryColors.blueAccent,
-            ),
-          ),
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: BorderRadius.circular(12),
+    child: CachedNetworkImage(
+      imageUrl: '${Constants.baseImageUrl}$episodeImageUrl',
+      placeholder: (context, url) => Center(
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
         ),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-        fit: BoxFit.cover,
       ),
-    );
-  }
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      fit: BoxFit.cover,
+    ),
+  );
 }

@@ -1,0 +1,28 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          include:
+            - lib/**/presentation/cubits/**/*.dart
+            - lib/**/presentation/blocs/**/*.dart
+            - lib/**/data/models/**/*.dart
+            
+
+      hive_generator:hive_generator:
+        generate_for:
+          include:
+            - lib/**/data/models/**/*.dart
+            - lib/core/utils/enums/content_type.dart
+
+      injectable_generator:injectable_builder:
+        generate_for:
+          include:
+            - lib/core/di/*.dart
+            - lib/features/**/presentation/cubits/**/*.dart
+            - lib/features/**/presentation/blocs/**/*.dart
+            - lib/features/**/data/data_sources/**/*.dart
+            - lib/features/**/data/repos/*.dart
+            - lib/features/**/domain/use_cases/*.dart
+            
+            

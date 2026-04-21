@@ -1,7 +1,7 @@
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/secondry_button.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/secondry_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -11,7 +11,7 @@ class MoreLessButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isClicked = useState(false);
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/features/search/presentaion/view_models/widgets/custom_grid_config.dart';
+import 'package:cinemax_app_new/core/types/ui_types.dart';
+import 'package:cinemax_app_new/core/utils/animations/animated_list_manger.dart';
+import 'package:cinemax_app_new/core/utils/animations/build_animated_list_item.dart';
+import 'package:cinemax_app_new/core/utils/animations/remove_animation_builder.dart';
+import 'package:cinemax_app_new/features/search/presentation/widgets/custom_grid_config.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/utils/animations/remove_animation_builder.dart';
-import '../../types/ui_types.dart';
-import 'animated_list_manger.dart';
-import 'build_animated_list_item.dart';
 
 enum GenericAnimatedWidgetType { list, grid }
 
@@ -16,6 +16,7 @@ class GenericAnimatedWidget<T> extends StatefulWidget {
   final RemoveAnimationType? removeAnimationType;
   final HeaderBuilder? headerWidget;
   final GenericAnimatedWidgetType widgetType;
+  final ScrollController? scrollController;
   const GenericAnimatedWidget({
     super.key,
     required this.items,
@@ -26,6 +27,7 @@ class GenericAnimatedWidget<T> extends StatefulWidget {
     this.removeAnimationType = RemoveAnimationType.slideDown,
     this.headerWidget,
     this.widgetType = GenericAnimatedWidgetType.list,
+    this.scrollController,
   });
 
   @override
@@ -92,27 +94,25 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
     });
   }
 
-  Widget _buildRemovedItem(T item, Animation<double> animation) {
-    return RemoveAnimationBuilder(
-      animation: animation,
-      animationType:
-          widget.removeAnimationType ?? RemoveAnimationType.slideDown,
-      child: widget.itemBuilder(item, () {}),
-    );
-  }
+  Widget _buildRemovedItem(T item, Animation<double> animation) =>
+      RemoveAnimationBuilder(
+        animation: animation,
+        animationType:
+            widget.removeAnimationType ?? RemoveAnimationType.slideDown,
+        child: widget.itemBuilder(item, () {}),
+      );
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        if (widget.headerWidget != null)
-          SliverToBoxAdapter(
-            child: widget.headerWidget!(() => _removeAllItems()),
-          ),
-        _buildAnimatedSliver(),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => CustomScrollView(
+    controller: widget.scrollController,
+    slivers: [
+      if (widget.headerWidget != null)
+        SliverToBoxAdapter(
+          child: widget.headerWidget!(() => _removeAllItems()),
+        ),
+      _buildAnimatedSliver(),
+    ],
+  );
 
   Widget _buildAnimatedSliver() {
     switch (widget.widgetType) {
@@ -121,7 +121,9 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
           key: _animatedKey,
           initialItemCount: _items.length,
           itemBuilder: (context, index, animation) {
-            if (index >= _items.length) return const SizedBox.shrink();
+            if (index >= _items.length) {
+              return const SizedBox.shrink();
+            }
             final item = _items[index];
             return widget.itemBuilder(item, () => _removeItem(index));
           },
@@ -132,7 +134,9 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
           gridDelegate: CustomGridConfig.getDelegate(context),
           initialItemCount: _items.length,
           itemBuilder: (context, index, animation) {
-            if (index >= _items.length) return const SizedBox.shrink();
+            if (index >= _items.length) {
+              return const SizedBox.shrink();
+            }
             final item = _items[index];
             return widget.itemBuilder(item, () => _removeItem(index));
           },

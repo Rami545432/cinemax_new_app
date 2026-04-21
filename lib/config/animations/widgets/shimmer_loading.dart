@@ -7,18 +7,16 @@ class ShimmerLoading extends StatelessWidget {
   const ShimmerLoading({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
-    return Animate(
-      onPlay: (controller) => controller.repeat(),
-      effects: [
-        ShimmerEffect(
-          duration: const Duration(milliseconds: 1500),
-          color: Colors.white.withValues(alpha: 0.5),
-        ),
-      ],
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) => Animate(
+    onPlay: (controller) => controller.repeat(),
+    effects: [
+      ShimmerEffect(
+        duration: const Duration(milliseconds: 1500),
+        color: Colors.white.withValues(alpha: 0.5),
+      ),
+    ],
+    child: child,
+  );
 }
 
 // Success Animation

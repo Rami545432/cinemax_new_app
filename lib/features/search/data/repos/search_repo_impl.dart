@@ -1,32 +1,22 @@
-import 'package:cinemax_app_new/core/utils/errors/errors.dart';
-import 'package:cinemax_app_new/features/home/domian/entites/movie_entity.dart';
-import 'package:cinemax_app_new/features/search/data/data_sources/local_search_data_source.dart';
-import 'package:cinemax_app_new/features/search/data/data_sources/remote_search_data_source.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_history_model.dart';
+import 'package:cinemax_app_new/core/errors/errors.dart';
+import 'package:cinemax_app_new/features/search/data/data_sources/remote/remote_search_data_source.dart';
 import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 import 'package:cinemax_app_new/features/search/domain/repo/search_repo.dart';
-import 'package:cinemax_app_new/features/home/domian/entites/series_entity.dart';
+import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
+import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: SearchRepo)
 class SearchRepoImpl implements SearchRepo {
   final RemoteSearchDataSource remoteDataSource;
-  final LocalSearchDataSource localSearchDataSource;
 
-  SearchRepoImpl({
-    required this.remoteDataSource,
-    required this.localSearchDataSource,
-  });
+  SearchRepoImpl({required this.remoteDataSource});
   @override
-  Future<Either<Failure, List<MovieEntity>>> searchMovies(
-    String query,
-    CancelToken? cancelToken,
-  ) async {
+  Future<Either<Failure, List<MovieEntity>>> searchMovies(String query) async {
     try {
-      var suggestions = await remoteDataSource.searchMovies(query, cancelToken);
-      return right(suggestions);
-    } on DioException catch (e) {
-      return left(ServerFailure.fromDioError(e));
+      final suggestions = await remoteDataSource.searchMovies(query);
+      return right(suggestions.map((e) => e.toEntity()).toList());
     } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }
@@ -35,13 +25,10 @@ class SearchRepoImpl implements SearchRepo {
   @override
   Future<Either<Failure, List<SearchActorEntity>>> searchActor(
     String query,
-    CancelToken? cancelToken,
   ) async {
     try {
-      var suggestions = await remoteDataSource.searchActors(query, cancelToken);
+      final suggestions = await remoteDataSource.searchActors(query);
       return right(suggestions);
-    } on DioException catch (e) {
-      return left(ServerFailure.fromDioError(e));
     } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }
@@ -50,35 +37,12 @@ class SearchRepoImpl implements SearchRepo {
   @override
   Future<Either<Failure, List<SeriesEntity>>> searchTvShows(
     String query,
-    CancelToken? cancelToken,
   ) async {
     try {
-      var results = await remoteDataSource.searchTvShows(query, cancelToken);
-      return right(results);
-    } on DioException catch (e) {
-      return left(ServerFailure.fromDioError(e));
+      final results = await remoteDataSource.searchSeries(query);
+      return right(results.map((e) => e.toEntity()).toList());
     } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }
-  }
-
-  @override
-  Future<void> addToSearchHistory(SearchHistoryModel searchHistory) async {
-    await localSearchDataSource.addToSearchHistory(searchHistory);
-  }
-
-  @override
-  Future<void> clearSearchHistory() async {
-    await localSearchDataSource.clearSearchHistory();
-  }
-
-  @override
-  Future<List<SearchHistoryModel>> getSearchHistory() async {
-    return await localSearchDataSource.getSearchHistory();
-  }
-
-  @override
-  Future<void> deleteSearchHistory(int id) async {
-    await localSearchDataSource.deleteSearchHistory(id);
   }
 }

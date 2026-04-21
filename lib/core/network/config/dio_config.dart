@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
 import 'package:dio/dio.dart';
-
-import '../api/services/api_service.dart';
 
 class DioConfig {
   static BaseOptions get baseOptions => BaseOptions(
@@ -11,9 +10,6 @@ class DioConfig {
 
     // Headers
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-
-    // Response type
-    responseType: ResponseType.json,
 
     // Follow redirects
     followRedirects: true,

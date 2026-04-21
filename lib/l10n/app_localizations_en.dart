@@ -305,4 +305,186 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get parts => 'Parts';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get sortBy => 'Sort By';
+
+  @override
+  String get sortPopularityDesc => 'Most Popular';
+
+  @override
+  String get sortPopularityAsc => 'Least Popular';
+
+  @override
+  String get sortRatingDesc => 'Highest Rated';
+
+  @override
+  String get sortRatingAsc => 'Lowest Rated';
+
+  @override
+  String get sortReleaseDateDesc => 'Newest';
+
+  @override
+  String get sortReleaseDateAsc => 'Oldest';
+
+  @override
+  String get sortRevenueDesc => 'Highest Revenue';
+
+  @override
+  String get sortRevenueAsc => 'Lowest Revenue';
+
+  @override
+  String get sortVoteCountDesc => 'Most Voted';
+
+  @override
+  String get sortVoteCountAsc => 'Least Voted';
+
+  @override
+  String get sortFirstAirDateDesc => 'Newest';
+
+  @override
+  String get sortFirstAirDateAsc => 'Oldest';
+
+  @override
+  String get sortVoteAverageDesc => 'Highest Rated';
+
+  @override
+  String get sortVoteAverageAsc => 'Lowest Rated';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get applyFilters => 'Apply';
+
+  @override
+  String get clearFilters => 'Clear';
+
+  @override
+  String get collections => 'Collections';
+
+  @override
+  String get cartoons => 'Cartoons';
+
+  @override
+  String get anime => 'Anime';
+
+  @override
+  String get maifa => 'Mafia';
+
+  @override
+  String get marvel => 'Marvel';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get min => 'min';
+
+  @override
+  String get cartoonDescreption =>
+      'Colorful fun, cozy laughs, and pure good vibes';
+
+  @override
+  String get mafiaDescreption =>
+      'Power, loyalty, betrayal — the underworld stories.';
+
+  @override
+  String get animeDescreption =>
+      'Epic worlds, deep emotions, unforgettable battles.';
+
+  @override
+  String get marvelDescreption =>
+      'Heroes, villains, and multiverse madness — all in one place.';
+
+  @override
+  String get logoutSuccessfully => 'Logout successfully';
+
+  @override
+  String get backOnline => 'Back Online';
+
+  @override
+  String durationFormat(int hours, int minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String noFavoritesContentType(String type) {
+    return 'No $type in favorites';
+  }
+
+  @override
+  String get statusReleased => 'Released';
+
+  @override
+  String get statusEnded => 'Ended';
+
+  @override
+  String get statusReturningSeries => 'Returning Series';
+
+  @override
+  String get statusInProduction => 'In Production';
+
+  @override
+  String get statusCanceled => 'Canceled';
+
+  @override
+  String get statusUnknown => 'Unknown';
+
+  @override
+  String numberFormat(int number) {
+    final intl.NumberFormat numberNumberFormat = intl.NumberFormat.currency(
+      locale: localeName,
+      decimalDigits: 0,
+      symbol: '\$',
+    );
+    final String numberString = numberNumberFormat.format(number);
+
+    return '$numberString';
+  }
+
+  @override
+  String get onboardingTitle1 => 'Discover Your Next Obsession';
+
+  @override
+  String get onboardingDesc1 =>
+      'Find trending movies and must-watch series in seconds.';
+
+  @override
+  String get onboardingTitle2 => 'Keep Favorites Close';
+
+  @override
+  String get onboardingDesc2 =>
+      'Save movies and shows you love into your personal watchlist.';
+
+  @override
+  String get onboardingTitle3 => 'Watch Before You Commit';
+
+  @override
+  String get onboardingDesc3 =>
+      'Check trailers, ratings, and reviews before hitting play.';
+
+  @override
+  String get onboardingTitle0 => 'Your Next Cinematic Obsession Starts Here';
+
+  @override
+  String get loginSuccessfully => 'Login successfully';
+
+  @override
+  String get loginFailed => 'Login failed';
+
+  @override
+  String get loginTagline => 'Login to keep your favorite list';
+
+  @override
+  String get signWithGoogle => 'Sign in with Google';
 }

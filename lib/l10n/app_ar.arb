@@ -214,7 +214,7 @@
   "@system": {
     "description": "النظام المتاح للتطبيق"
   },
-  "light": "وضع الاضاءة ",
+  "light": "الوضع النهاري",
   "@light": {
     "description": "وضع الاضاءة المتاح للتطبيق"
   },
@@ -351,6 +351,207 @@
   "parts": "الأجزاء",
   "@parts": {
     "description": "الأجزاء المتاحة للعمل الفني"
-  }
-  
+  },
+  "seeAll": "عرض الكل",
+  "@seeAll": {
+    "description": "زر عرض الكل"
+  },
+  "sortBy": "ترتيب حسب",
+  "@sortBy": {
+    "description": "زر ترتيب حسب"
+  },
+  "sortPopularityDesc": "الأكثر شهرة",
+  "@sortPopularityDesc": {
+    "description": "ترتيب حسب الأكثر شهرة"
+  },
+  "sortPopularityAsc": "الأقل شهرة",
+  "@sortPopularityAsc": {
+    "description": "ترتيب حسب الأقل شهرة"
+  },
+  "sortRatingDesc": "الأعلى تقييماً",
+  "@sortRatingDesc": {
+    "description": "ترتيب حسب الأعلى تقييماً"
+  },
+  "sortRatingAsc": "الأقل تقييماً",
+  "@sortRatingAsc": {
+    "description": "ترتيب حسب الأقل تقييماً"
+  },
+  "sortReleaseDateDesc": "الأحدث",
+  "@sortReleaseDateDesc": {
+    "description": "ترتيب حسب الأحدث"
+  },
+  "sortReleaseDateAsc": "الأقدم",
+  "@sortReleaseDateAsc": {
+    "description": "ترتيب حسب الأقدم"
+  },
+  "sortRevenueDesc": "الأعلى إيراداً",
+  "@sortRevenueDesc": {
+    "description": "ترتيب حسب الأعلى إيراداً"
+  },
+  "sortRevenueAsc": "الأقل إيراداً",
+  "@sortRevenueAsc": {
+    "description": "ترتيب حسب الأقل إيراداً"
+  },
+  "sortVoteCountDesc": "الأكثر تصويتاً",
+  "@sortVoteCountDesc": {
+    "description": "ترتيب حسب الأكثر تصويتاً"
+  },
+  "sortVoteCountAsc": "الأقل تصويتاً",
+  "@sortVoteCountAsc": {
+    "description": "ترتيب حسب الأقل تصويتاً"
+  },
+  "sortFirstAirDateDesc": "الأحدث",
+  "@sortFirstAirDateDesc": {
+    "description": "ترتيب حسب الأحدث"
+  },
+  "sortFirstAirDateAsc": "الأقدم",
+  "@sortFirstAirDateAsc": {
+    "description": "ترتيب حسب الأقدم"
+  },
+  "sortVoteAverageDesc": "الأعلى تقييماً",
+  "@sortVoteAverageDesc": {
+    "description": "ترتيب حسب الأعلى تقييماً"
+  },
+  "sortVoteAverageAsc": "الأقل تقييماً",
+  "@sortVoteAverageAsc": {
+    "description": "ترتيب حسب الأقل تقييماً"
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "description": "الرئيسية"
+  },
+  "applyFilters": "تطبيق",
+  "@applyFilters": {
+    "description": "تطبيق"
+  },
+  "clearFilters": "مسح",
+  "@clearFilters": {
+    "description": "مسح"
+  },
+  "collections": "المجموعات",
+  "@collections": {
+    "description": "المجموعات"
+  },
+  "cartoons": "رسوم متحركة",
+  "@cartoons": {
+    "description": "رسوم متحركة"
+  },
+  "anime": "أنمي",
+  "@anime": {
+    "description": "أنمي"
+  },
+  "maifa": "مافيا",
+  "@maifa": {
+    "description": "مافيا"
+  },
+  "marvel": "مارفل",
+  "@marvel": {
+    "description": "مارفل"
+  },
+  "year": "سنة",
+  "@year": {
+    "description": "سنة"
+  },
+  "rating": "تقييم",
+  "@rating": {
+    "description": "تقييم"
+  },
+  "min": "دقيقة",
+  "@min": {
+    "description": "دقيقة"
+  },
+  "cartoonDescreption": "مرح ملون وضحكات مريحة وأجواء مبهجة",
+  "@cartoonDescreption": {
+    "description": "وصف الرسوم المتحركة"
+  },
+  "mafiaDescreption": "قوة وولاء وخيانة - قصص العالم السفلي.",
+  "@mafiaDescreption": {
+    "description": "وصف المافيا"
+  },
+  "animeDescreption": "عوالم ملحمية ومشاعر عميقة ومعارك لا تُنسى.",
+  "@animeDescreption": {
+    "description": "وصف الأنمي"
+  },
+  "marvelDescreption": "أبطال وأشرار وجنون الأكوان المتعددة - كل شيء في مكان واحد.",
+  "@marvelDescreption": {
+    "description": "وصف مارفل"
+  },
+  "logoutSuccessfully": "تم تسجيل الخروج بنجاح",
+  "@logoutSuccessfully": {
+    "description": "تم تسجيل الخروج بنجاح"
+  },
+  "backOnline": "متصل بالإنترنت",
+  "@backOnline": {
+    "description": "متصل بالإنترنت"
+  },
+  "durationFormat": "{hours}س {minutes}د",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "المدة",
+  "@duration": {
+    "description": "المدة"
+  },
+  "noFavoritesContentType": "لا يوجد في المفضلة {type}",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "تم الاصدار",
+  "@statusReleased": {},
+  "statusEnded": "تم الانتهاء",
+  "@statusEnded": {},
+  "statusReturningSeries": "يعرض حاليا",
+  "@statusReturningSeries": {},
+  "statusInProduction": "قيد الانتاج",
+  "@statusInProduction": {},
+  "statusCanceled": "تم الالغاء",
+  "@statusCanceled": {},
+  "statusUnknown": "غير معروف",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "اكتشف هوسك القادم",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "اكتشف الأفلام الرائجة والمسلسلات التي تستحق المشاهدة في ثوانٍ.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "احتفظ بمفضلاتك قريبًا",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "احفظ الأفلام والمسلسلات التي تحبها في قائمة المشاهدة الخاصة بك.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "شاهد قبل أن تقرر",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "تحقق من الإعلانات الترويجية والتقييمات والمراجعات قبل البدء بالمشاهدة.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "هوسك السينمائي القادم يبدأ من هنا",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "تم تسجيل الدخول بنجاح",
+  "@loginSuccessfully": {},
+  "loginFailed": "فشل تسجيل الدخول",
+  "@loginFailed": {},
+  "loginTagline": "سجل دخولك للحفاظ على قائمتك المفضلة",
+  "@loginTagline": {},
+  "signWithGoogle": "تسجيل الدخول باستخدام جوجل",
+  "@signWithGoogle": {}
 }

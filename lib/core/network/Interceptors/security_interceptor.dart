@@ -1,9 +1,10 @@
+// ignore_for_file: strict_raw_type
+
+import 'dart:developer';
+import 'package:cinemax_app_new/core/network/services/secure_storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:developer';
-
-import '../services/secure_storage_service.dart';
 
 class SecurityInterceptor extends Interceptor {
   FirebaseAuth get _firebaseAuth => FirebaseAuth.instance;
@@ -90,7 +91,7 @@ class SecurityInterceptor extends Interceptor {
 
             // Retry the original request
             try {
-              final response = await Dio().request(
+              final response = await Dio().request<void>(
                 err.requestOptions.path,
                 options: Options(
                   method: err.requestOptions.method,

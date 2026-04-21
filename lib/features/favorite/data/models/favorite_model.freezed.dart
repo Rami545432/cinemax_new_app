@@ -21,34 +21,52 @@ FavoriteModel _$FavoriteModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FavoriteModel {
+  // ========== CONTENT IDENTIFICATION ==========
+  /// TMDB ID for this specific content
+  /// - For movies: Movie ID
+  /// - For series: Series ID
+  /// - For seasons: Season ID
+  /// - For episodes: Episode ID
   @HiveField(1)
-  int get id => throw _privateConstructorUsedError;
-  @HiveField(2)
-  String get title => throw _privateConstructorUsedError;
+  int get specificId => throw _privateConstructorUsedError; // ========== DISPLAY METADATA ==========
+  /// Display title
   @HiveField(3)
-  String get posterImage => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(4)
-  List<String> get gener => throw _privateConstructorUsedError;
+  String get posterImage => throw _privateConstructorUsedError; // Poster image URL (main thumbnail)
+  /// Backdrop image URL (background)
   @HiveField(5)
-  ContentType get contentType => throw _privateConstructorUsedError;
+  String get backdropImage => throw _privateConstructorUsedError; // Genre IDs (for movies and series only)
+  /// Empty list for seasons and episodes
   @HiveField(6)
-  String get date => throw _privateConstructorUsedError;
+  List<int> get genres => throw _privateConstructorUsedError; // Release/air date (ISO string format: "2024-02-17")
   @HiveField(7)
-  String get userId => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError; // Rating (0.0 - 10.0)
   @HiveField(8)
-  bool get isSynced => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError; // ========== SERIES/EPISODE SPECIFIC ==========
+  /// Season number (0 for movies/series, 1+ for seasons/episodes)
   @HiveField(9)
-  int get seasonNumber => throw _privateConstructorUsedError;
+  int get seasonNumber => throw _privateConstructorUsedError; // Episode number (0 for movies/series/seasons, 1+ for episodes)
   @HiveField(10)
-  int get specificId => throw _privateConstructorUsedError;
+  int get episodeNumber => throw _privateConstructorUsedError; // Parent series TMDB ID (0 for movies/series, series ID for seasons/episodes)
+  /// Used for API calls to get full series info
+  // ========== SYNC MANAGEMENT ==========
+  /// User ID ('guest' for unauthenticated, UID for authenticated)
+  /// Used in Hive key generation for multi-user support
   @HiveField(11)
-  String get seasonPosterUrl => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError; // Sync status (false = pending upload, true = synced to cloud)
+  /// Only used in Hive, not stored in Firestore
   @HiveField(12)
-  String get backGroundImage => throw _privateConstructorUsedError;
+  bool get isSynced => throw _privateConstructorUsedError; // Last sync timestamp (when last uploaded/downloaded from cloud)
+  /// Stored as DateTime in Hive, Timestamp in Firestore
   @HiveField(13)
-  int get episodeNumber => throw _privateConstructorUsedError;
+  DateTime? get lastSyncedAt => throw _privateConstructorUsedError;
   @HiveField(14)
-  num get rating => throw _privateConstructorUsedError;
+  int get tmbdId => throw _privateConstructorUsedError;
+
+  /// Type of content (movie, series, season, episode)
+  @HiveField(2)
+  ContentType get contentType => throw _privateConstructorUsedError;
 
   /// Serializes this FavoriteModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,20 +86,20 @@ abstract class $FavoriteModelCopyWith<$Res> {
   ) = _$FavoriteModelCopyWithImpl<$Res, FavoriteModel>;
   @useResult
   $Res call({
-    @HiveField(1) int id,
-    @HiveField(2) String title,
-    @HiveField(3) String posterImage,
-    @HiveField(4) List<String> gener,
-    @HiveField(5) ContentType contentType,
-    @HiveField(6) String date,
-    @HiveField(7) String userId,
-    @HiveField(8) bool isSynced,
+    @HiveField(1) int specificId,
+    @HiveField(3) String title,
+    @HiveField(4) String posterImage,
+    @HiveField(5) String backdropImage,
+    @HiveField(6) List<int> genres,
+    @HiveField(7) String date,
+    @HiveField(8) double rating,
     @HiveField(9) int seasonNumber,
-    @HiveField(10) int specificId,
-    @HiveField(11) String seasonPosterUrl,
-    @HiveField(12) String backGroundImage,
-    @HiveField(13) int episodeNumber,
-    @HiveField(14) num rating,
+    @HiveField(10) int episodeNumber,
+    @HiveField(11) String userId,
+    @HiveField(12) bool isSynced,
+    @HiveField(13) DateTime? lastSyncedAt,
+    @HiveField(14) int tmbdId,
+    @HiveField(2) ContentType contentType,
   });
 }
 
@@ -100,26 +118,26 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? specificId = null,
     Object? title = null,
     Object? posterImage = null,
-    Object? gener = null,
-    Object? contentType = null,
+    Object? backdropImage = null,
+    Object? genres = null,
     Object? date = null,
+    Object? rating = null,
+    Object? seasonNumber = null,
+    Object? episodeNumber = null,
     Object? userId = null,
     Object? isSynced = null,
-    Object? seasonNumber = null,
-    Object? specificId = null,
-    Object? seasonPosterUrl = null,
-    Object? backGroundImage = null,
-    Object? episodeNumber = null,
-    Object? rating = null,
+    Object? lastSyncedAt = freezed,
+    Object? tmbdId = null,
+    Object? contentType = null,
   }) {
     return _then(
       _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
+            specificId: null == specificId
+                ? _value.specificId
+                : specificId // ignore: cast_nullable_to_non_nullable
                       as int,
             title: null == title
                 ? _value.title
@@ -129,18 +147,30 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
                 ? _value.posterImage
                 : posterImage // ignore: cast_nullable_to_non_nullable
                       as String,
-            gener: null == gener
-                ? _value.gener
-                : gener // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
-            contentType: null == contentType
-                ? _value.contentType
-                : contentType // ignore: cast_nullable_to_non_nullable
-                      as ContentType,
+            backdropImage: null == backdropImage
+                ? _value.backdropImage
+                : backdropImage // ignore: cast_nullable_to_non_nullable
+                      as String,
+            genres: null == genres
+                ? _value.genres
+                : genres // ignore: cast_nullable_to_non_nullable
+                      as List<int>,
             date: null == date
                 ? _value.date
                 : date // ignore: cast_nullable_to_non_nullable
                       as String,
+            rating: null == rating
+                ? _value.rating
+                : rating // ignore: cast_nullable_to_non_nullable
+                      as double,
+            seasonNumber: null == seasonNumber
+                ? _value.seasonNumber
+                : seasonNumber // ignore: cast_nullable_to_non_nullable
+                      as int,
+            episodeNumber: null == episodeNumber
+                ? _value.episodeNumber
+                : episodeNumber // ignore: cast_nullable_to_non_nullable
+                      as int,
             userId: null == userId
                 ? _value.userId
                 : userId // ignore: cast_nullable_to_non_nullable
@@ -149,30 +179,18 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
                 ? _value.isSynced
                 : isSynced // ignore: cast_nullable_to_non_nullable
                       as bool,
-            seasonNumber: seasonNumber == null
-                ? _value.seasonNumber
-                : seasonNumber // ignore: cast_nullable_to_non_nullable
+            lastSyncedAt: freezed == lastSyncedAt
+                ? _value.lastSyncedAt
+                : lastSyncedAt // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            tmbdId: null == tmbdId
+                ? _value.tmbdId
+                : tmbdId // ignore: cast_nullable_to_non_nullable
                       as int,
-            specificId: specificId == null
-                ? _value.specificId
-                : specificId // ignore: cast_nullable_to_non_nullable
-                      as int,
-            seasonPosterUrl: seasonPosterUrl == null
-                ? _value.seasonPosterUrl
-                : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
-                      as String,
-            backGroundImage: backGroundImage == null
-                ? _value.backGroundImage
-                : backGroundImage // ignore: cast_nullable_to_non_nullable
-                      as String,
-            episodeNumber: episodeNumber == null
-                ? _value.episodeNumber
-                : episodeNumber // ignore: cast_nullable_to_non_nullable
-                      as int,
-            rating: rating == null
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                      as num,
+            contentType: null == contentType
+                ? _value.contentType
+                : contentType // ignore: cast_nullable_to_non_nullable
+                      as ContentType,
           )
           as $Val,
     );
@@ -189,20 +207,20 @@ abstract class _$$FavoriteModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @HiveField(1) int id,
-    @HiveField(2) String title,
-    @HiveField(3) String posterImage,
-    @HiveField(4) List<String> gener,
-    @HiveField(5) ContentType contentType,
-    @HiveField(6) String date,
-    @HiveField(7) String userId,
-    @HiveField(8) bool isSynced,
+    @HiveField(1) int specificId,
+    @HiveField(3) String title,
+    @HiveField(4) String posterImage,
+    @HiveField(5) String backdropImage,
+    @HiveField(6) List<int> genres,
+    @HiveField(7) String date,
+    @HiveField(8) double rating,
     @HiveField(9) int seasonNumber,
-    @HiveField(10) int specificId,
-    @HiveField(11) String seasonPosterUrl,
-    @HiveField(12) String backGroundImage,
-    @HiveField(13) int episodeNumber,
-    @HiveField(14) num rating,
+    @HiveField(10) int episodeNumber,
+    @HiveField(11) String userId,
+    @HiveField(12) bool isSynced,
+    @HiveField(13) DateTime? lastSyncedAt,
+    @HiveField(14) int tmbdId,
+    @HiveField(2) ContentType contentType,
   });
 }
 
@@ -220,26 +238,26 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? specificId = null,
     Object? title = null,
     Object? posterImage = null,
-    Object? gener = null,
-    Object? contentType = null,
+    Object? backdropImage = null,
+    Object? genres = null,
     Object? date = null,
+    Object? rating = null,
+    Object? seasonNumber = null,
+    Object? episodeNumber = null,
     Object? userId = null,
     Object? isSynced = null,
-    Object? seasonNumber = null,
-    Object? specificId = null,
-    Object? seasonPosterUrl = null,
-    Object? backGroundImage = null,
-    Object? episodeNumber = null,
-    Object? rating = null,
+    Object? lastSyncedAt = freezed,
+    Object? tmbdId = null,
+    Object? contentType = null,
   }) {
     return _then(
       _$FavoriteModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
+        specificId: null == specificId
+            ? _value.specificId
+            : specificId // ignore: cast_nullable_to_non_nullable
                   as int,
         title: null == title
             ? _value.title
@@ -249,18 +267,30 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
             ? _value.posterImage
             : posterImage // ignore: cast_nullable_to_non_nullable
                   as String,
-        gener: null == gener
-            ? _value._gener
-            : gener // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
-        contentType: null == contentType
-            ? _value.contentType
-            : contentType // ignore: cast_nullable_to_non_nullable
-                  as ContentType,
+        backdropImage: null == backdropImage
+            ? _value.backdropImage
+            : backdropImage // ignore: cast_nullable_to_non_nullable
+                  as String,
+        genres: null == genres
+            ? _value._genres
+            : genres // ignore: cast_nullable_to_non_nullable
+                  as List<int>,
         date: null == date
             ? _value.date
             : date // ignore: cast_nullable_to_non_nullable
                   as String,
+        rating: null == rating
+            ? _value.rating
+            : rating // ignore: cast_nullable_to_non_nullable
+                  as double,
+        seasonNumber: null == seasonNumber
+            ? _value.seasonNumber
+            : seasonNumber // ignore: cast_nullable_to_non_nullable
+                  as int,
+        episodeNumber: null == episodeNumber
+            ? _value.episodeNumber
+            : episodeNumber // ignore: cast_nullable_to_non_nullable
+                  as int,
         userId: null == userId
             ? _value.userId
             : userId // ignore: cast_nullable_to_non_nullable
@@ -269,30 +299,18 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
             ? _value.isSynced
             : isSynced // ignore: cast_nullable_to_non_nullable
                   as bool,
-        seasonNumber: seasonNumber == null
-            ? _value.seasonNumber
-            : seasonNumber // ignore: cast_nullable_to_non_nullable
+        lastSyncedAt: freezed == lastSyncedAt
+            ? _value.lastSyncedAt
+            : lastSyncedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        tmbdId: null == tmbdId
+            ? _value.tmbdId
+            : tmbdId // ignore: cast_nullable_to_non_nullable
                   as int,
-        specificId: specificId == null
-            ? _value.specificId
-            : specificId // ignore: cast_nullable_to_non_nullable
-                  as int,
-        seasonPosterUrl: seasonPosterUrl == null
-            ? _value.seasonPosterUrl
-            : seasonPosterUrl // ignore: cast_nullable_to_non_nullable
-                  as String,
-        backGroundImage: backGroundImage == null
-            ? _value.backGroundImage
-            : backGroundImage // ignore: cast_nullable_to_non_nullable
-                  as String,
-        episodeNumber: episodeNumber == null
-            ? _value.episodeNumber
-            : episodeNumber // ignore: cast_nullable_to_non_nullable
-                  as int,
-        rating: rating == null
-            ? _value.rating
-            : rating // ignore: cast_nullable_to_non_nullable
-                  as num,
+        contentType: null == contentType
+            ? _value.contentType
+            : contentType // ignore: cast_nullable_to_non_nullable
+                  as ContentType,
       ),
     );
   }
@@ -300,81 +318,116 @@ class __$$FavoriteModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveField(0)
-class _$FavoriteModelImpl implements _FavoriteModel {
+@HiveType(typeId: 4)
+class _$FavoriteModelImpl extends _FavoriteModel {
   const _$FavoriteModelImpl({
-    @HiveField(1) required this.id,
-    @HiveField(2) required this.title,
-    @HiveField(3) required this.posterImage,
-    @HiveField(4) required final List<String> gener,
-    @HiveField(5) required this.contentType,
-    @HiveField(6) required this.date,
-    @HiveField(7) this.userId = 'guest',
-    @HiveField(8) this.isSynced = false,
+    @HiveField(1) required this.specificId,
+    @HiveField(3) required this.title,
+    @HiveField(4) required this.posterImage,
+    @HiveField(5) required this.backdropImage,
+    @HiveField(6) required final List<int> genres,
+    @HiveField(7) required this.date,
+    @HiveField(8) required this.rating,
     @HiveField(9) this.seasonNumber = 0,
-    @HiveField(10) this.specificId = 0,
-    @HiveField(11) this.seasonPosterUrl = '',
-    @HiveField(12) this.backGroundImage = '',
-    @HiveField(13) this.episodeNumber = 0,
-    @HiveField(14) this.rating = 0,
-  }) : _gener = gener;
+    @HiveField(10) this.episodeNumber = 0,
+    @HiveField(11) this.userId = 'guest',
+    @HiveField(12) this.isSynced = false,
+    @HiveField(13) this.lastSyncedAt,
+    @HiveField(14) this.tmbdId = 0,
+    @HiveField(2) required this.contentType,
+  }) : _genres = genres,
+       super._();
 
   factory _$FavoriteModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FavoriteModelImplFromJson(json);
 
+  // ========== CONTENT IDENTIFICATION ==========
+  /// TMDB ID for this specific content
+  /// - For movies: Movie ID
+  /// - For series: Series ID
+  /// - For seasons: Season ID
+  /// - For episodes: Episode ID
   @override
   @HiveField(1)
-  final int id;
-  @override
-  @HiveField(2)
-  final String title;
+  final int specificId;
+  // ========== DISPLAY METADATA ==========
+  /// Display title
   @override
   @HiveField(3)
-  final String posterImage;
-  final List<String> _gener;
+  final String title;
   @override
   @HiveField(4)
-  List<String> get gener {
-    if (_gener is EqualUnmodifiableListView) return _gener;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_gener);
-  }
-
+  final String posterImage;
+  // Poster image URL (main thumbnail)
+  /// Backdrop image URL (background)
   @override
   @HiveField(5)
-  final ContentType contentType;
+  final String backdropImage;
+  // Genre IDs (for movies and series only)
+  /// Empty list for seasons and episodes
+  final List<int> _genres;
+  // Genre IDs (for movies and series only)
+  /// Empty list for seasons and episodes
   @override
   @HiveField(6)
-  final String date;
+  List<int> get genres {
+    if (_genres is EqualUnmodifiableListView) return _genres;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_genres);
+  }
+
+  // Release/air date (ISO string format: "2024-02-17")
   @override
-  @JsonKey()
   @HiveField(7)
-  final String userId;
+  final String date;
+  // Rating (0.0 - 10.0)
+  @override
+  @HiveField(8)
+  final double rating;
+  // ========== SERIES/EPISODE SPECIFIC ==========
+  /// Season number (0 for movies/series, 1+ for seasons/episodes)
   @override
   @JsonKey()
-  @HiveField(8)
-  final bool isSynced;
-  @override
   @HiveField(9)
   final int seasonNumber;
+  // Episode number (0 for movies/series/seasons, 1+ for episodes)
   @override
+  @JsonKey()
   @HiveField(10)
-  final int specificId;
+  final int episodeNumber;
+  // Parent series TMDB ID (0 for movies/series, series ID for seasons/episodes)
+  /// Used for API calls to get full series info
+  // ========== SYNC MANAGEMENT ==========
+  /// User ID ('guest' for unauthenticated, UID for authenticated)
+  /// Used in Hive key generation for multi-user support
   @override
+  @JsonKey()
   @HiveField(11)
-  final String seasonPosterUrl;
+  final String userId;
+  // Sync status (false = pending upload, true = synced to cloud)
+  /// Only used in Hive, not stored in Firestore
   @override
+  @JsonKey()
   @HiveField(12)
-  final String backGroundImage;
+  final bool isSynced;
+  // Last sync timestamp (when last uploaded/downloaded from cloud)
+  /// Stored as DateTime in Hive, Timestamp in Firestore
   @override
   @HiveField(13)
-  final int episodeNumber;
+  final DateTime? lastSyncedAt;
   @override
+  @JsonKey()
   @HiveField(14)
-  final num rating;
+  final int tmbdId;
+
+  /// Type of content (movie, series, season, episode)
+  @override
+  @HiveField(2)
+  final ContentType contentType;
+
   @override
   String toString() {
-    return 'FavoriteModel(id: $id, title: $title, posterImage: $posterImage, gener: $gener, contentType: $contentType, date: $date, userId: $userId, isSynced: $isSynced, seasonNumber: $seasonNumber, specificId: $specificId, seasonPosterUrl: $seasonPosterUrl, backGroundImage: $backGroundImage, episodeNumber: $episodeNumber)';
+    return 'FavoriteModel(specificId: $specificId, title: $title, posterImage: $posterImage, backdropImage: $backdropImage, genres: $genres, date: $date, rating: $rating, seasonNumber: $seasonNumber, episodeNumber: $episodeNumber, userId: $userId, isSynced: $isSynced, lastSyncedAt: $lastSyncedAt, tmbdId: $tmbdId, contentType: $contentType)';
   }
 
   @override
@@ -382,48 +435,48 @@ class _$FavoriteModelImpl implements _FavoriteModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoriteModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.specificId, specificId) ||
+                other.specificId == specificId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.posterImage, posterImage) ||
                 other.posterImage == posterImage) &&
-            const DeepCollectionEquality().equals(other._gener, _gener) &&
-            (identical(other.contentType, contentType) ||
-                other.contentType == contentType) &&
+            (identical(other.backdropImage, backdropImage) ||
+                other.backdropImage == backdropImage) &&
+            const DeepCollectionEquality().equals(other._genres, _genres) &&
             (identical(other.date, date) || other.date == date) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.seasonNumber, seasonNumber) ||
+                other.seasonNumber == seasonNumber) &&
+            (identical(other.episodeNumber, episodeNumber) ||
+                other.episodeNumber == episodeNumber) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.isSynced, isSynced) ||
                 other.isSynced == isSynced) &&
-            (identical(other.seasonNumber, seasonNumber) ||
-                other.seasonNumber == seasonNumber) &&
-            (identical(other.specificId, specificId) ||
-                other.specificId == specificId) &&
-            (identical(other.seasonPosterUrl, seasonPosterUrl) ||
-                other.seasonPosterUrl == seasonPosterUrl) &&
-            (identical(other.backGroundImage, backGroundImage) ||
-                other.backGroundImage == backGroundImage) &&
-            (identical(other.episodeNumber, episodeNumber) ||
-                other.episodeNumber == episodeNumber) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            (identical(other.lastSyncedAt, lastSyncedAt) ||
+                other.lastSyncedAt == lastSyncedAt) &&
+            (identical(other.tmbdId, tmbdId) || other.tmbdId == tmbdId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    id,
+    specificId,
     title,
     posterImage,
-    const DeepCollectionEquality().hash(_gener),
-    contentType,
+    backdropImage,
+    const DeepCollectionEquality().hash(_genres),
     date,
+    rating,
+    seasonNumber,
+    episodeNumber,
     userId,
     isSynced,
-    seasonNumber,
-    specificId,
-    seasonPosterUrl,
-    backGroundImage,
-    episodeNumber,
-    rating,
+    lastSyncedAt,
+    tmbdId,
+    contentType,
   );
 
   /// Create a copy of FavoriteModel
@@ -440,69 +493,86 @@ class _$FavoriteModelImpl implements _FavoriteModel {
   }
 }
 
-abstract class _FavoriteModel implements FavoriteModel {
+abstract class _FavoriteModel extends FavoriteModel {
   const factory _FavoriteModel({
-    @HiveField(1) required final int id,
-    @HiveField(2) required final String title,
-    @HiveField(3) required final String posterImage,
-    @HiveField(4) required final List<String> gener,
-    @HiveField(5) required final ContentType contentType,
-    @HiveField(6) required final String date,
-    @HiveField(7) final String userId,
-    @HiveField(8) final bool isSynced,
+    @HiveField(1) required final int specificId,
+    @HiveField(3) required final String title,
+    @HiveField(4) required final String posterImage,
+    @HiveField(5) required final String backdropImage,
+    @HiveField(6) required final List<int> genres,
+    @HiveField(7) required final String date,
+    @HiveField(8) required final double rating,
     @HiveField(9) final int seasonNumber,
-    @HiveField(10) final int specificId,
-    @HiveField(11) final String seasonPosterUrl,
-    @HiveField(12) final String backGroundImage,
-    @HiveField(13) final int episodeNumber,
-    @HiveField(14) final num rating,
+    @HiveField(10) final int episodeNumber,
+    @HiveField(11) final String userId,
+    @HiveField(12) final bool isSynced,
+    @HiveField(13) final DateTime? lastSyncedAt,
+    @HiveField(14) final int tmbdId,
+    @HiveField(2) required final ContentType contentType,
   }) = _$FavoriteModelImpl;
+  const _FavoriteModel._() : super._();
 
   factory _FavoriteModel.fromJson(Map<String, dynamic> json) =
       _$FavoriteModelImpl.fromJson;
 
-  @override
+  @override // ========== CONTENT IDENTIFICATION ==========
+  /// TMDB ID for this specific content
+  /// - For movies: Movie ID
+  /// - For series: Series ID
+  /// - For seasons: Season ID
+  /// - For episodes: Episode ID
   @HiveField(1)
-  int get id;
-  @override
-  @HiveField(2)
+  int get specificId;
+  @override // ========== DISPLAY METADATA ==========
+  /// Display title
+  @HiveField(3)
   String get title;
   @override
-  @HiveField(3)
-  String get posterImage;
-  @override
   @HiveField(4)
-  List<String> get gener;
-  @override
+  String get posterImage;
+  @override // Poster image URL (main thumbnail)
+  /// Backdrop image URL (background)
   @HiveField(5)
-  ContentType get contentType;
-  @override
+  String get backdropImage;
+  @override // Genre IDs (for movies and series only)
+  /// Empty list for seasons and episodes
   @HiveField(6)
-  String get date;
-  @override
+  List<int> get genres;
+  @override // Release/air date (ISO string format: "2024-02-17")
   @HiveField(7)
-  String get userId;
-  @override
+  String get date;
+  @override // Rating (0.0 - 10.0)
   @HiveField(8)
-  bool get isSynced;
-  @override
+  double get rating;
+  @override // ========== SERIES/EPISODE SPECIFIC ==========
+  /// Season number (0 for movies/series, 1+ for seasons/episodes)
   @HiveField(9)
   int get seasonNumber;
-  @override
+  @override // Episode number (0 for movies/series/seasons, 1+ for episodes)
   @HiveField(10)
-  int get specificId;
-  @override
-  @HiveField(11)
-  String get seasonPosterUrl;
-  @override
-  @HiveField(12)
-  String get backGroundImage;
-  @override
-  @HiveField(13)
   int get episodeNumber;
+  @override // Parent series TMDB ID (0 for movies/series, series ID for seasons/episodes)
+  /// Used for API calls to get full series info
+  // ========== SYNC MANAGEMENT ==========
+  /// User ID ('guest' for unauthenticated, UID for authenticated)
+  /// Used in Hive key generation for multi-user support
+  @HiveField(11)
+  String get userId;
+  @override // Sync status (false = pending upload, true = synced to cloud)
+  /// Only used in Hive, not stored in Firestore
+  @HiveField(12)
+  bool get isSynced;
+  @override // Last sync timestamp (when last uploaded/downloaded from cloud)
+  /// Stored as DateTime in Hive, Timestamp in Firestore
+  @HiveField(13)
+  DateTime? get lastSyncedAt;
   @override
   @HiveField(14)
-  num get rating;
+  int get tmbdId;
+  @override
+  /// Type of content (movie, series, season, episode)
+  @HiveField(2)
+  ContentType get contentType;
 
   /// Create a copy of FavoriteModel
   /// with the given fields replaced by the non-null parameter values.

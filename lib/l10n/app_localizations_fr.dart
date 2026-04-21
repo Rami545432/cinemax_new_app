@@ -307,4 +307,188 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get parts => 'Parts';
+
+  @override
+  String get seeAll => 'Voir tout';
+
+  @override
+  String get sortBy => 'Trier par';
+
+  @override
+  String get sortPopularityDesc => 'Le plus populaire';
+
+  @override
+  String get sortPopularityAsc => 'Le moins populaire';
+
+  @override
+  String get sortRatingDesc => 'Le mieux noté';
+
+  @override
+  String get sortRatingAsc => 'Le moins bien noté';
+
+  @override
+  String get sortReleaseDateDesc => 'Le plus récent';
+
+  @override
+  String get sortReleaseDateAsc => 'Le plus ancien';
+
+  @override
+  String get sortRevenueDesc => 'Le plus rentable';
+
+  @override
+  String get sortRevenueAsc => 'Le moins rentable';
+
+  @override
+  String get sortVoteCountDesc => 'Le plus voté';
+
+  @override
+  String get sortVoteCountAsc => 'Le moins voté';
+
+  @override
+  String get sortFirstAirDateDesc => 'Le plus récent';
+
+  @override
+  String get sortFirstAirDateAsc => 'Le plus ancien';
+
+  @override
+  String get sortVoteAverageDesc => 'Le mieux noté';
+
+  @override
+  String get sortVoteAverageAsc => 'Le moins bien noté';
+
+  @override
+  String get home => 'Accueil';
+
+  @override
+  String get applyFilters => 'Appliquer';
+
+  @override
+  String get clearFilters => 'Effacer';
+
+  @override
+  String get collections => 'Collections';
+
+  @override
+  String get cartoons => 'Dessins animés';
+
+  @override
+  String get anime => 'Anime';
+
+  @override
+  String get maifa => 'Mafia';
+
+  @override
+  String get marvel => 'Marvel';
+
+  @override
+  String get year => 'Année';
+
+  @override
+  String get rating => 'Note';
+
+  @override
+  String get min => 'min';
+
+  @override
+  String get cartoonDescreption =>
+      'Des rires colorés et des moments chaleureux';
+
+  @override
+  String get mafiaDescreption =>
+      'Pouvoir, loyauté, trahison - les histoires du monde souterrain.';
+
+  @override
+  String get animeDescreption =>
+      'Des mondes épiques, des émotions profondes et des batailles inoubliables.';
+
+  @override
+  String get marvelDescreption =>
+      'Héros, méchants et folie multiverselle - tout en un seul endroit.';
+
+  @override
+  String get logoutSuccessfully => 'Déconnexion réussie';
+
+  @override
+  String get backOnline => 'Retour en ligne';
+
+  @override
+  String durationFormat(int hours, int minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String get duration => 'Durée';
+
+  @override
+  String noFavoritesContentType(String type) {
+    return 'Aucun $type dans les favoris';
+  }
+
+  @override
+  String get statusReleased => 'Sorti';
+
+  @override
+  String get statusEnded => 'Terminé';
+
+  @override
+  String get statusReturningSeries => 'En cours';
+
+  @override
+  String get statusInProduction => 'En production';
+
+  @override
+  String get statusCanceled => 'Annulé';
+
+  @override
+  String get statusUnknown => 'Inconnu';
+
+  @override
+  String numberFormat(int number) {
+    final intl.NumberFormat numberNumberFormat = intl.NumberFormat.currency(
+      locale: localeName,
+      decimalDigits: 0,
+      symbol: '\$',
+    );
+    final String numberString = numberNumberFormat.format(number);
+
+    return '$numberString';
+  }
+
+  @override
+  String get onboardingTitle1 => 'Trouvez Votre Prochaine Obsession';
+
+  @override
+  String get onboardingDesc1 =>
+      'Découvrez les films tendance et les séries captivantes en quelques secondes.';
+
+  @override
+  String get onboardingTitle2 => 'Gardez Vos Favoris Près De Vous';
+
+  @override
+  String get onboardingDesc2 =>
+      'Enregistrez les films et séries que vous aimez dans votre liste personnelle.';
+
+  @override
+  String get onboardingTitle3 => 'Regardez Avant De Choisir';
+
+  @override
+  String get onboardingDesc3 =>
+      'Consultez les bandes-annonces, notes et avis avant de lancer la lecture.';
+
+  @override
+  String get onboardingTitle0 =>
+      'Votre prochaine obsession cinématographique commence ici';
+
+  @override
+  String get loginSuccessfully => 'Connexion réussie';
+
+  @override
+  String get loginFailed => 'Échec de la connexion';
+
+  @override
+  String get loginTagline =>
+      'Connectez-vous pour conserver votre liste de favoris';
+
+  @override
+  String get signWithGoogle => 'Se connecter avec Google';
 }

@@ -7,20 +7,18 @@ class GenerBox extends StatelessWidget {
   final String? gener;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade700),
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: Colors.grey.shade700),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: Text(
+        gener ?? '',
+        textAlign: TextAlign.center,
+        style: AppStyles.textStyle18(context),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Text(
-          gener ?? '',
-          textAlign: TextAlign.center,
-          style: AppStyles.textStyle18(context),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

@@ -10,14 +10,12 @@ class AboutTabViewBranch extends StatelessWidget {
   final Widget child;
   final String title;
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 20,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: AppStyles.textStyle24(context)),
-        Container(child: child),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+    spacing: 20,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(title, style: AppStyles.textStyle24(context)),
+      Container(child: child),
+    ],
+  );
 }

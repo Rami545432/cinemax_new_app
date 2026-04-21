@@ -1,19 +1,19 @@
 import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/keep_alive_wrapper.dart';
 import 'package:cinemax_app_new/features/details/domain/entites/movie_details_entity.dart';
 import 'package:cinemax_app_new/features/details/domain/enums/recomended_category.dart';
 import 'package:cinemax_app_new/features/details/domain/enums/similar_category.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/about_tab_bar_view.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/cast_tab_bar_view.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/movie_about_tab_view.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/parts_tab_bar_view.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/recomended_tab_bar_view.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/reviews_list_view_builder.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/similar_tab_bar.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
+import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
 import 'package:cinemax_app_new/l10n/app_localizations.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/keep_alive_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'about_tab_bar_view.dart';
-import 'cast_tab_bar_view.dart';
-import 'movie_about_tab_view.dart';
-import 'recomended_tab_bar_view.dart';
-import 'reviews_list_view_builder.dart';
 
 class MovieDetailComponets extends StatelessWidget {
   const MovieDetailComponets({super.key});
@@ -23,7 +23,7 @@ class MovieDetailComponets extends StatelessWidget {
     final movieDetailsEntity = context.watch<MovieDetailsEntity>();
     final reviews = movieDetailsEntity.kReviews;
     final watchProviders = movieDetailsEntity.kWatchProviders?.results;
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: TabBarView(
@@ -34,7 +34,7 @@ class MovieDetailComponets extends StatelessWidget {
               genreCategory: GenreCategory.movies,
               geners: movieDetailsEntity.kGeners,
               watchProviders: watchProviders,
-              child: MovieAboutTabView(),
+              child: const MovieAboutTabView(),
             ),
           ),
           KeepAliveWrapper(
@@ -56,7 +56,7 @@ class MovieDetailComponets extends StatelessWidget {
                   ),
           ),
           KeepAliveWrapper(
-            child: reviews!.results!.isNotEmpty
+            child: reviews?.results?.isNotEmpty ?? false
                 ? ReviewListViewBuilder(reviews: movieDetailsEntity.kReviews!)
                 : Center(
                     child: Text(

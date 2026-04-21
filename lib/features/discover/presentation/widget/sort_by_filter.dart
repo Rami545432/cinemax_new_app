@@ -1,6 +1,6 @@
 import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/sub_bar.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_filter.dart';
+import 'package:cinemax_app_new/features/discover/domain/enums/sort_by_enum.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/sub_bar.dart';
 import 'package:flutter/material.dart';
 
 class SortByFilter extends StatelessWidget {
@@ -14,30 +14,30 @@ class SortByFilter extends StatelessWidget {
   final ValueNotifier<SortBy?> selectedSortBy;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SubBar(title: 'Sort By'),
-        SizedBox(height: 10),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: sortOptions.map((sort) {
-            return ChoiceChip(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: Theme.of(context).colorScheme.onSurface,
+  Widget build(BuildContext context) => Column(
+    children: [
+      const SubBar(title: 'Sort By'),
+      const SizedBox(height: 10),
+      Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: sortOptions
+            .map(
+              (sort) => ChoiceChip(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
+                selectedColor: AppPrimaryColors.blueAccent,
+                label: Text(sort.name),
+                selected: selectedSortBy.value == sort,
+                onSelected: (_) => selectedSortBy.value = sort,
               ),
-              selectedColor: AppPrimaryColors.blueAccent,
-              label: Text(sort.uiLabel),
-              selected: selectedSortBy.value == sort,
-              onSelected: (_) => selectedSortBy.value = sort,
-            );
-          }).toList(),
-        ),
-      ],
-    );
-  }
+            )
+            .toList(),
+      ),
+    ],
+  );
 }

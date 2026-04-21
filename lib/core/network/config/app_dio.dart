@@ -1,18 +1,18 @@
+// ignore_for_file: inference_failure_on_untyped_parameter
+
 import 'dart:developer';
 
+import 'package:cinemax_app_new/core/network/Interceptors/cancellation_interceptor.dart';
+import 'package:cinemax_app_new/core/network/Interceptors/error_interceptor.dart';
+import 'package:cinemax_app_new/core/network/Interceptors/logging_interceptor.dart';
+import 'package:cinemax_app_new/core/network/Interceptors/security_interceptor.dart';
+import 'package:cinemax_app_new/core/network/config/dio_config.dart';
+import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:http_cache_hive_store/http_cache_hive_store.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../Interceptors/cancellation_interceptor.dart';
-import '../Interceptors/error_interceptor.dart';
-import '../Interceptors/logging_interceptor.dart';
-import '../Interceptors/security_interceptor.dart';
-
-import '../presentation/cubit/connectivity_cubit.dart';
-import 'dio_config.dart';
 
 class AppDio {
   static Dio? _instance;
@@ -29,7 +29,9 @@ class AppDio {
 
   /// Initialize cache (called lazily on first network request)
   static Future<void> _initializeCache() async {
-    if (_cacheInitialized) return;
+    if (_cacheInitialized) {
+      return;
+    }
 
     log('🔄 Lazy initializing cache...');
     final cacheDir = await getTemporaryDirectory();
@@ -38,12 +40,10 @@ class AppDio {
     _cacheOptions = CacheOptions(
       store: cacheStore,
       policy: CachePolicy.forceCache,
-      maxStale: Duration(days: 7),
+      maxStale: const Duration(days: 7),
       hitCacheOnErrorCodes: [500],
       hitCacheOnNetworkFailure: true,
       priority: CachePriority.high,
-      keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-      allowPostMethod: false,
     );
 
     _cacheInitialized = true;
@@ -76,7 +76,6 @@ class AppDio {
       RetryInterceptor(
         dio: dio,
         logPrint: print, // specify log function (optional)
-        retries: 3, // retry count (optional)
         retryDelays: const [
           // set delays between retries (optional)
           Duration(seconds: 1), // wait 1 sec before first retry

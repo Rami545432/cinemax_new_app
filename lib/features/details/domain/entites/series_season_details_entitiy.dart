@@ -1,8 +1,8 @@
-import '../../data/models/shared_details_models/credits.dart';
-import '../../data/models/shared_details_models/videos.dart';
-import '../../data/models/series_season_details/episode.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
 
-class SeriesSeasonDetailsEntitiy {
+final class SeriesSeasonDetailsEntity {
   final String seasonName;
   final String seasonOverView;
   final String seasonDate;
@@ -16,7 +16,7 @@ class SeriesSeasonDetailsEntitiy {
   final int episodeId;
   final int tvId;
 
-  SeriesSeasonDetailsEntitiy({
+  SeriesSeasonDetailsEntity({
     required this.seasonName,
     required this.seasonOverView,
     required this.seasonDate,

@@ -1,5 +1,5 @@
+import 'package:cinemax_app_new/core/utils/cubit_parameters/base_pagination_params.dart';
 import 'package:dio/dio.dart';
-import 'base_pagination_params.dart';
 
 class NowPlayingParams extends BasePaginationParams {
   const NowPlayingParams({required super.type, super.page, super.cancelToken});
@@ -9,11 +9,9 @@ class NowPlayingParams extends BasePaginationParams {
     String? type,
     int? page,
     CancelToken? cancelToken,
-  }) {
-    return NowPlayingParams(
-      type: type ?? this.type,
-      page: page ?? this.page,
-      cancelToken: cancelToken ?? this.cancelToken,
-    );
-  }
+  }) => NowPlayingParams(
+    type: type ?? this.type,
+    page: page ?? this.page,
+    cancelToken: cancelToken ?? this.cancelToken,
+  );
 }

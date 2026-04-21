@@ -1,14 +1,12 @@
 import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
 import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:cinemax_app_new/features/details/domain/entites/series_details_entity.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/season.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/season_info_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../data/models/series_details_models/season.dart';
-import '../../../domain/entites/series_details_entity.dart';
-import '../../../data/models/arguments/season_view_argument.dart';
-import 'season_info_section.dart';
 
 class SeasonTabBarView extends StatelessWidget {
   const SeasonTabBarView({super.key});
@@ -26,19 +24,18 @@ class SeasonTabBarView extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 20),
           child: InkWell(
             onTap: () {
+              final item = season[index];
               context.pushNamed(
                 RouteName.season,
-                extra: SeasonViewArgument(
-                  contentType: ContentType.seasons,
-                  id: seriesDetailsEntity.seiresId,
-                  backDropImageUrl: seriesDetailsEntity.backgroundImage,
-                  posterImageUrl: seriesDetailsEntity.posterImage,
-                  seasonDate: season[index].airDate,
-                  seasonName: season[index].name,
-                  seasonNumber: season[index].seasonNumber,
-                  seasonPosterPath: season[index].posterPath,
-                  seasonRating: season[index].voteAverage,
-                  specificId: season[index].id,
+                extra: SeasonNavData(
+                  tmdbId: seriesDetailsEntity.seiresId,
+                  seasonNumber: item.seasonNumber ?? 0,
+                  posterImage: item.posterPath ?? '',
+                  backdropImage: seriesDetailsEntity.backgroundImage ?? '',
+                  seasonName: item.name ?? '',
+                  date: item.airDate ?? '',
+                  rating: item.voteAverage ?? 0,
+                  specificId: item.id ?? 0,
                 ),
                 queryParameters: {'heroTag': heroTag},
               );

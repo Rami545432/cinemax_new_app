@@ -1,41 +1,34 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/data/models/collection_model/part.dart';
-import 'package:cinemax_app_new/models/base_card_model.dart';
+import 'package:cinemax_app_new/features/details/domain/entites/part_entity.dart';
 
-class CollectionEntity implements BaseCardModel {
-  final int collectionId;
-  final String collectionName;
-  final String collectionPosterPath;
-  final String collectionBackdropPath;
-  final String collectionOverview;
-  final List<Parts> collectionParts;
+class CollectionEntity {
+  final int id;
+  final String name;
+  final String posterPath;
+  final String backdropPath;
+  final String overview;
+  final List<PartEntity> parts;
 
   CollectionEntity({
-    required this.collectionId,
-    required this.collectionName,
-    required this.collectionPosterPath,
-    required this.collectionBackdropPath,
-    required this.collectionOverview,
-    required this.collectionParts,
+    required this.id,
+    required this.name,
+    required this.posterPath,
+    required this.backdropPath,
+    required this.overview,
+    required this.parts,
   });
-  @override
-  int get cardId => collectionId;
-  @override
-  String get cardImage => collectionPosterPath;
-  @override
-  String get cardTitle => collectionName;
-  @override
-  String? get horizontalCardImage => collectionBackdropPath;
-  @override
-  String? get type => 'collection';
-  @override
-  num? get cardRating => null;
-  @override
-  num? get cardPopularity => null;
-  @override
-  List<int>? get cardGeners => null;
-  @override
-  String? get cardDate => null;
-  @override
-  ContentType? get contentType => ContentType.movies;
+  CollectionEntity copyWith({
+    int? id,
+    String? name,
+    String? posterPath,
+    String? backdropPath,
+    String? overview,
+    List<PartEntity>? parts,
+  }) => CollectionEntity(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    posterPath: posterPath ?? this.posterPath,
+    backdropPath: backdropPath ?? this.backdropPath,
+    overview: overview ?? this.overview,
+    parts: parts ?? this.parts,
+  );
 }

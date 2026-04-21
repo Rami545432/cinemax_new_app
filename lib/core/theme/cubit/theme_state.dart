@@ -1,46 +1,45 @@
+// lib/features/theme/cubit/theme_state.dart
+
 import 'package:flutter/material.dart';
 
-enum AppColorScheme {
-  blue,
-  green,
-  purple,
-  red,
-  orange,
-  veryDarkBlue,
-  softBlue,
-  blueAccent,
-  black,
-}
-
 class ThemeState {
-  final AppColorScheme colorScheme;
-  final ThemeMode themeMode;
+  final ThemeMode mode;
+  final Color accentColor;
+  final double fontSize;
 
   const ThemeState({
-    this.colorScheme = AppColorScheme.black,
-    this.themeMode = ThemeMode.dark,
+    required this.mode,
+    required this.accentColor,
+    required this.fontSize,
   });
-  ThemeState copyWith({AppColorScheme? colorScheme, ThemeMode? themeMode}) {
-    return ThemeState(
-      colorScheme: colorScheme ?? this.colorScheme,
-      themeMode: themeMode ?? this.themeMode,
-    );
-  }
 
-  Map<String, dynamic> toJson() {
-    return {'colorScheme': colorScheme.name, 'themeMode': themeMode.name};
-  }
+  // Initial / default state
+  factory ThemeState.initial() => const ThemeState(
+    mode: ThemeMode.dark,
+    accentColor: Colors.black,
+    fontSize: 14.0,
+  );
 
-  factory ThemeState.fromJson(Map<String, dynamic> json) {
-    return ThemeState(
-      colorScheme: AppColorScheme.values.firstWhere(
-        (colorScheme) => colorScheme.name == json['colorScheme'],
-        orElse: () => AppColorScheme.blue,
-      ),
-      themeMode: ThemeMode.values.firstWhere(
-        (mode) => mode.name == json['themeMode'],
-        orElse: () => ThemeMode.dark,
-      ),
-    );
-  }
+  ThemeState copyWith({
+    ThemeMode? mode,
+    Color? accentColor,
+    double? fontSize,
+  }) => ThemeState(
+    mode: mode ?? this.mode,
+    accentColor: accentColor ?? this.accentColor,
+    fontSize: fontSize ?? this.fontSize,
+  );
+
+  // Serialization
+  Map<String, dynamic> toJson() => {
+    'mode': mode.name,
+    'accentColor': accentColor.toARGB32(), // stored as int
+    'fontSize': fontSize,
+  };
+
+  factory ThemeState.fromJson(Map<String, dynamic> json) => ThemeState(
+    mode: ThemeMode.values.byName(json['mode'] as String),
+    accentColor: Color(json['accentColor'] as int),
+    fontSize: json['fontSize'] as double,
+  );
 }

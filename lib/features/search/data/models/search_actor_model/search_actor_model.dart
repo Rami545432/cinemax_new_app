@@ -1,5 +1,5 @@
-import '../../../domain/entities/search_actor_entity.dart';
-import 'known_for.dart';
+import 'package:cinemax_app_new/features/search/data/models/search_actor_model/known_for.dart';
+import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
 
 class SearchActorModel extends SearchActorEntity {
   bool? adult;
@@ -31,21 +31,20 @@ class SearchActorModel extends SearchActorEntity {
          rating: '',
        );
 
-  factory SearchActorModel.fromJson(Map<String, dynamic> json) {
-    return SearchActorModel(
-      adult: json['adult'] as bool?,
-      gender: json['gender'] as num?,
-      id: json['id'] as int?,
-      knownForDepartment: json['known_for_department'] as String?,
-      name: json['name'] as String?,
-      originalName: json['original_name'] as String?,
-      popularity: (json['popularity'] as num?)?.toDouble(),
-      profilePath: json['profile_path'] as dynamic,
-      knownFor: (json['known_for'] as List<dynamic>?)
-          ?.map((e) => KnownFor.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-  }
+  factory SearchActorModel.fromJson(Map<String, dynamic> json) =>
+      SearchActorModel(
+        adult: json['adult'] as bool?,
+        gender: json['gender'] as num?,
+        id: json['id'] as int?,
+        knownForDepartment: json['known_for_department'] as String?,
+        name: json['name'] as String?,
+        originalName: json['original_name'] as String?,
+        popularity: (json['popularity'] as num?)?.toDouble(),
+        profilePath: json['profile_path'] as String?,
+        knownFor: (json['known_for'] as List<dynamic>?)
+            ?.map((e) => KnownFor.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
 
   Map<String, dynamic> toJson() => {
     'adult': adult,

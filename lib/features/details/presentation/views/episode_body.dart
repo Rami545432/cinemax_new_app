@@ -1,14 +1,16 @@
-import 'package:cinemax_app_new/core/utils/keep_alive_wrapper.dart';
-import 'package:cinemax_app_new/core/utils/tablet_play_button.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
+import 'package:cinemax_app_new/features/details/presentation/core/mappers/favorite_mappers.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_info_section.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_tab_bar_body.dart';
-import 'package:cinemax_app_new/features/home/presentation/views_models/widgets/opcaity_details_image.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
+import 'package:cinemax_app_new/features/home/presentation/widgets/opcaity_details_image.dart';
 import 'package:cinemax_app_new/hooks/ui/use_scroll_collapse_controller.dart';
 import 'package:cinemax_app_new/hooks/ui/use_tab_controller_animation.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/keep_alive_wrapper.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/tablet_play_button.dart';
 import 'package:flutter/material.dart';
-import 'package:cinemax_app_new/features/details/data/models/series_season_details/episode.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class EpisodeBody extends HookWidget {
@@ -67,43 +69,51 @@ class EpisodeBody extends HookWidget {
 
     return NestedScrollView(
       controller: scrollCollapse.scrollController,
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          DetailsSliverAppBar(
-            isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
-            title: currentEpisode.name ?? 'Episode $episodeNumber',
-            favorite: currentEpisode.toFavoriteEntity(
-              seasonPosterPath: seasonPosterPath,
-              seriesBackUpImage: seriesBackUpImage,
-            ),
-            backgroundWidget: OpcaityDetailsImage(
-              detailsBackGroundImage: currentEpisode.stillPath,
-              defaultDetailsBackGroundImage: seasonPosterPath,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              child: EpisodeInfoSection(
-                key: ValueKey(currentEpisode.episodeNumber),
-                episode: currentEpisode,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: TabletPlayButton(
-              type: 'tv',
-              id: currentEpisode.showId.toString(),
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        DetailsSliverAppBar(
+          expandedHeight: MediaQuery.sizeOf(context).height * 0.3,
+          isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
+          title: currentEpisode.name ?? 'Episode $episodeNumber',
+          favorite: FavoriteMapper.fromNavigationData(
+            EpisodeNavData(
+              tmdbId: currentEpisode.showId ?? 0,
+              posterImage: seasonPosterPath,
+              backdropImage: currentEpisode.stillPath,
               seasonNumber: currentEpisode.seasonNumber ?? 0,
+              seriesPosterPath: seriesBackUpImage,
               episodeNumber: currentEpisode.episodeNumber ?? 0,
-              title:
-                  currentEpisode.name ??
-                  'Episode ${currentEpisode.episodeNumber}',
+              rating: currentEpisode.voteAverage,
+              specificId: currentEpisode.id ?? 0,
+              date: currentEpisode.airDate,
             ),
           ),
-          CustomTabBar(controller: tabControllerResult.controller, tabs: tabs),
-        ];
-      },
+          backgroundWidget: OpcaityDetailsImage(
+            detailsBackGroundImage: currentEpisode.stillPath,
+            defaultDetailsBackGroundImage: seasonPosterPath,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+            child: EpisodeInfoSection(
+              key: ValueKey(currentEpisode.episodeNumber),
+              episode: currentEpisode,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: TabletPlayButton(
+            type: 'tv',
+            id: currentEpisode.showId.toString(),
+            seasonNumber: currentEpisode.seasonNumber ?? 0,
+            episodeNumber: currentEpisode.episodeNumber ?? 0,
+            title:
+                currentEpisode.name ??
+                'Episode ${currentEpisode.episodeNumber}',
+          ),
+        ),
+        CustomTabBar(controller: tabControllerResult.controller, tabs: tabs),
+      ],
       body: TabBarView(
         controller: tabControllerResult.controller,
         children: tabsViewChildren,

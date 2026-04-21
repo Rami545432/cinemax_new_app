@@ -1,6 +1,5 @@
+import 'package:cinemax_app_new/core/types/ui_types.dart';
 import 'package:flutter/material.dart';
-
-import '../../types/ui_types.dart';
 
 /// Generic animated list manager that can handle any type of item
 class AnimatedListManager<T> {
@@ -25,7 +24,9 @@ class AnimatedListManager<T> {
     ItemBuilderWithAnimation<T> removedItemBuilder,
     VoidCallback? onRemoved,
   ) {
-    if (index < 0 || index >= _items.length) return;
+    if (index < 0 || index >= _items.length) {
+      return;
+    }
 
     final removedItem = _items[index];
     _items.removeAt(index);
@@ -59,7 +60,7 @@ class AnimatedListManager<T> {
     for (int i = _items.length - 1; i >= 0; i--) {
       final removedItem = _items[i];
       final delay = Duration(
-        milliseconds: ((_items.length - 1 - i) * staggerDelay.inMilliseconds),
+        milliseconds: (_items.length - 1 - i) * staggerDelay.inMilliseconds,
       );
 
       Future.delayed(delay, () {

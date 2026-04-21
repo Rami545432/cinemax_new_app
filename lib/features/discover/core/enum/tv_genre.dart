@@ -25,7 +25,7 @@ enum TvGenre {
 
 extension TvGenreExtension on TvGenre {
   String localizedText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return switch (this) {
       TvGenre.actionAdventure => l10n.genreActionAdventure,
       TvGenre.animation => l10n.genreAnimation,

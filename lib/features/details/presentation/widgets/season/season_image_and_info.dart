@@ -1,8 +1,7 @@
-import 'package:cinemax_app_new/core/utils/size_config.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/season/text_column_info.dart';
 import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_image.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
-
-import 'text_column_info.dart';
 
 class SeasonImageAndInfo extends StatelessWidget {
   const SeasonImageAndInfo({
@@ -27,7 +26,6 @@ class SeasonImageAndInfo extends StatelessWidget {
       spacing: 20,
       children: [
         Expanded(
-          flex: 1,
           child: Hero(
             tag: title,
             child: DetailsImage(

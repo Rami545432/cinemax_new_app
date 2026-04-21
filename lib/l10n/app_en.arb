@@ -351,5 +351,207 @@
   "parts": "Parts",
   "@parts": {
     "description": "Parts of the content"
-  }
+  },
+  "seeAll": "See All",
+  "@seeAll": {
+    "description": "Button to see all content"
+  },
+  "sortBy": "Sort By",
+  "@sortBy": {
+    "description": "Button to sort content"
+  },
+  "sortPopularityDesc": "Most Popular",
+  "@sortPopularityDesc": {
+    "description": "Sort by most popular"
+  },
+  "sortPopularityAsc": "Least Popular",
+  "@sortPopularityAsc": {
+    "description": "Sort by least popular"
+  },
+  "sortRatingDesc": "Highest Rated",
+  "@sortRatingDesc": {
+    "description": "Sort by highest rated"
+  },
+  "sortRatingAsc": "Lowest Rated",
+  "@sortRatingAsc": {
+    "description": "Sort by lowest rated"
+  },
+  "sortReleaseDateDesc": "Newest",
+  "@sortReleaseDateDesc": {
+    "description": "Sort by newest"
+  },
+  "sortReleaseDateAsc": "Oldest",
+  "@sortReleaseDateAsc": {
+    "description": "Sort by oldest"
+  },
+  "sortRevenueDesc": "Highest Revenue",
+  "@sortRevenueDesc": {
+    "description": "Sort by highest revenue"
+  },
+  "sortRevenueAsc": "Lowest Revenue",
+  "@sortRevenueAsc": {
+    "description": "Sort by lowest revenue"
+  },
+  "sortVoteCountDesc": "Most Voted",
+  "@sortVoteCountDesc": {
+    "description": "Sort by most voted"
+  },
+  "sortVoteCountAsc": "Least Voted",
+  "@sortVoteCountAsc": {
+    "description": "Sort by least voted"
+  },
+  "sortFirstAirDateDesc": "Newest",
+  "@sortFirstAirDateDesc": {
+    "description": "Sort by newest"
+  },
+  "sortFirstAirDateAsc": "Oldest",
+  "@sortFirstAirDateAsc": {
+    "description": "Sort by oldest"
+  },
+  "sortVoteAverageDesc": "Highest Rated",
+  "@sortVoteAverageDesc": {
+    "description": "Sort by highest rated"
+  },
+  "sortVoteAverageAsc": "Lowest Rated",
+  "@sortVoteAverageAsc": {
+    "description": "Sort by lowest rated"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home"
+  },
+  "applyFilters": "Apply",
+  "@applyFilters": {
+    "description": "Apply Filters"
+  },
+  "clearFilters": "Clear",
+  "@clearFilters": {
+    "description": "Clear Filters"
+  },
+  "collections": "Collections",
+  "@collections": {
+    "description": "Collections"
+  },
+  "cartoons": "Cartoons",
+  "@cartoons": {
+    "description": "Cartoons"
+  },
+  "anime": "Anime",
+  "@anime": {
+    "description": "Anime"
+  },
+  "maifa": "Mafia",
+  "@maifa": {
+    "description": "Mafia"
+  },
+  "marvel": "Marvel",
+  "@marvel": {
+    "description": "Marvel"
+  },
+  "year": "Year",
+  "@year": {
+    "description": "Year"
+  },
+  "rating": "Rating",
+  "@rating": {
+    "description": "Rating"
+  },
+  "min": "min",
+  "@min": {
+    "description": "min"
+  },
+  "cartoonDescreption": "Colorful fun, cozy laughs, and pure good vibes",
+  "@cartoonDescreption": {
+    "description": "Cartoon description"
+  },
+  "mafiaDescreption": "Power, loyalty, betrayal — the underworld stories.",
+  "@mafiaDescreption": {
+    "description": "Mafia description"
+  },
+  "animeDescreption": "Epic worlds, deep emotions, unforgettable battles.",
+  "@animeDescreption": {
+    "description": "Anime description"
+  },
+  "marvelDescreption": "Heroes, villains, and multiverse madness — all in one place.",
+  "@marvelDescreption": {
+    "description": "Marvel description"
+  },
+  "logoutSuccessfully": "Logout successfully",
+  "@logoutSuccessfully": {
+    "description": "Logout successfully"
+  },
+  "backOnline": "Back Online",
+  "@backOnline": {
+    "description": "Back Online"
+  },
+  "durationFormat": "{hours}h {minutes}m",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration"
+  },
+  "noFavoritesContentType": "No {type} in favorites",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "Released",
+  "@statusReleased": {},
+  "statusEnded": "Ended",
+  "@statusEnded": {},
+  "statusReturningSeries": "Returning Series",
+  "@statusReturningSeries": {},
+  "statusInProduction": "In Production",
+  "@statusInProduction": {},
+  "statusCanceled": "Canceled",
+  "@statusCanceled": {},
+  "statusUnknown": "Unknown",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "Discover Your Next Obsession",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "Find trending movies and must-watch series in seconds.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "Keep Favorites Close",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "Save movies and shows you love into your personal watchlist.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "Watch Before You Commit",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "Check trailers, ratings, and reviews before hitting play.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "Your Next Cinematic Obsession Starts Here",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "Login successfully",
+  "@loginSuccessfully": {},
+  "loginFailed": "Login failed",
+  "@loginFailed": {},
+  "loginTagline": "Login to keep your favorite list",
+  "@loginTagline": {},
+  "signWithGoogle": "Sign in with Google",
+  "@signWithGoogle": {}
 }

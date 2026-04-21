@@ -1,9 +1,8 @@
-import 'package:cinemax_app_new/core/utils/size_config.dart';
+import 'package:cinemax_app_new/features/details/domain/value_objects/season.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_image.dart';
+import 'package:cinemax_app_new/features/details/presentation/widgets/shared/season_and_episode.dart';
+import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/models/series_details_models/season.dart';
-import 'episode_image.dart';
-import 'season_and_episode.dart';
 
 class SeasonInfoSection extends StatelessWidget {
   const SeasonInfoSection({
@@ -18,7 +17,7 @@ class SeasonInfoSection extends StatelessWidget {
   final String heroTag;
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.sizeOf(context).width;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     final image = season.posterPath ?? defaultImageUrl;
     return Row(
       spacing: 20,
@@ -31,7 +30,7 @@ class SeasonInfoSection extends StatelessWidget {
           ),
         ),
         Expanded(flex: 3, child: SeasonAndEpisodeInfo(season: season)),
-        Icon(Icons.arrow_forward_ios_rounded),
+        const Icon(Icons.arrow_forward_ios_rounded),
       ],
     );
   }

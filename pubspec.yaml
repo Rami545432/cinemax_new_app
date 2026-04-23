@@ -95,6 +95,7 @@ dependencies:
   stream_transform: ^2.1.1
   visibility_detector: ^0.4.0+2
   mocktail: ^1.0.4
+  bloc_test: ^10.0.0
     
 dev_dependencies:
   flutter_test:

@@ -27,25 +27,6 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> checkAuthStatus() async {
-    try {
-      final isGuest = await localDataSource.getGuestMode();
-      if (isGuest) {
-        return right(true);
-      }
-      final user = await remoteDataSource.getCurrentUser();
-      if (user != null) {
-        return right(true);
-      }
-      return right(false);
-    } on ServerFailure catch (e) {
-      return left(e);
-    } catch (e) {
-      return left(ServerFailure(errorMessage: e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, UserEntity?>> getCurrentUser() async {
     try {
       final isGuest = await localDataSource.getGuestMode();

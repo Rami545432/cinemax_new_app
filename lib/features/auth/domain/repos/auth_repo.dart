@@ -6,7 +6,6 @@ abstract interface class AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithGoogle();
   Future<Either<Failure, void>> signOut();
   Future<Either<Failure, UserEntity?>> getCurrentUser();
-  Future<Either<Failure, bool>> checkAuthStatus();
   Future<Either<Failure, UserEntity>> enableGuestMode();
   Future<Either<Failure, void>> disableGuestMode();
   Future<Either<Failure, bool>> isGuestMode();

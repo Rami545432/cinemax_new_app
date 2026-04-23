@@ -24,20 +24,16 @@ class SessionCubit extends Cubit<SessionState> {
   Future<void> checkAuthStatus() async {
     final result = await getCurrentUserUseCase(NoParams());
 
-    result.fold(
-      (_) => emit(SessionUnauthenticated()),
-      (user) {
-        if (user == null) {
-          emit(SessionUnauthenticated());
-        } else if (user.isGuest) {
-          emit(SessionGuest(user: user));
-        } else {
-          emit(SessionAuthenticated(user: user));
-        }
-      },
-    );
+    result.fold((_) => emit(SessionUnauthenticated()), (user) {
+      if (user == null) {
+        emit(SessionUnauthenticated());
+      } else if (user.isGuest) {
+        emit(SessionGuest(user: user));
+      } else {
+        emit(SessionAuthenticated(user: user));
+      }
+    });
   }
-
 
   Future<void> signOut() async {
     await signOutUseCase(NoParams());

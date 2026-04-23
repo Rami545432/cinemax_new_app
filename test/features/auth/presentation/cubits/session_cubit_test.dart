@@ -1,3 +1,5 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
 import 'package:cinemax_app_new/features/auth/domain/use_cases/get_current_user_use_case.dart';
@@ -63,26 +65,110 @@ void main() {
       expect(sessionCubit.state, isA<SessionUnknown>());
     });
 
-    test('emits [SessionUnauthenticated] when user is null', () async {
-      // ARRANGE: What should our mock dependencies do when called?
-      // When getCurrentUserUseCase is called with ANY NoParams, return a Right(null).
-      when(
-        () => mockGetCurrentUserUseCase(any()),
-      ).thenAnswer((_) async => const Right(null));
+    // ------------------------------------------------------------------
+    // NEW WAY: Using blocTest
+    // ------------------------------------------------------------------
+    // blocTest acts like a super-powered test() function designed specifically for Cubits.
+    // It takes 3 main stages: build, act, and expect.
 
-      // To test Cubit streams, we expect outcomes on the stream BEFORE acting.
-      final expectedStates = [isA<SessionUnauthenticated>()];
+    blocTest<SessionCubit, SessionState>(
+      'emits [SessionUnauthenticated] when user is null',
+      // BUILD: Return the Cubit you want to test and set up your Mocks
+      build: () {
+        when(
+          () => mockGetCurrentUserUseCase(any()),
+        ).thenAnswer((_) async => const Right(null));
+        return sessionCubit;
+      },
+      // ACT: What method do you want to trigger?
+      act: (cubit) => cubit.checkAuthStatus(),
+      // EXPECT: What states should be emitted in order? (We don't need expectLater anymore!)
+      expect: () => [isA<SessionUnauthenticated>()],
+      // VERIFY: (Optional) Make sure our mocks were actually interacted with
+      verify: (_) {
+        verify(() => mockGetCurrentUserUseCase(any())).called(1);
+      },
+    );
 
-      expectLater(sessionCubit.stream, emitsInOrder(expectedStates));
+    // Let's solve the TODO together using blocTest!
+    blocTest<SessionCubit, SessionState>(
+      'emits [SessionAuthenticated] when user is found and not guest',
+      build: () {
+        // Arrange
+        const fakeUser = UserEntity(
+          uid: '123',
+          email: 'test@test.com',
+          displayName: 'Test',
+          photoUrl: '',
+          isGuest: false,
+          isEmailVerified: true,
+          createdAt: null,
+        );
+        when(
+          () => mockGetCurrentUserUseCase(any()),
+        ).thenAnswer((_) async => const Right(fakeUser));
+        return sessionCubit;
+      },
+      act: (cubit) => cubit.checkAuthStatus(),
+      expect: () => [
+        // We can even check if the state contains the EXACT fake user we created!
+        isA<SessionAuthenticated>().having(
+          (state) => state.user.uid,
+          'uid',
+          '123',
+        ),
+      ],
+    );
+  });
 
-      // ACT: Call the method we want to test
-      await sessionCubit.checkAuthStatus();
+  group('signOut', () {
+    blocTest<SessionCubit, SessionState>(
+      'emits [SessionUnauthenticated] when sign out is successful',
+      build: () {
+        when(
+          () => mockSignOutUseCase(any()),
+        ).thenAnswer((_) async => const Right(null));
+        return sessionCubit;
+      },
+      act: (cubit) => cubit.signOut(),
+      expect: () => [isA<SessionUnauthenticated>()],
+      verify: (_) {
+        verify(() => mockSignOutUseCase(any())).called(1);
+      },
+    );
+  });
 
-      // Verify that our mock was actually called exactly 1 time
-      verify(() => mockGetCurrentUserUseCase(any())).called(1);
-    });
+  group('enableGuestMode', () {
+    blocTest<SessionCubit, SessionState>(
+      'emits [SessionGuestMode] when guest mode is enabled',
+      build: () {
+        when(
+          () => mockEnableGuestModeUseCase(any()),
+        ).thenAnswer((_) async => Right(UserEntity.guest()));
+        return sessionCubit;
+      },
+      act: (cubit) => cubit.enableGuestMode(),
+      expect: () => [isA<SessionGuest>()],
+      verify: (_) {
+        verify(() => mockEnableGuestModeUseCase(any())).called(1);
+      },
+    );
+  });
 
-    // TODO: We will write this one together!
-    // test('emits [SessionAuthenticated] when user is found and not guest', () async { ... });
+  group('disableGuestMode', () {
+    blocTest<SessionCubit, SessionState>(
+      'emits [SessionUnauthenticated] when guest mode is disabled',
+      build: () {
+        when(
+          () => mockDisableGuestModeUseCase(any()),
+        ).thenAnswer((_) async => const Right(null));
+        return sessionCubit;
+      },
+      act: (cubit) => cubit.disableGuestMode(),
+      expect: () => [isA<SessionUnauthenticated>()],
+      verify: (_) {
+        verify(() => mockDisableGuestModeUseCase(any())).called(1);
+      },
+    );
   });
 }

@@ -2,6 +2,7 @@ import 'package:cinemax_app_new/core/errors/errors.dart';
 import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:cinemax_app_new/features/auth/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -24,9 +25,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       return UserModel.fromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
-      throw ServerFailure(
-        errorMessage: e.message ?? 'Failed to get current user',
-      );
+      throw ServerException(e.message ?? 'Failed to get current user');
     }
   }
 
@@ -61,12 +60,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     try {
-      await Future.wait([
-        firebaseAuth.signOut(),
-        googleSignIn.signOut(),
-      ]);
+      await Future.wait([firebaseAuth.signOut(), googleSignIn.signOut()]);
+    } on FirebaseAuthException catch (e) {
+      throw ServerFailure(errorMessage: e.message ?? 'An error occurred');
     } catch (e) {
-      throw ServerFailure(errorMessage: 'Sign out failed');
+      throw ServerFailure(errorMessage: e.toString());
     }
   }
 }

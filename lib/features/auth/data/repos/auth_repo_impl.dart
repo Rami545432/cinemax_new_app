@@ -4,9 +4,7 @@ import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remo
 import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
 import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: AuthRepo)
 class AuthRepoImpl implements AuthRepo {
   final AuthLocalDataSource localDataSource;
   final AuthRemoteDataSource remoteDataSource;

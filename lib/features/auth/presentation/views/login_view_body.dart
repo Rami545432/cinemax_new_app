@@ -33,12 +33,6 @@ class LoginViewBody extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // Facebook Sign In
-          // SocialLoginButton(
-          //   icon: Assets.iconsFacebook,
-          //   title: 'Facebook',
-          //   onTap: context.read<AuthCubit>().signInWithFacebook,
-          // ),
           const SizedBox(height: 32),
 
           // Log In link

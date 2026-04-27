@@ -38,6 +38,20 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            applicationIdSuffix = ".dev"
+            resValue("string", "app_name", "Cinemax Dev")
+        }
+        create("prod") {
+            dimension = "env"
+            resValue("string", "app_name", "Cinemax")
+        }
+    }
 }
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")

@@ -27,7 +27,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // You can log or process data message
 }
 
-Future<void> main() async {
+Future<void> bootApp(String envPath) async {
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
@@ -37,13 +37,13 @@ Future<void> main() async {
   );
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  log('🚀 Starting app...');
+  log('🚀 Starting app with env: $envPath...');
 
   try {
-    await dotenv.load();
-    log('✅ .env loaded');
+    await dotenv.load(fileName: envPath);
+    log('✅ $envPath loaded');
   } catch (e) {
-    log('⚠️ Failed to load .env: $e');
+    log('⚠️ Failed to load $envPath: $e');
   }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);

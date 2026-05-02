@@ -1005,14 +1005,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  hotreloader:
-    dependency: transitive
-    description:
-      name: hotreloader
-      sha256: bc167a1163807b03bada490bfe2df25b0d744df359227880220a5cbd04e5734b
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.3.0"
   html:
     dependency: transitive
     description:
@@ -1085,14 +1077,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.7.1+4"
-  injectable_generator:
-    dependency: "direct dev"
-    description:
-      name: injectable_generator
-      sha256: fcc0d1edcef2c863dec846b0dec27cb2390d9e9b62e61da5cfc2b9a06b9533c2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.12.1"
   internet_connection_checker_plus:
     dependency: "direct main"
     description:
@@ -1173,14 +1157,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  lean_builder:
-    dependency: "direct dev"
-    description:
-      name: lean_builder
-      sha256: ee4117b03e93a4eb83e1a78c8e7a1dc22188d43bb142309982be48673a1b3a53
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.7"
   lints:
     dependency: transitive
     description:
@@ -1914,14 +1890,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.6.1"
-  xxh3:
-    dependency: transitive
-    description:
-      name: xxh3
-      sha256: "399a0438f5d426785723c99da6b16e136f4953fb1e9db0bf270bd41dd4619916"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   yaml:
     dependency: transitive
     description:

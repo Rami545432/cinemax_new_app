@@ -27,6 +27,10 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // You can log or process data message
 }
 
+Future<void> main() async {
+  await bootApp('.env');
+}
+
 Future<void> bootApp(String envPath) async {
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +63,7 @@ Future<void> bootApp(String envPath) async {
 
   final sessionCubit = getIt<SessionCubit>();
   await sessionCubit.checkAuthStatus();
-  
+
   final settingsCubit = getIt<SettingsCubit>();
   await settingsCubit.checkSettings();
 

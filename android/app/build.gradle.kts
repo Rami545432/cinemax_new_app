@@ -45,11 +45,14 @@ android {
         create("dev") {
             dimension = "env"
             applicationIdSuffix = ".dev"
-            resValue("string", "app_name", "Cinemax Dev")
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "Movify Dev")
         }
         create("prod") {
             dimension = "env"
-            resValue("string", "app_name", "Cinemax")
+             
+            resValue("string", "app_name", "Movify")
+            
         }
     }
 }

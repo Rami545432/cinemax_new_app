@@ -45,9 +45,7 @@ app.*.map.json
 /android/app/release
 
 # Environment variables
-.env
-.env.local
-.env.*.local
+*.env
 
 # Security, API Keys, and Secrets
 *.keystore

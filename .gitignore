@@ -46,6 +46,10 @@ app.*.map.json
 
 # Environment variables
 *.env
+*.env.dev
+*.env.prod
+*.env.dev.g.dart
+*.env.prod.g.dart
 
 # Security, API Keys, and Secrets
 *.keystore

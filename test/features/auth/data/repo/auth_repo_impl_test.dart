@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_instance_creation
+
 import 'package:cinemax_app_new/core/errors/errors.dart';
 import 'package:cinemax_app_new/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source.dart';

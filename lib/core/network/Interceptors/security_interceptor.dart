@@ -1,16 +1,18 @@
 // ignore_for_file: strict_raw_type
 
 import 'dart:developer';
+
+import 'package:cinemax_app_new/config/env/app_config.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:cinemax_app_new/core/network/services/secure_storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SecurityInterceptor extends Interceptor {
   FirebaseAuth get _firebaseAuth => FirebaseAuth.instance;
 
-  // Get TMDB API key from environment variables
-  String get _tmdbApiKey => dotenv.env['TMDB_API_KEY'] ?? '';
+  // Get TMDB API key from AppConfig
+  String get _tmdbApiKey => getIt<AppConfig>().tmdbApiKey;
 
   @override
   void onRequest(

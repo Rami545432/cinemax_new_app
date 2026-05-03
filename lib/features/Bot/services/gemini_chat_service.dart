@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:cinemax_app_new/config/env/app_config.dart';
+import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiChatService {
@@ -79,9 +80,9 @@ REMEMBER: You're not just listing titles - you're helping someone find their nex
   }
 
   void _initializeModel() {
-    final apiKey = dotenv.env['GEMINI_API_KEY'];
+    final apiKey = getIt<AppConfig>().geminiApiKey;
 
-    if (apiKey == null || apiKey.isEmpty) {
+    if (apiKey.isEmpty) {
       throw Exception('GEMINI_API_KEY not found in .env file');
     }
 

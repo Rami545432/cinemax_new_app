@@ -35,16 +35,16 @@ void main() {
 
     test('should return failure when guest mode is not disabled', () async {
       // Arrange
-      final failure = ServerFailure(errorMessage: '');
+      const failure = ServerFailure(errorMessage: '');
       when(
         () => mockAuthRepo.disableGuestMode(),
-      ).thenAnswer((_) async => Left(failure));
+      ).thenAnswer((_) async => const Left(failure));
 
       // Act
       final result = await useCase(NoParams());
 
       // Assert
-      expect(result, Left<Failure, void>(failure));
+      expect(result, const Left<Failure, void>(failure));
       verify(() => mockAuthRepo.disableGuestMode()).called(1);
       verifyNoMoreInteractions(mockAuthRepo);
     });

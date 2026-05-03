@@ -48,8 +48,8 @@ app.*.map.json
 *.env
 *.env.dev
 *.env.prod
-*.env.dev.g.dart
-*.env.prod.g.dart
+lib/config/env/env.dev.g.dart
+lib/config/env/env.prod.g.dart
 
 # Security, API Keys, and Secrets
 *.keystore

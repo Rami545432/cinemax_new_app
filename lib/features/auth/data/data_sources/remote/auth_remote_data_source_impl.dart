@@ -34,7 +34,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        throw ServerFailure(errorMessage: 'Google sign in failed');
+        throw const ServerFailure(errorMessage: 'Google sign in failed');
       }
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -47,7 +47,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       final user = userCredential.user;
       if (user == null) {
-        throw ServerFailure(errorMessage: 'Google sign in failed');
+        throw const ServerFailure(errorMessage: 'Google sign in failed');
       }
       return UserModel.fromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {

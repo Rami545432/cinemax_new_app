@@ -46,7 +46,7 @@ void main() {
 
     when(
       () => mockRepo.signInWithGoogle(),
-    ).thenAnswer((_) async => Left(ServerFailure(errorMessage: '')));
+    ).thenAnswer((_) async => const Left(ServerFailure(errorMessage: '')));
 
     // Act — call the use case
     final result = await useCase();

@@ -58,7 +58,7 @@ void main() {
       build: () {
         when(
           () => mockSignInWithGoogleUseCase.call(any()),
-        ).thenAnswer((_) async => Left(ServerFailure(errorMessage: '')));
+        ).thenAnswer((_) async => const Left(ServerFailure(errorMessage: '')));
         return loginCubit;
       },
       act: (_) => loginCubit.signInWithGoogle(),

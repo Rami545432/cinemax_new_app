@@ -1,12 +1,13 @@
-import 'package:cinemax_app_new/constant.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_cubit.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_state.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/favorite_vertical_card.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/constant.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_state.dart';
+import 'package:movify/features/favorite/presentation/widgets/favorite_vertical_card.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 /// Single tab view (Movies, Series, or Episodes)
 ///
@@ -57,57 +58,73 @@ class _FavoriteTabViewState extends State<FavoriteTabView> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<FavoriteCubit, FavoriteState>(
-        listener: (context, state) {
-          // Reload when favorites change
-          if (state is FavoriteLoaded) {
-            _loadFavorites();
-          }
-        },
-        child: _buildContent(),
-      );
-
-  Widget _buildContent() {
+  Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final l10n = AppLocalizations.of(context)!;
-    // Loading
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    // Empty state
-    if (_favorites.isEmpty) {
-      return RefreshIndicator(
-        onRefresh: _onRefresh,
-        child: Center(
-          child: Text(
-            l10n.noFavoritesContentType(
-              widget.contentType.localizedText(context),
+    return BlocConsumer<FavoriteCubit, FavoriteState>(
+      listener: (context, state) {
+        // Reload when favorites change
+        if (state is FavoriteLoaded) {
+          _loadFavorites();
+        }
+      },
+      builder: (context, state) => state.when(
+        initial: () => Center(
+          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
+        ),
+        loading: () => Center(
+          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
+        ),
+        loaded: (items, _, _, _, _) {
+          if (_favorites.isEmpty) {
+            return Center(
+              child: Text(
+                l10n.noFavoritesContentType(
+                  widget.contentType.localizedText(context),
+                ),
+              ),
+            );
+          }
+          return RefreshIndicator(
+            color: Colors.white,
+            onRefresh: _onRefresh,
+            child: GridView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(16),
+              itemCount: _favorites.length,
+              gridDelegate: Constants.sliverGridDelegate(width),
+              itemBuilder: (context, index) {
+                final favorite = _favorites[index];
+                return FavoriteVerticalCard(
+                  item: favorite,
+                  onRemove: () {
+                    context.read<FavoriteCubit>().toggleFavorite(favorite);
+                  },
+                );
+              },
+            ),
+          );
+        },
+        syncing: (message, _) => RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: Center(
+            child: Text(
+              l10n.noFavoritesContentType(
+                widget.contentType.localizedText(context),
+              ),
             ),
           ),
         ),
-      );
-    }
-
-    // List of favorites
-    return RefreshIndicator(
-      color: Colors.white,
-      onRefresh: _onRefresh,
-      child: GridView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(16),
-        itemCount: _favorites.length,
-        gridDelegate: Constants.sliverGridDelegate(width),
-        itemBuilder: (context, index) {
-          final favorite = _favorites[index];
-          return FavoriteVerticalCard(
-            item: favorite,
-            onRemove: () {
-              context.read<FavoriteCubit>().toggleFavorite(favorite);
-            },
-          );
-        },
+        error: (message) => RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: Center(
+            child: Text(
+              l10n.noFavoritesContentType(
+                widget.contentType.localizedText(context),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

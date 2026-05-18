@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
 
 abstract class LocalHomeDataSource {
   Future<List<MovieEntity>> fetchMostPopularMovies({int page = 10});

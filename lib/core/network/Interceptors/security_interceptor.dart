@@ -2,11 +2,11 @@
 
 import 'dart:developer';
 
-import 'package:cinemax_app_new/config/env/app_config.dart';
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/network/services/secure_storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movify/config/env/app_config.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/storage/secure/secure_storage_service.dart';
 
 class SecurityInterceptor extends Interceptor {
   FirebaseAuth get _firebaseAuth => FirebaseAuth.instance;

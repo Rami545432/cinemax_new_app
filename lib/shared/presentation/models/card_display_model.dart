@@ -1,6 +1,6 @@
 // presentation/models/card_display_model.dart
 // ✅ Pure Dart — no Flutter imports, no abstract
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
 
 final class CardDisplayModel {
   final int id;

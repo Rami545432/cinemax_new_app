@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/features/Bot/presentation/blocs/chat_bloc.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/blocs/chat_event.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/blocs/chat_states.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/widgets/chat_bubble.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/widgets/quick_suggestions.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/widgets/typing_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/Bot/presentation/blocs/chat_bloc.dart';
+import 'package:movify/features/Bot/presentation/blocs/chat_event.dart';
+import 'package:movify/features/Bot/presentation/blocs/chat_states.dart';
+import 'package:movify/features/Bot/presentation/widgets/chat_bubble.dart';
+import 'package:movify/features/Bot/presentation/widgets/quick_suggestions.dart';
+import 'package:movify/features/Bot/presentation/widgets/typing_indicator.dart';
 
 class AiChatScreen extends StatefulWidget {
   const AiChatScreen({super.key});

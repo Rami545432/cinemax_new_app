@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/utils/app_colors.dart';
 
 class OpcaityDetailsImage extends StatelessWidget {
   const OpcaityDetailsImage({

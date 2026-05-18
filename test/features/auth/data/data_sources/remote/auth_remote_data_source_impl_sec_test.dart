@@ -1,10 +1,11 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source_impl.dart';
-import 'package:cinemax_app_new/features/auth/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/errors/expections.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source_impl.dart';
+import 'package:movify/features/auth/data/models/user_model.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
@@ -177,5 +178,15 @@ void main() {
         verify(() => googleSignIn.signOut()).called(1);
       },
     );
+
+    test('Should throw Cancelled Exception ', () async {
+      when(() => googleSignIn.signIn()).thenAnswer((_) async => null);
+
+      expect(
+        () => authRemoteDataSourceImpl.signInWithGoogle(),
+        throwsA(isA<CancelledException>()),
+      );
+      verify(() => googleSignIn.signIn()).called(1);
+    });
   });
 }

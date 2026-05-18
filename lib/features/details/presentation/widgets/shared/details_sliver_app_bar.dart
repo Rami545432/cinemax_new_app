@@ -1,12 +1,12 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/back_button.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/home_icon_button.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/share_button.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/favorite_button.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/in_app_view.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/back_button.dart';
+import 'package:movify/features/details/presentation/widgets/shared/home_icon_button.dart';
+import 'package:movify/features/details/presentation/widgets/shared/share_button.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/presentation/widgets/favorite_button.dart';
+import 'package:movify/shared/presentation/widgets/in_app_view.dart';
 
 class DetailsSliverAppBar extends StatelessWidget {
   const DetailsSliverAppBar({

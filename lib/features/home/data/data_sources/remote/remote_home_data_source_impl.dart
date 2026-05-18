@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/core/types/data_source_types.dart';
-import 'package:cinemax_app_new/features/home/data/data_sources/remote/remote_home_data_source.dart';
-import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
-import 'package:cinemax_app_new/features/home/data/models/series_model.dart';
-import 'package:cinemax_app_new/shared/data/mappers/map_paged_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/network/api/services/api_service.dart';
+import 'package:movify/core/types/data_source_types.dart';
+import 'package:movify/features/home/data/data_sources/remote/remote_home_data_source.dart';
+import 'package:movify/features/home/data/models/movie_model.dart';
+import 'package:movify/features/home/data/models/series_model.dart';
+import 'package:movify/shared/data/mappers/map_paged_response.dart';
 
 @LazySingleton(as: RemoteHomeDataSource)
 class RemoteHomeDataSourceImpl implements RemoteHomeDataSource {

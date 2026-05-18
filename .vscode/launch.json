@@ -5,24 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "cinemax_app",
+            "name": "Movify",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "cinemax_app (profile mode)",
+            "name": "Movify (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "cinemax_app (release mode)",
+            "name": "Movify (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
-            "name": "Run dev",
+            "name": "Movify dev",
             "request": "launch",
             "type": "dart",
             "program": "lib/main_dev.dart",
@@ -32,7 +32,7 @@
             ]
         },
         {
-            "name": "Run prod",
+            "name": "Movify prod",
             "request": "launch",
             "type": "dart",
             "program": "lib/main_prod.dart",

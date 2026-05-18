@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_state.dart';
-import 'package:cinemax_app_new/features/home/presentation/enums/seires_category.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
+import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_state.dart';
+import 'package:movify/features/home/presentation/enums/seires_category.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 typedef SeriesBlocState =
     CategoryPaginationState<SeriesCategory, SeriesEntity, NoParams>;

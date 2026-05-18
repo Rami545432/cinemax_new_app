@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_title.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/home/presentation/widgets/card_title.dart';
 
 class VerticalFilmCardLoading extends StatelessWidget {
   const VerticalFilmCardLoading({super.key});

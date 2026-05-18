@@ -1,12 +1,12 @@
 // Create a dedicated animated item wrapper
 
-import 'package:cinemax_app_new/features/home/presentation/extensions/entity_card_extentions.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/search_vertical_card.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/custom_grid_config.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/simple_animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:movify/features/home/presentation/extensions/entity_card_extentions.dart';
+import 'package:movify/features/home/presentation/widgets/search_vertical_card.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/presentation/widgets/custom_grid_config.dart';
+import 'package:movify/features/search/presentation/widgets/simple_animated_card.dart';
 
 class AnimatedSearchResultItem extends StatelessWidget {
   final SearchResult result;

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/notification/notification_service.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/notification/notification_service.dart';
 
 class NotificationLabPage extends StatelessWidget {
   const NotificationLabPage({super.key});

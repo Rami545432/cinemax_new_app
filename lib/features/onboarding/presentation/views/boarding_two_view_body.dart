@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/constants/welcome_assets.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/build_on_boarding_content.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/on_boarding_two_upper_section.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/constants/welcome_assets.dart';
+import 'package:movify/features/onboarding/presentation/widgets/build_on_boarding_content.dart';
+import 'package:movify/features/onboarding/presentation/widgets/on_boarding_two_upper_section.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class BoardingTwoViewBody extends StatelessWidget {
   const BoardingTwoViewBody({super.key});

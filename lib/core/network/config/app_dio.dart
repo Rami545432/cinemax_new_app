@@ -2,16 +2,16 @@
 
 import 'dart:developer';
 
-import 'package:cinemax_app_new/core/network/Interceptors/cancellation_interceptor.dart';
-import 'package:cinemax_app_new/core/network/Interceptors/error_interceptor.dart';
-import 'package:cinemax_app_new/core/network/Interceptors/logging_interceptor.dart';
-import 'package:cinemax_app_new/core/network/Interceptors/security_interceptor.dart';
-import 'package:cinemax_app_new/core/network/config/dio_config.dart';
-import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:http_cache_hive_store/http_cache_hive_store.dart';
+import 'package:movify/core/network/Interceptors/cancellation_interceptor.dart';
+import 'package:movify/core/network/Interceptors/error_interceptor.dart';
+import 'package:movify/core/network/Interceptors/logging_interceptor.dart';
+import 'package:movify/core/network/Interceptors/security_interceptor.dart';
+import 'package:movify/core/network/config/dio_config.dart';
+import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AppDio {

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/shared/presentation/widgets/formmatted_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/shared/presentation/widgets/formmatted_rating.dart';
 
 class Rating extends StatelessWidget {
   const Rating({super.key, required this.rating});

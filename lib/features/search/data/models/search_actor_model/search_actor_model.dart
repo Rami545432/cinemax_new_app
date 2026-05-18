@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/search/data/models/search_actor_model/known_for.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
+import 'package:movify/features/search/data/models/search_actor_model/known_for.dart';
+import 'package:movify/features/search/domain/entities/search_actor_entity.dart';
 
 class SearchActorModel extends SearchActorEntity {
   bool? adult;

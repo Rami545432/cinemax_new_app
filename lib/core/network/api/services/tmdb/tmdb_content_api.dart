@@ -1,12 +1,12 @@
 // lib/core/network/api/services/tmdb/tmdb_content_api.dart
 import 'dart:developer';
 
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_base_client.dart';
-import 'package:cinemax_app_new/core/types/api_types.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/domain/enums/sort_by_enum.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_base_client.dart';
+import 'package:movify/core/types/api_types.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/domain/enums/sort_by_enum.dart';
 
 /// Unified content API for both movies and TV shows
 /// Follows DRY principle - shared endpoints use type parameter

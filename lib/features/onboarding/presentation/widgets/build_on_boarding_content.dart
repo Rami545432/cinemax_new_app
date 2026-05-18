@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/floating_particles_effect.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/gradient_overlay.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/on_boarding_bottom_section.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/floating_particles_effect.dart';
+import 'package:movify/features/onboarding/presentation/widgets/gradient_overlay.dart';
+import 'package:movify/features/onboarding/presentation/widgets/on_boarding_bottom_section.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class BuildOnBoardingContent extends StatelessWidget {
   const BuildOnBoardingContent({

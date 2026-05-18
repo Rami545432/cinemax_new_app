@@ -1,1 +1,39 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"movify-dev-project","appId":"1:59698721964:android:4e51d251dcb212417b1b09","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"movify-dev-project","configurations":{"android":"1:59698721964:android:4e51d251dcb212417b1b09","ios":"1:59698721964:ios:29c090f848df479d7b1b09","macos":"1:59698721964:ios:29c090f848df479d7b1b09","web":"1:59698721964:web:53b2c51c4949e8aa7b1b09","windows":"1:59698721964:web:66a4e3cfa07a09d17b1b09"}}}}}}
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "movify-prod",
+                    "appId": "1:322470183826:android:fb5eb7517bc9dde1e5774b",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "cinemamaxapp-be698",
+                    "configurations": {
+                        "android": "1:510131261228:android:5c79e851aa9b126a4c6689",
+                        "ios": "1:510131261228:ios:6b37cdc7c9f296014c6689",
+                        "macos": "1:510131261228:ios:6b37cdc7c9f296014c6689",
+                        "web": "1:510131261228:web:2184e9303345e11c4c6689",
+                        "windows": "1:510131261228:web:ecee64cc18c607bd4c6689"
+                    }
+                },
+                "lib/firebase_options_dev.dart": {
+                    "projectId": "movify-dev",
+                    "configurations": {
+                        "android": "1:502150476162:android:f5a7f91d3359be94ac5f9b",
+                        "ios": "1:502150476162:ios:4fd1f46f1178f363ac5f9b"
+                    }
+                },
+                "lib/firebase_options_prod.dart": {
+                    "projectId": "movify-prod",
+                    "configurations": {
+                        "android": "1:322470183826:android:fb5eb7517bc9dde1e5774b",
+                        "ios": "1:322470183826:ios:19c9c4c070c2a080e5774b"
+                    }
+                }
+            }
+        }
+    }
+}

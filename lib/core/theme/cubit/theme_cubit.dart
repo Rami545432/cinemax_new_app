@@ -1,9 +1,9 @@
 // lib/features/theme/cubit/theme_cubit.dart
 
-import 'package:cinemax_app_new/core/theme/cubit/theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/theme/cubit/theme_state.dart';
 
 @lazySingleton
 class ThemeCubit extends HydratedCubit<ThemeState> {

@@ -1,13 +1,13 @@
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/home/presentation/extensions/main_vertical_card_extention.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_image_and_rating.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_title.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/simple_animated_card.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/home/presentation/extensions/main_vertical_card_extention.dart';
+import 'package:movify/features/home/presentation/widgets/card_image_and_rating.dart';
+import 'package:movify/features/home/presentation/widgets/card_title.dart';
+import 'package:movify/features/search/presentation/widgets/simple_animated_card.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class MainVerticalCard extends StatelessWidget {
   const MainVerticalCard({

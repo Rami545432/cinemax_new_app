@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class Constants {
   static const String defaultProfileImage =

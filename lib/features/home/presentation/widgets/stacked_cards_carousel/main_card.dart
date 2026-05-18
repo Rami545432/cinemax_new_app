@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/core/utils/helper/get_gener_name.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/empty_image.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/helper/get_gener_name.dart';
+import 'package:movify/features/home/presentation/widgets/empty_image.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class MainCard extends StatelessWidget {
   final CardDisplayModel cardModel;

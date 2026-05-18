@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/Bot/models/chat_message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/Bot/models/chat_message_model.dart';
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;

@@ -1,10 +1,10 @@
 // lib/core/network/api/services/tmdb/tmdb_api_service.dart
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_base_client.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_configration.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_content_api.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_details_api.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_search_api.dart';
 import 'package:dio/dio.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_base_client.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_content_api.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_details_api.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_search_api.dart';
 
 /// Main TMDB API service that aggregates all domain-specific APIs
 class TmdbApiService {

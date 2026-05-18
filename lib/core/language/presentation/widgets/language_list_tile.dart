@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class LanguageListTile extends StatelessWidget {
   final String title;

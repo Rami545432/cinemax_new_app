@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/core/di/injection_container.dart';
-import 'package:cinemax_app_new/l10n/local_state.dart';
+import 'package:movify/core/network/api/services/api_service.dart';
+import 'package:movify/core/di/injection_container.dart';
+import 'package:movify/l10n/local_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

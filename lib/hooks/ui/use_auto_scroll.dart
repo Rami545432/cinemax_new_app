@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:cinemax_app_new/hooks/ui/use_is_mounted.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/hooks/ui/use_is_mounted.dart';
 
 void useAutoScroll({
   required PageController controller,

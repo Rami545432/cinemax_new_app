@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/config/animations/widgets/animated_list_item.dart';
+import 'package:movify/core/pagination/presentation/cubit/category_pagination_cubit.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class CustomGridView<C extends CategoryPaginationCubit<CAT, T, P>, CAT, T, P>
     extends HookWidget {

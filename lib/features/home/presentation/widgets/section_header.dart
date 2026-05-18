@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/core/utils/pagination/widgets/category_see_all_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/pagination/presentation/cubit/category_pagination_cubit.dart';
+import 'package:movify/core/pagination/widgets/category_see_all_view.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class SectionHeader<C extends CategoryPaginationCubit<CAT, T, P>, CAT, T, P>
     extends StatelessWidget {

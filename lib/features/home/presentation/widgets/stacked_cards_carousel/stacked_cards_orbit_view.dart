@@ -1,9 +1,10 @@
 import 'dart:math' as math;
-import 'package:cinemax_app_new/features/home/presentation/widgets/stacked_cards_carousel/orbit_layer.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/stacked_cards_carousel/orbit_model.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/stacked_cards_carousel/orbit_utlis.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
+
 import 'package:flutter/material.dart';
+import 'package:movify/features/home/presentation/widgets/stacked_cards_carousel/orbit_layer.dart';
+import 'package:movify/features/home/presentation/widgets/stacked_cards_carousel/orbit_model.dart';
+import 'package:movify/features/home/presentation/widgets/stacked_cards_carousel/orbit_utlis.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class StackedCardsOrbitView extends StatelessWidget {
   final List<CardDisplayModel> cards;

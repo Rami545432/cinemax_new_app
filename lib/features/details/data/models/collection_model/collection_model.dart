@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/details/data/models/collection_model/part.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/collection_entity.dart';
+import 'package:movify/features/details/data/models/collection_model/part.dart';
+import 'package:movify/features/details/domain/entites/collection_entity.dart';
 
 class CollectionModel {
   final int? id;

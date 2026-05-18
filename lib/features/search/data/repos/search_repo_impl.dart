@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/search/data/data_sources/remote/remote_search_data_source.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
-import 'package:cinemax_app_new/features/search/domain/repo/search_repo.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/search/data/data_sources/remote/remote_search_data_source.dart';
+import 'package:movify/features/search/domain/entities/search_actor_entity.dart';
+import 'package:movify/features/search/domain/repo/search_repo.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 @LazySingleton(as: SearchRepo)
 class SearchRepoImpl implements SearchRepo {

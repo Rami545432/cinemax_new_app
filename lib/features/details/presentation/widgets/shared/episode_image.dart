@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/constant.dart';
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/constant.dart';
+import 'package:movify/core/utils/app_colors.dart';
 
 class EpisodeImage extends StatelessWidget {
   const EpisodeImage({super.key, required this.episodeImageUrl});

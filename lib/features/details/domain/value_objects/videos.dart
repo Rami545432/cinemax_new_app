@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/result.dart';
+import 'package:movify/features/details/domain/value_objects/result.dart';
 
 class Videos {
   List<Result>? results;

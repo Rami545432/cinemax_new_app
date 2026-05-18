@@ -1,15 +1,18 @@
-import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/add_favorite_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/get_favorite_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/merge_guest_favorites_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/pull_cloud_favorites_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/domain/use_cases/remove_favorite_use_case.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_state.dart';
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/auth/auth_status_provider.dart';
+import 'package:movify/core/network/utils/safe_emit_state.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/domain/use_cases/add_favorite_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/get_favorite_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/merge_guest_favorites_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/pull_cloud_favorites_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/remove_favorite_use_case.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_state.dart';
 
 /// Favorites Cubit — Simplified Local-First
 ///
@@ -17,61 +20,99 @@ import 'package:injectable/injectable.dart';
 /// Zero Firestore reads during normal usage.
 @lazySingleton
 class FavoriteCubit extends Cubit<FavoriteState> {
-  final MergeGuestFavoritesUseCase _mergeGuestFavoritesUseCase;
-  final PullCloudFavoritesUseCase _pullCloudFavoritesUseCase;
-  final GetFavoritesUseCase _getFavoritesUseCase;
-  final AddFavoriteUseCase _addFavoriteUseCase;
-  final RemoveFavoriteUseCase _removeFavoriteUseCase;
+  final MergeGuestFavoritesUseCase mergeGuestFavoritesUseCase;
+  final PullCloudFavoritesUseCase pullCloudFavoritesUseCase;
+  final GetFavoritesUseCase getFavoritesUseCase;
+  final AddFavoriteUseCase addFavoriteUseCase;
+  final RemoveFavoriteUseCase removeFavoriteUseCase;
+  final AuthStatusProvider authStatusProvider;
+  late final StreamSubscription<AuthStatusEvent> _authSub;
+  String _currentUserId = 'guest';
+  bool _initialized = false;
 
   FavoriteCubit({
-    required MergeGuestFavoritesUseCase mergeGuestFavoritesUseCase,
-    required PullCloudFavoritesUseCase pullCloudFavoritesUseCase,
-    required GetFavoritesUseCase getFavoritesUseCase,
-    required AddFavoriteUseCase addFavoriteUseCase,
-    required RemoveFavoriteUseCase removeFavoriteUseCase,
-  }) : _mergeGuestFavoritesUseCase = mergeGuestFavoritesUseCase,
-       _pullCloudFavoritesUseCase = pullCloudFavoritesUseCase,
-       _getFavoritesUseCase = getFavoritesUseCase,
-       _addFavoriteUseCase = addFavoriteUseCase,
-       _removeFavoriteUseCase = removeFavoriteUseCase,
-       super(const FavoriteInitial());
+    required this.mergeGuestFavoritesUseCase,
+    required this.pullCloudFavoritesUseCase,
+    required this.getFavoritesUseCase,
+    required this.addFavoriteUseCase,
+    required this.removeFavoriteUseCase,
+    required this.authStatusProvider,
+  }) : super(const FavoriteInitial()) {
+    _authSub = authStatusProvider.authStatusStream.listen(_onAuthChanged);
+    // ✅ Start listening immediately
+    _initFromCurrentSession();
+  }
 
-  String _currentUserId = 'guest';
+  Future<void> _initFromCurrentSession() async {
+    final currentStatus = await authStatusProvider.currentAuthStatus;
+
+    await _onAuthChanged(currentStatus); // guest is fine, no Firestore
+  }
+
+  Future<void> _onAuthChanged(AuthStatusEvent event) async {
+    debugPrint(
+      '🎯 FavoriteCubit._onAuthChanged → ${event.status} | ${event.userId}',
+    );
+
+    switch (event.status) {
+      case AuthStatus.authenticated:
+        await _handleSignIn(
+          // ✅ awaited
+          userId: event.userId!,
+          isFirstSignIn: event.isFirstSignIn,
+        );
+        break;
+      case AuthStatus.guest:
+        _initialized = false; // ✅ reset for next sign in
+        _currentUserId = 'guest';
+        await loadFavorites(); // ✅ awaited
+        break;
+      case AuthStatus.unauthenticated:
+        _initialized = false; // ✅ reset
+        _currentUserId = 'guest';
+        safeEmit(const FavoriteInitial());
+        break;
+    }
+  }
+
   String get currentUserId => _currentUserId;
 
   // ═══════════════════════════════════════════════════════════════════
   // USER MANAGEMENT
   // ═══════════════════════════════════════════════════════════════════
 
-  /// Set user and load favorites from Hive.
-  ///
-  /// Used for:
-  ///   - App start (checkAuthStatus finds existing user)
-  ///   - Sign-out (switch to 'guest')
-  ///   - Guest mode
-  Future<void> setUser(String userId) async {
-    debugPrint('👤 FavoriteCubit.setUser → $userId');
-    _currentUserId = userId;
-    await loadFavorites();
-  }
-
   /// Sign-in flow: merge guest data + pull cloud + load.
   ///
   /// Called ONCE on explicit sign-in.
   /// This is the ONLY path that reads from Firestore.
-  Future<void> handleSignIn(String userId) async {
-    debugPrint('🔐 FavoriteCubit.handleSignIn → $userId');
+  Future<void> _handleSignIn({
+    required String userId,
+    required bool isFirstSignIn,
+  }) async {
+    // ✅ Guard now works correctly
+    // _currentUserId starts as 'guest' so first call passes
+    // second call with same userId is blocked
+    if (_initialized && _currentUserId == userId) {
+      debugPrint('⚠️ Already initialized for $userId — skipping');
+      return;
+    }
+
+    _initialized = true;
     _currentUserId = userId;
 
-    // Merge guest favorites (if any) + pull cloud data
-    final result = await _mergeGuestFavoritesUseCase(userId);
-    result.fold(
-      (failure) => debugPrint('⚠️ Merge failed: ${failure.errorMessage}'),
-      (_) => debugPrint('✅ Merge complete'),
-    );
+    // ✅ Only merge on explicit sign in — NOT on app restart
+    if (isFirstSignIn) {
+      debugPrint('🔐 First sign in — merging guest favorites');
+      final result = await mergeGuestFavoritesUseCase(userId);
+      result.fold(
+        (failure) => debugPrint('⚠️ Merge failed: ${failure.errorMessage}'),
+        (_) => debugPrint('✅ Merge complete'),
+      );
+    } else {
+      debugPrint('🔄 App restart — skipping merge, loading from Hive only');
+    }
 
-    // Load merged favorites from Hive
-    await loadFavorites();
+    await loadFavorites(); // always load from Hive
   }
 
   // ═══════════════════════════════════════════════════════════════════
@@ -81,7 +122,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   Future<void> loadFavorites({ContentType? contentType}) async {
     safeEmit(const FavoriteLoading());
 
-    final result = await _getFavoritesUseCase(
+    final result = await getFavoritesUseCase(
       userId: _currentUserId,
       contentType: contentType,
     );
@@ -111,7 +152,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   /// Get favorites by type (for tab views).
   Future<List<FavoriteEntity>> getFavoritesByType(ContentType type) async {
-    final result = await _getFavoritesUseCase(
+    final result = await getFavoritesUseCase(
       userId: _currentUserId,
       contentType: type,
     );
@@ -152,12 +193,12 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
     // 2. Persist to Hive + fire-and-forget Firestore
     final result = isCurrentlyFav
-        ? await _removeFavoriteUseCase(
+        ? await removeFavoriteUseCase(
             specificId: favorite.specificId,
             contentType: favorite.contentType,
             userId: _currentUserId,
           )
-        : await _addFavoriteUseCase(favorite.copyWith(userId: _currentUserId));
+        : await addFavoriteUseCase(favorite.copyWith(userId: _currentUserId));
 
     result.fold((failure) {
       // Rollback on failure
@@ -193,7 +234,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
 
     debugPrint('🔄 Pull-to-refresh from cloud...');
-    final result = await _pullCloudFavoritesUseCase(_currentUserId);
+    final result = await pullCloudFavoritesUseCase(_currentUserId);
 
     result.fold(
       (failure) => debugPrint('⚠️ Refresh failed: ${failure.errorMessage}'),
@@ -203,12 +244,17 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     await loadFavorites();
   }
 
+  @override
+  Future<void> close() {
+    _authSub.cancel();
+    return super.close();
+  }
   // ═══════════════════════════════════════════════════════════════════
   // HELPERS
   // ═══════════════════════════════════════════════════════════════════
 
   Future<List<FavoriteEntity>> getAllFavorites() async {
-    final result = await _getFavoritesUseCase(userId: _currentUserId);
+    final result = await getFavoritesUseCase(userId: _currentUserId);
     return result.fold((_) => [], (list) => list);
   }
 

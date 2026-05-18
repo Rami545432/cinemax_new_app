@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/profile/core/profile_list_tile_list.dart';
-import 'package:cinemax_app_new/features/profile/presentation/widgets/profile_container.dart';
-import 'package:cinemax_app_new/features/profile/presentation/widgets/profile_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/profile/core/profile_list_tile_list.dart';
+import 'package:movify/features/profile/presentation/widgets/profile_container.dart';
+import 'package:movify/features/profile/presentation/widgets/profile_list_tile.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});

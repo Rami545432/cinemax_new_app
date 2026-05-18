@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/build_grid_card.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/build_grid_card.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class OnBoardingTwoUpperSection extends StatelessWidget {
   const OnBoardingTwoUpperSection({super.key, required this.posters});

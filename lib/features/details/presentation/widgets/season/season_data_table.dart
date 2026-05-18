@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/formatters/formatted_time_method.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/data_cell_text.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/formatters/formatted_time_method.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/presentation/widgets/shared/data_cell_text.dart';
 
 class SeasonDataTable extends StatelessWidget {
   const SeasonDataTable({super.key, required this.data});

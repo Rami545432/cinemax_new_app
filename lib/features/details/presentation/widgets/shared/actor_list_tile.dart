@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/cast.dart';
 
 class ActorListTile extends StatelessWidget {
   const ActorListTile({super.key, required this.actorList});

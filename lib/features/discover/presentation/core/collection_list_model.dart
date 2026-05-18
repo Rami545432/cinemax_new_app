@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/enums/type_enum.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/core/enums/type_enum.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class CollectionListModel {
   static List<CollectionModel> movieCollections(BuildContext context) {

@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/reviews.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/review_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/domain/value_objects/reviews.dart';
+import 'package:movify/features/details/presentation/widgets/shared/review_list_tile.dart';
 
 class ReviewListViewBuilder extends StatelessWidget {
   const ReviewListViewBuilder({super.key, required this.reviews});

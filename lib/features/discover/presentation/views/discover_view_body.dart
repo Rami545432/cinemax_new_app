@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/movie_genre_tab.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/series_genre_tab.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_bar_button.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/discover/presentation/widget/movie_genre_tab.dart';
+import 'package:movify/features/discover/presentation/widget/series_genre_tab.dart';
+import 'package:movify/features/search/presentation/widgets/search_bar_button.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class DiscoverViewBody extends StatelessWidget {
   const DiscoverViewBody({super.key});

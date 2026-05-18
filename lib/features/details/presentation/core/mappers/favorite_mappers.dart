@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 
 class FavoriteMapper {
   static FavoriteEntity fromNavigationData(DetailsNavigationData data) =>

@@ -8,16 +8,19 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptionsDev.currentPlatform,
+///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-class DefaultFirebaseOptionsDev {
+class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,64 +28,43 @@ class DefaultFirebaseOptionsDev {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
-          'DefaultFirebaseOptionsDev have not been configured for linux - '
+          'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
-          'DefaultFirebaseOptionsDev are not supported for this platform.',
+          'DefaultFirebaseOptions are not supported for this platform.',
         );
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC061ueY01V-dyxQoMTju0jwJTGIssUSJE',
-    appId: '1:59698721964:web:53b2c51c4949e8aa7b1b09',
-    messagingSenderId: '59698721964',
-    projectId: 'movify-dev-project',
-    authDomain: 'movify-dev-project.firebaseapp.com',
-    storageBucket: 'movify-dev-project.firebasestorage.app',
-    measurementId: 'G-XK3NBKR3SB',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAx3wkOq3F-93KN-Gg_mSj3YIYH6SxFwxs',
-    appId: '1:59698721964:android:4e51d251dcb212417b1b09',
-    messagingSenderId: '59698721964',
-    projectId: 'movify-dev-project',
-    storageBucket: 'movify-dev-project.firebasestorage.app',
+    apiKey: 'AIzaSyB3fyGezIxkXT8WTb_lYOnp7-mu0iJBfGA',
+    appId: '1:502150476162:android:f5a7f91d3359be94ac5f9b',
+    messagingSenderId: '502150476162',
+    projectId: 'movify-dev',
+    storageBucket: 'movify-dev.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDrZDbLuKKvW6TWhJTUcnghSb_hV6H9L7Y',
-    appId: '1:59698721964:ios:29c090f848df479d7b1b09',
-    messagingSenderId: '59698721964',
-    projectId: 'movify-dev-project',
-    storageBucket: 'movify-dev-project.firebasestorage.app',
-    iosBundleId: 'com.example.cinemaxAppNew',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDrZDbLuKKvW6TWhJTUcnghSb_hV6H9L7Y',
-    appId: '1:59698721964:ios:29c090f848df479d7b1b09',
-    messagingSenderId: '59698721964',
-    projectId: 'movify-dev-project',
-    storageBucket: 'movify-dev-project.firebasestorage.app',
-    iosBundleId: 'com.example.cinemaxAppNew',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyC061ueY01V-dyxQoMTju0jwJTGIssUSJE',
-    appId: '1:59698721964:web:66a4e3cfa07a09d17b1b09',
-    messagingSenderId: '59698721964',
-    projectId: 'movify-dev-project',
-    authDomain: 'movify-dev-project.firebaseapp.com',
-    storageBucket: 'movify-dev-project.firebasestorage.app',
-    measurementId: 'G-2KVS9V1V09',
+    apiKey: 'AIzaSyB-FUx-C1BmexDT2iTXdZrG4mvfvbU93S0',
+    appId: '1:502150476162:ios:4fd1f46f1178f363ac5f9b',
+    messagingSenderId: '502150476162',
+    projectId: 'movify-dev',
+    storageBucket: 'movify-dev.firebasestorage.app',
+    androidClientId: '502150476162-he9n9nvj2c286omsv83osc1ph5hkqf4t.apps.googleusercontent.com',
+    iosClientId: '502150476162-lo62dhh3c4fgeve8c5rmnfnomlt5epj8.apps.googleusercontent.com',
+    iosBundleId: 'com.rami.movify',
   );
 }

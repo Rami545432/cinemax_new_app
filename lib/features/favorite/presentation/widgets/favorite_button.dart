@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_cubit.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_state.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/particle_heart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_state.dart';
+import 'package:movify/features/favorite/presentation/widgets/particle_heart_button.dart';
 
 class FavoriteButton extends StatelessWidget {
   const FavoriteButton({super.key, required this.favoriteEntity});

@@ -1,21 +1,21 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/core/routing/transition/app_transition.dart';
-import 'package:cinemax_app_new/core/utils/helper/get_gener_name.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_see_all_arguments.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_genre_use_case.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_keywords_use_case.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_genre_use_case.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_keywords_use_case.dart';
-import 'package:cinemax_app_new/features/discover/presentation/blocs/fetch_genre_bloc.dart';
-import 'package:cinemax_app_new/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/views/collection_view.dart';
-import 'package:cinemax_app_new/features/discover/presentation/views/genre_view.dart';
-import 'package:cinemax_app_new/features/discover/presentation/views/notification_testing_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/routing/transition/app_transition.dart';
+import 'package:movify/core/utils/helper/get_gener_name.dart';
+import 'package:movify/features/discover/data/models/genre_see_all_arguments.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_movie_by_genre_use_case.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_movie_by_keywords_use_case.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_series_by_genre_use_case.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_series_by_keywords_use_case.dart';
+import 'package:movify/features/discover/presentation/blocs/fetch_genre_bloc.dart';
+import 'package:movify/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/views/collection_view.dart';
+import 'package:movify/features/discover/presentation/views/genre_view.dart';
+import 'package:movify/features/discover/presentation/views/notification_testing_view.dart';
 
 class DiscoverRouting {
   static List<GoRoute> routes = [

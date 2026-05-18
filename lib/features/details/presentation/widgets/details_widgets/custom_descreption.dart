@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/details_widgets/more_less_button.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/presentation/widgets/details_widgets/more_less_button.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class CustomDescreption extends StatelessWidget {
   const CustomDescreption({super.key, required this.overview});

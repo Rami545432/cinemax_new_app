@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:cinemax_app_new/config/env/app_config.dart';
-import 'package:cinemax_app_new/core/di/service_locator.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:movify/config/env/app_config.dart';
+import 'package:movify/core/di/service_locator.dart';
 
 class GeminiChatService {
   late final GenerativeModel _model;

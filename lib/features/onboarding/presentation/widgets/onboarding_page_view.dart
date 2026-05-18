@@ -1,15 +1,15 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_one_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_three_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_two_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/onboarding_scaffold.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_one_view.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_three_view.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_two_view.dart';
+import 'package:movify/features/onboarding/presentation/widgets/onboarding_scaffold.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_cubit.dart';
 
 class OnboardingPageView extends StatefulWidget {
   const OnboardingPageView({super.key});

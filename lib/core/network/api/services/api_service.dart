@@ -1,7 +1,7 @@
 // api_service.dart (update constructor)
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_api_service.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_configration.dart';
 import 'package:dio/dio.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_api_service.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
 
 class ApiService {
   final Dio dio;

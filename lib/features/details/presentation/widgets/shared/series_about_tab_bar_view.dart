@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/features/details/domain/entites/series_details_entity.dart';
-import 'package:cinemax_app_new/features/details/presentation/extensions/episode_to_air_extension.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_to_air.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/series_data_table.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/trailers_image_list_view_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/details/domain/entites/series_details_entity.dart';
+import 'package:movify/features/details/presentation/extensions/episode_to_air_extension.dart';
+import 'package:movify/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
+import 'package:movify/features/details/presentation/widgets/shared/episode_to_air.dart';
+import 'package:movify/features/details/presentation/widgets/shared/series_data_table.dart';
+import 'package:movify/features/details/presentation/widgets/shared/trailers_image_list_view_builder.dart';
 
 class SeriesAboutTabBarView extends StatelessWidget {
   const SeriesAboutTabBarView({super.key});

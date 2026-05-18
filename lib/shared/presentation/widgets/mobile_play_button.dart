@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/icon_text_row.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/in_app_view.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/features/search/presentation/widgets/icon_text_row.dart';
+import 'package:movify/shared/presentation/widgets/in_app_view.dart';
 
 class MobilePlayButton extends StatelessWidget {
   const MobilePlayButton({

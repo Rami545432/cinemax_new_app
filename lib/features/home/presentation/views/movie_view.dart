@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/language/presentation/cubits/language_cubit.dart';
-import 'package:cinemax_app_new/core/language/presentation/cubits/language_state.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_event.dart';
-import 'package:cinemax_app_new/features/home/presentation/blocs/movie_bloc.dart';
-import 'package:cinemax_app_new/features/home/presentation/views/movie_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
+import 'package:movify/core/language/presentation/cubits/language_state.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
+import 'package:movify/features/home/presentation/blocs/movie_bloc.dart';
+import 'package:movify/features/home/presentation/views/movie_view_body.dart';
 
 class MovieView extends StatelessWidget {
   const MovieView({super.key});

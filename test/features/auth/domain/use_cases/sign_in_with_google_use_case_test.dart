@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
-import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
+import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 
 class MockAuthRepo extends Mock implements AuthRepo {}
 

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/details/domain/enums/status_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/domain/enums/status_enum.dart';
 
 String mapStatus(BuildContext context, String status) => switch (status) {
   'Released' => StatusType.released.localized(context),

@@ -1,12 +1,12 @@
 import 'dart:ui' as ui;
 
-import 'package:cinemax_app_new/core/language/presentation/cubits/language_cubit.dart';
-import 'package:cinemax_app_new/core/language/presentation/widgets/language_list_tile.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
+import 'package:movify/core/language/presentation/widgets/language_list_tile.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class LanguagesSwitcher extends StatelessWidget {
   const LanguagesSwitcher({super.key});

@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
 
 class HomeIconButton extends StatelessWidget {
   const HomeIconButton({super.key});

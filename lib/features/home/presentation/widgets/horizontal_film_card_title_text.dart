@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
 
 class HorizontalFilmCardTitleText extends StatelessWidget {
   const HorizontalFilmCardTitleText({super.key, required this.movieEntity});

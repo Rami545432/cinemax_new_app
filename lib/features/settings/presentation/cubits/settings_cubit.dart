@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/features/settings/domain/use_cases/get_is_first_time_use_case.dart';
-import 'package:cinemax_app_new/features/settings/domain/use_cases/set_is_first_time_use_case.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_state.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/features/settings/domain/use_cases/get_is_first_time_use_case.dart';
+import 'package:movify/features/settings/domain/use_cases/set_is_first_time_use_case.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_state.dart';
 
 @injectable
 class SettingsCubit extends Cubit<SettingsState> {

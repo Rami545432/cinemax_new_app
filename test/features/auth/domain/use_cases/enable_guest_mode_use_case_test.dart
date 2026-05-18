@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
-import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
+import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
 
 class MockAuthRepo extends Mock implements AuthRepo {}
 
@@ -36,10 +36,10 @@ void main() {
 
     test('should return Failure when repo returns Failure', () async {
       // Arrange — tell the mock what to return
-      final failure = ServerFailure(errorMessage: 'error');
+      const failure = ServerFailure(errorMessage: 'error');
       when(
         () => mockRepo.enableGuestMode(),
-      ).thenAnswer((_) async => Left(failure));
+      ).thenAnswer((_) async => const Left(failure));
 
       // Act — call the use case
       final result = await useCase(NoParams());

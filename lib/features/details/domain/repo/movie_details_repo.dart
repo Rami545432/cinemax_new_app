@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/types/domain_types.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/core/types/domain_types.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
 
 abstract interface class MovieDetailsRepo {
   MovieDetailsResult fetchMovieDetails(int movieId);

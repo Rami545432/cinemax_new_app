@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
 
 sealed class SessionState extends Equatable {
   const SessionState();

@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/details/presentation/models/episode_to_air_model.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_details.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/episode_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/presentation/models/episode_to_air_model.dart';
+import 'package:movify/features/details/presentation/widgets/shared/episode_details.dart';
+import 'package:movify/features/details/presentation/widgets/shared/episode_image.dart';
 
 class EpisodeImageAndDetails extends StatelessWidget {
   const EpisodeImageAndDetails({

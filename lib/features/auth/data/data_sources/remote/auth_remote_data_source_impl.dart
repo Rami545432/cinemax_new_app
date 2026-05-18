@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
-import 'package:cinemax_app_new/features/auth/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/expections.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:movify/features/auth/data/models/user_model.dart';
 
 @LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -19,13 +19,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel?> getCurrentUser() async {
     try {
-      final user = firebaseAuth.currentUser;
+      // Await authStateChanges().first to ensure the Firebase SDK has 
+      // finished restoring the session from local storage on app boot.
+      // This prevents the race condition where currentUser is null immediately after initializeApp.
+      final user = await firebaseAuth.authStateChanges().first;
       if (user == null) {
         return null;
       }
       return UserModel.fromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
-      throw ServerException(e.message ?? 'Failed to get current user');
+      throw ServerFailure(
+        errorMessage: e.message ?? 'Failed to get current user',
+      );
     }
   }
 
@@ -34,7 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        throw const ServerFailure(errorMessage: 'Google sign in failed');
+        throw CancelledException();
       }
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -52,6 +57,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return UserModel.fromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       throw ServerFailure(errorMessage: e.message ?? 'An error occurred');
+    } on CancelledException catch (e) {
+      throw CancelledException(e.message);
     } catch (e) {
       throw ServerFailure(errorMessage: e.toString());
     }

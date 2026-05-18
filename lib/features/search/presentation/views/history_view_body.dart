@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/search/presentation/cubits/search_history_cubit.dart';
-import 'package:cinemax_app_new/features/search/presentation/cubits/search_history_states.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_history_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/search/presentation/cubits/search_history_cubit.dart';
+import 'package:movify/features/search/presentation/cubits/search_history_states.dart';
+import 'package:movify/features/search/presentation/widgets/search_history_animated_list.dart';
 
 class HistoryViewBody extends StatelessWidget {
   const HistoryViewBody({super.key});

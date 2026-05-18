@@ -29,3 +29,12 @@ class FirebaseException implements Exception {
   @override
   String toString() => 'FirebaseException: $message';
 }
+
+class CancelledException implements Exception {
+  final String message;
+
+  CancelledException([this.message = 'Request cancelled']);
+
+  @override
+  String toString() => 'CancelledException: $message';
+}

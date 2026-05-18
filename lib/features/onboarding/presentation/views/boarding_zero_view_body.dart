@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/views/posters_background.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/boarding_one_text_and_logo.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/darknees_stack_layer.dart';
-// import 'package:cinemax_app_new/features/onboarding/presentation/view_models/widgets/get_started_button.dart';
+// import 'package:movify/features/onboarding/presentation/view_models/widgets/get_started_button.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/views/posters_background.dart';
+import 'package:movify/features/onboarding/presentation/widgets/boarding_one_text_and_logo.dart';
+import 'package:movify/features/onboarding/presentation/widgets/darknees_stack_layer.dart';
 
 class BoardingZeroViewBody extends StatelessWidget {
   const BoardingZeroViewBody({super.key});

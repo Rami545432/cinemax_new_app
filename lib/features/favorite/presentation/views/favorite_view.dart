@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_cubit.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/views/favorite_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:movify/features/favorite/presentation/views/favorite_view_body.dart';
 
 class FavoriteView extends StatefulWidget {
   const FavoriteView({super.key});

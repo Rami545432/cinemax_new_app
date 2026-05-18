@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/constant.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
-import 'package:cinemax_app_new/shared/presentation/utils/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/constant.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/utils/show_snack_bar.dart';
 
 class ProfileListTile extends StatelessWidget {
   const ProfileListTile({super.key});

@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/notification/fcm_token_manger.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/notification/fcm_token_manger.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
 
 class NotificationService {
   NotificationService._();

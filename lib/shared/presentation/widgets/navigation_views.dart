@@ -1,9 +1,9 @@
 // Use your ORIGINAL NavigationViews (the one that worked!)
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class NavigationViews extends HookWidget {
   const NavigationViews({super.key, required this.navigationShell});

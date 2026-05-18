@@ -11,7 +11,12 @@ enum NetworkStatus { connected, disconnected, checking }
 
 class ConnectivityCubit extends Cubit<NetworkStatus> {
   final Connectivity _connectivity = Connectivity();
-  final InternetConnection _internetChecker = InternetConnection();
+  final InternetConnection _internetChecker = InternetConnection.createInstance(
+    customCheckOptions: [
+      InternetCheckOption(uri: Uri.parse('https://google.com')),
+      InternetCheckOption(uri: Uri.parse('https://example.com')),
+    ],
+  );
 
   StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
   StreamSubscription<InternetStatus>? _internetSubscription;
@@ -19,7 +24,7 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
   bool _hasConnection = true;
   DateTime _lastStatusChange = DateTime.now();
 
-  ConnectivityCubit() : super(NetworkStatus.connected) {
+  ConnectivityCubit() : super(NetworkStatus.checking) {
     _initialize();
   }
 
@@ -32,7 +37,7 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
       _onConnectivityChanged,
       onError: (error) {
         log('🌐 Connectivity error: $error');
-        emit(NetworkStatus.disconnected);
+        _updateStatus(false, 'Connectivity error: $error');
       },
     );
 
@@ -41,7 +46,7 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
       _onInternetStatusChanged,
       onError: (error) {
         log('🌐 Internet checker error: $error');
-        emit(NetworkStatus.disconnected);
+        _updateStatus(false, 'Internet checker error: $error');
       },
     );
 
@@ -57,7 +62,7 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
       await _onConnectivityChanged(connectivityResult);
     } catch (e) {
       log('🌐 Initial status check failed: $e');
-      emit(NetworkStatus.disconnected);
+      _updateStatus(false, 'Initial check failed: $e');
     }
   }
 
@@ -87,17 +92,29 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
     );
   }
 
+  Timer? _offlineDebounceTimer;
+
   void _updateStatus(bool hasConnection, String reason) {
-    if (_hasConnection != hasConnection) {
+    if (_hasConnection != hasConnection || state == NetworkStatus.checking) {
       _hasConnection = hasConnection;
       _lastStatusChange = DateTime.now();
 
       log(
         '🌐 Status changed: ${hasConnection ? "CONNECTED" : "DISCONNECTED"} - $reason',
       );
-      emit(
-        hasConnection ? NetworkStatus.connected : NetworkStatus.disconnected,
-      );
+
+      if (hasConnection) {
+        _offlineDebounceTimer?.cancel();
+        emit(NetworkStatus.connected);
+      } else {
+        // Debounce the disconnected state to prevent false offline flashes on app startup
+        _offlineDebounceTimer?.cancel();
+        _offlineDebounceTimer = Timer(const Duration(seconds: 2), () {
+          if (!isClosed && !_hasConnection) {
+            emit(NetworkStatus.disconnected);
+          }
+        });
+      }
     }
   }
 
@@ -117,6 +134,8 @@ class ConnectivityCubit extends Cubit<NetworkStatus> {
     log('🌐 ConnectivityCubit: Disposing...');
     _connectivitySubscription?.cancel();
     _internetSubscription?.cancel();
+    _offlineDebounceTimer?.cancel();
+
     return super.close();
   }
 }

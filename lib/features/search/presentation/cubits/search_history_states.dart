@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
+import 'package:movify/features/search/domain/entities/search_history_entity.dart';
 
 sealed class SearchHistoryState {
   const SearchHistoryState();

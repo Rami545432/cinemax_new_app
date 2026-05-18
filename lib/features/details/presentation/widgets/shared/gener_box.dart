@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class GenerBox extends StatelessWidget {
   const GenerBox({super.key, required this.gener});

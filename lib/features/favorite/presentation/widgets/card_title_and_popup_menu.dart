@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_title.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/icon_text_row.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/home/presentation/widgets/card_title.dart';
+import 'package:movify/features/search/presentation/widgets/icon_text_row.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CardTitleAndPopUpMenu extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 
 /// Favorites Repository — Local-First Architecture
 ///

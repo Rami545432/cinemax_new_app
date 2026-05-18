@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/get_started_button.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/onboarding/presentation/widgets/get_started_button.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class BoardingOneTextAndLogo extends StatelessWidget {
   const BoardingOneTextAndLogo({super.key});

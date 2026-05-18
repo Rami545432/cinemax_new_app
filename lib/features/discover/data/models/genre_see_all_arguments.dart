@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
 
 class GenreSeeAllArguments {
   final GenreCategory category;

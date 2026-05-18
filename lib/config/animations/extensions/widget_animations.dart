@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/config/animations/animation_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/config/animations/animation_config.dart';
 
 extension AnimatedWidgetX on Widget {
   // Quick fade in from bottom

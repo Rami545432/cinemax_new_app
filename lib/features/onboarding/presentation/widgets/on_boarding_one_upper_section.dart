@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/boarding_one_poster_card.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/features/onboarding/presentation/widgets/boarding_one_poster_card.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class OnboardingOneUpperSection extends StatelessWidget {
   const OnboardingOneUpperSection({super.key, required this.images});

@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 
 part 'favorite_model.freezed.dart';
 part 'favorite_model.g.dart';

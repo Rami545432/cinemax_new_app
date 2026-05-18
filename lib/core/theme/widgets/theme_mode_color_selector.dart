@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/theme/cubit/theme_cubit.dart';
-import 'package:cinemax_app_new/core/theme/cubit/theme_state.dart';
-import 'package:cinemax_app_new/core/theme/widgets/theme_mode_selector.dart';
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/theme/cubit/theme_cubit.dart';
+import 'package:movify/core/theme/cubit/theme_state.dart';
+import 'package:movify/core/theme/widgets/theme_mode_selector.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class ThemeModeColorSelector extends StatelessWidget {
   const ThemeModeColorSelector({super.key});

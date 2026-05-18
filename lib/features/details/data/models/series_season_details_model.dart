@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/images.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/domain/value_objects/credits.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/domain/value_objects/images.dart';
+import 'package:movify/features/details/domain/value_objects/videos.dart';
 
 class SeriesSeasonDetailsModel {
   String? airDate;

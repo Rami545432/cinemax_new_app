@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:flutter/services.dart';
+import 'package:movify/core/utils/app_colors.dart';
 
 void setStatuesBarColor() {
   SystemChrome.setSystemUIOverlayStyle(

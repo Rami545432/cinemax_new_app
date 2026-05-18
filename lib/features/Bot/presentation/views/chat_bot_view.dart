@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/Bot/presentation/blocs/chat_bloc.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/blocs/chat_event.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/views/chat_bot_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/Bot/presentation/blocs/chat_bloc.dart';
+import 'package:movify/features/Bot/presentation/blocs/chat_event.dart';
+import 'package:movify/features/Bot/presentation/views/chat_bot_view_body.dart';
 
 class ChatBotView extends StatelessWidget {
   const ChatBotView({super.key});

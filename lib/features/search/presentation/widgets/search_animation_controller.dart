@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
 
 class SearchAnimationController extends ChangeNotifier {
   List<SearchResult> _previousResults = [];

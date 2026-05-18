@@ -1,38 +1,40 @@
 import 'dart:developer';
 
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
-import 'package:cinemax_app_new/features/auth/routing/auth_routes.dart';
-import 'package:cinemax_app_new/features/details/routing/details_routes.dart';
-import 'package:cinemax_app_new/features/discover/routing/discover_routing.dart';
-import 'package:cinemax_app_new/features/onboarding/routing/on_boarding_routes.dart';
-import 'package:cinemax_app_new/features/search/routing/search_routes.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_state.dart';
-import 'package:cinemax_app_new/shared/presentation/routing/main_routes.dart';
+import 'package:async/async.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/core/refresh_stream.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+import 'package:movify/features/auth/routing/auth_routes.dart';
+import 'package:movify/features/details/routing/details_routes.dart';
+import 'package:movify/features/discover/routing/discover_routing.dart';
+import 'package:movify/features/onboarding/routing/on_boarding_routes.dart';
+import 'package:movify/features/search/routing/search_routes.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_cubit.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_state.dart';
+import 'package:movify/shared/presentation/routing/main_routes.dart';
 
 class AppRouters {
-  GoRouter createRouter() {
-    final sessionCubit = getIt.get<SessionCubit>();
-    final settingsCubit = getIt.get<SettingsCubit>();
+  final SessionCubit sessionCubit;
+  final SettingsCubit settingsCubit;
 
-    return GoRouter(
-      routes: routes,
-      redirect: (context, state) => _redirect(
-        sessionCubit.state,
-        settingsCubit.state,
-        state.matchedLocation,
-      ),
+  AppRouters({required this.sessionCubit, required this.settingsCubit});
+  GoRouter createRouter() => GoRouter(
+    routes: routes,
+    redirect: (context, state) => redirectLogic(
+      sessionCubit.state,
+      settingsCubit.state,
+      state.matchedLocation,
+    ),
+    refreshListenable: GoRouterRefreshStream(
+      StreamGroup.merge([sessionCubit.stream, settingsCubit.stream]),
+    ),
+    initialLocation: RoutePaths.root,
+    debugLogDiagnostics: true,
+  );
 
-      initialLocation: RoutePaths.root,
-      debugLogDiagnostics: true,
-    );
-  }
-
-  String? _redirect(
+  String? redirectLogic(
     SessionState sessionState,
     SettingsState settingsState,
     String currentPath,
@@ -48,32 +50,55 @@ class AppRouters {
 
     // 2️⃣ First time → onboarding
     if (settingsState is SettingsLoaded && settingsState.isFirstTime) {
-      final onboardingRoutes = {
-        RoutePaths.boardingZero,
-        RoutePaths.onBoardingPageView,
-        RoutePaths.boardingOne,
-        RoutePaths.boardingTwo,
-        RoutePaths.boardingThree,
-      };
-
-      if (!onboardingRoutes.contains(currentPath)) {
-        log('➡️  Redirecting to onboarding');
-        return RoutePaths.boardingZero;
-      }
-      log('✅ Already at onboarding');
-      return null;
+      return _onboardingRoutes.contains(currentPath)
+          ? null
+          : RoutePaths.boardingZero;
     }
 
-    // 3️⃣ Guest or authenticated → home
-    if (sessionState is SessionGuest || sessionState is SessionAuthenticated) {
-      final blocked = {RoutePaths.root, RoutePaths.boardingZero};
-
-      return blocked.contains(currentPath) ? RoutePaths.home : null;
+    // 3️⃣ Authenticated → block auth screens
+    if (sessionState is SessionAuthenticated) {
+      return _blockedWhenAuthenticated.contains(currentPath)
+          ? RoutePaths.home
+          : null;
     }
 
-    // 4️⃣ Fallback – do nothing
+    // 4️⃣ Guest → block splash only
+    if (sessionState is SessionGuest) {
+      return _blockedWhenGuest.contains(currentPath) ? RoutePaths.home : null;
+    }
+    // 5️⃣ Unauthenticated → force login
+    if (sessionState is SessionUnauthenticated) {
+      return _blockedWhenUnauthenticated.contains(currentPath)
+          ? RoutePaths.login
+          : null;
+    }
+
     return null;
   }
+
+  static const _onboardingRoutes = {
+    RoutePaths.boardingZero,
+    RoutePaths.onBoardingPageView,
+    RoutePaths.boardingOne,
+    RoutePaths.boardingTwo,
+    RoutePaths.boardingThree,
+  };
+
+  static const _blockedWhenAuthenticated = {
+    RoutePaths.root,
+    RoutePaths.boardingZero,
+    RoutePaths.login,
+  };
+  static const _blockedWhenUnauthenticated = {
+    RoutePaths.root,
+    RoutePaths.home,
+    RoutePaths.favorite,
+    RoutePaths.profile,
+    RoutePaths.search,
+    RoutePaths.discover,
+  };
+
+  static const _blockedWhenGuest = {RoutePaths.root, RoutePaths.boardingZero};
 
   List<RouteBase> routes = [
     ...AuthRoutes.routes,

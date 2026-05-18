@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
 import 'package:dio/dio.dart';
+import 'package:movify/core/network/api/services/api_service.dart';
 
 class DioConfig {
   static BaseOptions get baseOptions => BaseOptions(

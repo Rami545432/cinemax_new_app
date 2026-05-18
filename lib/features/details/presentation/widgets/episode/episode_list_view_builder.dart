@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/config/animations/widgets/animated_list_item.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/presentation/widgets/episode/episode_list_tile.dart';
 
 class EpisodesListViewBuilder extends StatelessWidget {
   const EpisodesListViewBuilder({

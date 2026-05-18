@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/constant.dart';
 
 class DetailsImage extends StatelessWidget {
   const DetailsImage({super.key, this.defaultImageUrl, this.posterPath});

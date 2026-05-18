@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/entites/part_entity.dart';
+import 'package:movify/features/details/domain/entites/part_entity.dart';
 
 class Parts {
   final bool? adult;

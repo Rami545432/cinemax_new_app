@@ -1,4 +1,4 @@
-// import 'package:cinemax_app_new/core/routing/route_name.dart';
+// import 'package:movify/core/routing/route_name.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -8,7 +8,7 @@
 // import '../../../../../core/utils/sub_bar.dart';
 // import '../../../../../hooks/ui/use_pagination_controller.dart';
 // import '../../../../../models/base_card_model.dart';
-// import 'package:cinemax_app_new/features/home/data/models/see_all_arguments_model.dart';
+// import 'package:movify/features/home/data/models/see_all_arguments_model.dart';
 // import 'film_card_list_builder.dart';
 
 // class SubBarAndMainCard extends HookWidget {

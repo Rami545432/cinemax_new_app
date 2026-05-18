@@ -1,13 +1,13 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/utils/pagination/api/config/pagintaion_config.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/cubit/category_pagination_cubit.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_keywords_use_case.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_keywords_use_case.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/enums/type_enum.dart';
-import 'package:cinemax_app_new/features/home/presentation/extensions/entity_card_extentions.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/pagination/api/config/pagintaion_config.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/core/pagination/presentation/cubit/category_pagination_cubit.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_movie_by_keywords_use_case.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_series_by_keywords_use_case.dart';
+import 'package:movify/features/discover/presentation/core/enums/type_enum.dart';
+import 'package:movify/features/home/presentation/extensions/entity_card_extentions.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class FetchItemsByKeywordsCubit
     extends

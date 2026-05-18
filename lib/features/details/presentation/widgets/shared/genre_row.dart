@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/genre.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/gener_box.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_see_all_arguments.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/features/details/domain/value_objects/genre.dart';
+import 'package:movify/features/details/presentation/widgets/shared/gener_box.dart';
+import 'package:movify/features/discover/data/models/genre_see_all_arguments.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
 
 class GenreRow extends StatelessWidget {
   const GenreRow({

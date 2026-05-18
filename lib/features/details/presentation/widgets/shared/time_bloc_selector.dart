@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_time_method.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/formatters/formatted_time_method.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_details_cubit/fetch_details_state.dart';
 
 class TimeBlocSelector extends StatelessWidget {
   const TimeBlocSelector({super.key});

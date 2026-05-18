@@ -1,12 +1,12 @@
-import 'package:cinemax_app_new/core/utils/formatters/formatted_time_method.dart';
-import 'package:cinemax_app_new/features/details/data/models/mappers/status_mappers.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/movie_details_entity.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/production_company.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/production_country.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/data_cell_text.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/formatters/formatted_time_method.dart';
+import 'package:movify/features/details/data/models/mappers/status_mappers.dart';
+import 'package:movify/features/details/domain/entites/movie_details_entity.dart';
+import 'package:movify/features/details/domain/value_objects/production_company.dart';
+import 'package:movify/features/details/domain/value_objects/production_country.dart';
+import 'package:movify/features/details/presentation/widgets/shared/data_cell_text.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class MovieDataTable extends StatelessWidget {
   const MovieDataTable({super.key});

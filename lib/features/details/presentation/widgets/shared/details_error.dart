@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/shared/presentation/widgets/retry_button.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/shared/presentation/widgets/retry_button.dart';
 
 class DetailsError extends StatelessWidget {
   const DetailsError({super.key, required this.message, required this.onRetry});

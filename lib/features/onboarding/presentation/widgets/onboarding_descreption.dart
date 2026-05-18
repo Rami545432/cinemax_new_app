@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class OnboardingDescription extends StatelessWidget {
   const OnboardingDescription({super.key, required this.description});

@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/language/presentation/widgets/languages_switcher.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/theme/widgets/theme_mode_color_selector.dart';
-import 'package:cinemax_app_new/features/profile/core/profile_list_tile_model.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/language/presentation/widgets/languages_switcher.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/theme/widgets/theme_mode_color_selector.dart';
+import 'package:movify/features/profile/core/profile_list_tile_model.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 List<ProfileIstTileModel> profileListTileList(BuildContext context) {
   final l10n = AppLocalizations.of(context)!;

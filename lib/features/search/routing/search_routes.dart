@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/core/routing/transition/app_transition.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/routing/transition/app_transition.dart';
+import 'package:movify/features/search/presentation/widgets/search_provider.dart';
 
 class SearchRoutes {
   static List<GoRoute> get routes => [

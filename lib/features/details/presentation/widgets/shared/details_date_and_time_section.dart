@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/utils/animations/animated_button.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/time_bloc_selector.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/icon_text_row.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/animations/animated_button.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/time_bloc_selector.dart';
+import 'package:movify/features/search/presentation/widgets/icon_text_row.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class DetailsDateAndTimeSection extends StatelessWidget {
   const DetailsDateAndTimeSection({super.key, required this.cardModel});

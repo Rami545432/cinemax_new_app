@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
-import 'package:cinemax_app_new/core/utils/cubit_parameters/details_params.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/movies/fetch_movie_details_use_case.dart';
-import 'package:cinemax_app_new/features/details/domain/use_cases/tv/fetch_tv_show_details_use_case.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/network/utils/safe_emit_state.dart';
+import 'package:movify/features/details/domain/use_cases/details_params.dart';
+import 'package:movify/features/details/domain/use_cases/movies/fetch_movie_details_use_case.dart';
+import 'package:movify/features/details/domain/use_cases/tv/fetch_tv_show_details_use_case.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_details_cubit/fetch_details_state.dart';
 
 @injectable
 class FetchDetailsCubit extends Cubit<FetchDetailsState> {

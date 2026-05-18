@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/on_boarding_icon_badge.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/onboarding_descreption.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/onboarding_title.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/on_boarding_icon_badge.dart';
+import 'package:movify/features/onboarding/presentation/widgets/onboarding_descreption.dart';
+import 'package:movify/features/onboarding/presentation/widgets/onboarding_title.dart';
 
 class OnBoardingBottomSection extends StatelessWidget {
   const OnBoardingBottomSection({

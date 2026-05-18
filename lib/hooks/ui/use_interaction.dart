@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:cinemax_app_new/hooks/ui/use_is_mounted.dart'; // Import it
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' hide useIsMounted;
+import 'package:movify/hooks/ui/use_is_mounted.dart'; // Import it
 
 VoidCallback useUserInteractionPause({
   required ValueNotifier<bool> isInteracting,

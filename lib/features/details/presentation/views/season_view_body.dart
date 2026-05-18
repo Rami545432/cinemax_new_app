@@ -1,14 +1,14 @@
-import 'package:cinemax_app_new/features/details/domain/enums/tabs_enums.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/mappers/favorite_mappers.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/season/season_tabs_bloc_builder.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/stacked_details_background.dart';
-import 'package:cinemax_app_new/hooks/ui/use_scroll_collapse_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/features/details/domain/enums/tabs_enums.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
+import 'package:movify/features/details/presentation/widgets/season/season_tabs_bloc_builder.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
+import 'package:movify/features/details/presentation/widgets/shared/stacked_details_background.dart';
+import 'package:movify/hooks/ui/use_scroll_collapse_controller.dart';
 
 class SeasonViewBody extends HookWidget {
   const SeasonViewBody({super.key});

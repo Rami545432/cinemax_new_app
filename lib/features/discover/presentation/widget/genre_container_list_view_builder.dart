@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/features/discover/data/models/genre_see_all_arguments.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/genre_container.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/features/discover/data/models/genre_see_all_arguments.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/presentation/widget/genre_container.dart';
 
 class GenreContainerListViewBuilder extends StatelessWidget {
   const GenreContainerListViewBuilder({

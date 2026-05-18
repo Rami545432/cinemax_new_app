@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/core/types/data_source_types.dart';
+import 'package:movify/core/types/data_source_types.dart';
 
 abstract interface class RemoteHomeDataSource {
   RemoteDataSourceListMovieModel getMovies({

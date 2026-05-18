@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/details_widgets/custom_descreption.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_actor_list_tile_builder.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/presentation/widgets/details_widgets/custom_descreption.dart';
+import 'package:movify/features/details/presentation/widgets/episode/episode_actor_list_tile_builder.dart';
+import 'package:movify/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
 
 class EpisodeTabBarBody extends StatelessWidget {
   const EpisodeTabBarBody({super.key, required this.episode});

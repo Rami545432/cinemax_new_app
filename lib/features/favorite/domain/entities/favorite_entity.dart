@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
 
 /// Domain entity for a favorite item.
 ///
@@ -53,21 +53,20 @@ class FavoriteEntity extends Equatable {
     int? episodeNumber,
     int? tmbdId,
     String? userId,
-  }) =>
-      FavoriteEntity(
-        specificId: specificId ?? this.specificId,
-        contentType: contentType ?? this.contentType,
-        title: title ?? this.title,
-        posterImage: posterImage ?? this.posterImage,
-        backdropImage: backdropImage ?? this.backdropImage,
-        genres: genres ?? this.genres,
-        date: date ?? this.date,
-        rating: rating ?? this.rating,
-        seasonNumber: seasonNumber ?? this.seasonNumber,
-        episodeNumber: episodeNumber ?? this.episodeNumber,
-        tmbdId: tmbdId ?? this.tmbdId,
-        userId: userId ?? this.userId,
-      );
+  }) => FavoriteEntity(
+    specificId: specificId ?? this.specificId,
+    contentType: contentType ?? this.contentType,
+    title: title ?? this.title,
+    posterImage: posterImage ?? this.posterImage,
+    backdropImage: backdropImage ?? this.backdropImage,
+    genres: genres ?? this.genres,
+    date: date ?? this.date,
+    rating: rating ?? this.rating,
+    seasonNumber: seasonNumber ?? this.seasonNumber,
+    episodeNumber: episodeNumber ?? this.episodeNumber,
+    tmbdId: tmbdId ?? this.tmbdId,
+    userId: userId ?? this.userId,
+  );
 
   @override
   String toString() =>

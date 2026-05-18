@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/features/discover/data/data_sources/remote_discover_data_source.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
-import 'package:cinemax_app_new/features/home/data/models/series_model.dart';
-import 'package:cinemax_app_new/shared/data/mappers/map_paged_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/network/api/services/api_service.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/features/discover/data/data_sources/remote_discover_data_source.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/home/data/models/movie_model.dart';
+import 'package:movify/features/home/data/models/series_model.dart';
+import 'package:movify/shared/data/mappers/map_paged_response.dart';
 
 @LazySingleton(as: DiscoverRemoteDataSource)
 class DiscoverRemoteDataSourceImpl implements DiscoverRemoteDataSource {

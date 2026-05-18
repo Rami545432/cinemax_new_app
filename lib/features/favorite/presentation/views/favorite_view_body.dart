@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/favorite_tab_content.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/keep_alive_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/favorite/presentation/widgets/favorite_tab_content.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
 
 class FavoriteBody extends HookWidget {
   const FavoriteBody({super.key});

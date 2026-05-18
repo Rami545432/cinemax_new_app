@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_provider.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/search/presentation/widgets/search_provider.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SearchBarButton extends StatelessWidget {
   const SearchBarButton({super.key});

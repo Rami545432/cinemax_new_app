@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/data/models/favorite_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/data/models/favorite_model.dart';
 
 /// Firestore serialization helpers for NewFavoriteModel
 ///

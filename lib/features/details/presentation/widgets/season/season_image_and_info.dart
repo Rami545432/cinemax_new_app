@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/details/presentation/widgets/season/text_column_info.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_image.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/presentation/widgets/season/text_column_info.dart';
+import 'package:movify/features/details/presentation/widgets/shared/details_image.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class SeasonImageAndInfo extends StatelessWidget {
   const SeasonImageAndInfo({

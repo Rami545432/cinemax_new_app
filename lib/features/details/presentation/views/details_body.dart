@@ -1,14 +1,14 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/domain/enums/tabs_enums.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/mappers/favorite_mappers.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/build_details_body_content.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/stacked_details_background.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/time_bloc_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/domain/enums/tabs_enums.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
+import 'package:movify/features/details/presentation/widgets/shared/build_details_body_content.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
+import 'package:movify/features/details/presentation/widgets/shared/stacked_details_background.dart';
+import 'package:movify/features/details/presentation/widgets/shared/time_bloc_selector.dart';
 
 class DetailsBody extends HookWidget {
   const DetailsBody({

@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/domain/repos/favorite_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/domain/repos/favorite_repo.dart';
 
 @lazySingleton
 class GetFavoritesUseCase {
@@ -14,6 +14,5 @@ class GetFavoritesUseCase {
   Future<Either<Failure, List<FavoriteEntity>>> call({
     required String userId,
     ContentType? contentType,
-  }) =>
-      repository.getFavorites(userId: userId, contentType: contentType);
+  }) => repository.getFavorites(userId: userId, contentType: contentType);
 }

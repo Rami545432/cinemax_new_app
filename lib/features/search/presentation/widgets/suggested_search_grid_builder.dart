@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/animated_search_result_item.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/custom_grid_config.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_animation_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/presentation/widgets/animated_search_result_item.dart';
+import 'package:movify/features/search/presentation/widgets/custom_grid_config.dart';
+import 'package:movify/features/search/presentation/widgets/search_animation_controller.dart';
 
 class SuggestedSearchGridBuilder extends StatefulWidget {
   const SuggestedSearchGridBuilder({super.key, required this.results});

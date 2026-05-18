@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
 
 class UserModel {
   final String uid;

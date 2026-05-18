@@ -1,13 +1,13 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/features/Bot/presentation/views/chat_bot_view.dart';
-import 'package:cinemax_app_new/features/discover/presentation/views/discover_view.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/views/favorite_view.dart';
-import 'package:cinemax_app_new/features/home/presentation/views/home_view.dart';
-import 'package:cinemax_app_new/features/profile/presentation/views/profile_view.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/navigation_views.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/features/Bot/presentation/views/chat_bot_view.dart';
+import 'package:movify/features/discover/presentation/views/discover_view.dart';
+import 'package:movify/features/favorite/presentation/views/favorite_view.dart';
+import 'package:movify/features/home/presentation/views/home_view.dart';
+import 'package:movify/features/profile/presentation/views/profile_view.dart';
+import 'package:movify/shared/presentation/widgets/navigation_views.dart';
 
 class MainRoutes {
   static List<RouteBase> get routes => [
@@ -18,7 +18,6 @@ class MainRoutes {
           const Center(child: CircularProgressIndicator()),
     ),
 
-   
     GoRoute(
       path: RoutePaths.chatBot,
       name: RouteName.chatBot,

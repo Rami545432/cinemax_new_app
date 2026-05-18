@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/actor_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/config/animations/widgets/animated_list_item.dart';
+import 'package:movify/features/details/domain/value_objects/cast.dart';
+import 'package:movify/features/details/presentation/widgets/shared/actor_list_tile.dart';
 
 class CastTabBarView extends StatelessWidget {
   final List<Cast> actorList;

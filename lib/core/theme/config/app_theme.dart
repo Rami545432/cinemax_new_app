@@ -1,8 +1,8 @@
 // lib/core/theme/config/app_theme.dart
 
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movify/core/utils/app_colors.dart';
 
 class AppTheme {
   // Step 2: Light theme generator

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/details/domain/entites/collection_entity.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/features/details/domain/entites/collection_entity.dart';
 
 abstract class FetchCollectionState extends Equatable {}
 

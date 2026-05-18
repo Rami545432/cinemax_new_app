@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/collection_card.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/widget/collection_card.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class CollectionGridBuilder extends StatelessWidget {
   const CollectionGridBuilder({super.key, required this.collections});

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/review_results.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/details_widgets/more_less_button.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/rating.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/review_results.dart';
+import 'package:movify/features/details/presentation/widgets/details_widgets/more_less_button.dart';
+import 'package:movify/shared/presentation/widgets/rating.dart';
 
 class ReviewListTile extends StatelessWidget {
   const ReviewListTile({super.key, required this.review});

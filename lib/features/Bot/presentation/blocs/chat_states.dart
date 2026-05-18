@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/Bot/models/chat_message_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/features/Bot/models/chat_message_model.dart';
 
 abstract class ChatState extends Equatable {
   const ChatState();

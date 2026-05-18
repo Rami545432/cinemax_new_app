@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 
 class MockAuthRepo extends Mock implements AuthRepo {}
 

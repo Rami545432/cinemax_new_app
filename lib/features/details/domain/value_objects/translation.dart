@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/data.dart';
+import 'package:movify/features/details/domain/value_objects/data.dart';
 
 class Translation {
   String? iso31661;

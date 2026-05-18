@@ -1,14 +1,14 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/errors/expections.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
-import 'package:cinemax_app_new/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
-import 'package:cinemax_app_new/features/favorite/data/models/favorite_model.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/domain/repos/favorite_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/expections.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
+import 'package:movify/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
+import 'package:movify/features/favorite/data/models/favorite_model.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/domain/repos/favorite_repo.dart';
 
 @LazySingleton(as: FavoriteRepo)
 class FavoritesRepositoryImpl implements FavoriteRepo {
@@ -100,8 +100,7 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
       final guestFavs = await localDataSource.getGuestFavorites();
       if (guestFavs.isEmpty) {
         debugPrint('ℹ️ No guest favorites to merge');
-        // Still pull cloud data even if no guest favorites
-        await _pullCloud(newUserId);
+
         return const Right(unit);
       }
       debugPrint('📦 Found ${guestFavs.length} guest favorites to merge');

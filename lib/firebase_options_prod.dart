@@ -8,16 +8,19 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_prod.dart';
 /// // ...
 /// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptionsProd.currentPlatform,
+///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-class DefaultFirebaseOptionsProd {
+class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,65 +28,43 @@ class DefaultFirebaseOptionsProd {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
-          'DefaultFirebaseOptionsProd have not been configured for windows - '
+          'DefaultFirebaseOptions have not been configured for windows - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
-          'DefaultFirebaseOptionsProd have not been configured for linux - '
+          'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
-          'DefaultFirebaseOptionsProd are not supported for this platform.',
+          'DefaultFirebaseOptions are not supported for this platform.',
         );
     }
   }
 
-  static FirebaseOptions get web => FirebaseOptions(
-    apiKey: 'AIzaSyB8yzuEiuWRo7-bmt-_Fx7LT1ZC7F5h4HI',
-    appId: '1:510131261228:web:2184e9303345e11c4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    authDomain: 'cinemamaxapp-be698.firebaseapp.com',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
-    measurementId: 'G-VG01DK2JKQ',
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDyhcjaKCDJO_qg2UnrJyymSz5qLGJJihU',
+    appId: '1:322470183826:android:fb5eb7517bc9dde1e5774b',
+    messagingSenderId: '322470183826',
+    projectId: 'movify-prod',
+    storageBucket: 'movify-prod.firebasestorage.app',
   );
 
-  static FirebaseOptions get android => FirebaseOptions(
-    apiKey: 'AIzaSyCuosLn4dJtNxTCjDGcpFnkjJuz96FdCM4',
-    appId: '1:510131261228:android:5c79e851aa9b126a4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
-  );
-
-  static FirebaseOptions get ios => FirebaseOptions(
-    apiKey: 'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
-    appId: '1:510131261228:ios:e803a7651e9657ea4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
-    androidClientId:
-        '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
-    iosClientId:
-        '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.cinemaxApp',
-  );
-
-  static FirebaseOptions get macos => FirebaseOptions(
-    apiKey: 'AIzaSyCyr7UNajUylMVoogZd8AevkXxr-ZzcAWQ',
-    appId: '1:510131261228:ios:e803a7651e9657ea4c6689',
-    messagingSenderId: '510131261228',
-    projectId: 'cinemamaxapp-be698',
-    storageBucket: 'cinemamaxapp-be698.appspot.com',
-    androidClientId:
-        '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
-    iosClientId:
-        '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.cinemaxApp',
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyA_yoi4RnoezubsF1j6QXmGIdciW-4VZeg',
+    appId: '1:322470183826:ios:19c9c4c070c2a080e5774b',
+    messagingSenderId: '322470183826',
+    projectId: 'movify-prod',
+    storageBucket: 'movify-prod.firebasestorage.app',
+    androidClientId: '322470183826-g55pvg4tua0qqag5nlc7f8mla1fu7har.apps.googleusercontent.com',
+    iosClientId: '322470183826-r67ipldo9g5dktrb19q4iemd8i57tu57.apps.googleusercontent.com',
+    iosBundleId: 'com.rami.movify',
   );
 }

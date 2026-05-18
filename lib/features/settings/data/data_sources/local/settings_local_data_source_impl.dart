@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/settings/data/data_sources/local/settings_local_data_source.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/features/settings/data/data_sources/local/settings_local_data_source.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: SettingsLocalDataSource)

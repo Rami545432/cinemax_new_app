@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/constant.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/constant.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
 
 class AboutEpisodeComponets extends StatelessWidget {
   const AboutEpisodeComponets({

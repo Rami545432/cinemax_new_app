@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/responsive/get_responsive_text.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/responsive/get_responsive_text.dart';
 
 abstract class AppStyles {
   static TextStyle textStyle18(BuildContext context) => TextStyle(

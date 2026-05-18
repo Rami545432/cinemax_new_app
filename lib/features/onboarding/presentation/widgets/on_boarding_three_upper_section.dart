@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/gradient_overlay.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/insight_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/features/home/presentation/widgets/card_image.dart';
+import 'package:movify/features/onboarding/presentation/widgets/gradient_overlay.dart';
+import 'package:movify/features/onboarding/presentation/widgets/insight_chip.dart';
 
 class OnBoardingThreeUpperSection extends StatelessWidget {
   const OnBoardingThreeUpperSection({super.key});

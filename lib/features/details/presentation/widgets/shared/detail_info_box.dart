@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/detail_info.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/presentation/widgets/shared/detail_info.dart';
 
 class DetailInfoBox extends StatelessWidget {
   const DetailInfoBox({

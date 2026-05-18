@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/profile/presentation/views/profile_body.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/profile/presentation/views/profile_body.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

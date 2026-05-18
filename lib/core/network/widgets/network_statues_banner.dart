@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class NetworkStatusBanner extends StatefulWidget {
   const NetworkStatusBanner({super.key});

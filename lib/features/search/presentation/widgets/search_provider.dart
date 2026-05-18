@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/features/search/presentation/blocs/search_bloc.dart';
-import 'package:cinemax_app_new/features/search/presentation/cubits/search_history_cubit.dart';
-import 'package:cinemax_app_new/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/features/search/presentation/blocs/search_bloc.dart';
+import 'package:movify/features/search/presentation/cubits/search_history_cubit.dart';
+import 'package:movify/features/search/presentation/views/search_view.dart';
 
 class SearchMultiProviders extends StatelessWidget {
   const SearchMultiProviders({super.key});

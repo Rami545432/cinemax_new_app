@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/crew.dart';
+import 'package:movify/features/details/domain/value_objects/cast.dart';
+import 'package:movify/features/details/domain/value_objects/crew.dart';
 
 class Credits {
   List<Cast>? cast;

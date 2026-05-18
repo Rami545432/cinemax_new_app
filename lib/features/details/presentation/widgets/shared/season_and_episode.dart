@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/season.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/season.dart';
 
 class SeasonAndEpisodeInfo extends StatelessWidget {
   const SeasonAndEpisodeInfo({super.key, required this.season});

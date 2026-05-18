@@ -1,17 +1,17 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/mappers/favorite_mappers.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_info_section.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_tab_bar_body.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/opcaity_details_image.dart';
-import 'package:cinemax_app_new/hooks/ui/use_scroll_collapse_controller.dart';
-import 'package:cinemax_app_new/hooks/ui/use_tab_controller_animation.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/keep_alive_wrapper.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/tablet_play_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
+import 'package:movify/features/details/presentation/widgets/episode/episode_info_section.dart';
+import 'package:movify/features/details/presentation/widgets/episode/episode_tab_bar_body.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
+import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
+import 'package:movify/hooks/ui/use_scroll_collapse_controller.dart';
+import 'package:movify/hooks/ui/use_tab_controller_animation.dart';
+import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
+import 'package:movify/shared/presentation/widgets/tablet_play_button.dart';
 
 class EpisodeBody extends HookWidget {
   const EpisodeBody({

@@ -1,9 +1,10 @@
 // lib/core/network/api/base/base_api_client.dart
 import 'dart:developer';
-import 'package:cinemax_app_new/core/network/config/app_dio.dart';
-import 'package:cinemax_app_new/core/types/api_types.dart';
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:movify/core/network/config/app_dio.dart';
+import 'package:movify/core/types/api_types.dart';
 
 /// Base API client that can be reused for any API provider
 abstract class BaseApiClient {

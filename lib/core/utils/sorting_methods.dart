@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 List<SearchResult> sortSearchResultsByRatingAndDate(
   List<SearchResult> results,
@@ -30,7 +30,9 @@ List<SearchResult> sortSearchResultsByRatingAndDate(
   return results;
 }
 
-List<CardDisplayModel> sortResultsByRatingAndDate(List<CardDisplayModel> results) {
+List<CardDisplayModel> sortResultsByRatingAndDate(
+  List<CardDisplayModel> results,
+) {
   results.sort((a, b) {
     final ratingCompare = b.popularity!.compareTo(a.popularity!);
     if (ratingCompare != 0) {

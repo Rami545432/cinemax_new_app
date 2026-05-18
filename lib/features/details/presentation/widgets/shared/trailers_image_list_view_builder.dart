@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/trailer_thumbnail.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
-import 'package:cinemax_app_new/shared/presentation/utils/custom_show_modal_bottom_sheet.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/videos.dart';
+import 'package:movify/features/details/presentation/widgets/shared/trailer_thumbnail.dart';
+import 'package:movify/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/utils/custom_show_modal_bottom_sheet.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class TrailersImageListViewBuilder extends StatelessWidget {
   const TrailersImageListViewBuilder({super.key, required this.videos});

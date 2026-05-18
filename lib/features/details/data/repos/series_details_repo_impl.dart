@@ -1,14 +1,14 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/types/domain_types.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/features/details/data/data_sources/remote/series/remote_series_details_data_source.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_details_entity.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/domain/repo/series_details_repo.dart';
-import 'package:cinemax_app_new/shared/data/cache/in_memory_cache.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/core/types/domain_types.dart';
+import 'package:movify/features/details/data/data_sources/remote/series/remote_series_details_data_source.dart';
+import 'package:movify/features/details/domain/entites/series_details_entity.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/domain/repo/series_details_repo.dart';
+import 'package:movify/shared/data/cache/in_memory_cache.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 @LazySingleton(as: SeriesDetailsRepo)
 class SeriesDetailsRepoImpl implements SeriesDetailsRepo {
@@ -51,22 +51,20 @@ class SeriesDetailsRepoImpl implements SeriesDetailsRepo {
     int id,
     int? page,
   ) async {
-      final key = 'series_recommendations-$id-$page';
-      final cached = _seriesRecommendationCache.get(key);
-      if (cached != null) {
-        return Right(cached);
-      }
-      try {
-        final data = await remoteSeriesDetailsDataSource.fetchSeriesRecommendations(
-          id,
-          page,
-        );
-        final entity = data.map((e) => e.toEntity());
-        _seriesRecommendationCache.set(key, entity);
-        return Right(entity);
-      } catch (e) {
-        return Left(ServerFailure(errorMessage: e.toString()));
-      }
+    final key = 'series_recommendations-$id-$page';
+    final cached = _seriesRecommendationCache.get(key);
+    if (cached != null) {
+      return Right(cached);
+    }
+    try {
+      final data = await remoteSeriesDetailsDataSource
+          .fetchSeriesRecommendations(id, page);
+      final entity = data.map((e) => e.toEntity());
+      _seriesRecommendationCache.set(key, entity);
+      return Right(entity);
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
@@ -86,7 +84,7 @@ class SeriesDetailsRepoImpl implements SeriesDetailsRepo {
       );
       final entity = data.toEntity();
       _seasonCache.set(key, entity);
-      return Right(entity); 
+      return Right(entity);
     } catch (e) {
       return Left(ServerFailure(errorMessage: e.toString()));
     }
@@ -97,21 +95,21 @@ class SeriesDetailsRepoImpl implements SeriesDetailsRepo {
     int id,
     int? page,
   ) async {
-   final key = 'series_similar-$id-$page';
-   final cached = _seriesSimilarCache.get(key);
-   if (cached != null) {
-     return Right(cached);
-   }
-   try {
-     final data = await remoteSeriesDetailsDataSource.fetchSeriesSimilar(
-       id,
-       page,
-     );
-     final entity = data.map((e) => e.toEntity());
-     _seriesSimilarCache.set(key, entity);
-     return Right(entity);
-   } catch (e) {
-     return Left(ServerFailure(errorMessage: e.toString()));
-   }
+    final key = 'series_similar-$id-$page';
+    final cached = _seriesSimilarCache.get(key);
+    if (cached != null) {
+      return Right(cached);
+    }
+    try {
+      final data = await remoteSeriesDetailsDataSource.fetchSeriesSimilar(
+        id,
+        page,
+      );
+      final entity = data.map((e) => e.toEntity());
+      _seriesSimilarCache.set(key, entity);
+      return Right(entity);
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: e.toString()));
+    }
   }
 }

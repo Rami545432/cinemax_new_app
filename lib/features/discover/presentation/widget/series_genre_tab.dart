@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/features/discover/core/enum/tv_genre.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_list_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/collection_grid_builder.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/genre_tab_section.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/sub_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/core/enum/tv_genre.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/presentation/core/collection_list_model.dart';
+import 'package:movify/features/discover/presentation/widget/collection_grid_builder.dart';
+import 'package:movify/features/discover/presentation/widget/genre_tab_section.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/widgets/sub_bar.dart';
 
 class SeriesGenreTab extends StatelessWidget {
   const SeriesGenreTab({super.key});

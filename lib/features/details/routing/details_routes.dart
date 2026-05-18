@@ -1,17 +1,17 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/core/routing/transition/app_transition.dart';
-import 'package:cinemax_app_new/core/utils/cubit_parameters/details_params.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/views/details_view.dart';
-import 'package:cinemax_app_new/features/details/presentation/views/episode_view.dart';
-import 'package:cinemax_app_new/features/details/presentation/views/season_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/routing/transition/app_transition.dart';
+import 'package:movify/features/details/domain/use_cases/details_params.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_details_cubit/fetch_details_cubit.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
+import 'package:movify/features/details/presentation/views/details_view.dart';
+import 'package:movify/features/details/presentation/views/episode_view.dart';
+import 'package:movify/features/details/presentation/views/season_view.dart';
 
 class DetailsRoutes {
   static List<GoRoute> get routes => [

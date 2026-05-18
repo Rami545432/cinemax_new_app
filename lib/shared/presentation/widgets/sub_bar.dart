@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class SubBar extends StatelessWidget {
   const SubBar({super.key, required this.title, this.onPressed, this.data});

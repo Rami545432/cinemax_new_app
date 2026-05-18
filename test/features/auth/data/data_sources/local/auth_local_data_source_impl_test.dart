@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/auth/data/data_sources/local/auth_local_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // 1. Mock the 3rd party library!

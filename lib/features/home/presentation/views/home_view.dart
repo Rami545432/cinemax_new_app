@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/home/presentation/views/home_view_body.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/home/presentation/views/home_view_body.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

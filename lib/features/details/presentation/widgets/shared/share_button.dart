@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareButton extends HookWidget {

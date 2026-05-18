@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/suggested_search_grid_builder.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/presentation/widgets/suggested_search_grid_builder.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SearchTabBarViews extends HookWidget {
   const SearchTabBarViews({

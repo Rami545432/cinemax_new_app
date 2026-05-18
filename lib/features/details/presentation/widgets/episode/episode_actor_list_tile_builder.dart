@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/actor_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/presentation/widgets/shared/actor_list_tile.dart';
 
 class EpisodeActrolListTileListViewBuilder extends StatelessWidget {
   const EpisodeActrolListTileListViewBuilder({

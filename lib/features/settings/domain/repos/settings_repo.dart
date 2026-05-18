@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
 
 abstract interface class SettingsRepo {
   Future<Either<Failure, bool>> getIsFirstTime();

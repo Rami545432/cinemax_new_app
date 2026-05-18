@@ -1,16 +1,16 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_event.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_state.dart';
-import 'package:cinemax_app_new/core/utils/pagination/presentation/views/base_browse_view.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_movie_by_genre_use_case.dart';
-import 'package:cinemax_app_new/features/discover/domain/use_cases/fetch_series_by_genre_use_case.dart';
-import 'package:cinemax_app_new/features/discover/presentation/blocs/fetch_genre_bloc.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/genre_filter_sheet.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/main_list_card.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/main_vertical_card.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_state.dart';
+import 'package:movify/core/pagination/presentation/views/base_browse_view.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_movie_by_genre_use_case.dart';
+import 'package:movify/features/discover/domain/use_cases/fetch_series_by_genre_use_case.dart';
+import 'package:movify/features/discover/presentation/blocs/fetch_genre_bloc.dart';
+import 'package:movify/features/discover/presentation/widget/genre_filter_sheet.dart';
+import 'package:movify/features/home/presentation/widgets/main_list_card.dart';
+import 'package:movify/features/home/presentation/widgets/main_vertical_card.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class GenreView
     extends

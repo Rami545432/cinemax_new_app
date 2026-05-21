@@ -29,7 +29,6 @@ class _FavoriteTabViewState extends State<FavoriteTabView> {
   bool _isLoading = true;
 
   @override
-  @override
   void initState() {
     super.initState();
     _loadFavorites();
@@ -51,10 +50,8 @@ class _FavoriteTabViewState extends State<FavoriteTabView> {
   }
 
   Future<void> _onRefresh() async {
-    // Pull-to-refresh: Sync from cloud
-
-    // Reload favorites
-    await _loadFavorites();
+    // Pull-to-refresh: Sync from cloud and update Hive
+    await context.read<FavoriteCubit>().refreshFromCloud();
   }
 
   @override
@@ -68,64 +65,52 @@ class _FavoriteTabViewState extends State<FavoriteTabView> {
           _loadFavorites();
         }
       },
-      builder: (context, state) => state.when(
-        initial: () => Center(
-          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
-        ),
-        loading: () => Center(
-          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
-        ),
-        loaded: (items, _, _, _, _) {
-          if (_favorites.isEmpty) {
-            return Center(
-              child: Text(
-                l10n.noFavoritesContentType(
-                  widget.contentType.localizedText(context),
-                ),
-              ),
-            );
-          }
-          return RefreshIndicator(
-            color: Colors.white,
-            onRefresh: _onRefresh,
-            child: GridView.builder(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16),
-              itemCount: _favorites.length,
-              gridDelegate: Constants.sliverGridDelegate(width),
-              itemBuilder: (context, index) {
-                final favorite = _favorites[index];
-                return FavoriteVerticalCard(
-                  item: favorite,
-                  onRemove: () {
-                    context.read<FavoriteCubit>().toggleFavorite(favorite);
-                  },
-                );
-              },
+      builder: (context, state) {
+        if (_isLoading) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: AppPrimaryColors.blueAccent,
             ),
           );
-        },
-        syncing: (message, _) => RefreshIndicator(
-          onRefresh: _onRefresh,
-          child: Center(
-            child: Text(
-              l10n.noFavoritesContentType(
-                widget.contentType.localizedText(context),
-              ),
-            ),
+        }
+
+        return state.maybeWhen(
+          error: (message) => RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: Center(child: Text(message)),
           ),
-        ),
-        error: (message) => RefreshIndicator(
-          onRefresh: _onRefresh,
-          child: Center(
-            child: Text(
-              l10n.noFavoritesContentType(
-                widget.contentType.localizedText(context),
+          orElse: () {
+            if (_favorites.isEmpty) {
+              return Center(
+                child: Text(
+                  l10n.noFavoritesContentType(
+                    widget.contentType.localizedText(context),
+                  ),
+                ),
+              );
+            }
+            return RefreshIndicator(
+              color: Colors.white,
+              onRefresh: _onRefresh,
+              child: GridView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16),
+                itemCount: _favorites.length,
+                gridDelegate: Constants.sliverGridDelegate(width),
+                itemBuilder: (context, index) {
+                  final favorite = _favorites[index];
+                  return FavoriteVerticalCard(
+                    item: favorite,
+                    onRemove: () {
+                      context.read<FavoriteCubit>().toggleFavorite(favorite);
+                    },
+                  );
+                },
               ),
-            ),
-          ),
-        ),
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -1,0 +1,46 @@
+name: Deploy Dev Flavor to Firebase
+
+# 1. Trigger this workflow ONLY when code is pushed to the 'dev' branch
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ☕ Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: 📦 Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: 💎 Setup Ruby & Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      
+      # We must install the bundler to get the Firebase plugin we added earlier
+      - name: Install Fastlane Plugins
+        run: cd android && bundle install
+
+      - name: 🚀 Build and Distribute via Fastlane
+        # We pass the GitHub Secrets into the environment so Fastlane can use them
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        run: cd android && fastlane distribute_dev

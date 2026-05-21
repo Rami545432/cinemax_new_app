@@ -1,0 +1,39 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  
+  desc "Build Dev Flavor and upload to Firebase App Distribution"
+  lane :distribute_dev do
+    
+    # 1. Go to the root folder and build the Flutter APK
+    Dir.chdir("../") do
+      UI.message("Building Dev APK...")
+      # Adjust this if your dev entry point has a different name!
+      sh("flutter build apk --flavor dev -t lib/main_dev.dart") 
+    end
+
+    # 2. Upload the finished APK to Firebase
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      groups: "testers", # This must match the group name you make in Firebase!
+      release_notes: "New Dev Build from CI/CD 🚀",
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+    )
+  end
+
+end

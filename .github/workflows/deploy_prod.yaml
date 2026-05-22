@@ -1,22 +1,21 @@
-name: 🚀 Deploy Dev → Firebase App Distribution
+name: 🚀 Deploy Prod → Firebase App Distribution
 
 # ──────────────────────────────────────────────────────────────
-# Triggers on push to dev (and your testing branch)
+# Triggers on push to main
 # ──────────────────────────────────────────────────────────────
 on:
   push:
     branches:
-      - dev
-      - upgrade_Gradle_fixing_pipeline
+      - main
 
 # Prevent duplicate runs on the same branch
 concurrency:
-  group: deploy-dev-${{ github.ref }}
+  group: deploy-prod-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-and-distribute:
-    name: Build Dev APK & Upload
+    name: Build Prod APK & Upload
     runs-on: ubuntu-latest
 
     steps:
@@ -45,12 +44,12 @@ jobs:
       # ── 5. Create .env files from GitHub Secrets ────────────
       #    envied reads these at build_runner time, then they
       #    get baked (obfuscated) into the .g.dart files.
-      - name: 🔐 Create .env.dev from secrets
+      - name: 🔐 Create .env.prod from secrets
         run: |
-          cat <<EOF > .env.dev
+          cat <<EOF > .env.prod
           TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          BASE_URL=${{ secrets.BASE_URL_DEV }}
+          BASE_URL=${{ secrets.BASE_URL_PROD }}
           EOF
 
       # ── 6. Code generation (envied + freezed + json + etc.) ─
@@ -72,8 +71,7 @@ jobs:
       # ── 9. Build APK & Upload to Firebase ───────────────────
       - name: 🚀 Build & Distribute via Fastlane
         env:
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_DEV_APP_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_PROD_APP_ID }}
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-          
         working-directory: android
-        run: bundle exec fastlane distribute_dev
+        run: bundle exec fastlane distribute_prod

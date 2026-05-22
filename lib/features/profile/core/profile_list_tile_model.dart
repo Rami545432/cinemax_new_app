@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProfileIstTileModel {
   final String title;
-  final IconData icon;
+  final Icon icon;
   final VoidCallback onTap;
 
   ProfileIstTileModel({

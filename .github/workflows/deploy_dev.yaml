@@ -1,45 +1,58 @@
 name: Deploy Dev Flavor to Firebase
 
-# 1. Trigger this workflow ONLY when code is pushed to the 'dev' branch
+# 1. THE TRIGGER
 on:
   push:
     branches:
       - dev
+      - upgrade_Gradle_fixing_pipeline
 
 jobs:
   distribute:
+    # 2. THE SERVER
     runs-on: ubuntu-latest
 
     steps:
+      # 3. GET THE CODE
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
+      # 4. INSTALL JAVA (For Android)
       - name: ☕ Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
 
+      # 5. INSTALL FLUTTER
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          # TIP: If you keep getting font_awesome errors, uncomment the line below 
+          # and put your exact local Flutter version here (e.g., '3.22.0')
+          # flutter-version: '3.22.0'
 
+      # 6. GET PACKAGES
       - name: 📦 Install Flutter Dependencies
         run: flutter pub get
 
+      # 7. GENERATE MISSING FILES (The fix for your env.dev.g.dart error!)
+      - name: ⚙️ Generate Environment Files
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # 8. INSTALL FASTLANE
       - name: 💎 Setup Ruby & Fastlane
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
       
-      # We must install the bundler to get the Firebase plugin we added earlier
       - name: Install Fastlane Plugins
         run: cd android && bundle install
 
+      # 9. BUILD AND UPLOAD
       - name: 🚀 Build and Distribute via Fastlane
-        # We pass the GitHub Secrets into the environment so Fastlane can use them
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}

@@ -12,21 +12,21 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
   return [
     ProfileIstTileModel(
       title: l10n.favorites,
-      icon: Icons.favorite_outline_rounded,
+      icon: const FaIcon(FontAwesomeIcons.heart),
       onTap: () {
         context.pushNamed(RouteName.favorite);
       },
     ),
     ProfileIstTileModel(
       title: l10n.searchHistory,
-      icon: Icons.history,
+      icon: const FaIcon(FontAwesomeIcons.clockRotateLeft),
       onTap: () {
         context.pushNamed(RouteName.search);
       },
     ),
     ProfileIstTileModel(
       title: l10n.language,
-      icon: Icons.language_outlined,
+      icon: const FaIcon(FontAwesomeIcons.language),
       onTap: () {
         showModalBottomSheet<void>(
           context: context,
@@ -41,7 +41,7 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
     ),
 
     ProfileIstTileModel(
-      icon: FontAwesomeIcons.palette,
+      icon: const FaIcon(FontAwesomeIcons.palette),
       title: l10n.theme,
       onTap: () {
         showModalBottomSheet<void>(
@@ -58,7 +58,7 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
     ),
     ProfileIstTileModel(
       title: 'Notification Testing',
-      icon: Icons.notifications_outlined,
+      icon: const FaIcon(FontAwesomeIcons.palette),
       onTap: () {
         context.pushNamed(RouteName.notificationTesting);
       },

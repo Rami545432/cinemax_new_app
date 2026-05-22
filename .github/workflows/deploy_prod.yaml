@@ -27,14 +27,14 @@ jobs:
       - name: ☕ Setup Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          distribution: "zulu"
+          java-version: "17"
 
       # ── 3. Flutter ──────────────────────────────────────────
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
           cache: true
 
       # ── 4. Flutter dependencies ─────────────────────────────
@@ -46,11 +46,9 @@ jobs:
       #    get baked (obfuscated) into the .g.dart files.
       - name: 🔐 Create .env.prod from secrets
         run: |
-          cat <<EOF > .env.prod
-          TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          BASE_URL=${{ secrets.BASE_URL_PROD }}
-          EOF
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.prod
+          echo "BASE_URL=${{ secrets.BASE_URL_PROD }}" >> .env.prod
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.prod
 
       # ── 6. Code generation (envied + freezed + json + etc.) ─
       - name: ⚙️ Run build_runner (generate .g.dart files)
@@ -64,7 +62,7 @@ jobs:
       - name: 💎 Setup Ruby & Fastlane
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: "3.2"
           bundler-cache: true
           working-directory: android
 

@@ -59,11 +59,10 @@ jobs:
           cat .env.dev
           echo "--- PROD ENV ---"
           cat .env.prod
-      - name: ⚙️ Run build_runner (generate .g.dart files)
-        run: |
-          # Clean previous build artifacts
-          rm -rf .dart_tool/build
-          dart run build_runner build --delete-conflicting-outputs
+      - name: ⚙️ Generate envied .g.dart files only
+        run: >
+          dart run build_runner build
+          --build-filter="lib/config/env/*.g.dart"
 
       # ── 7. Static analysis ──────────────────────────────────
       - name: 🔍 Flutter analyze

@@ -59,6 +59,13 @@ jobs:
           cat .env.dev
           echo "--- PROD ENV ---"
           cat .env.prod
+      - name: ⚙️ Generate envied .g.dart files only
+        run: |
+          dart run build_runner build --build-filter="lib/config/env/*.g.dart"
+          # Restore any other .g.dart files that build_runner modified.
+          # The envied files (env.dev.g.dart, env.prod.g.dart) are git-ignored,
+          # so git checkout won't touch them — only they survive.
+          git checkout -- .
 
       # ── 7. Static analysis ──────────────────────────────────
       - name: 🔍 Flutter analyze

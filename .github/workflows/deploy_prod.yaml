@@ -53,12 +53,6 @@ jobs:
           echo "BASE_URL=${{ secrets.BASE_URL_PROD }}" >> .env.prod
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.prod
 
-      # ── 6. Code generation (envied + freezed + json + etc.) ─
-      - name: ⚙️ Generate envied .g.dart files only
-        run: >
-          dart run build_runner build
-          --build-filter="lib/config/env/*.g.dart"
-
       # ── 7. Static analysis ──────────────────────────────────
       - name: 🔍 Flutter analyze
         run: flutter analyze --no-fatal-infos

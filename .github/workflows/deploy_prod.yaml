@@ -44,8 +44,11 @@ jobs:
       # ── 5. Create .env files from GitHub Secrets ────────────
       #    envied reads these at build_runner time, then they
       #    get baked (obfuscated) into the .g.dart files.
-      - name: 🔐 Create .env.prod from secrets
+      - name: 🔐 Create .env files from secrets
         run: |
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.dev
+          echo "BASE_URL=${{ secrets.BASE_URL_DEV }}" >> .env.dev
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.dev
           echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.prod
           echo "BASE_URL=${{ secrets.BASE_URL_PROD }}" >> .env.prod
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.prod

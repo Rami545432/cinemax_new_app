@@ -50,10 +50,15 @@ jobs:
           echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.dev
           echo "BASE_URL=${{ secrets.BASE_URL_DEV }}" >> .env.dev
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.dev
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.prod
+          echo "BASE_URL=${{ secrets.BASE_URL_PROD }}" >> .env.prod
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.prod
       - name: 🕵️ Debug .env files
         run: |
           echo "--- DEV ENV ---"
           cat .env.dev
+          echo "--- PROD ENV ---"
+          cat .env.prod
       - name: ⚙️ Run build_runner (generate .g.dart files)
         run: |
           # Clean previous build artifacts

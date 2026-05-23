@@ -24,17 +24,17 @@ platform :android do
     #    Fastlane runs from android/fastlane/, so ../.. = project root
     Dir.chdir("../..") do
       UI.message("🔨 Building Dev APK...")
-      sh("flutter build apk --flavor dev -t lib/main_dev.dart")
+      sh("flutter build apk --flavor dev -t lib/main_dev.dart --split-per-abi")
     end
 
     # 2. Upload the finished APK to Firebase
-    #    apk_path is relative to the Fastlane execution dir (android/fastlane/)
+    #    Upload arm64 variant only (~25MB vs ~70MB fat APK)
     firebase_app_distribution(
       app: ENV["FIREBASE_APP_ID"],
       groups: "testers",
       release_notes: "New Dev Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../build/app/outputs/flutter-apk/app-dev-release.apk"
+      apk_path: "../build/app/outputs/flutter-apk/app-dev-release-arm64-v8a.apk"
     )
   end
 
@@ -43,7 +43,7 @@ platform :android do
     
     Dir.chdir("../..") do
       UI.message("🔨 Building Prod APK...")
-      sh("flutter build apk --flavor prod -t lib/main_prod.dart")
+      sh("flutter build apk --flavor prod -t lib/main_prod.dart --split-per-abi")
     end
 
     firebase_app_distribution(
@@ -51,7 +51,7 @@ platform :android do
       groups: "testers",
       release_notes: "New Prod Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../build/app/outputs/flutter-apk/app-prod-release.apk"
+      apk_path: "../build/app/outputs/flutter-apk/app-prod-release-arm64-v8a.apk"
     )
   end
 

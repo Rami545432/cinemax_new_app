@@ -58,11 +58,15 @@ jobs:
       - name: ⚙️ Generate envied .g.dart files only
         run: |
           dart run build_runner build --build-filter="lib/config/env/*.g.dart"
+          # Restore any other .g.dart files that build_runner modified.
+          # The envied files (env.dev.g.dart, env.prod.g.dart) are git-ignored,
+          # so git checkout won't touch them — only they survive.
+          git checkout -- .
+
       # ── 7. Static analysis ──────────────────────────────────
       - name: 🔍 Flutter analyze
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
-      - name: 📦 Get Flutter dependencies (clean state)
-        run: flutter pub get
+
       # ── 8. Ruby & Fastlane ──────────────────────────────────
       - name: 💎 Setup Ruby & Fastlane
         uses: ruby/setup-ruby@v1

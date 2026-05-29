@@ -34,7 +34,7 @@ platform :android do
       groups: "testers",
       release_notes: "New Dev Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "build/app/outputs/flutter-apk/app-dev-armeabi-v7a-release.apk"
+      apk_path: "../../build/app/outputs/flutter-apk/app-dev-armeabi-v7a-release.apk"
     )
   end
 

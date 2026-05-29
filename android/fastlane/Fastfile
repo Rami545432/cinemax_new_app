@@ -30,7 +30,7 @@ platform :android do
     # 2. Upload the finished APK to Firebase
     #    apk_path is relative to the Fastlane execution dir (android/fastlane/)
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_DEV_APP_ID"],
       groups: "testers",
       release_notes: "New Dev Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
@@ -47,7 +47,7 @@ platform :android do
     end
 
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_PROD_APP_ID"],
       groups: "testers",
       release_notes: "New Prod Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],

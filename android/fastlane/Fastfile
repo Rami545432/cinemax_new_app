@@ -26,13 +26,15 @@ platform :android do
       UI.message("🔨 Building Dev APK...")
       sh("flutter build apk --flavor dev -t lib/main_dev.dart --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols")
 
+      # 1. Grab the exact, absolute path while we are safely in the project root!
+      absolute_apk_path = File.expand_path("build/app/outputs/flutter-apk/app-arm64-v8a-dev-release.apk")
       # 2. Upload the finished APK to Firebase
       firebase_app_distribution(
         app: ENV["FIREBASE_DEV_APP_ID"],
         groups: "testers",
         release_notes: "New Dev Build from CI/CD 🚀",
         firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-        apk_path: "../../build/app/outputs/flutter-apk/app-arm64-v8a-dev-release.apk"
+        apk_path: absolute_apk_path
       )
     end
   end

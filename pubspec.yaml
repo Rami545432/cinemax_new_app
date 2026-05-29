@@ -64,7 +64,6 @@ dependencies:
   cloud_firestore: ^6.1.0
   flutter_inappwebview: ^6.1.5
   expandable_page_view: ^1.0.17
-  animated_text_kit: ^4.2.3
   json_annotation: ^4.9.0
   flutter_staggered_animations: ^1.1.1
   flutter_hooks: ^0.21.3+1

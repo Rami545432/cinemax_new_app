@@ -1,58 +1,103 @@
 # This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+# https://docs.fastlane.tools
 
 default_platform(:android)
 
 platform :android do
-  
-  desc "Build Dev Flavor and upload to Firebase App Distribution"
+
+  # ─────────────────────────────────────────────
+  # DEV — Build split APKs → Firebase Distribution
+  # ─────────────────────────────────────────────
+  desc "Build Dev Flavor (split APKs) and upload to Firebase App Distribution"
   lane :distribute_dev do
-    
-    # 1. Go to the project root and build the Flutter APK
-    #    Fastlane runs from android/fastlane/, so ../.. = project root
+
     Dir.chdir("../..") do
-      UI.message("🔨 Building Dev APK...")
-      sh("flutter build apk --flavor dev -t lib/main_dev.dart --split-per-abi")
+      UI.message("🔨 Building Dev APKs (split per ABI)...")
+      sh(
+        "flutter build apk " \
+        "--flavor dev " \
+        "-t lib/main_dev.dart " \
+        "--release " \
+        "--split-per-abi " \
+        "--obfuscate " \
+        "--split-debug-info=build/debug-info/dev"
+      )
     end
 
-    # 2. Upload the finished APK to Firebase
-    #    Upload arm64 variant only (~25MB vs ~70MB fat APK)
+    # Upload the arm64 APK (most common device architecture)
+    # You can also loop and upload all 3 if needed
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_APP_ID_DEV"],
       groups: "testers",
       release_notes: "New Dev Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../build/app/outputs/flutter-apk/app-dev-release-arm64-v8a.apk"
+      apk_path: "../../build/app/outputs/flutter-apk/app-dev-arm64-v8a-release.apk"
     )
+
+    # Save debug-info as a CI artifact (critical for decoding Dart crash traces)
+    UI.message("✅ Dev build complete. Remember to archive build/debug-info/dev as a CI artifact!")
   end
 
-  desc "Build Prod Flavor and upload to Firebase App Distribution"
+
+  # ─────────────────────────────────────────────
+  # PROD — Build AAB → Google Play Store
+  # ─────────────────────────────────────────────
+  desc "Build Prod Flavor (AAB) for Google Play Store"
   lane :distribute_prod do
-    
+
     Dir.chdir("../..") do
-      UI.message("🔨 Building Prod APK...")
-      sh("flutter build apk --flavor prod -t lib/main_prod.dart --split-per-abi")
+      UI.message("🔨 Building Prod AAB...")
+      sh(
+        "flutter build appbundle " \
+        "--flavor prod " \
+        "-t lib/main_prod.dart " \
+        "--release " \
+        "--obfuscate " \
+        "--split-debug-info=build/debug-info/prod"
+      )
+    end
+
+    # Upload AAB to Play Store (internal track)
+    upload_to_play_store(
+      track: "internal",
+      aab: "../../build/app/outputs/bundle/prodRelease/app-prod-release.aab",
+      json_key: ENV["GOOGLE_PLAY_JSON_KEY"],
+      package_name: ENV["PACKAGE_NAME"]
+    )
+
+    # Save debug-info as a CI artifact (critical for decoding Dart crash traces)
+    UI.message("✅ Prod build complete. Remember to archive build/debug-info/prod and build/app/outputs/mapping as CI artifacts!")
+  end
+
+
+  # ─────────────────────────────────────────────
+  # PROD → Firebase Distribution (for QA on prod flavor)
+  # ─────────────────────────────────────────────
+  desc "Build Prod Flavor (split APKs) and upload to Firebase App Distribution"
+  lane :distribute_prod_firebase do
+
+    Dir.chdir("../..") do
+      UI.message("🔨 Building Prod APKs (split per ABI)...")
+      sh(
+        "flutter build apk " \
+        "--flavor prod " \
+        "-t lib/main_prod.dart " \
+        "--release " \
+        "--split-per-abi " \
+        "--obfuscate " \
+        "--split-debug-info=build/debug-info/prod"
+      )
     end
 
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_APP_ID_PROD"],
       groups: "testers",
       release_notes: "New Prod Build from CI/CD 🚀",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../build/app/outputs/flutter-apk/app-prod-release-arm64-v8a.apk"
+      apk_path: "../../build/app/outputs/flutter-apk/app-prod-arm64-v8a-release.apk"
     )
+
+    UI.message("✅ Prod Firebase build complete. Remember to archive build/debug-info/prod as a CI artifact!")
   end
 
 end

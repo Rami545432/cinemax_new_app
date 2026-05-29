@@ -25,17 +25,16 @@ platform :android do
     Dir.chdir("../..") do
       UI.message("🔨 Building Dev APK...")
       sh("flutter build apk --flavor dev -t lib/main_dev.dart --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols")
-    end
 
-    # 2. Upload the finished APK to Firebase
-    #    apk_path is relative to the Fastlane execution dir (android/fastlane/)
-    firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
-      groups: "testers",
-      release_notes: "New Dev Build from CI/CD 🚀",
-      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../../build/app/outputs/flutter-apk/app-armeabi-v7a-dev-release.apk"
-    )
+      # 2. Upload the finished APK to Firebase
+      firebase_app_distribution(
+        app: ENV["FIREBASE_APP_ID"],
+        groups: "testers",
+        release_notes: "New Dev Build from CI/CD 🚀",
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        apk_path: "build/app/outputs/flutter-apk/app-armeabi-v7a-dev-release.apk"
+      )
+    end
   end
 
   desc "Build Prod Flavor and upload to Firebase App Distribution"
@@ -44,15 +43,15 @@ platform :android do
     Dir.chdir("../..") do
       UI.message("🔨 Building Prod APK...")
       sh("flutter build apk --flavor prod -t lib/main_prod.dart")
-    end
 
-    firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
-      groups: "testers",
-      release_notes: "New Prod Build from CI/CD 🚀",
-      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-      apk_path: "../../build/app/outputs/flutter-apk/app-prod-release.apk"
-    )
+      firebase_app_distribution(
+        app: ENV["FIREBASE_APP_ID"],
+        groups: "testers",
+        release_notes: "New Prod Build from CI/CD 🚀",
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        apk_path: "build/app/outputs/flutter-apk/app-prod-release.apk"
+      )
+    end
   end
 
 end

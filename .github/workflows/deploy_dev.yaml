@@ -85,7 +85,7 @@ jobs:
       # ── 9. Build APK & Upload to Firebase ───────────────────
       - name: 🚀 Build & Distribute via Fastlane
         env:
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_DEV_APP_ID }}
+          FIREBASE_DEV_APP_ID: ${{ secrets.FIREBASE_DEV_APP_ID }}
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
 
         working-directory: android

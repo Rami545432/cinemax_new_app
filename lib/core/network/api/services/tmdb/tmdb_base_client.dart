@@ -4,7 +4,7 @@ import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
 
 /// TMDB-specific API client extending the base client
 class TmdbBaseClient extends BaseApiClient {
-  TmdbBaseClient({required super.dio, required super.language})
+  TmdbBaseClient({required super.dioClient, required super.language})
     : super(baseUrl: TmdbConfig.baseUrl);
 
   @override

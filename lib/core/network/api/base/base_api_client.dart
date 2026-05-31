@@ -3,17 +3,19 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:movify/core/network/config/app_dio.dart';
+import 'package:movify/core/network/client/dio_client.dart';
 import 'package:movify/core/types/api_types.dart';
 
-/// Base API client that can be reused for any API provider
+/// Base API client that can be reused for any API provider.
+///
+/// Depends on [DioClient] (injected) instead of static singletons.
 abstract class BaseApiClient {
-  final Dio dio;
+  final DioClient dioClient;
   final String baseUrl;
   String _language;
 
   BaseApiClient({
-    required this.dio,
+    required this.dioClient,
     required this.baseUrl,
     required String language,
   }) : _language = language;
@@ -50,12 +52,8 @@ abstract class BaseApiClient {
     CancelToken? cancelToken,
     CachePolicy? overridePolicy,
   }) async {
-    final policy =
-        overridePolicy ??
-        (AppDio.hasConnectivity ? CachePolicy.request : CachePolicy.forceCache);
-
-    final requestOptions = await AppDio.cacheOptions.then(
-      (value) => value.copyWith(policy: policy).toOptions(),
+    final requestOptions = dioClient.cacheRequestOptions(
+      overridePolicy: overridePolicy,
     );
 
     final url = buildUrl(
@@ -64,13 +62,22 @@ abstract class BaseApiClient {
       defaultParams: defaultParams,
     );
 
-    final response = await dio.get<JsonMap>(
+    final response = await dioClient.dio.get<JsonMap>(
       url,
       cancelToken: cancelToken,
       options: requestOptions,
     );
-    log(url);
-    final data = response.data!;
+
+    final data = response.data;
+    if (data == null) {
+      throw DioException(
+        requestOptions: response.requestOptions,
+        response: response,
+        type: DioExceptionType.badResponse,
+        message: 'Response body was null',
+      );
+    }
+
     return data;
   }
 }

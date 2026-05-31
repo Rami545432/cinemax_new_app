@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:movify/constant.dart';
 import 'package:movify/core/network/api/services/tmdb/tmdb_base_client.dart';
 import 'package:movify/core/types/api_types.dart';
 import 'package:movify/features/discover/domain/entities/genre_filter.dart';
@@ -14,6 +15,7 @@ class TmdbContentApi {
   final TmdbBaseClient client;
 
   TmdbContentApi(this.client);
+  final int pageCacheCount = Constants.pageCacheCount;
 
   ApiResponse getItemsByKeyword({
     int page = 1,
@@ -28,7 +30,9 @@ class TmdbContentApi {
       'page': page.toString(),
     },
     cancelToken: cancelToken,
-    overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    overridePolicy: page <= pageCacheCount
+        ? CachePolicy.request
+        : CachePolicy.noCache,
   );
 
   ApiResponse getItemsByGenre({
@@ -62,7 +66,9 @@ class TmdbContentApi {
         'with_genres': params.genreId?.toString(),
       },
       cancelToken: cancelToken,
-      overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+      overridePolicy: page <= pageCacheCount
+          ? CachePolicy.request
+          : CachePolicy.noCache,
     );
   }
 
@@ -74,7 +80,9 @@ class TmdbContentApi {
     endPoint,
     queryParams: {'page': page.toString()},
     cancelToken: cancelToken,
-    overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    overridePolicy: page <= pageCacheCount
+        ? CachePolicy.request
+        : CachePolicy.noCache,
   );
 
   ApiResponse getTvShows({
@@ -85,7 +93,9 @@ class TmdbContentApi {
     endPoint,
     queryParams: {'page': page.toString()},
     cancelToken: cancelToken,
-    overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    overridePolicy: page <= pageCacheCount
+        ? CachePolicy.request
+        : CachePolicy.noCache,
   );
 
   ApiResponse getItemCompanies({
@@ -97,6 +107,8 @@ class TmdbContentApi {
     'discover/$type',
     queryParams: {'with_companies': companyId, 'page': page.toString()},
     cancelToken: cancelToken,
-    overridePolicy: page <= 5 ? CachePolicy.request : CachePolicy.noCache,
+    overridePolicy: page <= pageCacheCount
+        ? CachePolicy.request
+        : CachePolicy.noCache,
   );
 }

@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movify/constants/assets.dart';
 import 'package:movify/core/animations/animated_button.dart';
-import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
+import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
 import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/core/utils/app_styles.dart';
 

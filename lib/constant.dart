@@ -14,4 +14,5 @@ class Constants {
     mainAxisSpacing: 20,
   );
   static const String bundleIdentifier = 'com.example.movify';
+  static const int pageCacheCount = 3;
 }

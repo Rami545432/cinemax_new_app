@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
+import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
 import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:movify/features/details/domain/use_cases/details_params.dart';

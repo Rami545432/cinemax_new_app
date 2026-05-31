@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_paths.dart';
 import 'package:movify/features/auth/presentation/cubits/login_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/login_state.dart';
 import 'package:movify/features/auth/presentation/views/login_view_body.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movify/core/routing/route_paths.dart';
 import 'package:movify/shared/presentation/utils/show_snack_bar.dart';
 
 class LoginView extends StatelessWidget {

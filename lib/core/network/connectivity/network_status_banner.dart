@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
+import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/l10n/app_localizations.dart';
 

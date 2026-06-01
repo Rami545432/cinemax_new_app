@@ -9,6 +9,7 @@ class AppTheme {
   static ThemeData light(Color colorScheme) => ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
+    cardColor: Colors.grey.shade200,
     colorScheme: ColorScheme.light(
       primary: Colors.white,
 
@@ -24,10 +25,12 @@ class AppTheme {
   static ThemeData dark(Color colorScheme) => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
+    cardColor: Colors.grey.shade900,
     scaffoldBackgroundColor: colorScheme,
     colorScheme: ColorScheme.dark(
       primary: colorScheme,
       secondary: colorScheme,
+
       primaryContainer: AppPrimaryColors.blueAccent,
       onPrimaryContainer: Colors.white,
       onInverseSurface: Colors.white,

@@ -1,5 +1,4 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/network/utils/safe_emit_state.dart';
 import 'package:movify/features/search/domain/entities/search_history_entity.dart';
 import 'package:movify/features/search/domain/use_cases/add_to_history_use_case.dart';
@@ -8,7 +7,6 @@ import 'package:movify/features/search/domain/use_cases/delete_from_search_histo
 import 'package:movify/features/search/domain/use_cases/get_search_history_use_case.dart';
 import 'package:movify/features/search/presentation/cubits/search_history_states.dart';
 
-@injectable
 class SearchHistoryCubit extends Cubit<SearchHistoryState> {
   final GetSearchHistoryUseCase getSearchHistoryUseCase;
   final AddSearchHistoryUseCase addToHistoryUseCase;

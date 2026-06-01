@@ -9,6 +9,7 @@ void main() async {
     tmdbApiKey: env_dev.Env.tmdbApiKey,
     baseUrl: env_dev.Env.baseUrl,
     geminiApiKey: env_dev.Env.geminiApiKey,
+
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
 

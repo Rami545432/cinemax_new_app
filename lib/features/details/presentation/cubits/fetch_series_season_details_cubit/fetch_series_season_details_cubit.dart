@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/network/utils/safe_emit_state.dart';
 import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:movify/features/details/domain/use_cases/tv/fetch_series_season_details.dart';
 import 'package:movify/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_state.dart';
 
-@injectable
 class FetchSeriesSeasonDetailsCubit
     extends Cubit<FetchSeriesSeasonDetailsState> {
   FetchSeriesSeasonDetailsCubit(this.fetchSeriesSeasonDetails)

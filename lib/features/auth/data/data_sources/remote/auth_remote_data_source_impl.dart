@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/expections.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:movify/features/auth/data/models/user_model.dart';
 
-@LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn;
@@ -19,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel?> getCurrentUser() async {
     try {
-      // Await authStateChanges().first to ensure the Firebase SDK has 
+      // Await authStateChanges().first to ensure the Firebase SDK has
       // finished restoring the session from local storage on app boot.
       // This prevents the race condition where currentUser is null immediately after initializeApp.
       final user = await firebaseAuth.authStateChanges().first;

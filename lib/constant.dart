@@ -13,4 +13,6 @@ class Constants {
     crossAxisSpacing: 10,
     mainAxisSpacing: 20,
   );
+  static const String bundleIdentifier = 'com.example.movify';
+  static const int pageCacheCount = 3;
 }

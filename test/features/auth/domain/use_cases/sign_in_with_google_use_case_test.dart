@@ -37,7 +37,7 @@ void main() {
     final result = await useCase();
 
     // Assert — check what came back
-    // ignore: inference_failure_on_instance_creation
+    // ignore: strict_raw_type, inference_failure_on_instance_creation
     expect(result, isA<Right>());
   });
 
@@ -52,7 +52,7 @@ void main() {
     final result = await useCase();
 
     // Assert — check what came back
-    // ignore: inference_failure_on_instance_creation
+    // ignore: strict_raw_type, inference_failure_on_instance_creation
     expect(result, isA<Left>());
   });
 }

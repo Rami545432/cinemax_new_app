@@ -1,4 +1,3 @@
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/pagination/domain/entites/page_result.dart';
 import 'package:movify/features/details/data/data_sources/remote/series/remote_series_details_data_source.dart';
@@ -7,7 +6,6 @@ import 'package:movify/features/details/data/models/series_season_details_model.
 import 'package:movify/features/home/data/models/series_model.dart';
 import 'package:movify/shared/data/mappers/map_paged_response.dart';
 
-@LazySingleton(as: RemoteSeriesDetailsDataSource)
 class RemoteSeriesDetailsDataSourceImpl
     implements RemoteSeriesDetailsDataSource {
   final ApiService apiService;

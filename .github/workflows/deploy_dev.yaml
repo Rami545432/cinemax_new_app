@@ -1,46 +1,92 @@
-name: Deploy Dev Flavor to Firebase
+name: 🚀 Deploy Dev → Firebase App Distribution
 
-# 1. Trigger this workflow ONLY when code is pushed to the 'dev' branch
+# ──────────────────────────────────────────────────────────────
+# Triggers on push to dev (and your testing branch)
+# ──────────────────────────────────────────────────────────────
 on:
   push:
     branches:
       - dev
+      - upgrade_Gradle_fixing_pipeline
+
+# Prevent duplicate runs on the same branch
+concurrency:
+  group: deploy-dev-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  distribute:
+  build-and-distribute:
+    name: Build Dev APK & Upload
     runs-on: ubuntu-latest
 
     steps:
+      # ── 1. Checkout ─────────────────────────────────────────
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      - name: ☕ Setup Java
-        uses: actions/setup-java@v3
+      # ── 2. Java (for Android/Gradle) ────────────────────────
+      - name: ☕ Setup Java 17
+        uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          distribution: "zulu"
+          java-version: "17"
+          cache: "gradle"
 
+      # ── 3. Flutter ──────────────────────────────────────────
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
+          cache: true
 
-      - name: 📦 Install Flutter Dependencies
+      # ── 4. Flutter dependencies ─────────────────────────────
+      - name: 📦 Install Flutter dependencies
         run: flutter pub get
 
+      # ── 5. Create .env files from GitHub Secrets ────────────
+      #    envied reads these at build_runner time, then they
+      #    get baked (obfuscated) into the .g.dart files.
+      - name: 🔐 Create .env files
+        run: |
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.dev
+          echo "BASE_URL=${{ secrets.BASE_URL_DEV }}" >> .env.dev
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.dev
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" > .env.prod
+          echo "BASE_URL=${{ secrets.BASE_URL_PROD }}" >> .env.prod
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env.prod
+          # Also create .env (listed as a Flutter asset in pubspec.yaml)
+          cp .env.dev .env
+      - name: 🕵️ Debug .env files
+        run: |
+          echo "--- DEV ENV ---"
+          cat .env.dev
+          echo "--- PROD ENV ---"
+          cat .env.prod
+      - name: ⚙️ Generate envied .g.dart files only
+        run: |
+          dart run build_runner build --build-filter="lib/config/env/*.g.dart"
+          # Restore any other .g.dart files that build_runner modified.
+          # The envied files (env.dev.g.dart, env.prod.g.dart) are git-ignored,
+          # so git checkout won't touch them — only they survive.
+          git checkout -- .
+
+      # ── 7. Static analysis ──────────────────────────────────
+      - name: 🔍 Flutter analyze
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      # ── 8. Ruby & Fastlane ──────────────────────────────────
       - name: 💎 Setup Ruby & Fastlane
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: "3.2"
           bundler-cache: true
-      
-      # We must install the bundler to get the Firebase plugin we added earlier
-      - name: Install Fastlane Plugins
-        run: cd android && bundle install
+          working-directory: android
 
-      - name: 🚀 Build and Distribute via Fastlane
-        # We pass the GitHub Secrets into the environment so Fastlane can use them
+      # ── 9. Build APK & Upload to Firebase ───────────────────
+      - name: 🚀 Build & Distribute via Fastlane
         env:
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_DEV_APP_ID: ${{ secrets.FIREBASE_DEV_APP_ID }}
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-        run: cd android && fastlane distribute_dev
+
+        working-directory: android
+        run: bundle exec fastlane distribute_dev

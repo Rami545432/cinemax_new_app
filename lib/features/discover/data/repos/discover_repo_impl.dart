@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/network/api/services/safe_api_calls.dart';
 import 'package:movify/core/pagination/domain/entites/page_result.dart';
@@ -9,7 +8,6 @@ import 'package:movify/features/discover/domain/repos/discover_repo.dart';
 import 'package:movify/shared/domain/entites/movie_entity.dart';
 import 'package:movify/shared/domain/entites/series_entity.dart';
 
-@LazySingleton(as: DiscoverRepo)
 class DiscoverRepoImpl implements DiscoverRepo {
   final DiscoverRemoteDataSource remoteDataSource;
   DiscoverRepoImpl({required this.remoteDataSource});

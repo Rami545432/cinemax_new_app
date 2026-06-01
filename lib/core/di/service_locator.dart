@@ -2,18 +2,17 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:movify/config/env/app_config.dart';
 import 'package:movify/core/auth/auth_status_provider.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
-import 'package:movify/core/network/config/app_dio.dart';
-import 'package:movify/core/network/config/network_module.dart';
-import 'package:movify/core/network/presentation/cubit/connectivity_cubit.dart';
+import 'package:movify/core/network/client/dio_client.dart';
+import 'package:movify/core/network/client/dio_factory.dart';
+import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
 import 'package:movify/core/routing/app_router.dart';
 import 'package:movify/core/theme/cubit/theme_cubit.dart';
 import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source.dart';
@@ -136,13 +135,22 @@ Future<void> _registerCoreSync() async {
   if (!getIt.isRegistered<LanguageCubit>()) {
     getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
-  if (!getIt.isRegistered<Dio>()) {
-    getIt.registerLazySingleton<Dio>(() => NetworkModule.provideDio());
+
+  // Build DioClient with all interceptors and cache initialized.
+  // Awaited — no race condition.
+  if (!getIt.isRegistered<DioClient>()) {
+    final dioClient = await DioFactory.create(
+      tmdbApiKey: getIt<AppConfig>().tmdbApiKey,
+      networkInfo: getIt<ConnectivityCubit>(),
+      firebaseAuth: FirebaseAuth.instance,
+    );
+    getIt.registerSingleton<DioClient>(dioClient);
   }
+
   if (!getIt.isRegistered<ApiService>()) {
     getIt.registerLazySingleton<ApiService>(
       () => ApiService(
-        dio: getIt<Dio>(),
+        dioClient: getIt<DioClient>(),
         language: getIt<LanguageCubit>().state.locale.languageCode,
       ),
     );
@@ -152,7 +160,6 @@ Future<void> _registerCoreSync() async {
       () => FirebaseFirestore.instance,
     );
   }
-  AppDio.initialize(connectivityCubit: getIt<ConnectivityCubit>());
 }
 
 // ── 2. External ───────────────────────────────────────────────────────────
@@ -165,9 +172,6 @@ void _registerExternalDependencies() {
     getIt.registerLazySingleton<GoogleSignIn>(
       () => GoogleSignIn(scopes: ['email', 'profile']),
     );
-  }
-  if (!getIt.isRegistered<FacebookAuth>()) {
-    getIt.registerLazySingleton<FacebookAuth>(() => FacebookAuth.instance);
   }
 }
 

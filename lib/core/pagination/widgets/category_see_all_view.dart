@@ -70,7 +70,7 @@ class CategorySeeAllView<
               actions: [
                 if (genreId != null)
                   IconButton(
-                    icon: const Icon(FontAwesomeIcons.listUl),
+                    icon: const FaIcon(FontAwesomeIcons.listUl),
                     onPressed: () {},
                   ),
               ],

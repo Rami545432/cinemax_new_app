@@ -1,10 +1,8 @@
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/storage/hive/hive_service.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:movify/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
 import 'package:movify/features/favorite/data/models/favorite_model.dart';
 
-@LazySingleton(as: LocalFavoriteDataSource)
 class LocalFavoriteDataSourceImpl implements LocalFavoriteDataSource {
   String _key(int specificId, ContentType contentType, String userId) =>
       '${specificId}_${contentType.name}_$userId';

@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/expections.dart' as custom_exceptions;
 import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:movify/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
 import 'package:movify/features/favorite/data/models/favorite_model.dart';
 import 'package:movify/features/favorite/data/models/favorite_model_extenion.dart';
 
-@LazySingleton(as: RemoteFavoriteDataSource)
 class RemoteFavoriteDataSourceImpl implements RemoteFavoriteDataSource {
   final FirebaseFirestore firestore;
 

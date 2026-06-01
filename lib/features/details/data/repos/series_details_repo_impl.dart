@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/pagination/domain/entites/page_result.dart';
 import 'package:movify/core/types/domain_types.dart';
@@ -10,7 +9,6 @@ import 'package:movify/features/details/domain/repo/series_details_repo.dart';
 import 'package:movify/shared/data/cache/in_memory_cache.dart';
 import 'package:movify/shared/domain/entites/series_entity.dart';
 
-@LazySingleton(as: SeriesDetailsRepo)
 class SeriesDetailsRepoImpl implements SeriesDetailsRepo {
   final RemoteSeriesDetailsDataSource remoteSeriesDetailsDataSource;
   SeriesDetailsRepoImpl({required this.remoteSeriesDetailsDataSource});

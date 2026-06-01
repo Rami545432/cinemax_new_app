@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/expections.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
@@ -10,7 +9,6 @@ import 'package:movify/features/favorite/data/models/favorite_model.dart';
 import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:movify/features/favorite/domain/repos/favorite_repo.dart';
 
-@LazySingleton(as: FavoriteRepo)
 class FavoritesRepositoryImpl implements FavoriteRepo {
   final LocalFavoriteDataSource localDataSource;
   final RemoteFavoriteDataSource remoteDataSource;

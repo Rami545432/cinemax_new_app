@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/domain/use_cases/no_params.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/pagination/api/config/pagintaion_config.dart';
@@ -9,7 +8,6 @@ import 'package:movify/features/home/domian/use_cases/get_series_use_case.dart';
 import 'package:movify/features/home/presentation/enums/seires_category.dart';
 import 'package:movify/shared/domain/entites/series_entity.dart';
 
-@lazySingleton
 class SeriesBloc
     extends CategoryPaginationBloc<SeriesCategory, SeriesEntity, NoParams> {
   final GetSeriesUseCase getSeriesUseCase;

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_bloc.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_state.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 abstract class BaseHomeScreen<
   B extends CategoryPaginationBloc<CAT, T, P>,
@@ -20,6 +21,8 @@ abstract class BaseHomeScreen<
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<B>();
+    final width = MediaQuery.sizeOf(context).width;
+    final isMobile = width < SizeConfig.tablet;
 
     return Scaffold(
       body: RefreshIndicator(
@@ -27,7 +30,12 @@ abstract class BaseHomeScreen<
         onRefresh: () => onRefresh(bloc),
         child: ListView(
           children: categories
-              .map((cat) => buildCategoryRow(context, bloc, cat))
+              .map(
+                (cat) => Padding(
+                  padding: EdgeInsets.only(top: isMobile ? 16 : 64),
+                  child: buildCategoryRow(context, bloc, cat),
+                ),
+              )
               .toList(),
         ),
       ),

@@ -56,7 +56,7 @@ class MainVerticalCard extends StatelessWidget {
                       title: category,
                     ),
             ),
-            CardTitle(title: cardData.title),
+            Flexible(child: CardTitle(title: cardData.title)),
           ],
         ),
       ),

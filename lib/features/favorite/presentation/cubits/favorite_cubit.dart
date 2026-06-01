@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/auth/auth_status_provider.dart';
 import 'package:movify/core/network/utils/safe_emit_state.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
@@ -18,7 +17,6 @@ import 'package:movify/features/favorite/presentation/cubits/favorite_state.dart
 ///
 /// All reads from Hive. Firestore is fire-and-forget backup.
 /// Zero Firestore reads during normal usage.
-@lazySingleton
 class FavoriteCubit extends Cubit<FavoriteState> {
   final MergeGuestFavoritesUseCase mergeGuestFavoritesUseCase;
   final PullCloudFavoritesUseCase pullCloudFavoritesUseCase;

@@ -1,7 +1,6 @@
 // lib/features/search/bloc/search_bloc.dart
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/utils/sorting_methods.dart';
 import 'package:movify/features/search/data/models/search_result.dart';
@@ -13,7 +12,6 @@ import 'package:movify/shared/domain/entites/movie_entity.dart';
 import 'package:movify/shared/domain/entites/series_entity.dart';
 import 'package:stream_transform/stream_transform.dart'; // for debounce
 
-@injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchMovieUseCase _searchMovieUseCase;
   final SearchSeriesUseCase _searchSeriesUseCase;

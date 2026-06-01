@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/domain/use_cases/no_params.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/pagination/api/config/pagintaion_config.dart';
@@ -11,7 +10,6 @@ import 'package:movify/features/discover/presentation/core/enums/type_enum.dart'
 import 'package:movify/features/home/presentation/extensions/entity_card_extentions.dart';
 import 'package:movify/shared/presentation/models/card_display_model.dart';
 
-@injectable
 class FetchItemsByKeywordsBloc
     extends CategoryPaginationBloc<TypeEnum, CardDisplayModel, NoParams> {
   final FetchMoviesByKeywordsUseCase fetchMoviesByKeywordsUseCase;

@@ -1,9 +1,7 @@
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/storage/hive/hive_service.dart';
 import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source.dart';
 import 'package:movify/features/search/data/models/search_history_model.dart';
 
-@LazySingleton(as: LocalSearchHistoryDataSource)
 class LocalSearchDataSourceImpl implements LocalSearchHistoryDataSource {
   @override
   Future<void> addToSearchHistory(SearchHistoryModel searchHistory) async {

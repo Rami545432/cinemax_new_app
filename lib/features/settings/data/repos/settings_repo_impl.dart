@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/features/settings/data/data_sources/local/settings_local_data_source.dart';
 import 'package:movify/features/settings/domain/repos/settings_repo.dart';
 
-@LazySingleton(as: SettingsRepo)
 class SettingsRepoImpl implements SettingsRepo {
   final SettingsLocalDataSource localDataSource;
 

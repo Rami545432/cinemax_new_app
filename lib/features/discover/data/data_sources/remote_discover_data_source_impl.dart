@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/pagination/domain/entites/page_result.dart';
 import 'package:movify/features/discover/data/data_sources/remote_discover_data_source.dart';
@@ -10,7 +9,6 @@ import 'package:movify/features/home/data/models/movie_model.dart';
 import 'package:movify/features/home/data/models/series_model.dart';
 import 'package:movify/shared/data/mappers/map_paged_response.dart';
 
-@LazySingleton(as: DiscoverRemoteDataSource)
 class DiscoverRemoteDataSourceImpl implements DiscoverRemoteDataSource {
   final ApiService apiService;
   DiscoverRemoteDataSourceImpl({required this.apiService});

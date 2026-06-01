@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/features/Bot/models/chat_message_model.dart';
 import 'package:movify/features/Bot/presentation/blocs/chat_event.dart';
 import 'package:movify/features/Bot/presentation/blocs/chat_states.dart';
 import 'package:movify/features/Bot/services/gemini_chat_service.dart';
 
-@injectable
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final GeminiChatService _chatService;
   final List<ChatMessage> _messages = [];

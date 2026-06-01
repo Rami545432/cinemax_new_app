@@ -28,6 +28,7 @@ void main() {
       final result = await useCase(NoParams());
 
       // Assert
+      // ignore: inference_failure_on_instance_creation
       expect(result, const Right(null));
       verify(() => mockAuthRepo.disableGuestMode()).called(1);
       verifyNoMoreInteractions(mockAuthRepo);

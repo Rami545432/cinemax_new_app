@@ -2,12 +2,10 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/language/presentation/cubits/language_state.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 
-@lazySingleton
 class LanguageCubit extends HydratedCubit<LanguageState>
     with WidgetsBindingObserver {
   LanguageCubit() : super(_getInitialState()) {

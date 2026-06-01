@@ -11,6 +11,7 @@ class ReviewListViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) => ListView.separated(
     separatorBuilder: (context, index) => const SizedBox(height: 10),
     itemCount: reviews.results?.length ?? 0,
+
     itemBuilder: (context, index) {
       final review = reviews.results?[index];
       return SizedBox(child: ReviewListTile(review: review));

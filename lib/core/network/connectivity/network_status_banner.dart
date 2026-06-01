@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/network/connectivity/banner_base.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
-import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/l10n/app_localizations.dart';
 
 class NetworkStatusBanner extends StatefulWidget {
@@ -31,11 +31,9 @@ class _NetworkStatusBannerState extends State<NetworkStatusBanner> {
     child: BlocConsumer<ConnectivityCubit, NetworkStatus>(
       listener: (context, connectivityState) {
         if (connectivityState == NetworkStatus.connected && _wasOffline) {
-          log('🌐 📶 BACK ONLINE! Showing banner...');
           _showOnlineBannerNow();
           _wasOffline = false;
         } else if (connectivityState == NetworkStatus.disconnected) {
-          log('🌐 📵 OFFLINE! Showing banner...');
           _hideTimer?.cancel();
           setState(() {
             _showOnlineBanner = false; // force hide online banner
@@ -82,57 +80,22 @@ class _NetworkStatusBannerState extends State<NetworkStatusBanner> {
     setState(() => _showOnlineBanner = true);
 
     _hideTimer?.cancel();
-    _hideTimer = Timer(const Duration(milliseconds: 1200), () {
+    _hideTimer = Timer(const Duration(milliseconds: 1500), () {
       if (mounted) {
-        log('🌐 ✅ Hiding online banner');
         setState(() => _showOnlineBanner = false);
       }
     });
   }
 
-  Widget _buildOnlineBanner(BuildContext context) => _BannerBase(
-    color: Colors.green.shade700,
-    icon: Icons.wifi,
+  Widget _buildOnlineBanner(BuildContext context) => BannerBase(
+    color: AppSecondryColors.green,
+    icon: Icons.wifi_rounded,
     text: AppLocalizations.of(context)!.backOnline,
   );
 
-  Widget _buildOfflineBanner(BuildContext context) => _BannerBase(
-    color: Colors.red.shade700,
+  Widget _buildOfflineBanner(BuildContext context) => BannerBase(
+    color: AppSecondryColors.red,
     icon: Icons.wifi_off_rounded,
     text: AppLocalizations.of(context)!.noInternetConnection,
-  );
-}
-
-class _BannerBase extends StatelessWidget {
-  final Color color;
-  final IconData icon;
-  final String text;
-
-  const _BannerBase({
-    required this.color,
-    required this.icon,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) => SafeArea(
-    child: Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: BoxDecoration(color: color),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: Colors.white, size: 20),
-          const SizedBox(width: 8),
-          Text(
-            text,
-            style: AppStyles.textStyle18(
-              context,
-            ).copyWith(color: Colors.white, decoration: TextDecoration.none),
-          ),
-        ],
-      ),
-    ),
   );
 }

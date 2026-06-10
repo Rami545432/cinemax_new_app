@@ -46,24 +46,19 @@ class _SuggestedSearchGridBuilderState
         itemCount: widget.results.length,
         itemBuilder: (context, index) {
           final result = widget.results[index];
-          return _buildAnimatedItem(result, index);
+          final isFirstSearch = _animationController.isFirstSearch;
+          final shouldAnimate =
+              isFirstSearch || _animationController.isNewItem(result);
+          return AnimatedSearchResultItem(
+            result: result,
+            index: index,
+
+            shouldAnimate: shouldAnimate,
+            isFirstSearch: isFirstSearch,
+          );
         },
         gridDelegate: CustomGridConfig.getDelegate(context),
       ),
     ),
   );
-
-  Widget _buildAnimatedItem(SearchResult result, int index) {
-    final isFirstSearch = _animationController.isFirstSearch;
-    final shouldAnimate =
-        isFirstSearch || _animationController.isNewItem(result);
-
-    return AnimatedSearchResultItem(
-      result: result,
-      index: index,
-
-      shouldAnimate: shouldAnimate,
-      isFirstSearch: isFirstSearch,
-    );
-  }
 }

@@ -10,21 +10,35 @@ class ActorListTile extends StatelessWidget {
   final Cast actorList;
 
   @override
-  Widget build(BuildContext context) => ListTile(
-    leading: actorList.profilePath != null
-        ? CircleAvatar(
-            backgroundImage: CachedNetworkImageProvider(
-              tmdbImageSize(TmdbImageSize.w185, actorList.profilePath ?? ''),
-            ),
-          )
-        : const CircleAvatar(child: Icon(Icons.person)),
-    title: Text(
-      actorList.name ?? 'Unknown',
-      style: AppStyles.textStyle16(context),
-    ),
-    subtitle: Text(
-      actorList.character ?? 'Unknown Character',
-      style: AppStyles.textStyle14(context),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Row(
+      children: [
+        actorList.profilePath != null
+            ? CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(
+                  tmdbImageSize(TmdbImageSize.w92, actorList.profilePath ?? ''),
+                ),
+              )
+            : const CircleAvatar(child: Icon(Icons.person)),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                actorList.name ?? 'Unknown',
+                style: AppStyles.textStyle16(context),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                actorList.character ?? 'Unknown Character',
+                style: AppStyles.textStyle14(context),
+              ),
+            ],
+          ),
+        ),
+      ],
     ),
   );
 }

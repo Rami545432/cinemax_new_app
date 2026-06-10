@@ -55,12 +55,45 @@ class DetailsBody extends HookWidget {
         .toList();
     final tabs = contentType == ContentType.movies ? movieTabs : seriesTabs;
 
-    // Create a ValueNotifier to track collapse state
     final isCollapsedNotifier = useMemoized(() => ValueNotifier<bool>(false));
+    final hasAnimated = useState(false);
+
+    useEffect(() {
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        if (context.mounted) {
+          hasAnimated.value = true;
+        }
+      });
+      return null;
+    }, []);
 
     // Calculate the collapse threshold based on the expanded height
-    final collapseThreshold =
-        MediaQuery.sizeOf(context).height * 0.7 - kToolbarHeight;
+    final expandedHeight = MediaQuery.sizeOf(context).height * 0.7;
+    final collapseThreshold = expandedHeight - kToolbarHeight;
+
+    // Cache the sliver app bar so NestedScrollView's headerSliverBuilder
+    // doesn't recreate the heavy background widget on every scroll frame.
+    final sliverAppBar = useMemoized(
+      () => DetailsSliverAppBar(
+        favorite: FavoriteMapper.fromNavigationData(navigationData),
+        title: title,
+        isCollapsedNotifier: isCollapsedNotifier,
+        expandedHeight: expandedHeight,
+        backgroundWidget: StackedDetailsBackGorund(
+          backGroundImage: navigationData.backdropImage,
+          posterImage: navigationData.posterImage,
+          title: title,
+          date: date,
+          rating: rating,
+          heroTag: heroTag,
+          timeBlocSelector: const TimeBlocSelector(),
+          hasAnimated: hasAnimated.value,
+          onAnimationComplete: () => hasAnimated.value = true,
+          memCacheWidth: 1800,
+        ),
+      ),
+      [navigationData, isCollapsedNotifier, expandedHeight, hasAnimated.value],
+    );
 
     return DefaultTabController(
       length: tabs.length,
@@ -79,21 +112,7 @@ class DetailsBody extends HookWidget {
         },
         child: NestedScrollView(
           headerSliverBuilder: (_, _) => [
-            DetailsSliverAppBar(
-              favorite: FavoriteMapper.fromNavigationData(navigationData),
-              title: title,
-              isCollapsedNotifier: isCollapsedNotifier,
-              expandedHeight: MediaQuery.sizeOf(context).height * 0.7,
-              backgroundWidget: StackedDetailsBackGorund(
-                backGroundImage: navigationData.backdropImage,
-                posterImage: navigationData.posterImage,
-                title: title,
-                date: date,
-                rating: rating,
-                heroTag: heroTag,
-                timeBlocSelector: const TimeBlocSelector(),
-              ),
-            ),
+            sliverAppBar,
             CustomTabBar(tabs: tabs),
           ],
           body: Padding(

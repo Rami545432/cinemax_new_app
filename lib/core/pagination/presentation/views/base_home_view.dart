@@ -28,15 +28,15 @@ abstract class BaseHomeScreen<
       body: RefreshIndicator(
         color: Colors.white,
         onRefresh: () => onRefresh(bloc),
-        child: ListView(
-          children: categories
-              .map(
-                (cat) => Padding(
-                  padding: EdgeInsets.only(top: isMobile ? 16 : 64),
-                  child: buildCategoryRow(context, bloc, cat),
-                ),
-              )
-              .toList(),
+        child: ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final cat = categories[index];
+            return Padding(
+              padding: EdgeInsets.only(top: isMobile ? 16 : 64),
+              child: buildCategoryRow(context, bloc, cat),
+            );
+          },
         ),
       ),
     );

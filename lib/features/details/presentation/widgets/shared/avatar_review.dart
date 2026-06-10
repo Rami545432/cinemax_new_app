@@ -33,7 +33,7 @@ class ReviewAvatar extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.5),
         child: avatarUrl != null && avatarUrl!.isNotEmpty
             ? CachedNetworkImage(
-                imageUrl: tmdbImageSize(TmdbImageSize.w185, avatarUrl!),
+                imageUrl: tmdbImageSize(TmdbImageSize.w154, avatarUrl!),
                 fit: BoxFit.cover,
                 placeholder: (context, url) => ColoredBox(
                   color: theme.scaffoldBackgroundColor,

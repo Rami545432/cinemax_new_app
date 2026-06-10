@@ -30,18 +30,22 @@ class AuthRepoImpl implements AuthRepo, AuthStatusProvider {
     final isGuest = await localDataSource.getGuestMode();
     debugPrint('🔍 currentAuthStatus → isGuest: $isGuest');
 
-    final user = await remoteDataSource.getCurrentUser();
-    debugPrint('🔍 currentAuthStatus → user: $user');
-
+    // ✅ Return early — no Firestore call for guest
     if (isGuest) {
       return const AuthStatusEvent(status: AuthStatus.guest);
     }
+
+    // Only hits Firestore when NOT guest
+    final user = await remoteDataSource.getCurrentUser();
+    debugPrint('🔍 currentAuthStatus → user: $user');
+
     if (user != null) {
       return AuthStatusEvent(
         status: AuthStatus.authenticated,
         userId: user.toEntity().uid,
       );
     }
+
     return const AuthStatusEvent(status: AuthStatus.unauthenticated);
   }
 

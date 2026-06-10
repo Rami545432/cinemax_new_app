@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
@@ -42,10 +44,7 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
   }
 
   void _startSwipe(int direction) {
-    if (widget.cardModel.length < 3) {
-      return;
-    }
-    if (_isAnimating) {
+    if (widget.cardModel.length < 3 || _isAnimating) {
       return;
     }
 
@@ -57,6 +56,7 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
       }
 
       setState(() {
+        _controller.value = 0;
         if (_direction == 1) {
           current = (current + 1) % widget.cardModel.length;
         } else if (_direction == -1) {
@@ -65,19 +65,11 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
         }
         _direction = 0;
       });
-
-      _controller.value = 0;
     });
   }
 
-  int _index(int offset) {
-    final length = widget.cardModel.length;
-    return (current + offset + length) % length;
-  }
-
   void _openDetails() {
-    final centerIndex = _index(0);
-    final center = widget.cardModel[centerIndex];
+    final center = widget.cardModel[current];
 
     final routeName = center.contentType == ContentType.movies
         ? RouteName.movieDetail
@@ -92,6 +84,7 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
 
   @override
   Widget build(BuildContext context) {
+    log('Stacked Builded ');
     if (widget.cardModel.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -122,7 +115,6 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
         controller: _controller,
         buildMainCard: (model) => MainCard(cardModel: model),
         buildMiniCard: (img) => MiniCard(image: img),
-        // buildMediumCard: (img) => MediumCard(image: img), // optional
       ),
     );
   }

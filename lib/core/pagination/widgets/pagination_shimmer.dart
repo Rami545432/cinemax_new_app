@@ -16,27 +16,31 @@ class PaginationShimmer extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => isHorizontal
-      ? SizedBox(
-          height: height,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: itemCount,
-            itemBuilder: (_, _) => Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: _ShimmerBox(width: itemWidth, height: height),
+  Widget build(BuildContext context) {
+    final list = isHorizontal
+        ? SizedBox(
+            height: height,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: itemCount,
+              itemBuilder: (_, _) => Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: _ShimmerBox(width: itemWidth, height: height),
+              ),
             ),
-          ),
-        )
-      : ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: itemCount,
-          itemBuilder: (_, _) => const Padding(
-            padding: EdgeInsets.only(bottom: 12),
-            child: _ShimmerBox(width: double.infinity, height: 100),
-          ),
-        );
+          )
+        : ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: itemCount,
+            itemBuilder: (_, _) => const Padding(
+              padding: EdgeInsets.only(bottom: 12),
+              child: _ShimmerBox(width: double.infinity, height: 100),
+            ),
+          );
+
+    return ShimmerLoading(child: list);
+  }
 }
 
 class _ShimmerBox extends StatelessWidget {
@@ -46,14 +50,12 @@ class _ShimmerBox extends StatelessWidget {
   const _ShimmerBox({required this.width, required this.height});
 
   @override
-  Widget build(BuildContext context) => ShimmerLoading(
-    child: Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
-      ),
-    ),
-  );
+  Widget build(BuildContext context) => Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(12),
+        ),
+      );
 }

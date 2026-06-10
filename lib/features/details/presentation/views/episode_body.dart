@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/features/details/domain/value_objects/episode.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
@@ -67,11 +68,12 @@ class EpisodeBody extends HookWidget {
       [allEpisodes.length],
     );
 
-    return NestedScrollView(
-      controller: scrollCollapse.scrollController,
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+    final expandedHeight = MediaQuery.sizeOf(context).height * 0.3;
+
+    final headerSlivers = useMemoized(
+      () => [
         DetailsSliverAppBar(
-          expandedHeight: MediaQuery.sizeOf(context).height * 0.3,
+          expandedHeight: expandedHeight,
           isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
           title: currentEpisode.name ?? 'Episode $episodeNumber',
           favorite: FavoriteMapper.fromNavigationData(
@@ -90,6 +92,7 @@ class EpisodeBody extends HookWidget {
           backgroundWidget: OpcaityDetailsImage(
             detailsBackGroundImage: currentEpisode.stillPath,
             defaultDetailsBackGroundImage: seasonPosterPath,
+            imageSize: TmdbImageSize.w300,
           ),
         ),
         SliverToBoxAdapter(
@@ -114,6 +117,18 @@ class EpisodeBody extends HookWidget {
         ),
         CustomTabBar(controller: tabControllerResult.controller, tabs: tabs),
       ],
+      [
+        currentEpisode,
+        scrollCollapse.isCollapsedNotifier,
+        expandedHeight,
+        tabControllerResult.controller,
+        tabs,
+      ],
+    );
+
+    return NestedScrollView(
+      controller: scrollCollapse.scrollController,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => headerSlivers,
       body: TabBarView(
         controller: tabControllerResult.controller,
         children: tabsViewChildren,

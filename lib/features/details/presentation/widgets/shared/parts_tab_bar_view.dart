@@ -41,7 +41,11 @@ class PartsTabBarView extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final item = state.collection.parts[index];
-                return MainVerticalCard(cardData: item.toCardDisplay());
+                return MainVerticalCard(
+                  category: 'parts-$collectionId',
+                  cardData: item.toCardDisplay(),
+                  imageSize: .w185,
+                );
               },
             );
           }

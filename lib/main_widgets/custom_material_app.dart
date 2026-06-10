@@ -19,6 +19,7 @@ class CustomMaterialApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: getIt<GoRouter>(),
       debugShowCheckedModeBanner: false,
+
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

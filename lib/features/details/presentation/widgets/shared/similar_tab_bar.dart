@@ -42,8 +42,11 @@ class SimilarTabBarView extends StatelessWidget {
                 >) {
               return PaginatedGridView<CardDisplayModel>(
                 info: state.getPaginationInfo(category),
-                itemBuilder: (context, item) =>
-                    MainVerticalCard(cardData: item),
+                itemBuilder: (context, item) => MainVerticalCard(
+                  category: 'similar-${category.name}-$contentId',
+                  cardData: item,
+                  imageSize: .w185,
+                ),
                 onScrollEnd: () => context.read<SimilarBloc>().add(
                   LoadNextPageEvent(category),
                 ),

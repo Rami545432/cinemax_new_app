@@ -11,6 +11,8 @@ class MetaDataCoulmn extends StatelessWidget {
     required this.textStyle,
     required this.rating,
     this.timeBlocSelector,
+    this.hasAnimated = false,
+    this.onAnimationComplete,
   });
 
   final String title;
@@ -18,35 +20,41 @@ class MetaDataCoulmn extends StatelessWidget {
   final TextStyle textStyle;
   final num? rating;
   final Widget? timeBlocSelector;
+  final bool hasAnimated;
+  final VoidCallback? onAnimationComplete;
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    child: Column(
-      spacing: 8,
+  Widget build(BuildContext context) {
+    final titleWidget = Text(
+      title,
+      style: AppStyles.textStyle28(
+        context,
+      ).copyWith(fontWeight: FontWeight.bold),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
+    );
+
+    final rowWidget = Row(
+      spacing: 10,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          title,
-          style: AppStyles.textStyle28(
-            context,
-          ).copyWith(fontWeight: FontWeight.bold),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-        ).fadeInFromBottom(delay: 300),
-
-        Row(
-          spacing: 10,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(FormattedDateMethods.formatDateYear(date), style: textStyle),
-
-            timeBlocSelector ?? const SizedBox.shrink(),
-            const Icon(Icons.star_rate, color: Colors.yellow, size: 20),
-            Text(rating?.toStringAsFixed(1) ?? '0.0', style: textStyle),
-          ],
-        ).fadeInFromBottom(delay: 600),
+        Text(FormattedDateMethods.formatDateYear(date), style: textStyle),
+        timeBlocSelector ?? const SizedBox.shrink(),
+        const Icon(Icons.star_rate, color: Colors.yellow, size: 20),
+        Text(rating?.toStringAsFixed(1) ?? '0.0', style: textStyle),
       ],
-    ),
-  );
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        spacing: 8,
+        children: [
+          hasAnimated ? titleWidget : titleWidget.fadeInFromBottom(delay: 300),
+          hasAnimated ? rowWidget : rowWidget.fadeInFromBottom(delay: 600),
+        ],
+      ),
+    );
+  }
 }

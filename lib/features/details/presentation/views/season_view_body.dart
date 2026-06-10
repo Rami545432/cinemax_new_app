@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/features/details/domain/enums/tabs_enums.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
@@ -20,25 +21,33 @@ class SeasonViewBody extends HookWidget {
     final List<Tab> seasonTabs = SeasonDetailsEnum.values
         .map((e) => e.localizedTab(context))
         .toList();
+    final expandedHeight = MediaQuery.sizeOf(context).height * 0.7;
+
+    final sliverAppBar = useMemoized(
+      () => DetailsSliverAppBar(
+        expandedHeight: expandedHeight,
+        title: model.seasonName ?? 'Season ${model.seasonNumber}',
+        isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
+        favorite: FavoriteMapper.fromNavigationData(model),
+        backgroundWidget: StackedDetailsBackGorund(
+          backGroundImage: model.posterImage,
+          posterImage: model.posterImage,
+          title: model.seasonName ?? '_',
+          date: model.date ?? '_',
+          rating: model.rating ?? 0,
+          heroTag: '${model.tmdbId}',
+          imageSize: TmdbImageSize.w500,
+        ),
+      ),
+      [model, scrollCollapse.isCollapsedNotifier, expandedHeight],
+    );
+
     return DefaultTabController(
       length: seasonTabs.length,
       child: NestedScrollView(
         controller: scrollCollapse.scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          DetailsSliverAppBar(
-            expandedHeight: MediaQuery.sizeOf(context).height * 0.7,
-            title: model.seasonName ?? 'Season ${model.seasonNumber}',
-            isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
-            favorite: FavoriteMapper.fromNavigationData(model),
-            backgroundWidget: StackedDetailsBackGorund(
-              backGroundImage: model.posterImage,
-              posterImage: model.posterImage,
-              title: model.seasonName ?? '_',
-              date: model.date ?? '_',
-              rating: model.rating ?? 0,
-              heroTag: '${model.tmdbId}',
-            ),
-          ),
+          sliverAppBar,
           CustomTabBar(tabs: seasonTabs),
         ],
         body: Padding(

@@ -47,8 +47,11 @@ class RecomendedTabBarView extends StatelessWidget {
               state.getPaginationInfo(category);
               return PaginatedGridView<CardDisplayModel>(
                 info: state.getPaginationInfo(category),
-                itemBuilder: (context, item) =>
-                    MainVerticalCard(cardData: item),
+                itemBuilder: (context, item) => MainVerticalCard(
+                  category: '${category.name}-$contentId',
+                  cardData: item,
+                  imageSize: .w185,
+                ),
                 onScrollEnd: () => context.read<RecomendedBloc>().add(
                   LoadNextPageEvent(category),
                 ),

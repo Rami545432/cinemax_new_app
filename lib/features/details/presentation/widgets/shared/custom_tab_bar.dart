@@ -24,34 +24,31 @@ class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
-  ) => Material(
-    elevation: 2,
-    color: Theme.of(context).scaffoldBackgroundColor,
-    child: LayoutBuilder(
-      builder: (context, constraints) {
-        final style = AppStyles.textStyle18(context);
+  ) {
+    final style = AppStyles.textStyle18(context);
 
-        final shouldBeScrollable = tabs.length > 3;
-        final tabAlignment = shouldBeScrollable
-            ? TabAlignment.start
-            : TabAlignment.fill;
+    final shouldBeScrollable = tabs.length > 3;
+    final tabAlignment = shouldBeScrollable
+        ? TabAlignment.start
+        : TabAlignment.fill;
+    return Material(
+      elevation: 2,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: TabBar(
+        overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]),
 
-        return TabBar(
-          overlayColor: WidgetStateProperty.all(Colors.blueGrey[200]),
-
-          isScrollable: shouldBeScrollable,
-          tabAlignment: tabAlignment,
-          controller: controller,
-          labelColor: AppPrimaryColors.blueAccent,
-          indicatorColor: AppPrimaryColors.blueAccent,
-          dividerColor: Colors.transparent,
-          labelStyle: style,
-          unselectedLabelStyle: style,
-          tabs: tabs,
-        );
-      },
-    ),
-  );
+        isScrollable: shouldBeScrollable,
+        tabAlignment: tabAlignment,
+        controller: controller,
+        labelColor: AppPrimaryColors.blueAccent,
+        indicatorColor: AppPrimaryColors.blueAccent,
+        dividerColor: Colors.transparent,
+        labelStyle: style,
+        unselectedLabelStyle: style,
+        tabs: tabs,
+      ),
+    );
+  }
 
   @override
   double get maxExtent => 48;

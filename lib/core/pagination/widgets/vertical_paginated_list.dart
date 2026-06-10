@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dart';
-import 'package:movify/core/pagination/widgets/mixins/scroll_end_mixin.dart';
 import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
 import 'package:movify/core/pagination/widgets/pagination_error.dart';
 import 'package:movify/core/pagination/widgets/pagination_shimmer.dart';
@@ -40,29 +39,7 @@ class VerticalPaginatedList<T> extends StatefulWidget {
       _VerticalPaginatedListState<T>();
 }
 
-class _VerticalPaginatedListState<T> extends State<VerticalPaginatedList<T>>
-    with ScrollEndMixin {
-  @override
-  ScrollController? get externalScrollController =>
-      widget.externalScrollController;
-
-  @override
-  double get scrollThreshold => widget.scrollThreshold;
-
-  @override
-  VoidCallback get onScrollEnd => widget.onScrollEnd;
-  @override
-  void initState() {
-    super.initState();
-    initScrollController();
-  }
-
-  @override
-  void dispose() {
-    disposeScrollController();
-    super.dispose();
-  }
-
+class _VerticalPaginatedListState<T> extends State<VerticalPaginatedList<T>> {
   @override
   Widget build(BuildContext context) => _buildContent();
 
@@ -90,23 +67,34 @@ class _VerticalPaginatedListState<T> extends State<VerticalPaginatedList<T>>
     }
 
     // ── List ────────────────────────────────────────────
-    return ListView.separated(
-      controller: scrollController,
-      padding: widget.padding,
-      itemCount: info.items.length + 1,
-      separatorBuilder: (_, _) =>
-          widget.separator ?? const SizedBox(height: 12),
-      itemBuilder: (context, index) {
-        if (index == info.items.length) {
-          return PaginationBottomSlot(
-            isFetchingMore: info.isFetchingMore,
-            fetchMoreError: info.fetchMoreError,
-            hasMore: info.canLoadMore,
-            onRetry: widget.onRetry,
-          );
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        if (notification is ScrollUpdateNotification) {
+          final pos = notification.metrics;
+          if (pos.pixels >= pos.maxScrollExtent - widget.scrollThreshold) {
+            widget.onScrollEnd();
+          }
         }
-        return widget.itemBuilder(context, info.items[index]);
+        return false;
       },
+      child: ListView.separated(
+        controller: widget.externalScrollController,
+        padding: widget.padding,
+        itemCount: info.items.length + 1,
+        separatorBuilder: (context, index) =>
+            widget.separator ?? const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          if (index == info.items.length) {
+            return PaginationBottomSlot(
+              isFetchingMore: info.isFetchingMore,
+              fetchMoreError: info.fetchMoreError,
+              hasMore: info.canLoadMore,
+              onRetry: widget.onRetry,
+            );
+          }
+          return widget.itemBuilder(context, info.items[index]);
+        },
+      ),
     );
   }
 }

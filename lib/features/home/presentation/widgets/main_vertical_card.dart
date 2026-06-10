@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
@@ -15,13 +17,16 @@ class MainVerticalCard extends StatelessWidget {
     this.category,
     required this.cardData,
     this.enableHero = true,
+    this.imageSize = TmdbImageSize.w300,
   });
   final String? category;
   final CardDisplayModel cardData;
   final bool enableHero;
+  final TmdbImageSize imageSize;
 
   @override
   Widget build(BuildContext context) {
+    log('Main card ${cardData.title}');
     final heroTag = '$category-${cardData.id}';
     final isMovie = (cardData.contentType == ContentType.movies);
     final routeName = isMovie ? RouteName.movieDetail : RouteName.tvDetail;
@@ -45,7 +50,10 @@ class MainVerticalCard extends StatelessWidget {
                   ? Hero(
                       tag: heroTag,
                       child: CardImageAndRating(
-                        posterImage: tmdbImageSize(.w300, cardData.posterPath),
+                        posterImage: tmdbImageSize(
+                          imageSize,
+                          cardData.posterPath,
+                        ),
                         rating: cardData.rating ?? 0,
                         title: category,
                       ),

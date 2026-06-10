@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movify/config/animations/widgets/animated_list_item.dart';
 import 'package:movify/core/routing/route_name.dart';
 import 'package:movify/features/details/domain/entites/series_details_entity.dart';
 import 'package:movify/features/details/domain/value_objects/season.dart';
@@ -19,7 +18,7 @@ class SeasonTabBarView extends StatelessWidget {
     return ListView.builder(
       itemCount: season.length,
       itemBuilder: (context, index) {
-        final heroTag = '$seriesDetailsEntity.seiresId-${season[index].id}';
+        final heroTag = '${seriesDetailsEntity.seiresId}-${season[index].id}';
         return Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: InkWell(
@@ -40,13 +39,10 @@ class SeasonTabBarView extends StatelessWidget {
                 queryParameters: {'heroTag': heroTag},
               );
             },
-            child: AnimatedListItem(
-              index: index,
-              child: SeasonInfoSection(
-                heroTag: heroTag,
-                season: season[index],
-                defaultImageUrl: seriesDetailsEntity.posterImage!,
-              ),
+            child: SeasonInfoSection(
+              heroTag: heroTag,
+              season: season[index],
+              defaultImageUrl: seriesDetailsEntity.posterImage!,
             ),
           ),
         );

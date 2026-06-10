@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movify/config/animations/widgets/animated_list_item.dart';
 import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:movify/features/details/presentation/widgets/episode/episode_list_tile.dart';
 
@@ -21,14 +20,11 @@ class EpisodesListViewBuilder extends StatelessWidget {
           return const Text("No Episodes Available");
         }
 
-        return AnimatedListItem(
-          index: index,
-          child: EpisodeListTile(
-            episode: data.seasonEpisodes[index],
-            seiresPosterPath: seiresPosterPath,
-            seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
-            preloadedSeasonDetails: data,
-          ),
+        return EpisodeListTile(
+          episode: data.seasonEpisodes[index],
+          seiresPosterPath: seiresPosterPath,
+          seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
+          preloadedSeasonDetails: data,
         );
       },
       separatorBuilder: (context, index) => const Divider(),

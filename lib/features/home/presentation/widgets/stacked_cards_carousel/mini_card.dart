@@ -8,14 +8,14 @@ class MiniCard extends StatelessWidget {
   const MiniCard({super.key, required this.image});
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
     height: 250,
-    width: 150,
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+    width: 200,
     child: ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: CachedNetworkImage(
-        imageUrl: tmdbImageSize(TmdbImageSize.w300, image),
+        imageUrl: tmdbImageSize(TmdbImageSize.w500, image),
+
         fit: BoxFit.cover,
       ),
     ),

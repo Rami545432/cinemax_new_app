@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
-import 'package:movify/core/notification/auth_notification_binder.dart';
 import 'package:movify/core/theme/cubit/theme_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
 import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
@@ -23,6 +22,6 @@ class MainMultiProvieders extends StatelessWidget {
       BlocProvider.value(value: getIt.get<LanguageCubit>()),
       BlocProvider(create: (_) => getIt.get<FavoriteCubit>()),
     ],
-    child: const AuthNotificationBinder(child: CustomMaterialApp()),
+    child: const CustomMaterialApp(),
   );
 }

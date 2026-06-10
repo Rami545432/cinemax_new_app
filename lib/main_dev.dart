@@ -1,9 +1,12 @@
+import 'package:flutter/rendering.dart';
 import 'package:movify/config/env/app_config.dart';
 import 'package:movify/config/env/env.dev.dart' as env_dev;
 import 'package:movify/firebase_options_dev.dart';
 import 'package:movify/main_common.dart';
 
 void main() async {
+  debugRepaintRainbowEnabled = false;
+
   final devConfig = AppConfig(
     environmentName: 'dev',
     tmdbApiKey: env_dev.Env.tmdbApiKey,

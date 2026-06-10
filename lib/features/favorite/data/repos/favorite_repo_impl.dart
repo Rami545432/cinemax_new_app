@@ -97,6 +97,7 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
       // 1. Get guest favorites from Hive
       final guestFavs = await localDataSource.getGuestFavorites();
       if (guestFavs.isEmpty) {
+        _pullCloud(newUserId);
         debugPrint('ℹ️ No guest favorites to merge');
 
         return const Right(unit);

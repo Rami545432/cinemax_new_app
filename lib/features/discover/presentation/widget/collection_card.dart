@@ -24,7 +24,7 @@ class CollectionCard extends StatelessWidget {
         alignment: Alignment.bottomLeft,
         children: [
           CachedNetworkImage(
-            imageUrl: tmdbImageSize(.w500, colllectionModel.imageUrl),
+            imageUrl: tmdbImageSize(.w300, colllectionModel.imageUrl),
             fit: BoxFit.fill,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(

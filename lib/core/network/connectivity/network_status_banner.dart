@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movify/core/network/connectivity/banner_base.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
-import 'package:movify/core/utils/app_colors.dart';
-import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/core/network/connectivity/offline_banner.dart';
+import 'package:movify/core/network/connectivity/online_banner.dart';
 
 class NetworkStatusBanner extends StatefulWidget {
   const NetworkStatusBanner({super.key});
@@ -67,9 +66,9 @@ class _NetworkStatusBannerState extends State<NetworkStatusBanner> {
             );
           },
           child: isOffline
-              ? _buildOfflineBanner(context)
+              ? const OfflineBanner()
               : _showOnlineBanner
-              ? _buildOnlineBanner(context)
+              ? const OnlineBanner()
               : const SizedBox.shrink(),
         );
       },
@@ -86,16 +85,4 @@ class _NetworkStatusBannerState extends State<NetworkStatusBanner> {
       }
     });
   }
-
-  Widget _buildOnlineBanner(BuildContext context) => BannerBase(
-    color: AppSecondryColors.green,
-    icon: Icons.wifi_rounded,
-    text: AppLocalizations.of(context)!.backOnline,
-  );
-
-  Widget _buildOfflineBanner(BuildContext context) => BannerBase(
-    color: AppSecondryColors.red,
-    icon: Icons.wifi_off_rounded,
-    text: AppLocalizations.of(context)!.noInternetConnection,
-  );
 }

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:movify/constant.dart';
 import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dart';
-import 'package:movify/core/pagination/widgets/mixins/scroll_end_mixin.dart';
 import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
 
 class SliverPaginatedGridView<T> extends StatefulWidget {
@@ -44,30 +43,7 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
       _PaginatedGridViewState<T>();
 }
 
-class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>>
-    with ScrollEndMixin {
-  @override
-  ScrollController? get externalScrollController =>
-      widget.externalScrollController;
-
-  @override
-  double get scrollThreshold => widget.scrollThreshold;
-
-  @override
-  VoidCallback get onScrollEnd => widget.onScrollEnd;
-  @override
-  void initState() {
-    super.initState();
-    initScrollController();
-  }
-
-  @override
-  void dispose() {
-    disposeScrollController();
-
-    super.dispose();
-  }
-
+class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
   @override
   Widget build(BuildContext context) => _buildContent();
 

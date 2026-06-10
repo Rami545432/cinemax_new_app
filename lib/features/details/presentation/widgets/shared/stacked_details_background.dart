@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/details/presentation/widgets/shared/meta_data.dart';
-import 'package:movify/features/home/presentation/widgets/card_image.dart';
+import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
 import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
 import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class StackedDetailsBackGorund extends StatelessWidget {
+  final String? backGroundImage;
+  final String? posterImage;
+  final String? title;
+  final String? date;
+  final num? rating;
+  final String? heroTag;
+  final Widget? timeBlocSelector;
+  final TmdbImageSize imageSize;
+  final bool hasAnimated;
+  final VoidCallback? onAnimationComplete;
+  final int? memCacheWidth;
+
   const StackedDetailsBackGorund({
     super.key,
     required this.backGroundImage,
@@ -16,15 +28,11 @@ class StackedDetailsBackGorund extends StatelessWidget {
     required this.rating,
     required this.heroTag,
     this.timeBlocSelector,
+    this.imageSize = TmdbImageSize.original,
+    this.hasAnimated = false,
+    this.onAnimationComplete,
+    this.memCacheWidth,
   });
-
-  final String? backGroundImage;
-  final String? posterImage;
-  final String? title;
-  final String? date;
-  final num? rating;
-  final String? heroTag;
-  final Widget? timeBlocSelector;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -35,6 +43,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
         OpcaityDetailsImage(
           detailsBackGroundImage: backGroundImage,
           defaultDetailsBackGroundImage: posterImage,
+          imageSize: imageSize,
         ),
         DecoratedBox(
           decoration: BoxDecoration(
@@ -59,19 +68,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
                   : size.width * 0.25,
               child: AspectRatio(
                 aspectRatio: 2 / 3,
-                child: Hero(
-                  tag: heroTag ?? '',
-                  child: CardImage(
-                    imageUrl: tmdbImageSize(
-                      TmdbImageSize.w500,
-                      posterImage ?? '',
-                    ),
-                    thumbnailUrl: tmdbImageSize(
-                      TmdbImageSize.w300,
-                      posterImage ?? '',
-                    ),
-                  ),
-                ),
+                child: SafeHeroCard(posterImage: posterImage, heroTag: heroTag),
               ),
             ),
           ),
@@ -86,6 +83,8 @@ class StackedDetailsBackGorund extends StatelessWidget {
             textStyle: textStyle,
             rating: rating,
             timeBlocSelector: timeBlocSelector,
+            hasAnimated: hasAnimated,
+            onAnimationComplete: onAnimationComplete,
           ),
         ),
       ],

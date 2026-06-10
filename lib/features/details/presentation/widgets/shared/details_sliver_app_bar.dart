@@ -41,13 +41,7 @@ class DetailsSliverAppBar extends StatelessWidget {
         leading: const LeadingBackButton(),
         actions: actions,
         expandedHeight: expandedHeight,
-        flexibleSpace: FlexibleSpaceBar(
-          stretchModes: const [
-            StretchMode.zoomBackground,
-            StretchMode.blurBackground,
-          ],
-          background: backgroundWidget,
-        ),
+        flexibleSpace: FlexibleSpaceBar(background: backgroundWidget),
       ),
     );
   }

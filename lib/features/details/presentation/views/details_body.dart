@@ -58,17 +58,8 @@ class DetailsBody extends HookWidget {
     final isCollapsedNotifier = useMemoized(() => ValueNotifier<bool>(false));
     final hasAnimated = useState(false);
 
-    useEffect(() {
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        if (context.mounted) {
-          hasAnimated.value = true;
-        }
-      });
-      return null;
-    }, []);
-
     // Calculate the collapse threshold based on the expanded height
-    final expandedHeight = MediaQuery.sizeOf(context).height * 0.7;
+    final expandedHeight = MediaQuery.heightOf(context) * 0.7;
     final collapseThreshold = expandedHeight - kToolbarHeight;
 
     // Cache the sliver app bar so NestedScrollView's headerSliverBuilder
@@ -88,8 +79,8 @@ class DetailsBody extends HookWidget {
           heroTag: heroTag,
           timeBlocSelector: const TimeBlocSelector(),
           hasAnimated: hasAnimated.value,
+          memCacheWidth: 1600,
           onAnimationComplete: () => hasAnimated.value = true,
-          memCacheWidth: 1800,
         ),
       ),
       [navigationData, isCollapsedNotifier, expandedHeight, hasAnimated.value],

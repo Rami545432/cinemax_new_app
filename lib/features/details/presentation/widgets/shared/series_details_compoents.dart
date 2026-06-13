@@ -20,7 +20,7 @@ class SeriesDetailsCompoents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final seriesDetailsEntity = context.watch<SeriesDetailsEntity>();
+    final seriesDetailsEntity = context.read<SeriesDetailsEntity>();
     final reviews = seriesDetailsEntity.kReviews;
     final l10n = AppLocalizations.of(context)!;
     return Padding(

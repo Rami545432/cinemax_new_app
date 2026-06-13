@@ -484,4 +484,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'تسجيل الدخول باستخدام جوجل';
+
+  @override
+  String get noResultsFound => 'لا يوجد نتائج';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
 }

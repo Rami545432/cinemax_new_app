@@ -20,7 +20,7 @@ class MovieDetailComponets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetailsEntity = context.watch<MovieDetailsEntity>();
+    final movieDetailsEntity = context.read<MovieDetailsEntity>();
     final reviews = movieDetailsEntity.kReviews;
     final watchProviders = movieDetailsEntity.kWatchProviders?.results;
     final l10n = AppLocalizations.of(context)!;

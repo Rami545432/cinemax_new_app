@@ -14,6 +14,7 @@ class HistoryViewBody extends StatelessWidget {
           SearchHistoryInitial() => const Center(
             child: CircularProgressIndicator(color: Colors.blue),
           ),
+          SearchHistoryEmpty() => const Center(child: Text('No history found')),
           SearchHistoryLoaded(searchHistory: final history) =>
             SearchHistoryAnimatedList(searchHistory: history),
           SearchHistoryFailure(errorMessage: final errorMessage) => Center(

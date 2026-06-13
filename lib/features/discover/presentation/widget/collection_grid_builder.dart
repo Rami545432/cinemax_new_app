@@ -9,7 +9,7 @@ class CollectionGridBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     return GridView.builder(
       itemCount: collections.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

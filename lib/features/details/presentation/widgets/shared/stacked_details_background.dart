@@ -35,7 +35,8 @@ class StackedDetailsBackGorund extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
+    final width = MediaQuery.widthOf(context);
+    final height = MediaQuery.heightOf(context);
     final textStyle = AppStyles.textStyle16(context);
     return Stack(
       fit: StackFit.expand,
@@ -44,6 +45,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
           detailsBackGroundImage: backGroundImage,
           defaultDetailsBackGroundImage: posterImage,
           imageSize: imageSize,
+          memCacheWidth: memCacheWidth,
         ),
         DecoratedBox(
           decoration: BoxDecoration(
@@ -58,14 +60,12 @@ class StackedDetailsBackGorund extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: MediaQuery.sizeOf(context).height * 0.18,
+          bottom: height * 0.18,
           left: 0,
           right: 0,
           child: Center(
             child: SizedBox(
-              width: size.width < SizeConfig.mobile
-                  ? size.width * 0.45
-                  : size.width * 0.25,
+              width: width < SizeConfig.mobile ? width * 0.45 : width * 0.25,
               child: AspectRatio(
                 aspectRatio: 2 / 3,
                 child: SafeHeroCard(posterImage: posterImage, heroTag: heroTag),
@@ -74,9 +74,9 @@ class StackedDetailsBackGorund extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: MediaQuery.sizeOf(context).height * 0.05,
-          left: MediaQuery.sizeOf(context).width * 0.05,
-          right: MediaQuery.sizeOf(context).width * 0.05,
+          bottom: height * 0.05,
+          left: width * 0.05,
+          right: width * 0.05,
           child: MetaDataCoulmn(
             title: title!,
             date: date ?? 'Unknown',

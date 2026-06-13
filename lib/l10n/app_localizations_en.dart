@@ -487,4 +487,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Sign in with Google';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
 }

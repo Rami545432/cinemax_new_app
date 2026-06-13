@@ -10,7 +10,7 @@ class SeasonTabs extends StatelessWidget {
   final String seiresPosterPath;
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<SeriesSeasonDetailsEntity>();
+    final data = context.read<SeriesSeasonDetailsEntity>();
     return TabBarView(
       children: [
         EpisodesListViewBuilder(data: data, seiresPosterPath: seiresPosterPath),

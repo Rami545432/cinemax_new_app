@@ -553,5 +553,9 @@
   "loginTagline": "سجل دخولك للحفاظ على قائمتك المفضلة",
   "@loginTagline": {},
   "signWithGoogle": "تسجيل الدخول باستخدام جوجل",
-  "@signWithGoogle": {}
+  "@signWithGoogle": {},
+  "noResultsFound": "لا يوجد نتائج",
+  "@noResultsFound": {},
+  "somethingWentWrong": "حدث خطأ ما",
+  "@somethingWentWrong": {}
 }

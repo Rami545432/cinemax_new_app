@@ -15,7 +15,7 @@ class BoardingZeroViewBody extends StatelessWidget {
       const Positioned.fill(child: DarknessStackLayer()),
 
       Positioned(
-        bottom: MediaQuery.sizeOf(context).height * 0.01,
+        bottom: MediaQuery.heightOf(context) * 0.01,
         left: 0,
         right: 0,
         child: const BoardingOneTextAndLogo(),

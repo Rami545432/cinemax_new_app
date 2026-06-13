@@ -50,7 +50,9 @@ class RecomendedTabBarView extends StatelessWidget {
                 itemBuilder: (context, item) => MainVerticalCard(
                   category: '${category.name}-$contentId',
                   cardData: item,
-                  imageSize: .w185,
+                  imageSize: .w92,
+
+                  enableHero: false,
                 ),
                 onScrollEnd: () => context.read<RecomendedBloc>().add(
                   LoadNextPageEvent(category),

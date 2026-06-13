@@ -9,7 +9,7 @@ class OnboardingOneUpperSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final posterHeight = width < SizeConfig.mobile ? 224.0 : 280.0;
     final posterWidth = width < SizeConfig.mobile ? 160.0 : 200.0;
     return Center(

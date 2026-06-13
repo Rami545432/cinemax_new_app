@@ -17,7 +17,7 @@ class TrailersImageListViewBuilder extends StatelessWidget {
         ? CrossAxisAlignment.end
         : CrossAxisAlignment.start;
     final l10n = AppLocalizations.of(context)!;
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final videoKey = videos.results?.map((e) => e.key).toList() ?? [];
     final style = AppStyles.textStyle14(
       context,

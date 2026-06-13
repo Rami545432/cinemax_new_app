@@ -12,7 +12,7 @@ class PaginationShimmer extends StatelessWidget {
     this.isHorizontal = false,
     this.height = 200,
     this.itemWidth = 130,
-    this.itemCount = 20,
+    this.itemCount = 5,
   });
 
   @override
@@ -21,16 +21,22 @@ class PaginationShimmer extends StatelessWidget {
         ? SizedBox(
             height: height,
             child: ListView.builder(
+              prototypeItem: _ShimmerBox(width: itemWidth, height: height),
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: itemCount,
               itemBuilder: (_, _) => Padding(
                 padding: const EdgeInsets.only(right: 12),
+
                 child: _ShimmerBox(width: itemWidth, height: height),
               ),
             ),
           )
         : ListView.builder(
+            prototypeItem: const _ShimmerBox(
+              width: double.infinity,
+              height: 100,
+            ),
             padding: const EdgeInsets.all(16),
             itemCount: itemCount,
             itemBuilder: (_, _) => const Padding(
@@ -51,11 +57,11 @@ class _ShimmerBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(12),
-        ),
-      );
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(12),
+    ),
+  );
 }

@@ -11,7 +11,7 @@ class SeasonAboutTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<SeriesSeasonDetailsEntity>();
+    final data = context.read<SeriesSeasonDetailsEntity>();
     return CustomScrollView(
       slivers: [
         SliverFillRemaining(

@@ -553,5 +553,9 @@
   "loginTagline": "Connectez-vous pour conserver votre liste de favoris",
   "@loginTagline": {},
   "signWithGoogle": "Se connecter avec Google",
-  "@signWithGoogle": {}
+  "@signWithGoogle": {},
+  "noResultsFound": "Aucun résultat trouvé",
+  "@noResultsFound": {},
+  "somethingWentWrong": "Une erreur s'est produite",
+  "@somethingWentWrong": {}
 }

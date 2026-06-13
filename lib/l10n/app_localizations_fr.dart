@@ -491,4 +491,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Se connecter avec Google';
+
+  @override
+  String get noResultsFound => 'Aucun résultat trouvé';
+
+  @override
+  String get somethingWentWrong => 'Une erreur s\'est produite';
 }

@@ -15,6 +15,8 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: BlocListener<LoginCubit, LoginState>(
+      listenWhen: (previous, current) =>
+          previous.runtimeType != current.runtimeType,
       listener: (context, state) {
         if (state is LoginSuccess) {
           showSnackBar(context, color: Colors.green, text: 'Welcome !');

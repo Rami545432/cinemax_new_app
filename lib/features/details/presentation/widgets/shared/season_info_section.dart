@@ -17,7 +17,7 @@ class SeasonInfoSection extends StatelessWidget {
   final String heroTag;
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.sizeOf(context).width;
+    final double screenWidth = MediaQuery.widthOf(context);
     final image = season.posterPath ?? defaultImageUrl;
     return Row(
       spacing: 20,

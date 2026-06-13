@@ -100,10 +100,7 @@ class _HorizontalPaginatedListState<T>
   }
 
   @override
-  Widget build(BuildContext context) =>
-      SizedBox(height: widget.height, child: _buildContent());
-
-  Widget _buildContent() {
+  Widget build(BuildContext context) {
     final info = widget.info;
 
     // ── First page loading ──────────────────────────────
@@ -111,9 +108,8 @@ class _HorizontalPaginatedListState<T>
       return widget.loadingWidget ??
           PaginationShimmer(isHorizontal: true, height: widget.height);
     }
-
     // ── First page error ────────────────────────────────
-    if (info.firstPageError != null && !info.hasData) {
+    else if (info.firstPageError != null && !info.hasData) {
       return widget.errorBuilder?.call(info.firstPageError!) ??
           PaginationErrorWidget(
             message: info.firstPageError!,
@@ -121,41 +117,41 @@ class _HorizontalPaginatedListState<T>
             isCompact: true,
           );
     }
-
     // ── Empty ───────────────────────────────────────────
-    if (!info.hasData) {
+    else if (!info.hasData) {
       return widget.emptyWidget ??
           const Center(child: Text('Nothing here yet'));
     }
-
     // ── List ────────────────────────────────────────────
-    return ListView.builder(
-      controller: _scrollController,
-      scrollDirection: Axis.horizontal,
-      padding: widget.padding,
-      // +1 for the end slot (loader / retry / nothing)
-      itemCount: info.items.length + 1,
-      itemBuilder: (context, index) {
-        // End slot
-        if (index == info.items.length) {
-          return PaginationBottomSlot(
-            isFetchingMore: info.isFetchingMore,
-            fetchMoreError: info.fetchMoreError,
-            hasMore: info.canLoadMore,
-            isHorizontal: true,
-            onRetry: widget.onRetry,
-          );
-        }
+    else {
+      return ListView.builder(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        padding: widget.padding,
+        // +1 for the end slot (loader / retry / nothing)
+        itemCount: info.items.length + 1,
+        itemBuilder: (context, index) {
+          // End slot
+          if (index == info.items.length) {
+            return PaginationBottomSlot(
+              isFetchingMore: info.isFetchingMore,
+              fetchMoreError: info.fetchMoreError,
+              hasMore: info.canLoadMore,
+              isHorizontal: true,
+              onRetry: widget.onRetry,
+            );
+          }
 
-        return Padding(
-          padding: EdgeInsets.only(right: widget.itemGap),
-          child: widget.itemBuilder(
-            context,
-            info.items[index],
-            widget.enableHero,
-          ),
-        );
-      },
-    );
+          return Padding(
+            padding: EdgeInsets.only(right: widget.itemGap),
+            child: widget.itemBuilder(
+              context,
+              info.items[index],
+              widget.enableHero,
+            ),
+          );
+        },
+      );
+    }
   }
 }

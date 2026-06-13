@@ -46,10 +46,8 @@ class PaginatedGridView<T> extends StatefulWidget {
 
 class _PaginatedGridViewState<T> extends State<PaginatedGridView<T>> {
   @override
-  Widget build(BuildContext context) => _buildContent();
-
-  Widget _buildContent() {
-    final width = MediaQuery.sizeOf(context).width;
+  Widget build(BuildContext context) {
+    final width = MediaQuery.widthOf(context);
     final info = widget.info;
 
     if (info.isFirstLoad) {
@@ -84,6 +82,7 @@ class _PaginatedGridViewState<T> extends State<PaginatedGridView<T>> {
       child: GridView.builder(
         controller: widget.externalScrollController,
         padding: widget.padding,
+
         gridDelegate: Constants.sliverGridDelegate(width),
         // +1 for end slot — spans full width via SliverGridDelegate trick
         itemCount: info.items.length + 1,

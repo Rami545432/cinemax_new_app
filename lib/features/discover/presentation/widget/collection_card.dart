@@ -14,7 +14,7 @@ class CollectionCard extends StatelessWidget {
   final CollectionModel colllectionModel;
   @override
   Widget build(BuildContext context) {
-    log(colllectionModel.imageUrl);
+    log('Collectc card rebuilt');
     return GestureDetector(
       onTap: () {
         context.pushNamed(RouteName.modeView, extra: colllectionModel);

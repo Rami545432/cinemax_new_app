@@ -21,7 +21,7 @@ abstract class BaseHomeScreen<
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<B>();
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final isMobile = width < SizeConfig.tablet;
 
     return Scaffold(

@@ -68,7 +68,7 @@ class EpisodeBody extends HookWidget {
       [allEpisodes.length],
     );
 
-    final expandedHeight = MediaQuery.sizeOf(context).height * 0.3;
+    final expandedHeight = MediaQuery.heightOf(context) * 0.3;
 
     final headerSlivers = useMemoized(
       () => [
@@ -92,7 +92,7 @@ class EpisodeBody extends HookWidget {
           backgroundWidget: OpcaityDetailsImage(
             detailsBackGroundImage: currentEpisode.stillPath,
             defaultDetailsBackGroundImage: seasonPosterPath,
-            imageSize: TmdbImageSize.w300,
+            imageSize: TmdbImageSize.w500,
           ),
         ),
         SliverToBoxAdapter(

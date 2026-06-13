@@ -553,5 +553,9 @@
   "loginTagline": "Favori listenizi korumak için giriş yapın",
   "@loginTagline": {},
   "signWithGoogle": "Google ile giriş yap",
-  "@signWithGoogle": {}
+  "@signWithGoogle": {},
+  "noResultsFound": "Sonuc bulunamadi",
+  "@noResultsFound": {},
+  "somethingWentWrong": "Birseyler ters gitti",
+  "@somethingWentWrong": {}
 }

@@ -16,12 +16,12 @@ class SeasonViewBody extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<SeasonNavData>();
+    final model = context.read<SeasonNavData>();
     final scrollCollapse = useScrollCollapseDebounced(150);
     final List<Tab> seasonTabs = SeasonDetailsEnum.values
         .map((e) => e.localizedTab(context))
         .toList();
-    final expandedHeight = MediaQuery.sizeOf(context).height * 0.7;
+    final expandedHeight = MediaQuery.heightOf(context) * 0.7;
 
     final sliverAppBar = useMemoized(
       () => DetailsSliverAppBar(

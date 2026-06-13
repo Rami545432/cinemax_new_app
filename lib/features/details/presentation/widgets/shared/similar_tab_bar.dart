@@ -45,7 +45,8 @@ class SimilarTabBarView extends StatelessWidget {
                 itemBuilder: (context, item) => MainVerticalCard(
                   category: 'similar-${category.name}-$contentId',
                   cardData: item,
-                  imageSize: .w185,
+                  imageSize: .w92,
+                  enableHero: false,
                 ),
                 onScrollEnd: () => context.read<SimilarBloc>().add(
                   LoadNextPageEvent(category),

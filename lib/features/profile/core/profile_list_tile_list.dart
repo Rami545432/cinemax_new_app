@@ -33,7 +33,7 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
           isScrollControlled: true,
           showDragHandle: true,
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.sizeOf(context).width * 0.95,
+            maxWidth: MediaQuery.widthOf(context) * 0.95,
           ),
           builder: (context) => const LanguagesSwitcher(),
         );
@@ -50,7 +50,7 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
           useSafeArea: true,
           context: context,
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.sizeOf(context).width * 0.95,
+            maxWidth: MediaQuery.widthOf(context) * 0.95,
           ),
           builder: (context) => const ThemeModeColorSelector(),
         );

@@ -11,7 +11,7 @@ class MovieAboutTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetailsEntity = context.watch<MovieDetailsEntity>();
+    final movieDetailsEntity = context.read<MovieDetailsEntity>();
     final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [

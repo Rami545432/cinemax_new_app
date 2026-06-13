@@ -12,7 +12,7 @@ class SeriesAboutTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final seriesDetailsEntity = context.watch<SeriesDetailsEntity>();
+    final seriesDetailsEntity = context.read<SeriesDetailsEntity>();
     return Column(
       spacing: 20,
       children: [

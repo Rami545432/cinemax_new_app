@@ -11,7 +11,7 @@ class CollectionViewBody extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final scrollController = useScrollController();
     return CustomScrollView(
       controller: scrollController,
@@ -24,6 +24,7 @@ class CollectionViewBody extends HookWidget {
               fit: StackFit.expand,
               children: [
                 OpcaityDetailsImage(
+                  imageSize: .w780,
                   detailsBackGroundImage: collectionModel.imageUrl,
                 ),
                 Positioned(

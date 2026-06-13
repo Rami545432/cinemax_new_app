@@ -490,4 +490,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Inicia sesión con Google';
+
+  @override
+  String get noResultsFound => 'No se encontraron resultados';
+
+  @override
+  String get somethingWentWrong => 'Algo salió mal';
 }

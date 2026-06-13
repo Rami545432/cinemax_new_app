@@ -487,4 +487,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Google ile giriş yap';
+
+  @override
+  String get noResultsFound => 'Sonuc bulunamadi';
+
+  @override
+  String get somethingWentWrong => 'Birseyler ters gitti';
 }

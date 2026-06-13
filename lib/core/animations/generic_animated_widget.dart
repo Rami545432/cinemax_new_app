@@ -144,3 +144,10 @@ class _GenericAnimatedWidgetState<T> extends State<GenericAnimatedWidget<T>> {
     }
   }
 }
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) => const Placeholder();
+}

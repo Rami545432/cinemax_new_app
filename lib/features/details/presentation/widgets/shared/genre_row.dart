@@ -20,28 +20,25 @@ class GenreRow extends StatelessWidget {
     if (geners.isEmpty) {
       return const Center(child: Text('No genres found'));
     }
-    return Row(
-      children: geners
-          .asMap()
-          .entries
-          .map(
-            (gener) => Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: GestureDetector(
-                onTap: () {
-                  context.pushNamed(
-                    RouteName.genreSeeAll,
-                    extra: GenreSeeAllArguments(
-                      category: genreCategory,
-                      genreId: gener.value.id ?? 28,
-                    ),
-                  );
-                },
-                child: GenerBox(gener: gener.value.name),
+    return SizedBox(
+      height: 57,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () {
+            context.pushNamed(
+              RouteName.genreSeeAll,
+              extra: GenreSeeAllArguments(
+                category: genreCategory,
+                genreId: geners[index].id ?? 28,
               ),
-            ),
-          )
-          .toList(),
+            );
+          },
+          child: GenerBox(gener: geners[index].name),
+        ),
+        separatorBuilder: (context, index) => const SizedBox(width: 20),
+        itemCount: geners.length,
+      ),
     );
   }
 }

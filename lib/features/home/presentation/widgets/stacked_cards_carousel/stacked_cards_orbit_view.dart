@@ -66,8 +66,8 @@ class StackedCardsOrbitView extends StatelessWidget {
       // from the Flow's repaint cycle. ValueKey ensures Flutter reuses the
       // boundary across reorders.
       final children = <Widget>[
-        for (final slot in slots)
-          RepaintBoundary(
+        ...slots.map(
+          (slot) => RepaintBoundary(
             key: ValueKey(orbitIndex(current, slot.offset, cards.length)),
             child: OrbitCardSlot(
               current: current,
@@ -78,6 +78,7 @@ class StackedCardsOrbitView extends StatelessWidget {
               slot: slot,
             ),
           ),
+        ),
       ];
 
       return Flow(

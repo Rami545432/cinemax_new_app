@@ -14,8 +14,8 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) => Animate(
     effects: [FadeEffect(delay: 2000.ms, duration: 500.ms)],
     child: SizedBox(
-      width: MediaQuery.sizeOf(context).width * 0.8,
-      height: MediaQuery.sizeOf(context).height * 0.06,
+      width: MediaQuery.widthOf(context) * 0.8,
+      height: MediaQuery.heightOf(context) * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppPrimaryColors.blueAccent,

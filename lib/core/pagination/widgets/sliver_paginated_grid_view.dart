@@ -45,11 +45,9 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
 
 class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
   @override
-  Widget build(BuildContext context) => _buildContent();
-
-  Widget _buildContent() {
+  Widget build(BuildContext context) {
     final info = widget.info;
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
 
     if (info.isFirstLoad) {
       return SliverToBoxAdapter(

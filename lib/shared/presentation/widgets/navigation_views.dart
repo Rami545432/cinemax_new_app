@@ -28,12 +28,13 @@ class NavigationViews extends HookWidget {
         },
         selectedIndex: navigationShell.currentIndex,
         destinations: [
-          for (final NavigationItems item in NavigationItems.values)
-            NavigationDestination(
+          ...NavigationItems.values.map(
+            (item) => NavigationDestination(
               selectedIcon: Icon(item.icon, color: item.selectedColor),
               icon: Icon(item.icon),
               label: item.localizedLabel(context),
             ),
+          ),
         ],
       ),
     ),

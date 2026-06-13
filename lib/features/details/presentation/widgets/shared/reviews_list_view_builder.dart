@@ -14,7 +14,9 @@ class ReviewListViewBuilder extends StatelessWidget {
 
     itemBuilder: (context, index) {
       final review = reviews.results?[index];
-      return SizedBox(child: ReviewListTile(review: review));
+      return SizedBox(
+        child: ReviewListTile(key: ValueKey(review?.id), review: review),
+      );
     },
   );
 }

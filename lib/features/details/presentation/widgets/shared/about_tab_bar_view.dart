@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movify/config/animations/extensions/widget_animations.dart';
 import 'package:movify/features/details/domain/value_objects/genre.dart';
 import 'package:movify/features/details/domain/value_objects/results.dart';
 import 'package:movify/features/details/presentation/widgets/details_widgets/custom_descreption.dart';
@@ -35,17 +34,14 @@ class AboutTabBarView extends StatelessWidget {
         const Divider(),
         AboutTabViewBranch(
           title: l10n.geners,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: GenreRow(geners: geners, genreCategory: genreCategory),
-          ),
+          child: GenreRow(geners: geners, genreCategory: genreCategory),
         ),
         const SizedBox(height: 20),
         const Divider(),
         const SizedBox(height: 20),
 
         child,
-      ].animateList(),
+      ],
     );
   }
 }

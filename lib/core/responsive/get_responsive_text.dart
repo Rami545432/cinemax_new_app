@@ -11,7 +11,7 @@ double getResponsiveText(BuildContext context, double fontSize) {
 }
 
 double getScaleFactor(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
+  final width = MediaQuery.widthOf(context);
   if (width < SizeConfig.tablet) {
     return width / 700;
   } else if (width < SizeConfig.desktop) {

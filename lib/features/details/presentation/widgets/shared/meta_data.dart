@@ -11,8 +11,7 @@ class MetaDataCoulmn extends StatelessWidget {
     required this.textStyle,
     required this.rating,
     this.timeBlocSelector,
-    this.hasAnimated = false,
-    this.onAnimationComplete,
+    this.entryController,
   });
 
   final String title;
@@ -20,8 +19,8 @@ class MetaDataCoulmn extends StatelessWidget {
   final TextStyle textStyle;
   final num? rating;
   final Widget? timeBlocSelector;
-  final bool hasAnimated;
-  final VoidCallback? onAnimationComplete;
+
+  final AnimationController? entryController;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +50,8 @@ class MetaDataCoulmn extends StatelessWidget {
       child: Column(
         spacing: 8,
         children: [
-          hasAnimated ? titleWidget : titleWidget.fadeInFromBottom(delay: 300),
-          hasAnimated ? rowWidget : rowWidget.fadeInFromBottom(delay: 600),
+          titleWidget.fadeInFromBottom(delay: 300, controller: entryController),
+          rowWidget.fadeInFromBottom(delay: 600, controller: entryController),
         ],
       ),
     );

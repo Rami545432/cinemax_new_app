@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:movify/features/details/domain/value_objects/cast.dart';
 import 'package:movify/features/details/presentation/widgets/shared/actor_list_tile.dart';
 
@@ -18,7 +19,10 @@ class CastTabBarView extends StatelessWidget {
       itemCount: actorList.length,
       prototypeItem: ActorListTile(actorList: actorList.first),
       itemBuilder: (context, index) =>
-          ActorListTile(actorList: actorList[index]),
+          ActorListTile(actorList: actorList[index])
+              .animate()
+              .fade(duration: 400.ms, delay: (index * 100).ms)
+              .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
     );
   }
 }

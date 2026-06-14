@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:movify/features/details/presentation/widgets/episode/episode_list_tile.dart';
 
@@ -21,11 +22,14 @@ class EpisodesListViewBuilder extends StatelessWidget {
         }
 
         return EpisodeListTile(
-          episode: data.seasonEpisodes[index],
-          seiresPosterPath: seiresPosterPath,
-          seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
-          preloadedSeasonDetails: data,
-        );
+              episode: data.seasonEpisodes[index],
+              seiresPosterPath: seiresPosterPath,
+              seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
+              preloadedSeasonDetails: data,
+            )
+            .animate()
+            .fade(duration: 400.ms, delay: (index * 100).ms) // <-- The secret!
+            .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad);
       },
       separatorBuilder: (context, index) => const Divider(),
       itemCount: data.seasonEpisodes.length,

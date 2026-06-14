@@ -33,19 +33,20 @@ class PulsingStatusDotState extends State<PulsingStatusDot>
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-    animation: _animation,
-    builder: (context, child) => Container(
+  Widget build(BuildContext context) => FadeTransition(
+    opacity: _animation,
+    child: Container(
       width: 8,
       height: 8,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: widget.color.withValues(alpha: _animation.value),
+        color: widget.color,
+        // 2. The blur is now STATIC. Calculated once, completely free!
         boxShadow: [
           BoxShadow(
-            color: widget.color.withValues(alpha: 0.6 * _animation.value),
-            blurRadius: 6 * _animation.value,
-            spreadRadius: 1 * _animation.value,
+            color: widget.color.withValues(alpha: 0.6),
+            blurRadius: 6,
+            spreadRadius: 1,
           ),
         ],
       ),

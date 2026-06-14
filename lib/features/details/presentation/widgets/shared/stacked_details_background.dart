@@ -15,10 +15,9 @@ class StackedDetailsBackGorund extends StatelessWidget {
   final String? heroTag;
   final Widget? timeBlocSelector;
   final TmdbImageSize imageSize;
-  final bool hasAnimated;
-  final VoidCallback? onAnimationComplete;
-  final int? memCacheWidth;
 
+  final int? memCacheWidth;
+  final AnimationController? entryController;
   const StackedDetailsBackGorund({
     super.key,
     required this.backGroundImage,
@@ -29,8 +28,8 @@ class StackedDetailsBackGorund extends StatelessWidget {
     required this.heroTag,
     this.timeBlocSelector,
     this.imageSize = TmdbImageSize.original,
-    this.hasAnimated = false,
-    this.onAnimationComplete,
+
+    this.entryController,
     this.memCacheWidth,
   });
   @override
@@ -83,8 +82,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
             textStyle: textStyle,
             rating: rating,
             timeBlocSelector: timeBlocSelector,
-            hasAnimated: hasAnimated,
-            onAnimationComplete: onAnimationComplete,
+            entryController: entryController,
           ),
         ),
       ],

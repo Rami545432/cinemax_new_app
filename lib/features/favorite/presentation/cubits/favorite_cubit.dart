@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movify/core/auth/auth_status_provider.dart';
 import 'package:movify/core/network/utils/safe_emit_state.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
 import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:movify/features/favorite/domain/use_cases/add_favorite_use_case.dart';
 import 'package:movify/features/favorite/domain/use_cases/get_favorite_use_case.dart';
@@ -23,8 +23,9 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   final GetFavoritesUseCase getFavoritesUseCase;
   final AddFavoriteUseCase addFavoriteUseCase;
   final RemoveFavoriteUseCase removeFavoriteUseCase;
-  final AuthStatusProvider authStatusProvider;
-  late final StreamSubscription<AuthStatusEvent> _authSub;
+  final Stream<SessionState> sessionStream;
+
+  late final StreamSubscription<SessionState> _sessionSub;
   String _currentUserId = 'guest';
   bool _initialized = false;
 
@@ -34,42 +35,30 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     required this.getFavoritesUseCase,
     required this.addFavoriteUseCase,
     required this.removeFavoriteUseCase,
-    required this.authStatusProvider,
+    required this.sessionStream,
+    required SessionState initialSessionState,
   }) : super(const FavoriteInitial()) {
-    _authSub = authStatusProvider.authStatusStream.listen(_onAuthChanged);
-    // ✅ Start listening immediately
-    _initFromCurrentSession();
+    _sessionSub = sessionStream.listen(_onSessionChanged);
+    // ✅ Initialize synchronously using the provided initial state. No race conditions!
+    _onSessionChanged(initialSessionState);
   }
 
-  Future<void> _initFromCurrentSession() async {
-    final currentStatus = await authStatusProvider.currentAuthStatus;
+  Future<void> _onSessionChanged(SessionState state) async {
+    debugPrint('🎯 FavoriteCubit._onSessionChanged → ${state.runtimeType}');
 
-    await _onAuthChanged(currentStatus); // guest is fine, no Firestore
-  }
-
-  Future<void> _onAuthChanged(AuthStatusEvent event) async {
-    debugPrint(
-      '🎯 FavoriteCubit._onAuthChanged → ${event.status} | ${event.userId}',
-    );
-
-    switch (event.status) {
-      case AuthStatus.authenticated:
-        await _handleSignIn(
-          // ✅ awaited
-          userId: event.userId!,
-          isFirstSignIn: event.isFirstSignIn,
-        );
-        break;
-      case AuthStatus.guest:
-        _initialized = false; // ✅ reset for next sign in
-        _currentUserId = 'guest';
-        await loadFavorites(); // ✅ awaited
-        break;
-      case AuthStatus.unauthenticated:
-        _initialized = false; // ✅ reset
-        _currentUserId = 'guest';
-        safeEmit(const FavoriteInitial());
-        break;
+    if (state is SessionAuthenticated) {
+      await _handleSignIn(
+        userId: state.user.uid!,
+        isFirstSignIn: state.isExplicitSignIn,
+      );
+    } else if (state is SessionGuest) {
+      _initialized = false;
+      _currentUserId = 'guest';
+      await loadFavorites();
+    } else if (state is SessionUnauthenticated) {
+      _initialized = false;
+      _currentUserId = 'guest';
+      safeEmit(const FavoriteInitial());
     }
   }
 
@@ -244,7 +233,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   @override
   Future<void> close() {
-    _authSub.cancel();
+    _sessionSub.cancel();
     return super.close();
   }
   // ═══════════════════════════════════════════════════════════════════

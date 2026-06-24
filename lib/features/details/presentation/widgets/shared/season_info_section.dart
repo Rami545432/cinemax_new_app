@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movify/features/details/domain/value_objects/season.dart';
 import 'package:movify/features/details/presentation/widgets/shared/episode_image.dart';
+import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
 import 'package:movify/features/details/presentation/widgets/shared/season_and_episode.dart';
 import 'package:movify/shared/presentation/widgets/size_config.dart';
 
@@ -17,15 +18,15 @@ class SeasonInfoSection extends StatelessWidget {
   final String heroTag;
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.sizeOf(context).width;
+    final double screenWidth = MediaQuery.widthOf(context);
     final image = season.posterPath ?? defaultImageUrl;
     return Row(
       spacing: 20,
       children: [
         Expanded(
           flex: screenWidth > SizeConfig.mobile ? 1 : 2,
-          child: Hero(
-            tag: heroTag,
+          child: SafeHeroCard(
+            heroTag: heroTag,
             child: EpisodeImage(episodeImageUrl: image),
           ),
         ),

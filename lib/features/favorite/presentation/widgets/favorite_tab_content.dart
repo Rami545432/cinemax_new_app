@@ -56,7 +56,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final l10n = AppLocalizations.of(context)!;
     return BlocConsumer<FavoriteCubit, FavoriteState>(
       listener: (context, state) {

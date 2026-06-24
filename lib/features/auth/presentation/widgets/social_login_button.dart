@@ -24,6 +24,12 @@ class SocialLoginButton extends StatelessWidget {
       onTap: onTap,
       leading: SvgPicture.asset(icon, height: 36, width: 36),
       title: BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (previous, current) {
+          // Only rebuild if we are entering or exiting the loading state
+          final wasLoading = previous is LoginLoading;
+          final isLoading = current is LoginLoading;
+          return wasLoading != isLoading;
+        },
         builder: (context, state) {
           if (state is LoginLoading) {
             return Center(

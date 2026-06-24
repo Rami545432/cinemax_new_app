@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:movify/constant.dart';
 import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dart';
-import 'package:movify/core/pagination/widgets/mixins/scroll_end_mixin.dart';
 import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
 
 class SliverPaginatedGridView<T> extends StatefulWidget {
@@ -17,7 +16,6 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
   final Widget? loadingWidget;
   final Widget? emptyWidget;
   final Widget Function(String message)? errorBuilder;
-  final ScrollController? externalScrollController;
 
   const SliverPaginatedGridView({
     super.key,
@@ -36,7 +34,6 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
     this.loadingWidget,
     this.emptyWidget,
     this.errorBuilder,
-    this.externalScrollController,
   });
 
   @override
@@ -44,36 +41,13 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
       _PaginatedGridViewState<T>();
 }
 
-class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>>
-    with ScrollEndMixin {
-  @override
-  ScrollController? get externalScrollController =>
-      widget.externalScrollController;
+class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
+  int _lastFetchCount = 0;
 
   @override
-  double get scrollThreshold => widget.scrollThreshold;
-
-  @override
-  VoidCallback get onScrollEnd => widget.onScrollEnd;
-  @override
-  void initState() {
-    super.initState();
-    initScrollController();
-  }
-
-  @override
-  void dispose() {
-    disposeScrollController();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => _buildContent();
-
-  Widget _buildContent() {
+  Widget build(BuildContext context) {
     final info = widget.info;
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
 
     if (info.isFirstLoad) {
       return SliverToBoxAdapter(
@@ -129,6 +103,17 @@ class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>>
         // +1 for end slot — spans full width via SliverGridDelegate trick
         itemCount: info.items.length + 1,
         itemBuilder: (context, index) {
+          final thresholdIndex = (info.items.length * 0.7).round();
+          if (index >= thresholdIndex &&
+              info.canLoadMore &&
+              !info.isFetchingMore) {
+            if (_lastFetchCount != info.items.length) {
+              _lastFetchCount = info.items.length;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                widget.onScrollEnd();
+              });
+            }
+          }
           if (index == info.items.length) {
             return PaginationBottomSlot(
               isFetchingMore: info.isFetchingMore,

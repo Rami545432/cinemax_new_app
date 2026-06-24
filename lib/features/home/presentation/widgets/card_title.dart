@@ -9,9 +9,9 @@ class CardTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     return SizedBox(
-      width: width > SizeConfig.mobile ? 90 : 100,
+      width: width > SizeConfig.mobile ? 120 : 100,
       child: Text(
         title,
         style: AppStyles.textStyle12(

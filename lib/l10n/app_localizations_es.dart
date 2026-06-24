@@ -490,4 +490,64 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Inicia sesión con Google';
+
+  @override
+  String get noResultsFound => 'No se encontraron resultados';
+
+  @override
+  String get somethingWentWrong => 'Algo salió mal';
+
+  @override
+  String get removeFromFavorites => 'Eliminar de favoritos';
+
+  @override
+  String get share => 'Compartir';
+
+  @override
+  String get unknown => 'Desconocido';
+
+  @override
+  String get guestStars => 'Estrellas Invitadas';
+
+  @override
+  String get lastEpisode => 'Último Episodio';
+
+  @override
+  String get nextEpisode => 'Próximo Episodio';
+
+  @override
+  String get firstAirDate => 'Fecha de Emisión';
+
+  @override
+  String get lastAirDate => 'Fecha de Emisión';
+
+  @override
+  String get totalTime => 'Tiempo Total';
+
+  @override
+  String get noHistoryFound => 'No hay Historial';
+
+  @override
+  String get noActors => 'No hay Actores';
+
+  @override
+  String get noEpisodes => 'No hay Episodios';
+
+  @override
+  String get noSeasons => 'No hay Temporadas';
+
+  @override
+  String get episode => 'Episodio';
+
+  @override
+  String get pushNotifications => 'Push Notifications';
+
+  @override
+  String get getStarted => 'Comenzar';
+
+  @override
+  String get startExplore => 'Explorar';
+
+  @override
+  String get continueButton => 'Continuar';
 }

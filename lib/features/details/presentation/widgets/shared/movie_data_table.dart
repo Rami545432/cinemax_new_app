@@ -14,7 +14,7 @@ class MovieDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final movieDetailsEntity = context.watch<MovieDetailsEntity>();
+    final movieDetailsEntity = context.read<MovieDetailsEntity>();
     TableRow buildDataRow(String label, String value) => TableRow(
       children: [
         DataCellText(text: label),

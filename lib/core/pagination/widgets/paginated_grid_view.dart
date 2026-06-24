@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:movify/constant.dart';
 import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dart';
-import 'package:movify/core/pagination/widgets/mixins/scroll_end_mixin.dart';
 import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
 import 'package:movify/core/pagination/widgets/pagination_error.dart';
 import 'package:movify/core/pagination/widgets/pagination_shimmer.dart';
@@ -45,35 +44,10 @@ class PaginatedGridView<T> extends StatefulWidget {
   State<PaginatedGridView<T>> createState() => _PaginatedGridViewState<T>();
 }
 
-class _PaginatedGridViewState<T> extends State<PaginatedGridView<T>>
-    with ScrollEndMixin {
+class _PaginatedGridViewState<T> extends State<PaginatedGridView<T>> {
   @override
-  ScrollController? get externalScrollController =>
-      widget.externalScrollController;
-
-  @override
-  double get scrollThreshold => widget.scrollThreshold;
-
-  @override
-  VoidCallback get onScrollEnd => widget.onScrollEnd;
-  @override
-  void initState() {
-    super.initState();
-    initScrollController();
-  }
-
-  @override
-  void dispose() {
-    disposeScrollController();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => _buildContent();
-
-  Widget _buildContent() {
-    final width = MediaQuery.sizeOf(context).width;
+  Widget build(BuildContext context) {
+    final width = MediaQuery.widthOf(context);
     final info = widget.info;
 
     if (info.isFirstLoad) {
@@ -93,23 +67,37 @@ class _PaginatedGridViewState<T> extends State<PaginatedGridView<T>>
           const Center(child: Text('Nothing here yet'));
     }
 
-    return GridView.builder(
-      controller: scrollController,
-      padding: widget.padding,
-      gridDelegate: Constants.sliverGridDelegate(width),
-      // +1 for end slot — spans full width via SliverGridDelegate trick
-      itemCount: info.items.length + 1,
-      itemBuilder: (context, index) {
-        if (index == info.items.length) {
-          return PaginationBottomSlot(
-            isFetchingMore: info.isFetchingMore,
-            fetchMoreError: info.fetchMoreError,
-            hasMore: info.canLoadMore,
-            onRetry: widget.onRetry,
-          );
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        // Trigger pagination when reaching the end
+        if (notification is ScrollUpdateNotification) {
+          final pos = notification.metrics;
+          if (pos.pixels >= pos.maxScrollExtent - widget.scrollThreshold) {
+            widget.onScrollEnd();
+          }
         }
-        return widget.itemBuilder(context, info.items[index]);
+        // Return false to let the notification bubble up (vital for NestedScrollView)
+        return false;
       },
+      child: GridView.builder(
+        controller: widget.externalScrollController,
+        padding: widget.padding,
+
+        gridDelegate: Constants.sliverGridDelegate(width),
+        // +1 for end slot — spans full width via SliverGridDelegate trick
+        itemCount: info.items.length + 1,
+        itemBuilder: (context, index) {
+          if (index == info.items.length) {
+            return PaginationBottomSlot(
+              isFetchingMore: info.isFetchingMore,
+              fetchMoreError: info.fetchMoreError,
+              hasMore: info.canLoadMore,
+              onRetry: widget.onRetry,
+            );
+          }
+          return widget.itemBuilder(context, info.items[index]);
+        },
+      ),
     );
   }
 }

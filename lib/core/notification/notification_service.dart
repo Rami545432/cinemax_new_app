@@ -30,8 +30,8 @@ class NotificationService {
 
   Future<void> init() async {
     try {
-      // 1) permissions
-      await _requestPermission();
+      // 1) permissions (Removed: We now handle this via the Profile Settings switch)
+      // We no longer ask immediately on app launch to improve UX.
 
       // 2) local notification init
       await _initLocalNotifications();
@@ -63,11 +63,6 @@ class NotificationService {
       debugPrint("NotificationService init error: $e");
       debugPrint(stackTrace.toString());
     }
-  }
-
-  Future<void> _requestPermission() async {
-    final settings = await _fcm.requestPermission();
-    debugPrint("Permission status: ${settings.authorizationStatus}");
   }
 
   Future<void> _initLocalNotifications() async {

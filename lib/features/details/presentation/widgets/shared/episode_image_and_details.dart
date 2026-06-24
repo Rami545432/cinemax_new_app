@@ -18,7 +18,10 @@ class EpisodeImageAndDetails extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(flex: 2, child: EpisodeImage(episodeImageUrl: image)),
+        Expanded(
+          flex: 2,
+          child: EpisodeImage(episodeImageUrl: image, imageSize: .w185),
+        ),
         const SizedBox(width: 10),
         Expanded(
           flex: 3,

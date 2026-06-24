@@ -27,3 +27,6 @@ class OvershootCurve extends Curve {
         1;
   }
 }
+
+int orbitIndex(int current, int offset, int length) =>
+    (current + offset + length) % length;

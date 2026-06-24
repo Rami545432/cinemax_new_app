@@ -1,68 +1,138 @@
-// import 'dart:async';
+// ignore_for_file: inference_failure_on_instance_creation
 
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mocktail/mocktail.dart';
-// import 'package:movify/core/auth/auth_status_provider.dart';
-// import 'package:movify/features/favorite/domain/use_cases/add_favorite_use_case.dart';
-// import 'package:movify/features/favorite/domain/use_cases/get_favorite_use_case.dart';
-// import 'package:movify/features/favorite/domain/use_cases/merge_guest_favorites_use_case.dart';
-// import 'package:movify/features/favorite/domain/use_cases/pull_cloud_favorites_use_case.dart';
-// import 'package:movify/features/favorite/domain/use_cases/remove_favorite_use_case.dart';
-// import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'dart:async';
 
-// class MockMergeGuestFavoritesUseCase extends Mock
-//     implements MergeGuestFavoritesUseCase {}
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/domain/use_cases/add_favorite_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/get_favorite_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/merge_guest_favorites_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/pull_cloud_favorites_use_case.dart';
+import 'package:movify/features/favorite/domain/use_cases/remove_favorite_use_case.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_state.dart';
 
-// class MockPullCloudFavouritesUseCase extends Mock
-//     implements PullCloudFavoritesUseCase {}
+class MockMergeGuestFavoritesUseCase extends Mock
+    implements MergeGuestFavoritesUseCase {}
 
-// class MockAddFavouritesUseCase extends Mock implements AddFavoriteUseCase {}
+class MockPullCloudFavoritesUseCase extends Mock
+    implements PullCloudFavoritesUseCase {}
 
-// class MockRemoveFavouritesUseCase extends Mock
-//     implements RemoveFavoriteUseCase {}
+class MockGetFavoritesUseCase extends Mock implements GetFavoritesUseCase {}
 
-// class MockGetFavoritesUseCase extends Mock implements GetFavoritesUseCase {}
+class MockAddFavoriteUseCase extends Mock implements AddFavoriteUseCase {}
 
-// class MockAuthStatusProvider extends Mock implements AuthStatusProvider {}
+class MockRemoveFavoriteUseCase extends Mock implements RemoveFavoriteUseCase {}
 
-// late final StreamController<AuthStatusEvent> authStreamController;
-// void main() {
-//   late FavoriteCubit favoriteCubit;
-//   late MockAuthStatusProvider mockAuthStatusProvider;
-//   late MockMergeGuestFavoritesUseCase mockMergeUseCase;
-//   late MockGetFavoritesUseCase mockGetFavoritesUseCase;
-//   late MockPullCloudFavouritesUseCase mockPullCloudFavoritesUseCase;
-//   late MockAddFavouritesUseCase mockAddFavouritesUseCase;
-//   late MockRemoveFavouritesUseCase mockRemoveFavouritesUseCase;
+void main() {
+  late MockMergeGuestFavoritesUseCase mockMergeUseCase;
+  late MockPullCloudFavoritesUseCase mockPullCloudUseCase;
+  late MockGetFavoritesUseCase mockGetFavoritesUseCase;
+  late MockAddFavoriteUseCase mockAddFavoriteUseCase;
+  late MockRemoveFavoriteUseCase mockRemoveFavoriteUseCase;
+  late StreamController<SessionState> sessionStreamController;
 
-//   setUp(() {
-//     mockAuthStatusProvider = MockAuthStatusProvider();
-//     mockMergeUseCase = MockMergeGuestFavoritesUseCase();
-//     mockGetFavoritesUseCase = MockGetFavoritesUseCase();
-//     mockPullCloudFavoritesUseCase = MockPullCloudFavouritesUseCase();
-//     mockAddFavouritesUseCase = MockAddFavouritesUseCase();
-//     mockRemoveFavouritesUseCase = MockRemoveFavouritesUseCase();
-//     authStreamController = StreamController<AuthStatusEvent>.broadcast();
-//     mockAuthStatusProvider = MockAuthStatusProvider();
+  final testUser = UserEntity(
+    uid: 'user_123',
+    email: 'test@test.com',
+    displayName: 'Test User',
+    photoUrl: '',
+    isEmailVerified: true,
+    isGuest: false,
+    createdAt: DateTime.now(),
+  );
 
-//     when(
-//       () => mockAuthStatusProvider.authStatusStream,
-//     ).thenAnswer((_) => authStreamController.stream);
+  final guestUser = UserEntity.guest();
 
-//     when(
-//       () => mockAuthStatusProvider.currentAuthStatus,
-//     ).thenAnswer((_) async => const AuthStatusEvent(status: AuthStatus.guest));
-//     favoriteCubit = FavoriteCubit(
-//       authStatusProvider: mockAuthStatusProvider,
-//       getFavoritesUseCase: mockGetFavoritesUseCase,
-//       mergeGuestFavoritesUseCase: mockMergeUseCase,
-//       pullCloudFavoritesUseCase: mockPullCloudFavoritesUseCase,
-//       addFavoriteUseCase: mockAddFavouritesUseCase,
-//       removeFavoriteUseCase: mockRemoveFavouritesUseCase,
-//     );
-//   });
-//   tearDown(() {
-//     authStreamController.close();
-//     favoriteCubit.close();
-//   });
-// }
+  setUp(() {
+    mockMergeUseCase = MockMergeGuestFavoritesUseCase();
+    mockPullCloudUseCase = MockPullCloudFavoritesUseCase();
+    mockGetFavoritesUseCase = MockGetFavoritesUseCase();
+    mockAddFavoriteUseCase = MockAddFavoriteUseCase();
+    mockRemoveFavoriteUseCase = MockRemoveFavoriteUseCase();
+    sessionStreamController = StreamController<SessionState>.broadcast();
+
+    // Default mock behaviors
+    when(
+      () => mockMergeUseCase(any()),
+    ).thenAnswer((_) async => const Right(unit));
+    when(
+      () => mockGetFavoritesUseCase(
+        userId: any(named: 'userId'),
+        contentType: any(named: 'contentType'),
+      ),
+    ).thenAnswer((_) async => const Right(<FavoriteEntity>[]));
+  });
+
+  tearDown(() {
+    sessionStreamController.close();
+  });
+
+  FavoriteCubit buildCubit(SessionState initialState) => FavoriteCubit(
+    mergeGuestFavoritesUseCase: mockMergeUseCase,
+    pullCloudFavoritesUseCase: mockPullCloudUseCase,
+    getFavoritesUseCase: mockGetFavoritesUseCase,
+    addFavoriteUseCase: mockAddFavoriteUseCase,
+    removeFavoriteUseCase: mockRemoveFavoriteUseCase,
+    sessionStream: sessionStreamController.stream,
+    initialSessionState: initialState,
+  );
+
+  group('FavoriteCubit - Authentication Flow', () {
+    blocTest<FavoriteCubit, FavoriteState>(
+      'starts as guest, then merges cloud data when user signs in',
+      build: () => buildCubit(SessionGuest(user: guestUser)),
+      act: (cubit) async {
+        // Wait for initial constructor events to settle
+        await Future.delayed(Duration.zero);
+        // Simulate user successfully logging in explicitly
+        sessionStreamController.add(SessionAuthenticated(user: testUser, isExplicitSignIn: true));
+      },
+      skip: 1, // Skips the async Loaded from the initial guest state
+      expect: () => [isA<FavoriteLoading>(), isA<FavoriteLoaded>()],
+      verify: (cubit) {
+        // 1. Verify it merged guest favorites since it was the first sign-in
+        verify(() => mockMergeUseCase(testUser.uid!)).called(1);
+
+        // 2. Verify it fetched from Hive using the real user ID
+        verify(
+          () => mockGetFavoritesUseCase(userId: testUser.uid!),
+        ).called(greaterThan(0));
+
+        // 3. Verify internal state ID is updated
+        expect(cubit.currentUserId, equals(testUser.uid));
+      },
+    );
+
+    blocTest<FavoriteCubit, FavoriteState>(
+      'clears user data and loads guest favorites when user signs out',
+      build: () => buildCubit(SessionAuthenticated(user: testUser)),
+      act: (cubit) async {
+        // Wait for initial constructor events to settle
+        await Future.delayed(Duration.zero);
+        // Simulate user clicking sign out
+        sessionStreamController.add(SessionGuest(user: guestUser));
+      },
+      skip: 1, // Skips the async Loaded from the initial auth state
+      expect: () => [isA<FavoriteLoading>(), isA<FavoriteLoaded>()],
+      verify: (cubit) {
+        // 1. Verify we never merged because the initial state was a hot restart, 
+        // and sign out shouldn't merge either.
+        verifyNever(() => mockMergeUseCase(any()));
+
+        // 2. Verify it instantly switched to reading guest data from Hive
+        verify(
+          () => mockGetFavoritesUseCase(userId: 'guest'),
+        ).called(greaterThan(0));
+
+        // 3. Verify internal state ID is updated
+        expect(cubit.currentUserId, equals('guest'));
+      },
+    );
+  });
+}

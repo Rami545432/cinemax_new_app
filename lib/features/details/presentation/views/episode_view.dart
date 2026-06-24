@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
@@ -21,8 +19,6 @@ class _EpisodeViewState extends State<EpisodeView> {
   void initState() {
     super.initState();
     final cubit = BlocProvider.of<FetchSeriesSeasonDetailsCubit>(context);
-    log(widget.episodeDataNav.tmdbId.toString());
-    log(widget.episodeDataNav.specificId.toString());
 
     final int tvid = widget.episodeDataNav.tmdbId;
     final int season = widget.episodeDataNav.seasonNumber;

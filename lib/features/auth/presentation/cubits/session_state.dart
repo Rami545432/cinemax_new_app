@@ -23,9 +23,13 @@ class SessionGuest extends SessionState {
 
 class SessionAuthenticated extends SessionState {
   final UserEntity user;
+  final bool isExplicitSignIn;
 
-  const SessionAuthenticated({required this.user});
+  const SessionAuthenticated({
+    required this.user,
+    this.isExplicitSignIn = false,
+  });
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, isExplicitSignIn];
 }

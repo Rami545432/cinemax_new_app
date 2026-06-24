@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/features/details/domain/entites/movie_details_entity.dart';
 import 'package:movify/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
@@ -11,23 +12,28 @@ class MovieAboutTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetailsEntity = context.watch<MovieDetailsEntity>();
+    final movieDetailsEntity = context.read<MovieDetailsEntity>();
     final l10n = AppLocalizations.of(context)!;
     return Column(
-      children: [
-        AboutTabViewBranch(
-          title: l10n.informations,
-          child: const MovieDataTable(),
-        ),
-        const Divider(),
-        const SizedBox(height: 20),
-        AboutTabViewBranch(
-          title: l10n.trailers,
-          child: TrailersImageListViewBuilder(
-            videos: movieDetailsEntity.kVideos!,
-          ),
-        ),
-      ],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:
+          [
+                AboutTabViewBranch(
+                  title: l10n.informations,
+                  child: const MovieDataTable(),
+                ),
+                const Divider(),
+                const SizedBox(height: 20),
+                AboutTabViewBranch(
+                  title: l10n.trailers,
+                  child: TrailersImageListViewBuilder(
+                    videos: movieDetailsEntity.kVideos!,
+                  ),
+                ),
+              ]
+              .animate(interval: 100.ms)
+              .fade(duration: 400.ms)
+              .slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuart),
     );
   }
 }

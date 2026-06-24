@@ -72,6 +72,7 @@ class _MovieCategoryRowState extends State<MovieCategoryRow>
           showHeader: widget.category != MovieCategory.trending,
           onSeeAll: () => Navigator.push(
             context,
+
             MaterialPageRoute<void>(
               builder: (_) =>
                   MovieCategoryView(initialCategory: widget.category),

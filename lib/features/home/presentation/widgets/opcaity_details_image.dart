@@ -8,33 +8,30 @@ class OpcaityDetailsImage extends StatelessWidget {
     super.key,
     required this.detailsBackGroundImage,
     this.defaultDetailsBackGroundImage,
+    this.imageSize = TmdbImageSize.original,
+    this.memCacheWidth,
   });
   final String? detailsBackGroundImage;
   final String? defaultDetailsBackGroundImage;
-
+  final TmdbImageSize imageSize;
+  final int? memCacheWidth;
   @override
-  Widget build(BuildContext context) => ShaderMask(
-    shaderCallback: (bounds) => LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [Colors.transparent, AppPrimaryColors.dark],
-      stops: const [0.1, 1],
-    ).createShader(bounds),
-    blendMode: BlendMode.dstOut,
+  Widget build(BuildContext context) => Container(
+    foregroundDecoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Colors.transparent, AppPrimaryColors.dark],
+        stops: const [0.1, 1],
+      ),
+    ),
     child: CachedNetworkImage(
       fit: BoxFit.cover,
-
-      imageUrl: tmdbImageSize(
-        TmdbImageSize.original,
-        detailsBackGroundImage ?? '',
-      ),
+      imageUrl: tmdbImageSize(imageSize, detailsBackGroundImage ?? ''),
+      memCacheWidth: memCacheWidth,
       errorWidget: (context, url, error) => CachedNetworkImage(
-        fit: BoxFit.contain,
-
-        imageUrl: tmdbImageSize(
-          TmdbImageSize.original,
-          defaultDetailsBackGroundImage ?? '',
-        ),
+        fit: BoxFit.cover,
+        imageUrl: tmdbImageSize(imageSize, defaultDetailsBackGroundImage ?? ''),
         errorWidget: (context, url, error) =>
             Container(color: AppPrimaryColors.dark),
       ),

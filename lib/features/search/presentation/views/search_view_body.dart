@@ -13,6 +13,7 @@ class SearchViewBody extends StatelessWidget {
     builder: (context, state) => switch (state) {
       SearchInitial() => const HistoryView(),
       SearchLoading() => const Center(child: CircularProgressIndicator()),
+
       SearchLoaded(
         results: final results,
         movies: final movies,

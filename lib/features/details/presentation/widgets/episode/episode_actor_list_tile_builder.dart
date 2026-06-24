@@ -15,7 +15,7 @@ class EpisodeActrolListTileListViewBuilder extends StatelessWidget {
     itemBuilder: (context, index) => Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: AspectRatio(
-        aspectRatio: 0.68,
+        aspectRatio: 2,
         child: ActorListTile(actorList: episode.guestStars![index]),
       ),
     ),

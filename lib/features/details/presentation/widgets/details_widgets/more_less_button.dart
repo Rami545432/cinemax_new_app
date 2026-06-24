@@ -18,8 +18,8 @@ class MoreLessButton extends HookWidget {
         Text(
           maxLines: isClicked.value ? overview.length : 2,
           overflow: isClicked.value
-              ? TextOverflow.ellipsis
-              : TextOverflow.visible,
+              ? TextOverflow.visible
+              : TextOverflow.ellipsis,
           overview,
           style: AppStyles.textStyle16(context),
         ),

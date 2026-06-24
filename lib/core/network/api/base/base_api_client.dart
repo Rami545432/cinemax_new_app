@@ -1,5 +1,4 @@
 // lib/core/network/api/base/base_api_client.dart
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -40,7 +39,6 @@ abstract class BaseApiClient {
       },
     );
 
-    log('🔍 URL: ${uri.toString()}');
     return uri.toString();
   }
 

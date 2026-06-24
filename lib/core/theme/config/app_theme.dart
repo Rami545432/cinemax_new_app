@@ -27,6 +27,7 @@ class AppTheme {
     brightness: Brightness.dark,
     cardColor: Colors.grey.shade900,
     scaffoldBackgroundColor: colorScheme,
+
     colorScheme: ColorScheme.dark(
       primary: colorScheme,
       secondary: colorScheme,

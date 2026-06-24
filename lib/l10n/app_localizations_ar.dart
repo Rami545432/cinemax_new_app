@@ -484,4 +484,64 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'تسجيل الدخول باستخدام جوجل';
+
+  @override
+  String get noResultsFound => 'لا يوجد نتائج';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
+  String get removeFromFavorites => 'إزالة من المفضلة';
+
+  @override
+  String get share => 'مشاركة';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
+  String get guestStars => 'ضيوف';
+
+  @override
+  String get lastEpisode => 'اخر حلقة';
+
+  @override
+  String get nextEpisode => 'الحلقة القادمة';
+
+  @override
+  String get firstAirDate => 'اول حلقة';
+
+  @override
+  String get lastAirDate => 'اخر حلقة';
+
+  @override
+  String get totalTime => 'الوقت الاجمالي';
+
+  @override
+  String get noHistoryFound => 'لا يوجد سجل';
+
+  @override
+  String get noActors => 'لا يوجد ممثلين';
+
+  @override
+  String get noEpisodes => 'لا يوجد حلقات';
+
+  @override
+  String get noSeasons => 'لا يوجد مواسم';
+
+  @override
+  String get episode => 'الحلقة';
+
+  @override
+  String get pushNotifications => 'تفعيل الاشعارات';
+
+  @override
+  String get getStarted => 'ابدأ';
+
+  @override
+  String get startExplore => 'ابدأ الاستكشاف';
+
+  @override
+  String get continueButton => 'التالي';
 }

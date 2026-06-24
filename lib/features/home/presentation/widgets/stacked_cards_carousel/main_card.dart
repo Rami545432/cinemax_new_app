@@ -17,25 +17,19 @@ class MainCard extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Hero(
-          tag: 'trending-${cardModel.id}',
-          child: Container(
-            height: 250,
-            width: 175,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: CachedNetworkImage(
-                imageUrl: tmdbImageSize(
-                  TmdbImageSize.w780,
-                  cardModel.posterPath,
-                ),
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    const Center(child: EmptyImage()),
-              ),
+        SizedBox(
+          height: 250,
+          width: 175,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: CachedNetworkImage(
+              imageUrl: tmdbImageSize(TmdbImageSize.w500, cardModel.posterPath),
+              filterQuality: .high,
+              fit: BoxFit.cover,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  const Center(child: EmptyImage()),
             ),
           ),
         ),

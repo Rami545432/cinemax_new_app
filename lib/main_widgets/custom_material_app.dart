@@ -19,6 +19,7 @@ class CustomMaterialApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: getIt<GoRouter>(),
       debugShowCheckedModeBanner: false,
+
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -27,8 +28,12 @@ class CustomMaterialApp extends StatelessWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
 
-      builder: (context, child) =>
-          Stack(children: [child!, const NetworkStatusBanner()]),
+      builder: (context, child) => Stack(
+        children: [
+          child!,
+          const RepaintBoundary(child: NetworkStatusBanner()),
+        ],
+      ),
 
       theme: AppTheme.light(themeState.accentColor),
       darkTheme: AppTheme.dark(themeState.accentColor),

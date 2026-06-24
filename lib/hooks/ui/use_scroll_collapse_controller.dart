@@ -31,7 +31,7 @@ ScrollCollapseResult useScrollCollapseDebounced([
   useEffect(() {
     final threshold =
         customThreshold ??
-        (MediaQuery.of(context).size.height * 0.4 - kToolbarHeight);
+        (MediaQuery.sizeOf(context).height * 0.4 - kToolbarHeight);
 
     void updateScroll() {
       debounceTimer.value?.cancel();

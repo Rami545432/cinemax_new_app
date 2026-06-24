@@ -1,7 +1,6 @@
 // ignore_for_file: inference_failure_on_untyped_parameter
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,27 +29,25 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
   ConnectivityCubit({
     Connectivity? connectivity,
     InternetConnection? internetChecker,
-  })  : _connectivity = connectivity ?? Connectivity(),
-        _internetChecker = internetChecker ??
-            InternetConnection.createInstance(
-              customCheckOptions: [
-                InternetCheckOption(uri: Uri.parse('https://google.com')),
-                InternetCheckOption(uri: Uri.parse('https://example.com')),
-              ],
-            ),
-        super(NetworkStatus.checking) {
+  }) : _connectivity = connectivity ?? Connectivity(),
+       _internetChecker =
+           internetChecker ??
+           InternetConnection.createInstance(
+             customCheckOptions: [
+               InternetCheckOption(uri: Uri.parse('https://google.com')),
+               InternetCheckOption(uri: Uri.parse('https://example.com')),
+             ],
+           ),
+       super(NetworkStatus.checking) {
     _initialize();
   }
 
   // ── Initialization ──────────────────────────────────────────────────
 
   void _initialize() {
-    log('🌐 ConnectivityCubit: Initializing...');
-
     _connectivitySub = _connectivity.onConnectivityChanged.listen(
       _onConnectivityChanged,
       onError: (error) {
-        log('🌐 Connectivity error: $error');
         _updateStatus(false, 'Connectivity error: $error');
       },
     );
@@ -58,7 +55,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
     _internetSub = _internetChecker.onStatusChange.listen(
       _onInternetStatusChanged,
       onError: (error) {
-        log('🌐 Internet checker error: $error');
         _updateStatus(false, 'Internet checker error: $error');
       },
     );
@@ -72,7 +68,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
       final result = await _connectivity.checkConnectivity();
       await _onConnectivityChanged(result);
     } catch (e) {
-      log('🌐 Initial status check failed: $e');
       _updateStatus(false, 'Initial check failed: $e');
     }
   }
@@ -80,8 +75,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
   // ── Event handlers ──────────────────────────────────────────────────
 
   Future<void> _onConnectivityChanged(List<ConnectivityResult> results) async {
-    log('🌐 Connectivity changed: $results');
-
     if (results.contains(ConnectivityResult.none)) {
       _updateStatus(false, 'No connection');
     } else {
@@ -95,7 +88,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
   }
 
   void _onInternetStatusChanged(InternetStatus status) {
-    log('🌐 Internet status changed: $status');
     final online = status == InternetStatus.connected;
     _updateStatus(online, online ? 'Internet restored' : 'Internet lost');
   }
@@ -106,10 +98,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
     if (_hasConnection != hasConnection || state == NetworkStatus.checking) {
       _hasConnection = hasConnection;
       _lastStatusChange = DateTime.now();
-
-      log(
-        '🌐 Status: ${hasConnection ? "CONNECTED" : "DISCONNECTED"} — $reason',
-      );
 
       if (hasConnection) {
         _offlineDebounceTimer?.cancel();
@@ -149,7 +137,6 @@ class ConnectivityCubit extends Cubit<NetworkStatus> implements NetworkInfo {
 
   @override
   Future<void> close() {
-    log('🌐 ConnectivityCubit: Disposing...');
     _connectivitySub?.cancel();
     _internetSub?.cancel();
     _offlineDebounceTimer?.cancel();

@@ -487,4 +487,64 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Google ile giriş yap';
+
+  @override
+  String get noResultsFound => 'Sonuc bulunamadi';
+
+  @override
+  String get somethingWentWrong => 'Birseyler ters gitti';
+
+  @override
+  String get removeFromFavorites => 'Favorilerden Çıkar';
+
+  @override
+  String get share => 'Paylaş';
+
+  @override
+  String get unknown => 'Bilinmeyen';
+
+  @override
+  String get guestStars => 'Konuk Oyuncular';
+
+  @override
+  String get lastEpisode => 'Son Bölüm';
+
+  @override
+  String get nextEpisode => 'Sonraki Bölüm';
+
+  @override
+  String get firstAirDate => 'İlk Yayın Tarihi';
+
+  @override
+  String get lastAirDate => 'Son Yayın Tarihi';
+
+  @override
+  String get totalTime => 'Toplam Süre';
+
+  @override
+  String get noHistoryFound => 'Hiçbir tarih bulunamadı';
+
+  @override
+  String get noActors => 'Hiçbir aktör bulunamadı';
+
+  @override
+  String get noEpisodes => 'Hiçbir bölüm bulunamadı';
+
+  @override
+  String get noSeasons => 'Hiçbir sezon bulunamadı';
+
+  @override
+  String get episode => 'Bölüm';
+
+  @override
+  String get pushNotifications => 'Push Bildirimleri';
+
+  @override
+  String get getStarted => 'Başla';
+
+  @override
+  String get startExplore => 'Keşfetmeye Başla';
+
+  @override
+  String get continueButton => 'Devam Et';
 }

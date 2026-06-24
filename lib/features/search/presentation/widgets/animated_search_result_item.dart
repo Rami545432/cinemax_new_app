@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:movify/features/home/presentation/extensions/entity_card_extentions.dart';
-import 'package:movify/features/home/presentation/widgets/search_vertical_card.dart';
 import 'package:movify/features/search/data/models/search_result.dart';
 import 'package:movify/features/search/presentation/widgets/custom_grid_config.dart';
-import 'package:movify/features/search/presentation/widgets/simple_animated_card.dart';
+import 'package:movify/features/search/presentation/widgets/search_result_card.dart';
 
 class AnimatedSearchResultItem extends StatelessWidget {
   final SearchResult result;
@@ -26,7 +24,7 @@ class AnimatedSearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resultCard = _buildResultCard(result, context);
+    final resultCard = SearchResultCard(result: result);
 
     if (!shouldAnimate) {
       return resultCard;
@@ -53,16 +51,6 @@ class AnimatedSearchResultItem extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildResultCard(SearchResult result, BuildContext context) =>
-      switch (result) {
-        MovieResult(:final movie) => SimpleAnimatedCard(
-          child: SearchVerticalCard(cardModel: movie.toCardDisplay()),
-        ),
-        TvShowResult(:final tvShow) => SimpleAnimatedCard(
-          child: SearchVerticalCard(cardModel: tvShow.toCardDisplay()),
-        ),
-      };
 
   String _getItemId(SearchResult result) => switch (result) {
     MovieResult(:final movie) => 'movie-${movie.id}',

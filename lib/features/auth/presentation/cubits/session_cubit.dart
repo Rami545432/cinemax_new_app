@@ -1,8 +1,6 @@
-import 'dart:async';
-
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movify/core/auth/auth_status_provider.dart';
 import 'package:movify/core/domain/use_cases/no_params.dart';
 import 'package:movify/features/auth/domain/entities/user_entity.dart';
 import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
@@ -16,59 +14,36 @@ class SessionCubit extends Cubit<SessionState> {
   final SignOutUseCase signOutUseCase;
   final EnableGuestModeUseCase enableGuestModeUseCase;
   final DisableGuestModeUseCase disableGuestModeUseCase;
-  final AuthStatusProvider authStatusProvider; // ← inject this
-
-  late final StreamSubscription<AuthStatusEvent> _authSub;
 
   SessionCubit({
     required this.getCurrentUserUseCase,
     required this.signOutUseCase,
     required this.enableGuestModeUseCase,
     required this.disableGuestModeUseCase,
-    required this.authStatusProvider,
-  }) : super(SessionUnknown()) {
-    _authSub = authStatusProvider.authStatusStream.listen(_onAuthChanged);
-  }
-  void _onAuthChanged(AuthStatusEvent event) {
-    debugPrint('🎯 SessionCubit._onAuthChanged → ${event.status}');
-    switch (event.status) {
-      case AuthStatus.authenticated:
-        // Re-read full user from repo to get complete UserEntity
-        _refreshAuthenticatedUser();
-        break;
-      case AuthStatus.guest:
-        emit(SessionGuest(user: UserEntity.guest()));
-        break;
-      case AuthStatus.unauthenticated:
-        emit(SessionUnauthenticated());
-        break;
+  }) : super(SessionUnknown());
+
+  /// Called explicitly by other cubits (like LoginCubit) after a successful login
+  void setAuthenticated(UserEntity user) {
+    if (user.uid != null) {
+      FirebaseCrashlytics.instance.setUserIdentifier(user.uid!);
     }
+    emit(SessionAuthenticated(user: user, isExplicitSignIn: true));
   }
 
-  // Re-fetch full user because AuthStatusEvent only carries userId
-  Future<void> _refreshAuthenticatedUser() async {
-    final result = await getCurrentUserUseCase(NoParams());
-    result.fold((_) => emit(SessionUnauthenticated()), (user) {
-      if (user == null) {
-        emit(SessionUnauthenticated());
-      } else if (user.isGuest) {
-        emit(SessionGuest(user: user));
-      } else {
-        emit(SessionAuthenticated(user: user));
-      }
-    });
-  }
-
-  Future<void> checkAuthStatus() async {
+  Future<void> checkAuthStatus({bool isExplicitSignIn = false}) async {
     final result = await getCurrentUserUseCase(NoParams());
 
     result.fold((_) => emit(SessionUnauthenticated()), (user) {
       if (user == null) {
         emit(SessionUnauthenticated());
       } else if (user.isGuest) {
+        FirebaseCrashlytics.instance.setUserIdentifier(''); // Clear it so Crashlytics uses the unique device ID
         emit(SessionGuest(user: user));
       } else {
-        emit(SessionAuthenticated(user: user));
+        if (user.uid != null) {
+          FirebaseCrashlytics.instance.setUserIdentifier(user.uid!);
+        }
+        emit(SessionAuthenticated(user: user, isExplicitSignIn: isExplicitSignIn));
       }
     });
   }
@@ -76,14 +51,17 @@ class SessionCubit extends Cubit<SessionState> {
   Future<void> signOut() async {
     await signOutUseCase(NoParams());
     await enableGuestModeUseCase(NoParams());
+    FirebaseCrashlytics.instance.setUserIdentifier(''); // Clear the identifier
+    emit(SessionGuest(user: UserEntity.guest()));
   }
 
   Future<void> enableGuestMode() async {
     final result = await enableGuestModeUseCase(NoParams());
     result.fold(
       (failure) => debugPrint('❌ Guest mode error: ${failure.errorMessage}'),
-      (user) => () {
-        return;
+      (user) {
+        FirebaseCrashlytics.instance.setUserIdentifier('');
+        emit(SessionGuest(user: user));
       },
     );
   }
@@ -94,11 +72,5 @@ class SessionCubit extends Cubit<SessionState> {
       (failure) => debugPrint('❌ Disable guest error: ${failure.errorMessage}'),
       (_) => emit(SessionUnauthenticated()),
     );
-  }
-
-  @override
-  Future<void> close() {
-    _authSub.cancel();
-    return super.close();
   }
 }

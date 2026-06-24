@@ -21,7 +21,11 @@ class SearchHistoryCubit extends Cubit<SearchHistoryState> {
 
   Future<void> getSearchHistory() async {
     final searchHistory = await getSearchHistoryUseCase.call();
-    safeEmit(SearchHistoryLoaded(searchHistory: searchHistory));
+    if (searchHistory.isEmpty) {
+      safeEmit(const SearchHistoryEmpty());
+    } else {
+      safeEmit(SearchHistoryLoaded(searchHistory: searchHistory));
+    }
   }
 
   Future<void> addToHistory(SearchHistoryEntity searchHistory) async {
@@ -36,6 +40,7 @@ class SearchHistoryCubit extends Cubit<SearchHistoryState> {
 
   Future<void> clearHistory() async {
     await clearSearchHistoryUseCase.call();
+
     getSearchHistory();
   }
 }

@@ -14,7 +14,7 @@ class EpisodeInfoSection extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
-        'Episode ${episode.episodeNumber}',
+        '${episode.name} ${episode.episodeNumber}',
         style: AppStyles.textStyle16(context),
       ),
       IconTextRow(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/features/details/domain/value_objects/episode.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
@@ -10,8 +11,8 @@ import 'package:movify/features/details/presentation/widgets/shared/details_sliv
 import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
 import 'package:movify/hooks/ui/use_scroll_collapse_controller.dart';
 import 'package:movify/hooks/ui/use_tab_controller_animation.dart';
+import 'package:movify/l10n/app_localizations.dart';
 import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
-import 'package:movify/shared/presentation/widgets/tablet_play_button.dart';
 
 class EpisodeBody extends HookWidget {
   const EpisodeBody({
@@ -29,6 +30,7 @@ class EpisodeBody extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final scrollCollapse = useScrollCollapseDebounced(200);
     final intialIndex = allEpisodes.indexWhere(
       (element) => element.episodeNumber == episodeNumber,
@@ -67,13 +69,14 @@ class EpisodeBody extends HookWidget {
       [allEpisodes.length],
     );
 
-    return NestedScrollView(
-      controller: scrollCollapse.scrollController,
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+    final expandedHeight = MediaQuery.heightOf(context) * 0.3;
+
+    final headerSlivers = useMemoized(
+      () => [
         DetailsSliverAppBar(
-          expandedHeight: MediaQuery.sizeOf(context).height * 0.3,
+          expandedHeight: expandedHeight,
           isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
-          title: currentEpisode.name ?? 'Episode $episodeNumber',
+          title: currentEpisode.name ?? '${l10n.episode} $episodeNumber',
           favorite: FavoriteMapper.fromNavigationData(
             EpisodeNavData(
               tmdbId: currentEpisode.showId ?? 0,
@@ -90,6 +93,7 @@ class EpisodeBody extends HookWidget {
           backgroundWidget: OpcaityDetailsImage(
             detailsBackGroundImage: currentEpisode.stillPath,
             defaultDetailsBackGroundImage: seasonPosterPath,
+            imageSize: TmdbImageSize.w500,
           ),
         ),
         SliverToBoxAdapter(
@@ -101,19 +105,20 @@ class EpisodeBody extends HookWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: TabletPlayButton(
-            type: 'tv',
-            id: currentEpisode.showId.toString(),
-            seasonNumber: currentEpisode.seasonNumber ?? 0,
-            episodeNumber: currentEpisode.episodeNumber ?? 0,
-            title:
-                currentEpisode.name ??
-                'Episode ${currentEpisode.episodeNumber}',
-          ),
-        ),
         CustomTabBar(controller: tabControllerResult.controller, tabs: tabs),
       ],
+      [
+        currentEpisode,
+        scrollCollapse.isCollapsedNotifier,
+        expandedHeight,
+        tabControllerResult.controller,
+        tabs,
+      ],
+    );
+
+    return NestedScrollView(
+      controller: scrollCollapse.scrollController,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => headerSlivers,
       body: TabBarView(
         controller: tabControllerResult.controller,
         children: tabsViewChildren,

@@ -67,4 +67,5 @@ class DefaultFirebaseOptions {
     iosClientId: '502150476162-lo62dhh3c4fgeve8c5rmnfnomlt5epj8.apps.googleusercontent.com',
     iosBundleId: 'com.rami.movify',
   );
+
 }

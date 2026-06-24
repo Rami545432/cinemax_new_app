@@ -8,7 +8,7 @@ class OnBoardingTwoUpperSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.widthOf(context);
     final crossAxisCount = (width < SizeConfig.tablet) ? 2 : 3;
     final gridSpacing = (width < SizeConfig.tablet) ? 16.0 : 24.0;
     final mainAxisSpacing = (width < SizeConfig.tablet) ? 16.0 : 24.0;

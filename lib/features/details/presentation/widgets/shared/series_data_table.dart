@@ -50,8 +50,8 @@ class SeriesDataTable extends StatelessWidget {
 
     List<TableRow> createDataRows() => [
       buildDataRow(l10n.originalTitle, seriesDetailsEntity.seriesTitle ?? '_'),
-      buildDataRow('First Air Data', seriesDetailsEntity.firstDate ?? '_'),
-      buildDataRow('Last Air Date', seriesDetailsEntity.kLastAirDate ?? '_'),
+      buildDataRow(l10n.firstAirDate, seriesDetailsEntity.firstDate ?? '_'),
+      buildDataRow(l10n.lastAirDate, seriesDetailsEntity.kLastAirDate ?? '_'),
       buildDataRow(
         l10n.status,
         mapStatus(context, seriesDetailsEntity.seriesStatus ?? '__'),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/pagination/domain/entites/page_result.dart';
@@ -33,7 +31,6 @@ class DiscoverRemoteDataSourceImpl implements DiscoverRemoteDataSource {
     int page,
     GenreFilterParams params,
   ) async {
-    log('fetchMoviesByGenre $genreId $page $params');
     final data = await apiService.tmdb.content.getItemsByGenre(
       type: 'movie',
       params: params,
@@ -49,7 +46,6 @@ class DiscoverRemoteDataSourceImpl implements DiscoverRemoteDataSource {
     int page,
     GenreFilterParams params,
   ) async {
-    log('fetchSeriesByGenre $genreId $page $params');
     final data = await apiService.tmdb.content.getItemsByGenre(
       type: 'tv',
       params: params,

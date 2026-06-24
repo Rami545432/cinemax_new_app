@@ -2,9 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String animationsMovieClipper =
-      "assets/animations/movie_clipper.json";
-
   static const String fontsPoppinsRegular = "assets/fonts/Poppins-Regular.ttf";
 
   static const String iconsAppIcon = "assets/icons/app_icon.png";
@@ -24,50 +21,9 @@ class Assets {
 
   static const String imagesAppLogo = "assets/images/app_logo.svg";
 
-  static const String imagesAppLogo2 = "assets/images/app_logo_2.png";
-
-  static const String imagesAppLogo3 = "assets/images/app_logo_3.png";
-
-  static const String imagesApple = "assets/images/Apple.svg";
-
-  static const String imagesButtonOne = "assets/images/button_one.svg";
-
-  static const String imagesButtonThree = "assets/images/button_three.svg";
-
-  static const String imagesButtonTwo = "assets/images/button_two.svg";
-
-  static const String imagesFacebook = "assets/images/facebook.svg";
-
-  static const String imagesGoogle = "assets/images/google.svg";
-
-  static const String imagesGroup = "assets/images/Group.svg";
-
-  static const String imagesHeartFav = "assets/images/Heart_fav.json";
-
-  static const String imagesLiveTvBlack24dp1 =
-      "assets/images/live_tv_black_24dp1.svg";
-
   static const String imagesNoInternet = "assets/images/no_internet.json";
 
   static const String imagesNoResults1 = "assets/images/no-results1.svg";
 
-  static const String imagesNotFoundSearch = "assets/images/notFoundSearch.svg";
-
-  static const String imagesOnBoardingOne =
-      "assets/images/on_boarding_one.json";
-
-  static const String imagesOnBoardingThree =
-      "assets/images/on_boarding_three.json";
-
-  static const String imagesOnBoardingTwo =
-      "assets/images/on_boarding_two.json";
-
-  static const String imagesOptions2 = "assets/images/options-2.svg";
-
-  static const String imagesSearch = "assets/images/search.svg";
-
-  static const String imagesSystemRegular48FavoriteHeartMorphSelect =
-      "assets/images/system-regular-48-favorite-heart-morph-select.json";
-  static const String iconsFacebook = "assets/images/one.svg";
   static const String iconsGoogle = "assets/images/two.svg";
 }

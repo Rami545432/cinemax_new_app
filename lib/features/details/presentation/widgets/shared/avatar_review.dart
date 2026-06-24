@@ -29,32 +29,27 @@ class ReviewAvatar extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: avatarBorderColor, width: 1.5),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.5),
-        child: avatarUrl != null && avatarUrl!.isNotEmpty
-            ? CachedNetworkImage(
-                imageUrl: tmdbImageSize(TmdbImageSize.w185, avatarUrl!),
-                fit: BoxFit.cover,
-                placeholder: (context, url) => ColoredBox(
-                  color: theme.scaffoldBackgroundColor,
-                  child: const Center(
-                    child: SizedBox(
-                      width: 14,
-                      height: 14,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1.5,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.white30,
-                        ),
-                      ),
+      child: avatarUrl != null && avatarUrl!.isNotEmpty
+          ? CachedNetworkImage(
+              imageUrl: tmdbImageSize(TmdbImageSize.w154, avatarUrl!),
+              fit: BoxFit.cover,
+              placeholder: (context, url) => ColoredBox(
+                color: theme.scaffoldBackgroundColor,
+                child: const Center(
+                  child: SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white30),
                     ),
                   ),
                 ),
-                errorWidget: (context, url, error) =>
-                    AvatarPlaceholder(name: authorName),
-              )
-            : AvatarPlaceholder(name: authorName),
-      ),
+              ),
+              errorWidget: (context, url, error) =>
+                  AvatarPlaceholder(name: authorName),
+            )
+          : AvatarPlaceholder(name: authorName),
     );
   }
 }

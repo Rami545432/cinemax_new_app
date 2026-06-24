@@ -42,6 +42,7 @@ class MetaDataReview extends StatelessWidget {
                   child: Text(
                     displayUsername!,
                     maxLines: 1,
+
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.textStyle12(
                       context,

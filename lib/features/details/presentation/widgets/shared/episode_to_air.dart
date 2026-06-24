@@ -23,33 +23,31 @@ class EpisodeToAir extends StatelessWidget {
       return const SizedBox();
     }
 
-    return _buildEpisodeToAir(context);
+    return GestureDetector(
+      onTap: () {
+        context.pushNamed(
+          RouteName.episode,
+          extra: EpisodeNavData(
+            tmdbId: episodeToAirModel?.showId ?? 0,
+            seasonNumber: episodeToAirModel!.seasonNumber!,
+            episodeNumber: episodeToAirModel!.episodeNumber!,
+            rating: episodeToAirModel!.voteAverage,
+            posterImage: imageUrl!,
+            specificId: episodeToAirModel?.id ?? 0,
+          ),
+        );
+      },
+      child: Column(
+        spacing: 20,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title ?? '', style: AppStyles.textStyle18(context)),
+          EpisodeImageAndDetails(
+            episodeToAirModel: episodeToAirModel!,
+            imageUrl: imageUrl ?? '',
+          ),
+        ],
+      ),
+    );
   }
-
-  Widget _buildEpisodeToAir(BuildContext context) => GestureDetector(
-    onTap: () {
-      context.pushNamed(
-        RouteName.episode,
-        extra: EpisodeNavData(
-          tmdbId: episodeToAirModel?.showId ?? 0,
-          seasonNumber: episodeToAirModel!.seasonNumber!,
-          episodeNumber: episodeToAirModel!.episodeNumber!,
-          rating: episodeToAirModel!.voteAverage,
-          posterImage: imageUrl!,
-          specificId: episodeToAirModel?.id ?? 0,
-        ),
-      );
-    },
-    child: Column(
-      spacing: 20,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title ?? '', style: AppStyles.textStyle18(context)),
-        EpisodeImageAndDetails(
-          episodeToAirModel: episodeToAirModel!,
-          imageUrl: imageUrl ?? '',
-        ),
-      ],
-    ),
-  );
 }

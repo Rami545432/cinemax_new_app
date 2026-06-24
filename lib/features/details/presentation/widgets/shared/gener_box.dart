@@ -13,7 +13,7 @@ class GenerBox extends StatelessWidget {
       border: Border.all(color: Colors.grey.shade700),
     ),
     child: Padding(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       child: Text(
         gener ?? '',
         textAlign: TextAlign.center,

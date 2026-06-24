@@ -12,22 +12,20 @@ class FavoriteButton extends StatelessWidget {
   final FavoriteEntity favoriteEntity;
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<FavoriteCubit, FavoriteState>(
-        builder: (context, state) {
-          final cubit = context.read<FavoriteCubit>();
-          final isFav = cubit.isFavorite(
-            favoriteEntity.specificId,
-            favoriteEntity.contentType,
-          );
-
-          return ParticleHeartButton(
-            isFavorited: isFav,
-            onTap: () {
-              HapticFeedback.heavyImpact();
-              cubit.toggleFavorite(favoriteEntity);
-            },
-          );
+  Widget build(BuildContext context) {
+    final cubit = context.read<FavoriteCubit>();
+    return BlocSelector<FavoriteCubit, FavoriteState, bool>(
+      selector: (state) => cubit.isFavorite(
+        favoriteEntity.specificId,
+        favoriteEntity.contentType,
+      ),
+      builder: (context, isFavorited) => ParticleHeartButton(
+        isFavorited: isFavorited,
+        onTap: () {
+          HapticFeedback.heavyImpact();
+          cubit.toggleFavorite(favoriteEntity);
         },
-      );
+      ),
+    );
+  }
 }

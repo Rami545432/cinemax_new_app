@@ -41,7 +41,11 @@ class PartsTabBarView extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final item = state.collection.parts[index];
-                return MainVerticalCard(cardData: item.toCardDisplay());
+                return MainVerticalCard(
+                  category: 'parts-$collectionId',
+                  cardData: item.toCardDisplay(),
+                  imageSize: .w185,
+                );
               },
             );
           }
@@ -50,7 +54,12 @@ class PartsTabBarView extends StatelessWidget {
               child: Text(state.message, style: AppStyles.textStyle18(context)),
             );
           }
-          return const SizedBox.shrink();
+          return Center(
+            child: Text(
+              'No Collection Found',
+              style: AppStyles.textStyle18(context),
+            ),
+          );
         },
       ),
     );

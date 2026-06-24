@@ -5,13 +5,15 @@ import 'package:movify/features/details/presentation/widgets/details_widgets/cus
 import 'package:movify/features/details/presentation/widgets/season/season_data_table.dart';
 import 'package:movify/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
 import 'package:movify/features/details/presentation/widgets/shared/trailers_image_list_view_builder.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SeasonAboutTab extends StatelessWidget {
   const SeasonAboutTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<SeriesSeasonDetailsEntity>();
+    final data = context.read<SeriesSeasonDetailsEntity>();
+    final l10n = AppLocalizations.of(context)!;
     return CustomScrollView(
       slivers: [
         SliverFillRemaining(
@@ -23,13 +25,13 @@ class SeasonAboutTab extends StatelessWidget {
               CustomDescreption(overview: data.seasonOverView),
               const Divider(),
               AboutTabViewBranch(
-                title: 'Information',
+                title: l10n.informations,
                 child: SeasonDataTable(data: data),
               ),
               const Divider(),
               if (data.seasonVideos != null)
                 AboutTabViewBranch(
-                  title: 'Trailers',
+                  title: l10n.trailers,
                   child: TrailersImageListViewBuilder(
                     videos: data.seasonVideos!,
                   ),

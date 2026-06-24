@@ -48,15 +48,6 @@ class CategoryRow<T> extends StatefulWidget {
 }
 
 class _CategoryRowState<T> extends State<CategoryRow<T>> {
-  // bool _fetched = false;
-
-  // void _onVisibilityChanged(VisibilityInfo info) {
-  //   if (!_fetched && info.visibleFraction >= widget.visibilityThreshold) {
-  //     _fetched = true;
-  //     widget.onVisible();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,

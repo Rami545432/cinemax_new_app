@@ -3,7 +3,7 @@
 /// Welcome screen background posters
 /// Mix of iconic movies and popular series across different genres and eras
 class WelcomeAssets {
-  static const String imageBase = 'https://image.tmdb.org/t/p/w500';
+  static const String imageBase = 'https://image.tmdb.org/t/p/w300';
   // ========================================
   // COLUMN 1: Mix of Classic & Modern Movies + Series
   // ========================================

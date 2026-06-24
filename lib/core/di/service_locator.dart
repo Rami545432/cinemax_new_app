@@ -1,5 +1,4 @@
 // lib/core/di/get_it.dart
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,12 +6,17 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movify/config/env/app_config.dart';
-import 'package:movify/core/auth/auth_status_provider.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/network/client/dio_client.dart';
 import 'package:movify/core/network/client/dio_factory.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
+import 'package:movify/core/notification/settings/data/repos/notification_settings_repo_impl.dart';
+import 'package:movify/core/notification/settings/domain/repos/notification_settings_repo.dart';
+import 'package:movify/core/notification/settings/domain/usecases/check_notification_permanently_denied_usecase.dart';
+import 'package:movify/core/notification/settings/domain/usecases/get_notification_status_usecase.dart';
+import 'package:movify/core/notification/settings/domain/usecases/open_notification_settings_usecase.dart';
+import 'package:movify/core/notification/settings/domain/usecases/request_notification_permission_usecase.dart';
 import 'package:movify/core/routing/app_router.dart';
 import 'package:movify/core/theme/cubit/theme_cubit.dart';
 import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source.dart';
@@ -76,6 +80,7 @@ import 'package:movify/features/home/domian/use_cases/get_movies_use_case.dart';
 import 'package:movify/features/home/domian/use_cases/get_series_use_case.dart';
 import 'package:movify/features/home/presentation/blocs/movie_bloc.dart';
 import 'package:movify/features/home/presentation/blocs/series_bloc.dart';
+import 'package:movify/features/profile/presentation/cubits/notification_settings/notification_settings_cubit.dart';
 import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source.dart';
 import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source_impl.dart';
 import 'package:movify/features/search/data/data_sources/remote/remote_search_data_source.dart';
@@ -104,8 +109,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupDependencies() async {
-  log('📦 Setting up dependencies...');
-
   // Order is critical — each step depends on the previous one.
   await _registerCoreSync(); // 1. infrastructure (Dio, Prefs, Firebase)
   _registerExternalDependencies(); // 2. third-party singletons
@@ -115,16 +118,13 @@ Future<void> setupDependencies() async {
   _registerCubits(); // 7. feature cubits (need use cases)
   _registerAuthCubits(); // 8. session + login (need ListenToAuthEventsUseCase)
   _registerSettings(); // 9. settings
+  _registerNotificationSettings(); // 9.5 notification settings
   _registerRouter(); // 10. router (needs SessionCubit + SettingsCubit)
-
-  log('✅ Dependencies ready');
 }
 
 // ── 1. Core sync ──────────────────────────────────────────────────────────
 
 Future<void> _registerCoreSync() async {
-  log('⚙️ Registering core sync services');
-
   final sharedPrefs = await SharedPreferences.getInstance();
   if (!getIt.isRegistered<SharedPreferences>()) {
     getIt.registerSingleton<SharedPreferences>(sharedPrefs);
@@ -242,9 +242,6 @@ void _registerRepositories() {
   );
   // AuthRepoImpl now receives AuthEventSink — it pushes events to the vendor.
   getIt.registerLazySingleton<AuthRepo>(() => authRepoImpl);
-  getIt.registerLazySingleton<AuthStatusProvider>(
-    () => getIt<AuthRepo>() as AuthStatusProvider,
-  );
 
   getIt.registerLazySingleton<FavoriteRepo>(
     () => FavoritesRepositoryImpl(
@@ -426,7 +423,8 @@ void _registerCubits() {
       getFavoritesUseCase: getIt<GetFavoritesUseCase>(),
       addFavoriteUseCase: getIt<AddFavoriteUseCase>(),
       removeFavoriteUseCase: getIt<RemoveFavoriteUseCase>(),
-      authStatusProvider: getIt<AuthStatusProvider>(),
+      sessionStream: getIt<SessionCubit>().stream,
+      initialSessionState: getIt<SessionCubit>().state,
     ),
   );
 
@@ -478,7 +476,6 @@ void _registerAuthCubits() {
       enableGuestModeUseCase: getIt<EnableGuestModeUseCase>(),
       disableGuestModeUseCase: getIt<DisableGuestModeUseCase>(),
       getCurrentUserUseCase: getIt<GetCurrentUserUseCase>(),
-      authStatusProvider: getIt<AuthStatusProvider>(),
     ),
   );
   getIt.registerFactory<LoginCubit>(
@@ -514,5 +511,37 @@ void _registerRouter() {
   );
   getIt.registerLazySingleton<GoRouter>(
     () => getIt<AppRouters>().createRouter(),
+  );
+}
+
+// ── 11. Notification Settings ─────────────────────────────────────────────
+
+void _registerNotificationSettings() {
+  getIt.registerLazySingleton<NotificationSettingsRepo>(
+    () => NotificationSettingsRepoImpl(),
+  );
+  getIt.registerLazySingleton<GetNotificationStatusUseCase>(
+    () => GetNotificationStatusUseCase(getIt<NotificationSettingsRepo>()),
+  );
+  getIt.registerLazySingleton<RequestNotificationPermissionUseCase>(
+    () =>
+        RequestNotificationPermissionUseCase(getIt<NotificationSettingsRepo>()),
+  );
+  getIt.registerLazySingleton<OpenNotificationSettingsUseCase>(
+    () => OpenNotificationSettingsUseCase(getIt<NotificationSettingsRepo>()),
+  );
+  getIt.registerLazySingleton<CheckNotificationPermanentlyDeniedUseCase>(
+    () => CheckNotificationPermanentlyDeniedUseCase(
+      getIt<NotificationSettingsRepo>(),
+    ),
+  );
+  getIt.registerFactory<NotificationSettingsCubit>(
+    () => NotificationSettingsCubit(
+      getStatusUseCase: getIt<GetNotificationStatusUseCase>(),
+      requestPermissionUseCase: getIt<RequestNotificationPermissionUseCase>(),
+      openSettingsUseCase: getIt<OpenNotificationSettingsUseCase>(),
+      checkPermanentlyDeniedUseCase:
+          getIt<CheckNotificationPermanentlyDeniedUseCase>(),
+    ),
   );
 }

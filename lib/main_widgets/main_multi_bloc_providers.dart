@@ -20,7 +20,7 @@ class MainMultiProvieders extends StatelessWidget {
       BlocProvider.value(value: getIt.get<SessionCubit>()..checkAuthStatus()),
       BlocProvider.value(value: getIt.get<SettingsCubit>()..checkSettings()),
       BlocProvider.value(value: getIt.get<LanguageCubit>()),
-      BlocProvider(create: (_) => getIt.get<FavoriteCubit>()),
+      BlocProvider(create: (_) => getIt.get<FavoriteCubit>(), lazy: false),
     ],
     child: const CustomMaterialApp(),
   );

@@ -6,6 +6,7 @@ import 'package:movify/features/details/presentation/widgets/shared/about_tab_vi
 import 'package:movify/features/details/presentation/widgets/shared/episode_to_air.dart';
 import 'package:movify/features/details/presentation/widgets/shared/series_data_table.dart';
 import 'package:movify/features/details/presentation/widgets/shared/trailers_image_list_view_builder.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SeriesAboutTabBarView extends StatelessWidget {
   const SeriesAboutTabBarView({super.key});
@@ -13,6 +14,7 @@ class SeriesAboutTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final seriesDetailsEntity = context.read<SeriesDetailsEntity>();
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       spacing: 20,
       children: [
@@ -20,22 +22,22 @@ class SeriesAboutTabBarView extends StatelessWidget {
           episodeToAirModel: seriesDetailsEntity.lastEpisodeAir
               ?.toEpisodeToAirModel(),
           imageUrl: seriesDetailsEntity.backgroundImage,
-          title: 'Last Episode',
+          title: l10n.lastEpisode,
         ),
         EpisodeToAir(
           episodeToAirModel: seriesDetailsEntity.nextEpisodeAir
               ?.toEpisodeToAirModel(),
           imageUrl: seriesDetailsEntity.backgroundImage,
-          title: 'Next Episode',
+          title: l10n.nextEpisode,
         ),
         const Divider(),
         AboutTabViewBranch(
-          title: 'Informations',
+          title: l10n.informations,
           child: SeriesDataTable(seriesDetailsEntity: seriesDetailsEntity),
         ),
         const Divider(),
         AboutTabViewBranch(
-          title: 'Trailers',
+          title: l10n.trailers,
           child: TrailersImageListViewBuilder(
             videos: seriesDetailsEntity.kVideos!,
           ),

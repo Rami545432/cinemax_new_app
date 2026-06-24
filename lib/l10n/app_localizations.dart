@@ -1021,6 +1021,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get somethingWentWrong;
+
+  /// No description provided for @removeFromFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove From Favorites'**
+  String get removeFromFavorites;
+
+  /// No description provided for @share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get share;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @guestStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest Stars'**
+  String get guestStars;
+
+  /// No description provided for @lastEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Episode'**
+  String get lastEpisode;
+
+  /// No description provided for @nextEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Episode'**
+  String get nextEpisode;
+
+  /// No description provided for @firstAirDate.
+  ///
+  /// In en, this message translates to:
+  /// **'First Air Date'**
+  String get firstAirDate;
+
+  /// No description provided for @lastAirDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Air Date'**
+  String get lastAirDate;
+
+  /// No description provided for @totalTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Time'**
+  String get totalTime;
+
+  /// No description provided for @noHistoryFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No History Found'**
+  String get noHistoryFound;
+
+  /// No description provided for @noActors.
+  ///
+  /// In en, this message translates to:
+  /// **'No Actors'**
+  String get noActors;
+
+  /// No description provided for @noEpisodes.
+  ///
+  /// In en, this message translates to:
+  /// **'No Episodes'**
+  String get noEpisodes;
+
+  /// No description provided for @noSeasons.
+  ///
+  /// In en, this message translates to:
+  /// **'No Seasons'**
+  String get noSeasons;
+
+  /// No description provided for @episode.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode'**
+  String get episode;
+
+  /// No description provided for @pushNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Push Notifications'**
+  String get pushNotifications;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @startExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Explore'**
+  String get startExplore;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
 }
 
 class _AppLocalizationsDelegate

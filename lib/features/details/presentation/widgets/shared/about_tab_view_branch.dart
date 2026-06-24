@@ -15,7 +15,7 @@ class AboutTabViewBranch extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(title, style: AppStyles.textStyle24(context)),
-      Container(child: child),
+      SizedBox(child: child),
     ],
   );
 }

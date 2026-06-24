@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movify/config/animations/extensions/widget_animations.dart';
 import 'package:movify/core/formatters/formatted_date_method.dart';
 import 'package:movify/core/utils/app_styles.dart';
 
@@ -11,7 +10,6 @@ class MetaDataCoulmn extends StatelessWidget {
     required this.textStyle,
     required this.rating,
     this.timeBlocSelector,
-    this.entryController,
   });
 
   final String title;
@@ -19,8 +17,6 @@ class MetaDataCoulmn extends StatelessWidget {
   final TextStyle textStyle;
   final num? rating;
   final Widget? timeBlocSelector;
-
-  final AnimationController? entryController;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +43,7 @@ class MetaDataCoulmn extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        spacing: 8,
-        children: [
-          titleWidget.fadeInFromBottom(delay: 300, controller: entryController),
-          rowWidget.fadeInFromBottom(delay: 600, controller: entryController),
-        ],
-      ),
+      child: Column(spacing: 8, children: [titleWidget, rowWidget]),
     );
   }
 }

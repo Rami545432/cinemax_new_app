@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
 import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:movify/features/favorite/presentation/widgets/favorite_button.dart';
 import 'package:movify/features/home/presentation/extensions/main_vertical_card_extention.dart';
@@ -74,11 +75,13 @@ class MainListCard extends StatelessWidget {
             spacing: 16,
             children: [
               // Poster
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: enableHero
-                    ? Hero(
-                        tag: heroTag,
+                    ? SafeHeroCard(
+                        heroTag: heroTag,
                         child: MainListImage(posterPath: cardData.posterPath),
                       )
                     : MainListImage(posterPath: cardData.posterPath),

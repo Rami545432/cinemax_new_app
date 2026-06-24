@@ -3,6 +3,7 @@ import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/details/presentation/widgets/shared/meta_data.dart';
 import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
+import 'package:movify/features/home/presentation/widgets/card_image.dart';
 import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
 import 'package:movify/shared/presentation/widgets/size_config.dart';
 
@@ -17,7 +18,7 @@ class StackedDetailsBackGorund extends StatelessWidget {
   final TmdbImageSize imageSize;
 
   final int? memCacheWidth;
-  final AnimationController? entryController;
+
   const StackedDetailsBackGorund({
     super.key,
     required this.backGroundImage,
@@ -28,8 +29,6 @@ class StackedDetailsBackGorund extends StatelessWidget {
     required this.heroTag,
     this.timeBlocSelector,
     this.imageSize = TmdbImageSize.original,
-
-    this.entryController,
     this.memCacheWidth,
   });
   @override
@@ -67,7 +66,19 @@ class StackedDetailsBackGorund extends StatelessWidget {
               width: width < SizeConfig.mobile ? width * 0.45 : width * 0.25,
               child: AspectRatio(
                 aspectRatio: 2 / 3,
-                child: SafeHeroCard(posterImage: posterImage, heroTag: heroTag),
+                child: SafeHeroCard(
+                  heroTag: heroTag,
+                  child: CardImage(
+                    imageUrl: tmdbImageSize(
+                      TmdbImageSize.w300,
+                      posterImage ?? '',
+                    ),
+                    thumbnailUrl: tmdbImageSize(
+                      TmdbImageSize.w300,
+                      posterImage ?? '',
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -82,7 +93,6 @@ class StackedDetailsBackGorund extends StatelessWidget {
             textStyle: textStyle,
             rating: rating,
             timeBlocSelector: timeBlocSelector,
-            entryController: entryController,
           ),
         ),
       ],

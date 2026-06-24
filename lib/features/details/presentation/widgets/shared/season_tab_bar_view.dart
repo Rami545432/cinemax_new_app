@@ -6,9 +6,17 @@ import 'package:movify/features/details/domain/entites/series_details_entity.dar
 import 'package:movify/features/details/domain/value_objects/season.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/widgets/shared/season_info_section.dart';
+import 'package:movify/shared/presentation/widgets/premium_staggered_entrance.dart';
 
-class SeasonTabBarView extends StatelessWidget {
+class SeasonTabBarView extends StatefulWidget {
   const SeasonTabBarView({super.key});
+
+  @override
+  State<SeasonTabBarView> createState() => _SeasonTabBarViewState();
+}
+
+class _SeasonTabBarViewState extends State<SeasonTabBarView> {
+  final Set<int> _animatedIndices = {};
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class SeasonTabBarView extends StatelessWidget {
       itemCount: season.length,
       itemBuilder: (context, index) {
         final heroTag = '${seriesDetailsEntity.seiresId}-${season[index].id}';
-        return Padding(
+        final Widget child = Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: InkWell(
             onTap: () {
@@ -45,6 +53,14 @@ class SeasonTabBarView extends StatelessWidget {
               defaultImageUrl: seriesDetailsEntity.posterImage!,
             ),
           ),
+        );
+
+        return PremiumStaggeredEntrance(
+          index: index,
+          isAnimated: _animatedIndices.contains(index),
+          markAsAnimated: () => _animatedIndices.add(index),
+          slideAxis: Axis.horizontal,
+          child: child,
         );
       },
     );

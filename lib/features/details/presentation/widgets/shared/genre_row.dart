@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/helper/get_gener_name.dart';
 import 'package:movify/features/details/domain/value_objects/genre.dart';
 import 'package:movify/features/details/presentation/widgets/shared/gener_box.dart';
 import 'package:movify/features/discover/data/models/genre_see_all_arguments.dart';
@@ -34,7 +35,9 @@ class GenreRow extends StatelessWidget {
               ),
             );
           },
-          child: GenerBox(gener: geners[index].name),
+          child: GenerBox(
+            gener: getGenreName(geners[index].id ?? 28, context),
+          ),
         ),
         separatorBuilder: (context, index) => const SizedBox(width: 20),
         itemCount: geners.length,

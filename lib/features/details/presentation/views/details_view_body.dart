@@ -56,7 +56,6 @@ class DetailsBody extends HookWidget {
     final tabs = contentType == ContentType.movies ? movieTabs : seriesTabs;
 
     final isCollapsedNotifier = useMemoized(() => ValueNotifier<bool>(false));
-    final entryController = useAnimationController();
     // Calculate the collapse threshold based on the expanded height
     final expandedHeight = MediaQuery.heightOf(context) * 0.7;
     final collapseThreshold = expandedHeight - kToolbarHeight;
@@ -77,7 +76,6 @@ class DetailsBody extends HookWidget {
           rating: rating,
           heroTag: heroTag,
           timeBlocSelector: const TimeBlocSelector(),
-          entryController: entryController,
           memCacheWidth: 1600,
         ),
       ),

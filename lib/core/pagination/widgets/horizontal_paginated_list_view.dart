@@ -3,6 +3,7 @@ import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dar
 import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
 import 'package:movify/core/pagination/widgets/pagination_error.dart';
 import 'package:movify/core/pagination/widgets/pagination_shimmer.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 /// A fully generic horizontal paginated list.
 /// Knows nothing about Blocs, Movies, News, or Products.
@@ -102,6 +103,7 @@ class _HorizontalPaginatedListState<T>
   @override
   Widget build(BuildContext context) {
     final info = widget.info;
+    final width = MediaQuery.widthOf(context);
 
     // ── First page loading ──────────────────────────────
     if (info.isFirstLoad) {
@@ -124,33 +126,36 @@ class _HorizontalPaginatedListState<T>
     }
     // ── List ────────────────────────────────────────────
     else {
-      return ListView.builder(
-        controller: _scrollController,
-        scrollDirection: Axis.horizontal,
-        padding: widget.padding,
-        // +1 for the end slot (loader / retry / nothing)
-        itemCount: info.items.length + 1,
-        itemBuilder: (context, index) {
-          // End slot
-          if (index == info.items.length) {
-            return PaginationBottomSlot(
-              isFetchingMore: info.isFetchingMore,
-              fetchMoreError: info.fetchMoreError,
-              hasMore: info.canLoadMore,
-              isHorizontal: true,
-              onRetry: widget.onRetry,
-            );
-          }
+      return AspectRatio(
+        aspectRatio: width > SizeConfig.mobile ? 4 : 2,
+        child: ListView.builder(
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          padding: widget.padding,
+          // +1 for the end slot (loader / retry / nothing)
+          itemCount: info.items.length + 1,
+          itemBuilder: (context, index) {
+            // End slot
+            if (index == info.items.length) {
+              return PaginationBottomSlot(
+                isFetchingMore: info.isFetchingMore,
+                fetchMoreError: info.fetchMoreError,
+                hasMore: info.canLoadMore,
+                isHorizontal: true,
+                onRetry: widget.onRetry,
+              );
+            }
 
-          return Padding(
-            padding: EdgeInsets.only(right: widget.itemGap),
-            child: widget.itemBuilder(
-              context,
-              info.items[index],
-              widget.enableHero,
-            ),
-          );
-        },
+            return Padding(
+              padding: EdgeInsets.only(right: widget.itemGap),
+              child: widget.itemBuilder(
+                context,
+                info.items[index],
+                widget.enableHero,
+              ),
+            );
+          },
+        ),
       );
     }
   }

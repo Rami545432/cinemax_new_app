@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/shared/presentation/widgets/size_config.dart';
@@ -11,10 +9,9 @@ class CardTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('cardTitle rebuilt');
     final width = MediaQuery.widthOf(context);
     return SizedBox(
-      width: width > SizeConfig.mobile ? 90 : 100,
+      width: width > SizeConfig.mobile ? 120 : 100,
       child: Text(
         title,
         style: AppStyles.textStyle12(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:movify/features/details/domain/value_objects/genre.dart';
 import 'package:movify/features/details/domain/value_objects/results.dart';
 import 'package:movify/features/details/presentation/widgets/details_widgets/custom_descreption.dart';
@@ -41,7 +40,7 @@ class AboutTabBarView extends StatelessWidget {
         const SizedBox(height: 20),
 
         child,
-      ].animate(interval: 300.ms).fadeIn(duration: 200.ms),
+      ],
     );
   }
 }

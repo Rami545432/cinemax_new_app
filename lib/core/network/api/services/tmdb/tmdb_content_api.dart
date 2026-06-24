@@ -1,5 +1,4 @@
 // lib/core/network/api/services/tmdb/tmdb_content_api.dart
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -40,37 +39,34 @@ class TmdbContentApi {
     required GenreFilterParams params,
     required int page,
     CancelToken? cancelToken,
-  }) {
-    log('params: ${params.genreId}');
-    return client.get(
-      'discover/$type',
-      queryParams: {
-        'page': page.toString(),
-        'sort_by': params.sortBy?.apiValue,
-        'min_runtime': params.minRuntime?.toString(),
-        'max_runtime': params.maxRuntime?.toString(),
-        'vote_average.gte': params.minRating?.toString(),
-        'vote_average.lte': params.maxRating?.toString(),
-        'first_air_date.gte': params.minYear != null
-            ? '${params.minYear}-01-01'
-            : null,
-        'first_air_date.lte': params.maxYear != null
-            ? '${params.maxYear}-01-01'
-            : null,
-        'release_date.gte': params.minYear != null
-            ? '${params.minYear}-01-01'
-            : null,
-        'release_date.lte': params.maxYear != null
-            ? '${params.maxYear}-01-01'
-            : null,
-        'with_genres': params.genreId?.toString(),
-      },
-      cancelToken: cancelToken,
-      overridePolicy: page <= pageCacheCount
-          ? CachePolicy.request
-          : CachePolicy.noCache,
-    );
-  }
+  }) => client.get(
+    'discover/$type',
+    queryParams: {
+      'page': page.toString(),
+      'sort_by': params.sortBy?.apiValue,
+      'min_runtime': params.minRuntime?.toString(),
+      'max_runtime': params.maxRuntime?.toString(),
+      'vote_average.gte': params.minRating?.toString(),
+      'vote_average.lte': params.maxRating?.toString(),
+      'first_air_date.gte': params.minYear != null
+          ? '${params.minYear}-01-01'
+          : null,
+      'first_air_date.lte': params.maxYear != null
+          ? '${params.maxYear}-01-01'
+          : null,
+      'release_date.gte': params.minYear != null
+          ? '${params.minYear}-01-01'
+          : null,
+      'release_date.lte': params.maxYear != null
+          ? '${params.maxYear}-01-01'
+          : null,
+      'with_genres': params.genreId?.toString(),
+    },
+    cancelToken: cancelToken,
+    overridePolicy: page <= pageCacheCount
+        ? CachePolicy.request
+        : CachePolicy.noCache,
+  );
 
   ApiResponse getMovies({
     int page = 1,

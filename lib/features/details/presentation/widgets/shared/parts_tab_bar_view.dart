@@ -54,7 +54,12 @@ class PartsTabBarView extends StatelessWidget {
               child: Text(state.message, style: AppStyles.textStyle18(context)),
             );
           }
-          return const SizedBox.shrink();
+          return Center(
+            child: Text(
+              'No Collection Found',
+              style: AppStyles.textStyle18(context),
+            ),
+          );
         },
       ),
     );

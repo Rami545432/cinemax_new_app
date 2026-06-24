@@ -40,20 +40,16 @@ class DetailsRoutes {
     GoRoute(
       path: RoutePaths.movieDetail,
       name: RouteName.movieDetail,
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         final id = int.parse(state.pathParameters['id']!);
-
-        return AppTransitions.fadeScaleAnimation(
-          state: state,
-          child: BlocProvider(
-            key: ValueKey('movie-$id'), // 🔑 guarantees disposal
-            create: (_) =>
-                getIt<FetchDetailsCubit>()
-                  ..fetchDetails(DetailsParams(id: id, type: 'movie')),
-            child: DetailsView(
-              data: state.extra as MovieNavData,
-              heroTag: state.uri.queryParameters['heroTag'],
-            ),
+        return BlocProvider(
+          key: ValueKey('movie-$id'), // 🔑 guarantees disposal
+          create: (_) =>
+              getIt<FetchDetailsCubit>()
+                ..fetchDetails(DetailsParams(id: id, type: 'movie')),
+          child: DetailsView(
+            data: state.extra as MovieNavData,
+            heroTag: state.uri.queryParameters['heroTag'],
           ),
         );
       },

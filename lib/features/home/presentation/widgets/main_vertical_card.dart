@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
 import 'package:movify/core/routing/route_name.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
 import 'package:movify/features/home/presentation/extensions/main_vertical_card_extention.dart';
 import 'package:movify/features/home/presentation/widgets/card_image_and_rating.dart';
 import 'package:movify/features/home/presentation/widgets/card_title.dart';
@@ -39,13 +40,13 @@ class MainVerticalCard extends StatelessWidget {
         },
         child: Column(
           spacing: 12,
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               flex: 5,
               child: enableHero
-                  ? Hero(
-                      tag: heroTag,
+                  ? SafeHeroCard(
+                      heroTag: heroTag,
                       child: CardImageAndRating(
                         posterImage: tmdbImageSize(
                           imageSize,

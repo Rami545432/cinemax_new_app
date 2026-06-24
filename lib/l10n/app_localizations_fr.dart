@@ -497,4 +497,58 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get somethingWentWrong => 'Une erreur s\'est produite';
+
+  @override
+  String get removeFromFavorites => 'Supprimer des favoris';
+
+  @override
+  String get share => 'Partager';
+
+  @override
+  String get unknown => 'Inconnu';
+
+  @override
+  String get guestStars => 'Invités';
+
+  @override
+  String get lastEpisode => 'Dernier épisode';
+
+  @override
+  String get nextEpisode => 'Prochain épisode';
+
+  @override
+  String get firstAirDate => 'Date de Première Diffusion';
+
+  @override
+  String get lastAirDate => 'Date de Dernière Diffusion';
+
+  @override
+  String get totalTime => 'Durée Totale';
+
+  @override
+  String get noHistoryFound => 'Aucun historique trouvé';
+
+  @override
+  String get noActors => 'Aucun acteur';
+
+  @override
+  String get noEpisodes => 'Aucun épisode';
+
+  @override
+  String get noSeasons => 'Aucune saison';
+
+  @override
+  String get episode => 'Épisode';
+
+  @override
+  String get pushNotifications => 'Notifications Push';
+
+  @override
+  String get getStarted => 'Commencer';
+
+  @override
+  String get startExplore => 'Explorer';
+
+  @override
+  String get continueButton => 'Continuer';
 }

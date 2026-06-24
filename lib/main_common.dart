@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:movify/config/env/app_config.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/notification/notification_service.dart';
@@ -28,6 +28,8 @@ Future<void> bootApp(AppConfig config) async {
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
 
+  await initializeDateFormatting();
+
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorageDirectory.web
@@ -35,7 +37,6 @@ Future<void> bootApp(AppConfig config) async {
   );
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  log('🚀 Starting app [${config.environmentName}]...');
 
   // ── Infrastructure ──────────────────────────────────────────────────────
   getIt.registerSingleton<AppConfig>(config);
@@ -46,6 +47,20 @@ Future<void> bootApp(AppConfig config) async {
       name: config.environmentName,
     );
   }
+
+  // Prevent Crashlytics from collecting crashes while debugging locally
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+    !kDebugMode,
+  );
+
+  // Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await Hive.initFlutter();

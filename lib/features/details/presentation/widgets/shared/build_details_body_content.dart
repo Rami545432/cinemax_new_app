@@ -27,7 +27,9 @@ class BuildDetailsBodyContent extends StatelessWidget {
     builder: (context, state) => state.when(
       initial: () => const SizedBox(),
       loading: () => Center(
-        child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
+        child: RepaintBoundary(
+          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent),
+        ),
       ),
       failure: (errMessage) {
         final connectivityCubit = context.read<ConnectivityCubit>();

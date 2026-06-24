@@ -124,6 +124,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
     return AnimatedBuilder(
       animation: _pressController,
+
       builder: (context, child) => switch (widget.pressAnimation!) {
         ButtonAnimationType.press => Transform.scale(
           scale: 1.0 - (_pressController.value * 0.05),

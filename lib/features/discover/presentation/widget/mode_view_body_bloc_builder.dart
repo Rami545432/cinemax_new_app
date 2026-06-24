@@ -24,7 +24,6 @@ class ModeViewBodyBlocBuilder extends StatelessWidget {
           if (state is FetchItemsByKeywordsLoaded) {
             final data = state.getPaginationInfo(modeModel.type);
             return SliverPaginatedGridView(
-              externalScrollController: scrollController,
               info: data,
               itemBuilder: (context, cardData) =>
                   MainVerticalCard(cardData: cardData),

@@ -56,12 +56,5 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
         );
       },
     ),
-    ProfileIstTileModel(
-      title: 'Notification Testing',
-      icon: const FaIcon(FontAwesomeIcons.palette),
-      onTap: () {
-        context.pushNamed(RouteName.notificationTesting);
-      },
-    ),
   ];
 }

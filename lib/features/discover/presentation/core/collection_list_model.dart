@@ -16,7 +16,7 @@ class CollectionListModel {
       ),
       CollectionModel(
         name: l10n.maifa,
-        imageUrl: '/3bhkrj58Vtu7enYsRolD1fZdja1.jpg', // the godfather
+        imageUrl: '/loSpBeirRfTPJ3cMIqpQArstGhh.jpg', // the godfather
         description: l10n.mafiaDescreption,
         type: TypeEnum.movie,
         keyword: 10391,
@@ -29,7 +29,7 @@ class CollectionListModel {
         keyword: 210024,
       ),
       CollectionModel(
-        name: 'MARVEL',
+        name: l10n.marvel,
         imageUrl: '/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg', // avengers
         description: l10n.marvelDescreption,
         type: TypeEnum.movie,

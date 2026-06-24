@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
@@ -9,7 +7,6 @@ import 'package:movify/core/network/client/dio_client.dart';
 import 'package:movify/core/network/client/network_info.dart';
 import 'package:movify/core/network/config/dio_config.dart';
 import 'package:movify/core/network/interceptors/api_key_interceptor.dart';
-import 'package:movify/core/network/interceptors/logging_interceptor.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Factory that builds a fully configured [DioClient].
@@ -42,7 +39,6 @@ class DioFactory {
       hitCacheOnNetworkFailure: true,
       priority: CachePriority.high,
     );
-    log('✅ Cache initialized: ${cacheDir.path}');
 
     // ── 2. Dio instance ─────────────────────────────────────────────
     final dio = Dio(DioConfig.baseOptions);
@@ -52,11 +48,9 @@ class DioFactory {
     dio.interceptors.addAll([
       DioCacheInterceptor(options: cacheOptions),
       ApiKeyInterceptor(tmdbApiKey: tmdbApiKey),
-      LoggingInterceptor(),
+
       RetryInterceptor(dio: dio, retryDelays: DioConfig.retryDelays),
     ]);
-
-    log('📡 Dio created with ${dio.interceptors.length} interceptors');
 
     return DioClient(
       dio: dio,

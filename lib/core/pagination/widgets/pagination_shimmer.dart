@@ -21,7 +21,6 @@ class PaginationShimmer extends StatelessWidget {
         ? SizedBox(
             height: height,
             child: ListView.builder(
-              prototypeItem: _ShimmerBox(width: itemWidth, height: height),
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: itemCount,
@@ -33,10 +32,6 @@ class PaginationShimmer extends StatelessWidget {
             ),
           )
         : ListView.builder(
-            prototypeItem: const _ShimmerBox(
-              width: double.infinity,
-              height: 100,
-            ),
             padding: const EdgeInsets.all(16),
             itemCount: itemCount,
             itemBuilder: (_, _) => const Padding(

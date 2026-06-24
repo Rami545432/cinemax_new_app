@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:async/async.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/core/refresh_stream.dart';
 import 'package:movify/core/routing/route_paths.dart';
@@ -31,7 +32,10 @@ class AppRouters {
       StreamGroup.merge([sessionCubit.stream, settingsCubit.stream]),
     ),
     initialLocation: RoutePaths.root,
-    debugLogDiagnostics: true,
+
+    observers: [
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
   );
 
   String? redirectLogic(

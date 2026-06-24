@@ -87,7 +87,7 @@ class ParticleHeartButton extends HookWidget {
               scale: scaleAnimation,
               child: Icon(
                 isFavorited ? Icons.favorite : Icons.favorite_border,
-                color: isFavorited ? Colors.red : Colors.grey,
+                color: isFavorited ? Colors.red : null,
                 size: size,
               ),
             ),

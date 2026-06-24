@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
@@ -84,7 +82,6 @@ class _StackedCardsCarouselState extends State<StackedCardsCarousel>
 
   @override
   Widget build(BuildContext context) {
-    log('Stacked Builded ');
     if (widget.cardModel.isEmpty) {
       return const SizedBox.shrink();
     }

@@ -16,7 +16,6 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
   final Widget? loadingWidget;
   final Widget? emptyWidget;
   final Widget Function(String message)? errorBuilder;
-  final ScrollController? externalScrollController;
 
   const SliverPaginatedGridView({
     super.key,
@@ -35,7 +34,6 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
     this.loadingWidget,
     this.emptyWidget,
     this.errorBuilder,
-    this.externalScrollController,
   });
 
   @override
@@ -44,6 +42,8 @@ class SliverPaginatedGridView<T> extends StatefulWidget {
 }
 
 class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
+  int _lastFetchCount = 0;
+
   @override
   Widget build(BuildContext context) {
     final info = widget.info;
@@ -103,6 +103,17 @@ class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
         // +1 for end slot — spans full width via SliverGridDelegate trick
         itemCount: info.items.length + 1,
         itemBuilder: (context, index) {
+          final thresholdIndex = (info.items.length * 0.7).round();
+          if (index >= thresholdIndex &&
+              info.canLoadMore &&
+              !info.isFetchingMore) {
+            if (_lastFetchCount != info.items.length) {
+              _lastFetchCount = info.items.length;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                widget.onScrollEnd();
+              });
+            }
+          }
           if (index == info.items.length) {
             return PaginationBottomSlot(
               isFetchingMore: info.isFetchingMore,

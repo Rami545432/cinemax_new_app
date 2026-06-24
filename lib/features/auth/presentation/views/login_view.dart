@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_paths.dart';
 import 'package:movify/features/auth/presentation/cubits/login_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/login_state.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
 import 'package:movify/features/auth/presentation/views/login_view_body.dart';
 import 'package:movify/shared/presentation/utils/show_snack_bar.dart';
 
@@ -20,6 +21,8 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccess) {
           showSnackBar(context, color: Colors.green, text: 'Welcome !');
+          // ✅ Notify SessionCubit so it updates to SessionAuthenticated globally
+          context.read<SessionCubit>().checkAuthStatus(isExplicitSignIn: true);
           context.go(RoutePaths.home);
         }
         if (state is LoginFailure) {

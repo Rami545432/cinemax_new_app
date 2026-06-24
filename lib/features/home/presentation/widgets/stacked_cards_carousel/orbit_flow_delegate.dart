@@ -46,7 +46,6 @@ class OrbitFlowDelegate extends FlowDelegate {
           arc * arcSign * _orbitFactor(from.offset);
       final rot = _lerp(from.rotation, to.rotation, eased);
       final scale = _lerp(from.scale, to.scale, eased);
-      // final opacity = _lerp(from.opacity, to.opacity, eased);
 
       // Center of the Flow widget
       final cx = context.size.width / 2;

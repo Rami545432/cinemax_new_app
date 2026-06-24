@@ -1,4 +1,6 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/discover/core/enum/movie_genre.dart';
 import 'package:movify/features/discover/domain/entities/genre_filter.dart';
 import 'package:movify/features/discover/presentation/core/collection_list_model.dart';
@@ -33,6 +35,10 @@ class MovieGenreTab extends StatelessWidget {
             child: CollectionGridBuilder(
               collections: CollectionListModel.movieCollections(context),
             ),
+          ),
+          ElevatedButton(
+            onPressed: () => FirebaseCrashlytics.instance.crash(),
+            child: Text('Test crash', style: AppStyles.textStyle16(context)),
           ),
         ],
       ),

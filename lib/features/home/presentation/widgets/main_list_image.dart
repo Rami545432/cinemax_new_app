@@ -8,6 +8,12 @@ class MainListImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CachedNetworkImage(
+    imageBuilder: (context, imageProvider) => DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        image: DecorationImage(image: imageProvider, fit: .cover),
+      ),
+    ),
     imageUrl: tmdbImageSize(.w185, posterPath),
     width: 60,
     height: 80,

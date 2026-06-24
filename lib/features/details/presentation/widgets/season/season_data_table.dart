@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movify/core/formatters/formatted_time_method.dart';
 import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:movify/features/details/presentation/widgets/shared/data_cell_text.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SeasonDataTable extends StatelessWidget {
   const SeasonDataTable({super.key, required this.data});
   final SeriesSeasonDetailsEntity data;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     TableRow buildTableRow(String title, String value) => TableRow(
       children: [
         DataCellText(text: title),
@@ -28,10 +30,10 @@ class SeasonDataTable extends StatelessWidget {
     }
 
     final List<TableRow> rows = [
-      buildTableRow("Episodes", data.seasonEpisodes.length.toString()),
-      buildTableRow("Air Date", data.seasonDate),
-      buildTableRow('Total Time', totalTime().toString()),
-      buildTableRow("Rating", data.seasonRating.toString()),
+      buildTableRow(l10n.episodes, data.seasonEpisodes.length.toString()),
+      buildTableRow(l10n.firstAirDate, data.seasonDate),
+      buildTableRow(l10n.totalTime, totalTime().toString()),
+      buildTableRow(l10n.rating, data.seasonRating.toString()),
     ];
 
     return Table(children: rows);

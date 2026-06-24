@@ -15,49 +15,46 @@ class CardImage extends StatelessWidget {
   final String? thumbnailUrl;
 
   @override
-  Widget build(BuildContext context) {
-    // log('cardImage rebuilt $imageUrl');
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
+  Widget build(BuildContext context) => CachedNetworkImage(
+    imageUrl: imageUrl,
+    fit: BoxFit.cover,
+    imageBuilder: (context, imageProvider) => Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+      ),
+    ),
+    placeholder: (context, url) {
+      if (thumbnailUrl != null && thumbnailUrl!.isNotEmpty) {
+        return CachedNetworkImage(
+          imageUrl: thumbnailUrl!,
+          fit: BoxFit.cover,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            ),
+          ),
+          placeholder: (context, url) =>
+              const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) =>
+              const Center(child: CircularProgressIndicator()),
+        );
+      }
+      return const Center(child: CircularProgressIndicator());
+    },
+    errorWidget: (context, url, error) => CachedNetworkImage(
       fit: BoxFit.cover,
+      imageUrl: defaultImageUrl ?? '',
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
-      placeholder: (context, url) {
-        if (thumbnailUrl != null && thumbnailUrl!.isNotEmpty) {
-          return CachedNetworkImage(
-            imageUrl: thumbnailUrl!,
-            fit: BoxFit.cover,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-              ),
-            ),
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                const Center(child: CircularProgressIndicator()),
-          );
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
-      errorWidget: (context, url, error) => CachedNetworkImage(
-        fit: BoxFit.cover,
-        imageUrl: defaultImageUrl ?? '',
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-          ),
-        ),
-        placeholder: (context, url) =>
-            const Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => const EmptyImage(),
-      ),
-    );
-  }
+      placeholder: (context, url) =>
+          const Center(child: CircularProgressIndicator()),
+      errorWidget: (context, url, error) => const EmptyImage(),
+    ),
+  );
 }

@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/language/presentation/cubits/language_state.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
@@ -16,6 +17,7 @@ class LanguageCubit extends HydratedCubit<LanguageState>
     final systemLocale = _getSystemFallbackLocale(
       ui.PlatformDispatcher.instance.locale,
     );
+    Intl.defaultLocale = systemLocale.languageCode;
     return LanguageState(locale: systemLocale, isSystemDefault: true);
   }
 
@@ -32,9 +34,11 @@ class LanguageCubit extends HydratedCubit<LanguageState>
       final systemLocale = _getSystemFallbackLocale(
         ui.PlatformDispatcher.instance.locale,
       );
+      Intl.defaultLocale = systemLocale.languageCode;
       emit(LanguageState(locale: systemLocale, isSystemDefault: true));
       updateApiServiceLanguage(systemLocale.languageCode);
     } else {
+      Intl.defaultLocale = languageCode;
       emit(LanguageState(locale: Locale(languageCode)));
       updateApiServiceLanguage(languageCode);
     }
@@ -46,6 +50,7 @@ class LanguageCubit extends HydratedCubit<LanguageState>
   void didChangeLocales(List<Locale>? locales) {
     if (state.isSystemDefault && locales != null && locales.isNotEmpty) {
       final newLocale = _getSystemFallbackLocale(locales.first);
+      Intl.defaultLocale = newLocale.languageCode;
       emit(LanguageState(locale: newLocale, isSystemDefault: true));
       updateApiServiceLanguage(newLocale.languageCode);
     }

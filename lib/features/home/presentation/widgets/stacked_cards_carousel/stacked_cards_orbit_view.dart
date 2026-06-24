@@ -67,16 +67,13 @@ class StackedCardsOrbitView extends StatelessWidget {
       // boundary across reorders.
       final children = <Widget>[
         ...slots.map(
-          (slot) => RepaintBoundary(
-            key: ValueKey(orbitIndex(current, slot.offset, cards.length)),
-            child: OrbitCardSlot(
-              current: current,
-              cards: cards,
-              buildMainCard: buildMainCard,
-              buildMediumCard: buildMediumCard,
-              buildMiniCard: buildMiniCard,
-              slot: slot,
-            ),
+          (slot) => OrbitCardSlot(
+            current: current,
+            cards: cards,
+            buildMainCard: buildMainCard,
+            buildMediumCard: buildMediumCard,
+            buildMiniCard: buildMiniCard,
+            slot: slot,
           ),
         ),
       ];

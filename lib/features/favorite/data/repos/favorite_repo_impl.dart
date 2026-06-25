@@ -49,7 +49,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
 
       // 1. Save to Hive immediately
       await localDataSource.addFavorite(model);
-      debugPrint('✅ Added to Hive: ${model.title}');
 
       // 2. Fire-and-forget to Firestore (if signed in)
       if (favorite.userId != 'guest') {
@@ -130,10 +129,7 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
             .toList();
         try {
           await remoteDataSource.batchSaveFavorites(toUpload);
-          debugPrint('☁️ Uploaded ${toUpload.length} new items to cloud');
-        } catch (e) {
-          debugPrint('⚠️ Upload failed (offline?): $e');
-        }
+        } catch (e) {}
       }
 
       // 5. Re-key guest favorites in Hive (guest → userId)
@@ -220,9 +216,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
 
     if (toAdd.isNotEmpty) {
       await localDataSource.batchSaveFavorites(toAdd);
-      debugPrint('📥 Pulled ${toAdd.length} items from cloud');
-    } else {
-      debugPrint('✅ Hive already in sync with cloud');
     }
   }
 
@@ -230,8 +223,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
   void _fireAndForget(Future<void> Function() operation) async {
     try {
       await operation();
-    } catch (e) {
-      debugPrint('⚠️ Background Firestore operation failed: $e');
-    }
+    } catch (e) {}
   }
 }

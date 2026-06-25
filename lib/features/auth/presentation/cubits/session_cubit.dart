@@ -37,13 +37,17 @@ class SessionCubit extends Cubit<SessionState> {
       if (user == null) {
         emit(SessionUnauthenticated());
       } else if (user.isGuest) {
-        FirebaseCrashlytics.instance.setUserIdentifier(''); // Clear it so Crashlytics uses the unique device ID
+        FirebaseCrashlytics.instance.setUserIdentifier(
+          '',
+        ); // Clear it so Crashlytics uses the unique device ID
         emit(SessionGuest(user: user));
       } else {
         if (user.uid != null) {
           FirebaseCrashlytics.instance.setUserIdentifier(user.uid!);
         }
-        emit(SessionAuthenticated(user: user, isExplicitSignIn: isExplicitSignIn));
+        emit(
+          SessionAuthenticated(user: user, isExplicitSignIn: isExplicitSignIn),
+        );
       }
     });
   }
@@ -57,20 +61,14 @@ class SessionCubit extends Cubit<SessionState> {
 
   Future<void> enableGuestMode() async {
     final result = await enableGuestModeUseCase(NoParams());
-    result.fold(
-      (failure) => debugPrint('❌ Guest mode error: ${failure.errorMessage}'),
-      (user) {
-        FirebaseCrashlytics.instance.setUserIdentifier('');
-        emit(SessionGuest(user: user));
-      },
-    );
+    result.fold((failure) {}, (user) {
+      FirebaseCrashlytics.instance.setUserIdentifier('');
+      emit(SessionGuest(user: user));
+    });
   }
 
   Future<void> disableGuestMode() async {
     final result = await disableGuestModeUseCase(NoParams());
-    result.fold(
-      (failure) => debugPrint('❌ Disable guest error: ${failure.errorMessage}'),
-      (_) => emit(SessionUnauthenticated()),
-    );
+    result.fold((failure) => {}, (_) => emit(SessionUnauthenticated()));
   }
 }

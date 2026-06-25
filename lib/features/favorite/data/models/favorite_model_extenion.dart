@@ -136,7 +136,6 @@ extension FavoriteModelFirestoreX on FavoriteModel {
   /// Handles multiple formats for backwards compatibility
   static ContentType _parseContentType(dynamic value) {
     if (value == null) {
-      debugPrint('⚠️ Missing contentType, defaulting to movie');
       return ContentType.movies;
     }
 
@@ -146,12 +145,7 @@ extension FavoriteModelFirestoreX on FavoriteModel {
     try {
       return ContentType.values.firstWhere(
         (type) => type.name.toLowerCase() == stringValue,
-        orElse: () {
-          debugPrint(
-            '⚠️ Unknown contentType: $stringValue, defaulting to movie',
-          );
-          return ContentType.movies;
-        },
+        orElse: () => ContentType.movies,
       );
     } catch (e) {
       debugPrint('⚠️ Error parsing contentType: $e, defaulting to movies');
@@ -172,14 +166,10 @@ extension FavoriteModelFirestoreX on FavoriteModel {
             .map((item) => (item as num).toInt())
             .toList();
       } catch (e) {
-        debugPrint('⚠️ Error parsing genres: $e, returning empty list');
         return [];
       }
     }
 
-    debugPrint(
-      '⚠️ Genres is not a list: ${value.runtimeType}, returning empty list',
-    );
     return [];
   }
 
@@ -200,7 +190,6 @@ extension FavoriteModelFirestoreX on FavoriteModel {
       try {
         return DateTime.parse(value);
       } catch (e) {
-        debugPrint('⚠️ Error parsing date string: $value, error: $e');
         return null;
       }
     }
@@ -210,12 +199,10 @@ extension FavoriteModelFirestoreX on FavoriteModel {
       try {
         return DateTime.fromMillisecondsSinceEpoch(value);
       } catch (e) {
-        debugPrint('⚠️ Error parsing timestamp from int: $value, error: $e');
         return null;
       }
     }
 
-    debugPrint('⚠️ Unknown timestamp format: ${value.runtimeType}');
     return null;
   }
 }

@@ -59,10 +59,7 @@ class NotificationService {
 
       // 4) get token and listen for refresh
       await _initFCMToken();
-    } catch (e, stackTrace) {
-      debugPrint("NotificationService init error: $e");
-      debugPrint(stackTrace.toString());
-    }
+    } catch (e) {}
   }
 
   Future<void> _initLocalNotifications() async {
@@ -171,15 +168,11 @@ class NotificationService {
       final type = data['type'];
       final id = data['id'];
 
-      debugPrint("Notification clicked: type=$type id=$id");
-
       // TODO: Navigate based on type
       // Example:
       // if (type == 'message') navigateToChat(id);
       // if (type == 'order') navigateToOrder(id);
-    } catch (e) {
-      debugPrint("Error parsing notification payload: $e");
-    }
+    } catch (e) {}
   }
 
   Future<void> onUserAuthenticated() async {

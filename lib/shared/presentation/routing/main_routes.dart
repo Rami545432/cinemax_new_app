@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
 import 'package:movify/core/routing/route_paths.dart';
-import 'package:movify/features/Bot/presentation/views/chat_bot_view.dart';
 import 'package:movify/features/discover/presentation/views/discover_view.dart';
 import 'package:movify/features/favorite/presentation/views/favorite_view.dart';
 import 'package:movify/features/home/presentation/views/home_view.dart';
@@ -18,11 +17,6 @@ class MainRoutes {
           const Center(child: CircularProgressIndicator()),
     ),
 
-    GoRoute(
-      path: RoutePaths.chatBot,
-      name: RouteName.chatBot,
-      builder: (context, state) => const ChatBotView(),
-    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
           NavigationViews(navigationShell: navigationShell),

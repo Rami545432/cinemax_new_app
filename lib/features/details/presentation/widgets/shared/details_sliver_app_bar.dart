@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movify/core/utils/app_styles.dart';
-import 'package:movify/core/utils/enums/content_type.dart';
+
 import 'package:movify/features/details/presentation/widgets/shared/back_button.dart';
 import 'package:movify/features/details/presentation/widgets/shared/home_icon_button.dart';
 import 'package:movify/features/details/presentation/widgets/shared/share_button.dart';
 import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:movify/features/favorite/presentation/widgets/favorite_button.dart';
-import 'package:movify/shared/presentation/widgets/in_app_view.dart';
+
 
 class DetailsSliverAppBar extends StatelessWidget {
   const DetailsSliverAppBar({
@@ -76,6 +76,7 @@ class DetailsSliverAppBar extends StatelessWidget {
       const Padding(padding: EdgeInsets.all(8.0), child: HomeIconButton()),
       IconButton(
         onPressed: () {
+          /*
           Navigator.push<void>(
             context,
             MaterialPageRoute(
@@ -87,6 +88,7 @@ class DetailsSliverAppBar extends StatelessWidget {
               ),
             ),
           );
+          */
         },
         icon: const Icon(Icons.play_arrow_rounded),
       ),

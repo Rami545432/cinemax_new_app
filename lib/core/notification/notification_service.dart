@@ -1,9 +1,10 @@
+// ignore_for_file: empty_catches
+
 import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/notification/fcm_token_manger.dart';
@@ -78,7 +79,7 @@ class NotificationService {
       onDidReceiveNotificationResponse: (resp) {
         final payload = resp.payload;
         if (payload != null) {
-          _handleNotificationClick(payload);
+          // _handleNotificationClick(payload);
         }
       },
     );
@@ -93,13 +94,10 @@ class NotificationService {
 
   Future<void> _initFCMToken() async {
     // Get current token
-    final token = await _fcm.getToken();
-    debugPrint("FCM Token: $token");
+    // final token = await _fcm.getToken();
 
     // Listen for token refresh
-    _fcm.onTokenRefresh.listen((newToken) {
-      debugPrint("FCM Token Refreshed: $newToken");
-    });
+    _fcm.onTokenRefresh.listen((newToken) {});
   }
 
   Future<void> _initFCMListeners() async {
@@ -110,13 +108,13 @@ class NotificationService {
 
     // Tapped when app was in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      _handleFCMClick(message.data);
+      // _handleFCMClick(message.data);
     });
 
     // Tapped when app was terminated
     final initialMessage = await _fcm.getInitialMessage();
     if (initialMessage != null) {
-      _handleFCMClick(initialMessage.data);
+      // _handleFCMClick(initialMessage.data);
     }
   }
 
@@ -156,24 +154,24 @@ class NotificationService {
     );
   }
 
-  void _handleFCMClick(Map<String, dynamic> data) {
-    final payload = jsonEncode(data);
-    _handleNotificationClick(payload);
-  }
+  // void _handleFCMClick(Map<String, dynamic> data) {
+  //   final payload = jsonEncode(data);
+  //   _handleNotificationClick(payload);
+  // }
 
-  void _handleNotificationClick(String payload) {
-    try {
-      final data = jsonDecode(payload);
+  // void _handleNotificationClick(String payload) {
+  //   try {
+  //     final data = jsonDecode(payload);
 
-      final type = data['type'];
-      final id = data['id'];
+  //     final type = data['type'];
+  //     final id = data['id'];
 
-      // TODO: Navigate based on type
-      // Example:
-      // if (type == 'message') navigateToChat(id);
-      // if (type == 'order') navigateToOrder(id);
-    } catch (e) {}
-  }
+  //     // TODO: Navigate based on type
+  //     // Example:
+  //     // if (type == 'message') navigateToChat(id);
+  //     // if (type == 'order') navigateToOrder(id);
+  //   } catch (e) {}
+  // }
 
   Future<void> onUserAuthenticated() async {
     await _tokenManager.syncToken();

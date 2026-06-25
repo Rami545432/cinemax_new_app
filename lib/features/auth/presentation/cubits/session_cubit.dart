@@ -69,6 +69,9 @@ class SessionCubit extends Cubit<SessionState> {
 
   Future<void> disableGuestMode() async {
     final result = await disableGuestModeUseCase(NoParams());
-    result.fold((failure) => {}, (_) => emit(SessionUnauthenticated()));
+    result.fold(
+      (failure) => debugPrint('❌ Disable guest error: ${failure.errorMessage}'),
+      (_) => emit(SessionUnauthenticated()),
+    );
   }
 }

@@ -1,5 +1,6 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:movify/core/errors/expections.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
@@ -70,7 +71,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
     try {
       // 1. Remove from Hive immediately
       await localDataSource.removeFavorite(specificId, contentType, userId);
-      debugPrint('🗑️ Removed from Hive: $specificId');
 
       // 2. Fire-and-forget to Firestore (if signed in)
       if (userId != 'guest') {
@@ -97,19 +97,15 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
       final guestFavs = await localDataSource.getGuestFavorites();
       if (guestFavs.isEmpty) {
         await _pullCloud(newUserId);
-        debugPrint('ℹ️ No guest favorites to merge');
 
         return const Right(unit);
       }
-      debugPrint('📦 Found ${guestFavs.length} guest favorites to merge');
 
       // 2. Get cloud favorites (ONE Firestore read)
       List<FavoriteModel> cloudFavs = [];
       try {
         cloudFavs = await remoteDataSource.getFavorites(newUserId);
-      } catch (e) {
-        debugPrint('⚠️ Could not read cloud (offline?): $e');
-      }
+      } catch (e) {}
 
       // 3. Build cloud lookup set
       final cloudKeys = <String>{};
@@ -138,7 +134,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
         'guest',
         newUserId,
       );
-      debugPrint('💾 Migrated Hive data: guest → $newUserId');
 
       // 6. Download cloud-only favorites to Hive
       final localKeys = <String>{};
@@ -155,12 +150,10 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
             .map((f) => f.copyWith(userId: newUserId))
             .toList();
         await localDataSource.batchSaveFavorites(toSave);
-        debugPrint('📥 Downloaded ${toSave.length} cloud-only favorites');
       }
 
       // 7. Clear remaining guest data
       await localDataSource.clearGuestFavorites();
-      debugPrint('✅ Merge complete');
 
       return const Right(unit);
     } on FirebaseException catch (e) {

@@ -43,6 +43,14 @@ jobs:
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
 
+      # ── 4.5 Shorebird ─────────────────────────────────────────
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_CI }}
+
       # ── 5. Create .env files from GitHub Secrets ────────────
       #    envied reads these at build_runner time, then they
       #    get baked (obfuscated) into the .g.dart files.

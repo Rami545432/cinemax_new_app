@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - dev
-      - upgrade_Gradle_fixing_pipeline
+      - bot_feature
 
 # Prevent duplicate runs on the same branch
 concurrency:

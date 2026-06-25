@@ -9,7 +9,6 @@ import 'package:movify/features/details/presentation/widgets/episode/episode_tab
 import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
 import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
-import 'package:movify/hooks/ui/use_scroll_collapse_controller.dart';
 import 'package:movify/hooks/ui/use_tab_controller_animation.dart';
 import 'package:movify/l10n/app_localizations.dart';
 import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
@@ -31,7 +30,7 @@ class EpisodeBody extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final scrollCollapse = useScrollCollapseDebounced(200);
+
     final intialIndex = allEpisodes.indexWhere(
       (element) => element.episodeNumber == episodeNumber,
     );
@@ -42,6 +41,9 @@ class EpisodeBody extends HookWidget {
     );
     final currentIndex = tabControllerResult.currentPage.round();
     final currentEpisode = allEpisodes[currentIndex];
+    final expandedHeight = MediaQuery.heightOf(context) * 0.3;
+    final collapseThreshold = expandedHeight - kToolbarHeight;
+    final isCollapsedNotifier = useMemoized(() => ValueNotifier<bool>(false));
     final tabs = useMemoized(
       () => List.generate(
         allEpisodes.length,
@@ -69,13 +71,11 @@ class EpisodeBody extends HookWidget {
       [allEpisodes.length],
     );
 
-    final expandedHeight = MediaQuery.heightOf(context) * 0.3;
-
     final headerSlivers = useMemoized(
       () => [
         DetailsSliverAppBar(
           expandedHeight: expandedHeight,
-          isCollapsedNotifier: scrollCollapse.isCollapsedNotifier,
+          isCollapsedNotifier: isCollapsedNotifier,
           title: currentEpisode.name ?? '${l10n.episode} $episodeNumber',
           favorite: FavoriteMapper.fromNavigationData(
             EpisodeNavData(
@@ -109,19 +109,31 @@ class EpisodeBody extends HookWidget {
       ],
       [
         currentEpisode,
-        scrollCollapse.isCollapsedNotifier,
+        isCollapsedNotifier,
         expandedHeight,
         tabControllerResult.controller,
         tabs,
       ],
     );
 
-    return NestedScrollView(
-      controller: scrollCollapse.scrollController,
-      headerSliverBuilder: (context, innerBoxIsScrolled) => headerSlivers,
-      body: TabBarView(
-        controller: tabControllerResult.controller,
-        children: tabsViewChildren,
+    return NotificationListener<ScrollNotification>(
+      onNotification: (scrollNotification) {
+        if (scrollNotification.depth == 0) {
+          final offset = scrollNotification.metrics.pixels;
+          final shouldCollapse = offset >= collapseThreshold;
+
+          if (isCollapsedNotifier.value != shouldCollapse) {
+            isCollapsedNotifier.value = shouldCollapse;
+          }
+        }
+        return false;
+      },
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => headerSlivers,
+        body: TabBarView(
+          controller: tabControllerResult.controller,
+          children: tabsViewChildren,
+        ),
       ),
     );
   }

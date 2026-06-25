@@ -44,8 +44,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   }
 
   Future<void> _onSessionChanged(SessionState state) async {
-    debugPrint('🎯 FavoriteCubit._onSessionChanged → ${state.runtimeType}');
-
     if (state is SessionAuthenticated) {
       await _handleSignIn(
         userId: state.user.uid!,
@@ -80,7 +78,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     // _currentUserId starts as 'guest' so first call passes
     // second call with same userId is blocked
     if (_initialized && _currentUserId == userId) {
-      debugPrint('⚠️ Already initialized for $userId — skipping');
       return;
     }
 
@@ -89,7 +86,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
     // ✅ Only merge on explicit sign in — NOT on app restart
     if (isFirstSignIn) {
-      debugPrint('🔐 First sign in — merging guest favorites');
       final result = await mergeGuestFavoritesUseCase(userId);
       result.fold(
         (failure) => debugPrint('⚠️ Merge failed: ${failure.errorMessage}'),
@@ -116,7 +112,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
     result.fold(
       (failure) {
-        debugPrint('❌ Load failed: ${failure.errorMessage}');
         safeEmit(FavoriteError(message: failure.errorMessage));
       },
       (favorites) {
@@ -220,7 +215,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       return;
     }
 
-    debugPrint('🔄 Pull-to-refresh from cloud...');
     final result = await pullCloudFavoritesUseCase(_currentUserId);
 
     result.fold(

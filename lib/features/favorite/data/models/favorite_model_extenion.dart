@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:movify/features/favorite/data/models/favorite_model.dart';
 
@@ -148,7 +147,6 @@ extension FavoriteModelFirestoreX on FavoriteModel {
         orElse: () => ContentType.movies,
       );
     } catch (e) {
-      debugPrint('⚠️ Error parsing contentType: $e, defaulting to movies');
       return ContentType.movies;
     }
   }

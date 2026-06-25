@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:movify/config/env/app_config.dart';
 import 'package:movify/core/di/service_locator.dart';
@@ -111,7 +109,6 @@ REMEMBER: You're not just listing titles - you're helping someone find their nex
 
       return text;
     } catch (e) {
-      log('Error sending message: $e');
       throw Exception('Failed to get response from AI: $e');
     }
   }

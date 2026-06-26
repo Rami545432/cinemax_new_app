@@ -5,6 +5,7 @@ import 'package:movify/features/details/domain/enums/tabs_enums.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
 import 'package:movify/features/details/presentation/widgets/shared/build_details_body_content.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_notifiacation_listener.dart';
 import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/stacked_details_background.dart';
@@ -59,6 +60,9 @@ class DetailsBody extends HookWidget {
     // Calculate the collapse threshold based on the expanded height
     final expandedHeight = MediaQuery.heightOf(context) * 0.7;
     final collapseThreshold = expandedHeight - kToolbarHeight;
+    final exactCacheWidth =
+        (MediaQuery.widthOf(context) * MediaQuery.devicePixelRatioOf(context))
+            .round();
 
     // Cache the sliver app bar so NestedScrollView's headerSliverBuilder
     // doesn't recreate the heavy background widget on every scroll frame.
@@ -76,27 +80,17 @@ class DetailsBody extends HookWidget {
           rating: rating,
           heroTag: heroTag,
           timeBlocSelector: const TimeBlocSelector(),
-          memCacheWidth: 1600,
+          memCacheWidth: exactCacheWidth,
         ),
       ),
-      [navigationData, isCollapsedNotifier, expandedHeight],
+      [navigationData, isCollapsedNotifier, expandedHeight, exactCacheWidth],
     );
 
     return DefaultTabController(
       length: tabs.length,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          // Check if we're scrolling the outer scroll view
-          if (scrollNotification.depth == 0) {
-            final offset = scrollNotification.metrics.pixels;
-            final shouldCollapse = offset >= collapseThreshold;
-
-            if (isCollapsedNotifier.value != shouldCollapse) {
-              isCollapsedNotifier.value = shouldCollapse;
-            }
-          }
-          return false;
-        },
+      child: CustomNotificationListener(
+        collapseThreshold: collapseThreshold,
+        isCollapsedNotifier: isCollapsedNotifier,
         child: NestedScrollView(
           headerSliverBuilder: (_, _) => [
             sliverAppBar,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
@@ -31,9 +32,21 @@ class MainVerticalCard extends StatelessWidget {
     return SimpleAnimatedCard(
       child: GestureDetector(
         onTap: () {
+          // Precache the tiny placeholder for the details screen backdrop so it 
+          // renders instantly without network delay during the Hero transition.
+          final navData = cardData.toNavigationData();
+          if (navData.backdropImage != null && navData.backdropImage!.isNotEmpty) {
+            precacheImage(
+              CachedNetworkImageProvider(
+                tmdbImageSize(TmdbImageSize.w300, navData.backdropImage!),
+              ),
+              context,
+            );
+          }
+
           context.pushNamed(
             routeName,
-            extra: cardData.toNavigationData(),
+            extra: navData,
             pathParameters: {'id': cardData.id.toString()},
             queryParameters: {'heroTag': heroTag},
           );

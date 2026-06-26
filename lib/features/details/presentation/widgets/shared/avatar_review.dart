@@ -33,6 +33,12 @@ class ReviewAvatar extends StatelessWidget {
           ? CachedNetworkImage(
               imageUrl: tmdbImageSize(TmdbImageSize.w154, avatarUrl!),
               fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(image: imageProvider, fit: .cover),
+                ),
+              ),
               placeholder: (context, url) => ColoredBox(
                 color: theme.scaffoldBackgroundColor,
                 child: const Center(

@@ -22,16 +22,29 @@ class OpcaityDetailsImage extends StatelessWidget {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [Colors.transparent, AppPrimaryColors.dark],
-        stops: const [0.1, 1],
       ),
     ),
     child: CachedNetworkImage(
       fit: BoxFit.cover,
       imageUrl: tmdbImageSize(imageSize, detailsBackGroundImage ?? ''),
       memCacheWidth: memCacheWidth,
+      // Progressive loading: The w300 version downloads instantly (or is already cached),
+      // giving a smooth transition while the massive version decodes.
+      placeholder: (context, url) => CachedNetworkImage(
+        fit: BoxFit.cover,
+        imageUrl: tmdbImageSize(TmdbImageSize.w300, detailsBackGroundImage ?? ''),
+        placeholder: (context, url) => Container(color: AppPrimaryColors.dark),
+        errorWidget: (context, url, error) => Container(color: AppPrimaryColors.dark),
+      ),
       errorWidget: (context, url, error) => CachedNetworkImage(
         fit: BoxFit.cover,
         imageUrl: tmdbImageSize(imageSize, defaultDetailsBackGroundImage ?? ''),
+        placeholder: (context, url) => CachedNetworkImage(
+           fit: BoxFit.cover,
+           imageUrl: tmdbImageSize(TmdbImageSize.w300, defaultDetailsBackGroundImage ?? ''),
+           placeholder: (context, url) => Container(color: AppPrimaryColors.dark),
+           errorWidget: (context, url, error) => Container(color: AppPrimaryColors.dark),
+        ),
         errorWidget: (context, url, error) =>
             Container(color: AppPrimaryColors.dark),
       ),

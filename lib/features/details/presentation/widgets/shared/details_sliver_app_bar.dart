@@ -7,7 +7,6 @@ import 'package:movify/features/details/presentation/widgets/shared/share_button
 import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
 import 'package:movify/features/favorite/presentation/widgets/favorite_button.dart';
 
-
 class DetailsSliverAppBar extends StatelessWidget {
   const DetailsSliverAppBar({
     super.key,
@@ -46,7 +45,7 @@ class DetailsSliverAppBar extends StatelessWidget {
           pinned: true,
           leadingWidth: 50,
           leading: const LeadingBackButton(),
-          actions: _buildActions(context),
+          actions: _buildActions(),
           expandedHeight: expandedHeight,
           flexibleSpace: FlexibleSpaceBar(background: backgroundWidget),
         );
@@ -54,7 +53,7 @@ class DetailsSliverAppBar extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildActions(BuildContext context) {
+  List<Widget> _buildActions() {
     final uniqueId = '${favorite.title}-${favorite.contentType}';
     return [
       Padding(
@@ -74,24 +73,6 @@ class DetailsSliverAppBar extends StatelessWidget {
         ),
       ),
       const Padding(padding: EdgeInsets.all(8.0), child: HomeIconButton()),
-      IconButton(
-        onPressed: () {
-          /*
-          Navigator.push<void>(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomInappView(
-                movieOrTvUrl: favorite.contentType == ContentType.movies
-                    ? 'https://vsembed.ru/embed/movie?tmdb=${favorite.specificId}'
-                    : 'https://vsembed.ru/embed/tv?tmdb=${favorite.tmbdId}&season=${favorite.seasonNumber}&episode=${favorite.episodeNumber}',
-                title: favorite.title,
-              ),
-            ),
-          );
-          */
-        },
-        icon: const Icon(Icons.play_arrow_rounded),
-      ),
     ];
   }
 }

@@ -15,38 +15,35 @@ class CollectionCard extends StatelessWidget {
     onTap: () {
       context.pushNamed(RouteName.modeView, extra: colllectionModel);
     },
-    child: Stack(
-      fit: StackFit.expand,
-      alignment: Alignment.bottomLeft,
-      children: [
-        CachedNetworkImage(
-          imageUrl: tmdbImageSize(.w300, colllectionModel.imageUrl),
-          fit: BoxFit.fill,
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(image: imageProvider, fit: .fill),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.bottomLeft,
+        children: [
+          CachedNetworkImage(
+            imageUrl: tmdbImageSize(.w300, colllectionModel.imageUrl),
+            fit: BoxFit.fill,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+          const Positioned.fill(child: GradientOverlay()),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, bottom: 25),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    colllectionModel.name,
+                    style: AppStyles.textStyle20(context),
+                  ),
+                ],
+              ),
             ),
           ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
-        const Positioned.fill(child: GradientOverlay()),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, bottom: 25),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  colllectionModel.name,
-                  style: AppStyles.textStyle20(context),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

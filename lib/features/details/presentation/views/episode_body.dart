@@ -6,6 +6,7 @@ import 'package:movify/features/details/presentation/core/details_data_navigatio
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
 import 'package:movify/features/details/presentation/widgets/episode/episode_info_section.dart';
 import 'package:movify/features/details/presentation/widgets/episode/episode_tab_bar_body.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_notifiacation_listener.dart';
 import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
 import 'package:movify/features/home/presentation/widgets/opcaity_details_image.dart';
@@ -116,18 +117,10 @@ class EpisodeBody extends HookWidget {
       ],
     );
 
-    return NotificationListener<ScrollNotification>(
-      onNotification: (scrollNotification) {
-        if (scrollNotification.depth == 0) {
-          final offset = scrollNotification.metrics.pixels;
-          final shouldCollapse = offset >= collapseThreshold;
+    return CustomNotificationListener(
+      collapseThreshold: collapseThreshold,
+      isCollapsedNotifier: isCollapsedNotifier,
 
-          if (isCollapsedNotifier.value != shouldCollapse) {
-            isCollapsedNotifier.value = shouldCollapse;
-          }
-        }
-        return false;
-      },
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => headerSlivers,
         body: TabBarView(

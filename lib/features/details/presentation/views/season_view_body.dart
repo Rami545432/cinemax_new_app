@@ -6,6 +6,7 @@ import 'package:movify/features/details/domain/enums/tabs_enums.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/core/mappers/favorite_mappers.dart';
 import 'package:movify/features/details/presentation/widgets/season/season_tabs_bloc_builder.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_notifiacation_listener.dart';
 import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/details_sliver_app_bar.dart';
 import 'package:movify/features/details/presentation/widgets/shared/stacked_details_background.dart';
@@ -44,19 +45,9 @@ class SeasonViewBody extends HookWidget {
 
     return DefaultTabController(
       length: seasonTabs.length,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          // Check if we're scrolling the outer scroll view
-          if (scrollNotification.depth == 0) {
-            final offset = scrollNotification.metrics.pixels;
-            final shouldCollapse = offset >= collapseThreshold;
-
-            if (isCollapsedNotifier.value != shouldCollapse) {
-              isCollapsedNotifier.value = shouldCollapse;
-            }
-          }
-          return false;
-        },
+      child: CustomNotificationListener(
+        collapseThreshold: collapseThreshold,
+        isCollapsedNotifier: isCollapsedNotifier,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             sliverAppBar,

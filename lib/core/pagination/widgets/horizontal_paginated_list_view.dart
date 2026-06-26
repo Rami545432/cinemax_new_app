@@ -54,6 +54,10 @@ class HorizontalPaginatedList<T> extends StatefulWidget {
 
   final bool enableHero;
 
+  /// A prototype widget that represents the exact size of the items in the list.
+  /// Providing this completely eliminates layout overhead during scrolling!
+  final Widget? prototypeItem;
+
   const HorizontalPaginatedList({
     super.key,
     required this.info,
@@ -68,6 +72,7 @@ class HorizontalPaginatedList<T> extends StatefulWidget {
     this.emptyWidget,
     this.itemGap = 12,
     this.enableHero = true,
+    this.prototypeItem,
   });
 
   @override
@@ -132,6 +137,8 @@ class _HorizontalPaginatedListState<T>
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
           padding: widget.padding,
+          // Optimization: Skip layout calculations by using a prototype item
+          prototypeItem: widget.prototypeItem,
           // +1 for the end slot (loader / retry / nothing)
           itemCount: info.items.length + 1,
           itemBuilder: (context, index) {

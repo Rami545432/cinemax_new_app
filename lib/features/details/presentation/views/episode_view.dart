@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 import 'package:movify/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
 import 'package:movify/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_state.dart';
@@ -34,8 +35,10 @@ class _EpisodeViewState extends State<EpisodeView> {
         >(
           builder: (context, state) => state.when(
             initial: () => const SizedBox.shrink(),
-            loading: () => const Center(
-              child: CircularProgressIndicator(color: Colors.cyanAccent),
+            loading: () => Center(
+              child: CircularProgressIndicator(
+                color: AppPrimaryColors.blueAccent,
+              ),
             ),
             failure: (message) => Center(child: Text(message ?? '')),
             success: (series) => EpisodeBody(

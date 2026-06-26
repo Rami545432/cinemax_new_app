@@ -86,10 +86,19 @@ class _MovieCategoryRowState extends State<MovieCategoryRow>
             ),
             _ => HorizontalPaginatedList<MovieEntity>(
               info: info,
+              prototypeItem: info.items.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: MainVerticalCard(
+                        cardData: info.items.first.toCardDisplay(),
+                        enableHero: false,
+                        category: widget.category.localizedName(context),
+                      ),
+                    )
+                  : null,
               itemBuilder: (context, movie, enableHero) => MainVerticalCard(
                 cardData: movie.toCardDisplay(),
                 enableHero: enableHero,
-
                 category: widget.category.localizedName(context),
               ),
               onScrollEnd: () =>

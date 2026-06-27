@@ -43,7 +43,7 @@ class ParticleHeartButton extends HookWidget {
         particleController.forward(from: 0);
       }
       return null;
-    }, [isFavorited]);
+    }, [isFavorited],);
 
     return GestureDetector(
       onTap: onTap,

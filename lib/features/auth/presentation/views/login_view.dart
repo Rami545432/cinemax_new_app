@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/utils/app_logger.dart';
 import 'package:movify/features/auth/presentation/cubits/login_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/login_state.dart';
 import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
@@ -26,7 +25,7 @@ class LoginView extends StatelessWidget {
           context.go(RoutePaths.home);
         }
         if (state is LoginFailure) {
-          log(state.message);
+          AppLogger.log(state.message);
           showSnackBar(context, color: Colors.red, text: state.message);
         }
       },

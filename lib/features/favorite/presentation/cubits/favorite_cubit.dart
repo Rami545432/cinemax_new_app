@@ -191,7 +191,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
           currentUserId: _currentUserId,
         ),
       );
-    }, (_) => debugPrint('✅ Toggle persisted'));
+    }, (_) => debugPrint('✅ Toggle persisted'),);
   }
 
   // ═══════════════════════════════════════════════════════════════════

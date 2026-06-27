@@ -148,7 +148,7 @@ class FcmTokenManager {
         "token": token,
         "platform": Platform.isAndroid ? "android" : "ios",
         "lastSeenAt": FieldValue.serverTimestamp(),
-      }, SetOptions(merge: true));
+      }, SetOptions(merge: true),);
     } catch (e) {}
   }
 }

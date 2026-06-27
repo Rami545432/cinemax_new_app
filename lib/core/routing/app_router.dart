@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:async/async.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/core/refresh_stream.dart';
 import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/utils/app_logger.dart';
 import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/session_state.dart';
 import 'package:movify/features/auth/routing/auth_routes.dart';
@@ -43,7 +42,7 @@ class AppRouters {
     SettingsState settingsState,
     String currentPath,
   ) {
-    log(
+    AppLogger.log(
       '🔄 Redirect | Session: ${sessionState.runtimeType} | Settings: ${settingsState.runtimeType} | Path: $currentPath',
     );
 

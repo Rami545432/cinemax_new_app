@@ -1,15 +1,14 @@
 // ignore_for_file: strict_raw_type
 
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:movify/core/utils/app_logger.dart';
 
 class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    log('🚀 ${options.method} ${options.path}');
+    AppLogger.log('🚀 ${options.method} ${options.path}');
     if (options.queryParameters.isNotEmpty) {
-      log('📝 Query: ${options.queryParameters}');
+      AppLogger.log('📝 Query: ${options.queryParameters}');
     }
     handler.next(options);
   }
@@ -22,9 +21,9 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    log('❌ ${err.type} ${err.requestOptions.path}');
+    AppLogger.log('❌ ${err.type} ${err.requestOptions.path}');
     if (err.response != null) {
-      log('Status: ${err.response!.statusCode}');
+      AppLogger.log('Status: ${err.response!.statusCode}');
     }
     handler.next(err);
   }

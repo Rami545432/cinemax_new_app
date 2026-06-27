@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/utils/app_logger.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   // @override
@@ -12,13 +11,13 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onClose(BlocBase<void> bloc) {
     super.onClose(bloc);
-    log('closed  $bloc');
+    AppLogger.log('closed  $bloc');
   }
 
   @override
   void onCreate(BlocBase<void> bloc) {
     super.onCreate(bloc);
-    log('created  $bloc');
+    AppLogger.log('created  $bloc');
   }
 
   // @override

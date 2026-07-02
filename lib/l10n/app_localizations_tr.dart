@@ -547,4 +547,27 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get continueButton => 'Devam Et';
+
+  @override
+  String get deleteAccount => 'Hesabı Sil';
+
+  @override
+  String get areYouSureYouWantToDelete =>
+      'Hesabınızı silmek istediğinizden emin misiniz?';
+
+  @override
+  String get thisActionCannotBeUndone => 'Bu işlem geri alınamaz';
+
+  @override
+  String get loginAgainToContinue =>
+      'İşleme devam etmek için lütfen tekrar giriş yapın';
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get accountDeleted => 'Hesap başarıyla silindi';
+
+  @override
+  String get delete => 'Sil';
 }

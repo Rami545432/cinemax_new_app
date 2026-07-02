@@ -74,6 +74,11 @@ class _StaticPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    color: const Color(0xFF1E1E2C), // A sleek dark color for the loading state
+    decoration: BoxDecoration(
+      color: const Color(
+        0xFF1E1E2C,
+      ), // A sleek dark color for the loading state
+      borderRadius: BorderRadius.circular(16),
+    ),
   );
 }

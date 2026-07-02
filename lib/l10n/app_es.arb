@@ -593,5 +593,19 @@
   "getStarted": "Comenzar",
   "@getStarted": {},
   "continueButton": "Continuar",
-  "@continueButton": {}
+  "@continueButton": {},
+  "deleteAccount": "Eliminar Cuenta",
+  "@deleteAccount": {},
+  "areYouSureYouWantToDelete": "¿Estás seguro de que quieres eliminar tu cuenta?",
+  "@areYouSureYouWantToDelete": {},
+  "thisActionCannotBeUndone": "Esta acción no se puede deshacer",
+  "@thisActionCannotBeUndone": {},
+  "loginAgainToContinue": "Por favor, inicia sesión de nuevo para continuar",
+  "@loginAgainToContinue": {},
+  "cancel": "Cancelar",
+  "@cancel": {},
+  "accountDeleted": "Cuenta eliminada exitosamente",
+  "@accountDeleted": {},
+  "delete": "Eliminar",
+  "@delete": {}
 }

@@ -550,4 +550,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get continueButton => 'Continuar';
+
+  @override
+  String get deleteAccount => 'Eliminar Cuenta';
+
+  @override
+  String get areYouSureYouWantToDelete =>
+      '¿Estás seguro de que quieres eliminar tu cuenta?';
+
+  @override
+  String get thisActionCannotBeUndone => 'Esta acción no se puede deshacer';
+
+  @override
+  String get loginAgainToContinue =>
+      'Por favor, inicia sesión de nuevo para continuar';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get accountDeleted => 'Cuenta eliminada exitosamente';
+
+  @override
+  String get delete => 'Eliminar';
 }

@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -29,6 +30,7 @@ Future<void> bootApp(AppConfig config) async {
       WidgetsFlutterBinding.ensureInitialized();
 
   await initializeDateFormatting();
+  await MobileAds.instance.initialize();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb

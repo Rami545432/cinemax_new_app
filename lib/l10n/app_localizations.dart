@@ -1129,6 +1129,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get continueButton;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @areYouSureYouWantToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get areYouSureYouWantToDelete;
+
+  /// No description provided for @thisActionCannotBeUndone.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone'**
+  String get thisActionCannotBeUndone;
+
+  /// No description provided for @loginAgainToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login again to continue'**
+  String get loginAgainToContinue;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @accountDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get accountDeleted;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
 }
 
 class _AppLocalizationsDelegate

@@ -11,11 +11,14 @@ class EpisodeInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
+    spacing: 12,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(
-        '${episode.name} ${episode.episodeNumber}',
-        style: AppStyles.textStyle16(context),
+      Flexible(
+        child: Text(
+          '${episode.name} ${episode.episodeNumber}',
+          style: AppStyles.textStyle16(context),
+        ),
       ),
       IconTextRow(
         iconData: Icons.calendar_month,

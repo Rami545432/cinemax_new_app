@@ -547,4 +547,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continueButton => 'Continue';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get areYouSureYouWantToDelete =>
+      'Are you sure you want to delete your account?';
+
+  @override
+  String get thisActionCannotBeUndone => 'This action cannot be undone';
+
+  @override
+  String get loginAgainToContinue => 'Please login again to continue';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get accountDeleted => 'Account deleted successfully';
+
+  @override
+  String get delete => 'Delete';
 }

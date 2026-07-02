@@ -593,5 +593,19 @@
   "startExplore": "Keşfetmeye Başla",
   "@startExplore": {},
   "continueButton": "Devam Et",
-  "@continueButton": {}
+  "@continueButton": {},
+  "deleteAccount": "Hesabı Sil",
+  "@deleteAccount": {},
+  "areYouSureYouWantToDelete": "Hesabınızı silmek istediğinizden emin misiniz?",
+  "@areYouSureYouWantToDelete": {},
+  "thisActionCannotBeUndone": "Bu işlem geri alınamaz",
+  "@thisActionCannotBeUndone": {},
+  "loginAgainToContinue": "İşleme devam etmek için lütfen tekrar giriş yapın",
+  "@loginAgainToContinue": {},
+  "cancel": "İptal",
+  "@cancel": {},
+  "accountDeleted": "Hesap başarıyla silindi",
+  "@accountDeleted": {},
+  "delete": "Sil",
+  "@delete": {}
 }

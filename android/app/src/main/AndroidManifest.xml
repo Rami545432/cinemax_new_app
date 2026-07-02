@@ -1,7 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <queries>
-        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
-    </queries>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -11,12 +8,6 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher">
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.facebook.sdk.ClientToken"
-            android:value="@string/facebook_client_token" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="movie_notifications" />
@@ -48,6 +39,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4319849356057219~7278989672"/>
+
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

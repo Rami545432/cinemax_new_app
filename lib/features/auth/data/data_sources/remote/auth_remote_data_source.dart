@@ -4,4 +4,5 @@ abstract interface class AuthRemoteDataSource {
   Future<UserModel> signInWithGoogle();
   Future<void> signOut();
   Future<UserModel?> getCurrentUser();
+  Future<void> deleteUserAccount();
 }

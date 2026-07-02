@@ -32,10 +32,11 @@ class MainVerticalCard extends StatelessWidget {
     return SimpleAnimatedCard(
       child: GestureDetector(
         onTap: () {
-          // Precache the tiny placeholder for the details screen backdrop so it 
+          // Precache the tiny placeholder for the details screen backdrop so it
           // renders instantly without network delay during the Hero transition.
           final navData = cardData.toNavigationData();
-          if (navData.backdropImage != null && navData.backdropImage!.isNotEmpty) {
+          if (navData.backdropImage != null &&
+              navData.backdropImage!.isNotEmpty) {
             precacheImage(
               CachedNetworkImageProvider(
                 tmdbImageSize(TmdbImageSize.w300, navData.backdropImage!),

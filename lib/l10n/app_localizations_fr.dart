@@ -551,4 +551,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get continueButton => 'Continuer';
+
+  @override
+  String get deleteAccount => 'Supprimer le compte';
+
+  @override
+  String get areYouSureYouWantToDelete =>
+      'Êtes-vous sûr de vouloir supprimer votre compte ?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'Cette action ne peut pas être annulée';
+
+  @override
+  String get loginAgainToContinue => 'Veuillez vous reconnecter pour continuer';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get accountDeleted => 'Compte supprimé avec succès';
+
+  @override
+  String get delete => 'Supprimer';
 }

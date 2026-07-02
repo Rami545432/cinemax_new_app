@@ -593,5 +593,19 @@
   "startExplore": "ابدأ الاستكشاف",
   "@startExplore": {},
   "continueButton": "التالي",
-  "@continueButton": {}
+  "@continueButton": {},
+  "deleteAccount": "حذف الحساب",
+  "@deleteAccount": {},
+  "areYouSureYouWantToDelete": "هل انت متأكد من رغبتك في حذف الحساب؟",
+  "@areYouSureYouWantToDelete": {},
+  "thisActionCannotBeUndone": "هذا الإجراء لا يمكن التراجع عنه",
+  "@thisActionCannotBeUndone": {},
+  "loginAgainToContinue": "يرجى تسجيل الدخول مرة أخرى لمتابعة العملية",
+  "@loginAgainToContinue": {},
+  "cancel": "إلغاء",
+  "@cancel": {},
+  "accountDeleted": "تم حذف الحساب بنجاح",
+  "@accountDeleted": {},
+  "delete": "حذف",
+  "@delete": {}
 }

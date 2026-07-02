@@ -36,7 +36,9 @@ class CollectionCard extends StatelessWidget {
                 children: [
                   Text(
                     colllectionModel.name,
-                    style: AppStyles.textStyle20(context),
+                    style: AppStyles.textStyle20(
+                      context,
+                    ).copyWith(color: Colors.white),
                   ),
                 ],
               ),

@@ -94,4 +94,17 @@ class AuthRepoImpl implements AuthRepo {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteUserAccount() async {
+    try {
+      await remoteDataSource.deleteUserAccount();
+      await localDataSource.clearGuestMode();
+      return right(null);
+    } on ServerFailure catch (e) {
+      return left(e);
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
 }

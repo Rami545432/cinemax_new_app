@@ -23,6 +23,7 @@ class AvatarPlaceholder extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
           colors: colorPair,
           begin: Alignment.topLeft,

@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movify/config/env/app_config.dart';
+import 'package:movify/core/ads/cubits/interstitial_ad_cubit.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/network/client/dio_client.dart';
@@ -25,6 +26,7 @@ import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_s
 import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source_impl.dart';
 import 'package:movify/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/delete_user_account_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/get_current_user_use_case.dart';
@@ -204,6 +206,7 @@ void _registerDataSources() {
     () => AuthRemoteDataSourceImpl(
       firebaseAuth: getIt<FirebaseAuth>(),
       googleSignIn: getIt<GoogleSignIn>(),
+      firestore: getIt<FirebaseFirestore>(),
     ),
   );
   getIt.registerLazySingleton<LocalFavoriteDataSource>(
@@ -284,6 +287,9 @@ void _registerAuthUseCases() {
   );
   getIt.registerLazySingleton<SignOutUseCase>(
     () => SignOutUseCase(getIt<AuthRepo>()),
+  );
+  getIt.registerLazySingleton<DeleteUserAccountUseCase>(
+    () => DeleteUserAccountUseCase(getIt<AuthRepo>()),
   );
   getIt.registerLazySingleton<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(getIt<AuthRepo>()),
@@ -463,6 +469,7 @@ void _registerCubits() {
       getIt<ClearSearchHistoryUseCase>(),
     ),
   );
+  getIt.registerLazySingleton<InterstitialAdCubit>(() => InterstitialAdCubit());
 }
 
 // ── 8. Auth cubits ────────────────────────────────────────────────────────
@@ -475,6 +482,7 @@ void _registerAuthCubits() {
       signOutUseCase: getIt<SignOutUseCase>(),
       enableGuestModeUseCase: getIt<EnableGuestModeUseCase>(),
       disableGuestModeUseCase: getIt<DisableGuestModeUseCase>(),
+      deleteUserAccountUseCase: getIt<DeleteUserAccountUseCase>(),
       getCurrentUserUseCase: getIt<GetCurrentUserUseCase>(),
     ),
   );

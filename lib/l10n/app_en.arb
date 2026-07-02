@@ -593,5 +593,19 @@
   "startExplore": "Start Explore",
   "@startExplore": {},
   "continueButton": "Continue",
-  "@continueButton": {}
+  "@continueButton": {},
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {},
+  "areYouSureYouWantToDelete": "Are you sure you want to delete your account?",
+  "@areYouSureYouWantToDelete": {},
+  "thisActionCannotBeUndone": "This action cannot be undone",
+  "@thisActionCannotBeUndone": {},
+  "loginAgainToContinue": "Please login again to continue",
+  "@loginAgainToContinue": {},
+  "cancel": "Cancel",
+  "@cancel": {},
+  "accountDeleted": "Account deleted successfully",
+  "@accountDeleted": {},
+  "delete": "Delete",
+  "@delete": {}
 }

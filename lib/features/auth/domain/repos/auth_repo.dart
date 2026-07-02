@@ -9,4 +9,5 @@ abstract interface class AuthRepo {
   Future<Either<Failure, UserEntity>> enableGuestMode();
   Future<Either<Failure, void>> disableGuestMode();
   Future<Either<Failure, bool>> isGuestMode();
+  Future<Either<Failure, void>> deleteUserAccount();
 }

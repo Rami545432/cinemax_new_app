@@ -4,6 +4,7 @@ import 'package:movify/features/details/presentation/widgets/shared/custom_tab_b
 import 'package:movify/features/search/data/models/search_result.dart';
 import 'package:movify/features/search/presentation/widgets/suggested_search_grid_builder.dart';
 import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
 
 class SearchTabBarViews extends HookWidget {
   const SearchTabBarViews({
@@ -35,9 +36,9 @@ class SearchTabBarViews extends HookWidget {
       body: TabBarView(
         controller: tabController,
         children: [
-          SuggestedSearchGridBuilder(results: results),
-          SuggestedSearchGridBuilder(results: movies),
-          SuggestedSearchGridBuilder(results: tvShows),
+          KeepAliveWrapper(child: SuggestedSearchGridBuilder(results: results)),
+          KeepAliveWrapper(child: SuggestedSearchGridBuilder(results: movies)),
+          KeepAliveWrapper(child: SuggestedSearchGridBuilder(results: tvShows)),
         ],
       ),
     );

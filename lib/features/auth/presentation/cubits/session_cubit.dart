@@ -2,7 +2,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/core/utils/app_logger.dart';
 import 'package:movify/features/auth/domain/entities/user_entity.dart';
+import 'package:movify/features/auth/domain/use_cases/delete_user_account_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/get_current_user_use_case.dart';
@@ -14,12 +16,14 @@ class SessionCubit extends Cubit<SessionState> {
   final SignOutUseCase signOutUseCase;
   final EnableGuestModeUseCase enableGuestModeUseCase;
   final DisableGuestModeUseCase disableGuestModeUseCase;
+  final DeleteUserAccountUseCase deleteUserAccountUseCase;
 
   SessionCubit({
     required this.getCurrentUserUseCase,
     required this.signOutUseCase,
     required this.enableGuestModeUseCase,
     required this.disableGuestModeUseCase,
+    required this.deleteUserAccountUseCase,
   }) : super(SessionUnknown());
 
   /// Called explicitly by other cubits (like LoginCubit) after a successful login
@@ -32,6 +36,7 @@ class SessionCubit extends Cubit<SessionState> {
 
   Future<void> checkAuthStatus({bool isExplicitSignIn = false}) async {
     final result = await getCurrentUserUseCase(NoParams());
+    AppLogger.log("isExplicitSignIn : $isExplicitSignIn", name: 'test');
 
     result.fold((_) => emit(SessionUnauthenticated()), (user) {
       if (user == null) {
@@ -57,6 +62,19 @@ class SessionCubit extends Cubit<SessionState> {
     await enableGuestModeUseCase(NoParams());
     FirebaseCrashlytics.instance.setUserIdentifier(''); // Clear the identifier
     emit(SessionGuest(user: UserEntity.guest()));
+  }
+
+  Future<void> deleteAccount() async {
+    final result = await deleteUserAccountUseCase(NoParams());
+    result.fold(
+      (failure) =>
+          debugPrint('❌ Delete account error: ${failure.errorMessage}'),
+      (_) async {
+        await enableGuestModeUseCase(NoParams());
+        FirebaseCrashlytics.instance.setUserIdentifier('');
+        emit(SessionGuest(user: UserEntity.guest()));
+      },
+    );
   }
 
   Future<void> enableGuestMode() async {

@@ -1139,13 +1139,13 @@ abstract class AppLocalizations {
   /// No description provided for @areYouSureYouWantToDelete.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete your account?'**
+  /// **'Delete Your Account ?'**
   String get areYouSureYouWantToDelete;
 
   /// No description provided for @thisActionCannotBeUndone.
   ///
   /// In en, this message translates to:
-  /// **'This action cannot be undone'**
+  /// **'Your Favorites Will Be Deleted Permanently'**
   String get thisActionCannotBeUndone;
 
   /// No description provided for @loginAgainToContinue.
@@ -1171,6 +1171,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get delete;
+
+  /// No description provided for @privacySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Settings'**
+  String get privacySettings;
 }
 
 class _AppLocalizationsDelegate

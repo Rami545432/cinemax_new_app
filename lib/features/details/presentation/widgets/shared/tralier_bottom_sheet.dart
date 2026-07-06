@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movify/core/ads/banner_ad_widget.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
-import 'package:movify/core/ads/banner_ad_widget.dart';
 
 class TrailersBottomSheet extends StatelessWidget {
   const TrailersBottomSheet({
@@ -40,7 +40,7 @@ class TrailersBottomSheet extends StatelessWidget {
               icon: Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: Colors.grey.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.close, size: 18),

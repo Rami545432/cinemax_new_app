@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:movify/core/ads/ad_helper.dart';
+import 'package:movify/core/ads/consent_manager.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
 
 class BannerAdWidget extends StatefulWidget {
@@ -27,6 +28,10 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   }
 
   Future<void> _loadAd() async {
+    await ConsentManager.waitForInitialization;
+    if (!await ConsentManager.canRequestAds()) {
+      return;
+    }
     setState(() {
       _isLoading = true;
     });
@@ -56,7 +61,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
               _isLoading = false;
             });
           }
-          
+
           _numLoadAttempts++;
           if (_numLoadAttempts <= maxFailedLoadAttempts) {
             final backoffSeconds = 1 << (_numLoadAttempts - 1);

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:movify/core/ads/consent_manager.dart';
 import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/l10n/app_localizations.dart';
 
@@ -10,35 +12,49 @@ class NavigationViews extends HookWidget {
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) => PopScope(
-    canPop: navigationShell.currentIndex == 0,
-    onPopInvokedWithResult: (didPop, result) async {
-      if (!didPop) {
-        _onItemTapped(0, context);
-      }
-    },
-    child: Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        indicatorColor: Colors.transparent,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-
-        onDestinationSelected: (value) {
-          _onItemTapped(value, context);
+  Widget build(BuildContext context) {
+    useMemoized(() async {
+      ConsentManager.initialize(
+        debugMode: true,
+        onConsentGathered: () async {
+          final canRequestAds = await ConsentManager.canRequestAds();
+          if (canRequestAds) {
+            await MobileAds.instance.initialize();
+          }
         },
-        selectedIndex: navigationShell.currentIndex,
-        destinations: [
-          ...NavigationItems.values.map(
-            (item) => NavigationDestination(
-              selectedIcon: Icon(item.icon, color: item.selectedColor),
-              icon: Icon(item.icon),
-              label: item.localizedLabel(context),
+      );
+    });
+
+    return PopScope(
+      canPop: navigationShell.currentIndex == 0,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop) {
+          _onItemTapped(0, context);
+        }
+      },
+      child: Scaffold(
+        body: navigationShell,
+        bottomNavigationBar: NavigationBar(
+          indicatorColor: Colors.transparent,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+
+          onDestinationSelected: (value) {
+            _onItemTapped(value, context);
+          },
+          selectedIndex: navigationShell.currentIndex,
+          destinations: [
+            ...NavigationItems.values.map(
+              (item) => NavigationDestination(
+                selectedIcon: Icon(item.icon, color: item.selectedColor),
+                icon: Icon(item.icon),
+                label: item.localizedLabel(context),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   void _onItemTapped(int index, BuildContext context) {
     navigationShell.goBranch(

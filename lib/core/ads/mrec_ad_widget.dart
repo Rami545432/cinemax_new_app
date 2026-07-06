@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:movify/core/ads/ad_helper.dart';
-import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/core/ads/consent_manager.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
+import 'package:movify/core/utils/app_colors.dart';
 
 class MrecAdWidget extends StatefulWidget {
   const MrecAdWidget({super.key});
@@ -28,7 +29,11 @@ class _MrecAdWidgetState extends State<MrecAdWidget> {
     }
   }
 
-  void _loadAd() {
+  void _loadAd() async {
+    await ConsentManager.waitForInitialization;
+    if (!await ConsentManager.canRequestAds()) {
+      return;
+    }
     setState(() {
       _isLoading = true;
     });
@@ -56,7 +61,7 @@ class _MrecAdWidgetState extends State<MrecAdWidget> {
               _isLoading = false;
             });
           }
-          
+
           _numLoadAttempts++;
           if (_numLoadAttempts <= maxFailedLoadAttempts) {
             final backoffSeconds = 1 << (_numLoadAttempts - 1);

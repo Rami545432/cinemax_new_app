@@ -596,9 +596,9 @@
   "@continueButton": {},
   "deleteAccount": "Eliminar Cuenta",
   "@deleteAccount": {},
-  "areYouSureYouWantToDelete": "¿Estás seguro de que quieres eliminar tu cuenta?",
+  "areYouSureYouWantToDelete": "¿Eliminar tu cuenta?",
   "@areYouSureYouWantToDelete": {},
-  "thisActionCannotBeUndone": "Esta acción no se puede deshacer",
+  "thisActionCannotBeUndone": "Tus favoritos se eliminarán permanentemente",
   "@thisActionCannotBeUndone": {},
   "loginAgainToContinue": "Por favor, inicia sesión de nuevo para continuar",
   "@loginAgainToContinue": {},
@@ -607,5 +607,7 @@
   "accountDeleted": "Cuenta eliminada exitosamente",
   "@accountDeleted": {},
   "delete": "Eliminar",
-  "@delete": {}
+  "@delete": {},
+  "privacySettings": "Ajustes de privacidad",
+  "@privacySettings": {}
 }

@@ -552,11 +552,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get deleteAccount => 'Hesabı Sil';
 
   @override
-  String get areYouSureYouWantToDelete =>
-      'Hesabınızı silmek istediğinizden emin misiniz?';
+  String get areYouSureYouWantToDelete => 'Hesabınızı Silmek istiyorsunuz?';
 
   @override
-  String get thisActionCannotBeUndone => 'Bu işlem geri alınamaz';
+  String get thisActionCannotBeUndone =>
+      'Sileceksiniz! Tüm favori film ve dizilerinizi kalıcı olarak sileceksiniz.';
 
   @override
   String get loginAgainToContinue =>
@@ -570,4 +570,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get delete => 'Sil';
+
+  @override
+  String get privacySettings => 'Gizlilik Ayarları';
 }

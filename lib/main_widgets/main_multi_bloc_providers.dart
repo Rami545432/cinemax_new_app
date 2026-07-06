@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/ads/cubits/interstitial_ad_cubit.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
@@ -8,7 +9,6 @@ import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
 import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
 import 'package:movify/features/settings/presentation/cubits/settings_cubit.dart';
 import 'package:movify/main_widgets/custom_material_app.dart';
-import 'package:movify/core/ads/cubits/interstitial_ad_cubit.dart';
 
 class MainMultiProvieders extends StatelessWidget {
   const MainMultiProvieders({super.key});
@@ -22,7 +22,10 @@ class MainMultiProvieders extends StatelessWidget {
       BlocProvider.value(value: getIt.get<SettingsCubit>()..checkSettings()),
       BlocProvider.value(value: getIt.get<LanguageCubit>()),
       BlocProvider(create: (_) => getIt.get<FavoriteCubit>(), lazy: false),
-      BlocProvider(create: (_) => getIt.get<InterstitialAdCubit>()..loadAd(), lazy: false),
+      BlocProvider(
+        create: (_) => getIt.get<InterstitialAdCubit>()..loadAd(),
+        lazy: false,
+      ),
     ],
     child: const CustomMaterialApp(),
   );

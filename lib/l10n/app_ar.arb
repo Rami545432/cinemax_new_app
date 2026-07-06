@@ -596,9 +596,9 @@
   "@continueButton": {},
   "deleteAccount": "حذف الحساب",
   "@deleteAccount": {},
-  "areYouSureYouWantToDelete": "هل انت متأكد من رغبتك في حذف الحساب؟",
+  "areYouSureYouWantToDelete": "حذف الحساب ؟",
   "@areYouSureYouWantToDelete": {},
-  "thisActionCannotBeUndone": "هذا الإجراء لا يمكن التراجع عنه",
+  "thisActionCannotBeUndone": "سوف يتم فقد كل مفضلاتك",
   "@thisActionCannotBeUndone": {},
   "loginAgainToContinue": "يرجى تسجيل الدخول مرة أخرى لمتابعة العملية",
   "@loginAgainToContinue": {},
@@ -607,5 +607,9 @@
   "accountDeleted": "تم حذف الحساب بنجاح",
   "@accountDeleted": {},
   "delete": "حذف",
-  "@delete": {}
+  "@delete": {},
+  "privacySettings": "إعدادات الخصوصية",
+  "@privacySettings": {},
+  "privacyOptions": "خيارات الخصوصية",
+  "@privacyOptions": {}
 }

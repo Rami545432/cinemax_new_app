@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:movify/core/ads/ad_helper.dart';
+import 'package:movify/core/ads/consent_manager.dart';
 
 part 'interstitial_ad_state.dart';
 
@@ -15,7 +16,10 @@ class InterstitialAdCubit extends Cubit<InterstitialAdState> {
     loadAd();
   }
 
-  void loadAd() {
+  void loadAd() async {
+    if (!await ConsentManager.canRequestAds()) {
+      return;
+    }
     if (state is InterstitialAdLoading || state is InterstitialAdLoaded) {
       return; // Already loading or loaded
     }
@@ -33,11 +37,11 @@ class InterstitialAdCubit extends Cubit<InterstitialAdState> {
         onAdFailedToLoad: (error) {
           debugPrint('InterstitialAd failed to load: $error');
           emit(InterstitialAdFailed(error.message));
-          
+
           _numLoadAttempts++;
           if (_numLoadAttempts <= maxFailedLoadAttempts) {
             // Exponential backoff: 1, 2, 4, 8, 16 seconds
-            final backoffSeconds = 1 << (_numLoadAttempts - 1); 
+            final backoffSeconds = 1 << (_numLoadAttempts - 1);
             Future.delayed(Duration(seconds: backoffSeconds), () {
               if (!isClosed) {
                 loadAd();

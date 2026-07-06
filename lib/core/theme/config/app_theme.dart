@@ -10,6 +10,7 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     cardColor: Colors.grey.shade200,
+    dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
     colorScheme: ColorScheme.light(
       primary: Colors.white,
 
@@ -25,6 +26,7 @@ class AppTheme {
   static ThemeData dark(Color colorScheme) => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
+    dialogTheme: DialogThemeData(backgroundColor: AppPrimaryColors.dark),
     cardColor: Colors.grey.shade900,
     scaffoldBackgroundColor: colorScheme,
 

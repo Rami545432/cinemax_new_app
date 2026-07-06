@@ -556,12 +556,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deleteAccount => 'Supprimer le compte';
 
   @override
-  String get areYouSureYouWantToDelete =>
-      'Êtes-vous sûr de vouloir supprimer votre compte ?';
+  String get areYouSureYouWantToDelete => 'Supprimer le compte?';
 
   @override
   String get thisActionCannotBeUndone =>
-      'Cette action ne peut pas être annulée';
+      'Vos favoris seront supprimés définitivement';
 
   @override
   String get loginAgainToContinue => 'Veuillez vous reconnecter pour continuer';
@@ -574,4 +573,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get delete => 'Supprimer';
+
+  @override
+  String get privacySettings => 'Paramètres de confidentialité';
 }

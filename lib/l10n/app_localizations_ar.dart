@@ -549,11 +549,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteAccount => 'حذف الحساب';
 
   @override
-  String get areYouSureYouWantToDelete =>
-      'هل انت متأكد من رغبتك في حذف الحساب؟';
+  String get areYouSureYouWantToDelete => 'حذف الحساب ؟';
 
   @override
-  String get thisActionCannotBeUndone => 'هذا الإجراء لا يمكن التراجع عنه';
+  String get thisActionCannotBeUndone => 'سوف يتم فقد كل مفضلاتك';
 
   @override
   String get loginAgainToContinue =>
@@ -567,4 +566,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get delete => 'حذف';
+
+  @override
+  String get privacySettings => 'إعدادات الخصوصية';
 }

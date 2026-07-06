@@ -596,9 +596,9 @@
   "@continueButton": {},
   "deleteAccount": "Supprimer le compte",
   "@deleteAccount": {},
-  "areYouSureYouWantToDelete": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+  "areYouSureYouWantToDelete": "Supprimer le compte?",
   "@areYouSureYouWantToDelete": {},
-  "thisActionCannotBeUndone": "Cette action ne peut pas être annulée",
+  "thisActionCannotBeUndone": "Vos favoris seront supprimés définitivement",
   "@thisActionCannotBeUndone": {},
   "loginAgainToContinue": "Veuillez vous reconnecter pour continuer",
   "@loginAgainToContinue": {},
@@ -607,5 +607,7 @@
   "accountDeleted": "Compte supprimé avec succès",
   "@accountDeleted": {},
   "delete": "Supprimer",
-  "@delete": {}
+  "@delete": {},
+  "privacySettings": "Paramètres de confidentialité",
+  "@privacySettings": {}
 }

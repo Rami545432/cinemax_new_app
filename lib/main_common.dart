@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,10 +12,12 @@ import 'package:movify/config/env/app_config.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/notification/notification_service.dart';
 import 'package:movify/core/observer/bloc_observer.dart';
+import 'package:movify/core/remote_config/remote_config_service.dart';
 import 'package:movify/core/storage/hive/hive_adapters_registers.dart';
 import 'package:movify/main_widgets/main_multi_bloc_providers.dart';
 import 'package:movify/shared/presentation/utils/statues_bar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -30,7 +31,6 @@ Future<void> bootApp(AppConfig config) async {
       WidgetsFlutterBinding.ensureInitialized();
 
   await initializeDateFormatting();
-  await MobileAds.instance.initialize();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
@@ -49,6 +49,14 @@ Future<void> bootApp(AppConfig config) async {
       name: config.environmentName,
     );
   }
+  if (kDebugMode) {
+    await ConsentInformation.instance.reset();
+  }
+  final patch = await ShorebirdUpdater().readCurrentPatch();
+  FirebaseCrashlytics.instance.setCustomKey(
+    'shorebird_patch_number',
+    '${patch?.number}',
+  );
 
   // Prevent Crashlytics from collecting crashes while debugging locally
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
@@ -73,16 +81,15 @@ Future<void> bootApp(AppConfig config) async {
   // ── DI ──────────────────────────────────────────────────────────────────
   await setupDependencies();
 
+  // ── Remote Config ────────────────────────────────────────────────────────
+  await RemoteConfigService.instance.init();
+
   // ── Notifications ────────────────────────────────────────────────────────
   // Moved here from MyApp.initState — no reason to delay until widget mounts
   await NotificationService.instance.init();
 
   FlutterNativeSplash.remove();
-  runApp(
-    kDebugMode
-        ? DevicePreview(builder: (context) => const MyApp())
-        : const MyApp(),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

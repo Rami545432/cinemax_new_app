@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
 import 'package:movify/core/pagination/widgets/sliver_paginated_grid_view.dart';
+import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
 import 'package:movify/features/discover/presentation/core/collection_model.dart';
 import 'package:movify/features/discover/presentation/cubits/fetch_items_by_keywords_states.dart';
@@ -36,8 +37,12 @@ class ModeViewBodyBlocBuilder extends StatelessWidget {
             );
           }
 
-          return const SliverToBoxAdapter(
-            child: Center(child: CircularProgressIndicator(color: Colors.blue)),
+          return SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppPrimaryColors.blueAccent,
+              ),
+            ),
           );
         },
       );

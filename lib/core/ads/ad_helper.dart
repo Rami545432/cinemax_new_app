@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:movify/core/remote_config/remote_config_service.dart';
+
 class AdHelper {
   // Replace these with your actual AdMob App IDs and Ad Unit IDs before releasing.
-  static const int interstitialFrequency = 6;
+  static int interstitialFrequency =
+      RemoteConfigService.instance.adFrequencyClicks;
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
       // Test Banner ID for Android

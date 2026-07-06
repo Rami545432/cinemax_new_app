@@ -552,11 +552,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAccount => 'Delete Account';
 
   @override
-  String get areYouSureYouWantToDelete =>
-      'Are you sure you want to delete your account?';
+  String get areYouSureYouWantToDelete => 'Delete Your Account ?';
 
   @override
-  String get thisActionCannotBeUndone => 'This action cannot be undone';
+  String get thisActionCannotBeUndone =>
+      'Your Favorites Will Be Deleted Permanently';
 
   @override
   String get loginAgainToContinue => 'Please login again to continue';
@@ -569,4 +569,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete => 'Delete';
+
+  @override
+  String get privacySettings => 'Privacy Settings';
 }

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/constant.dart';
 import 'package:movify/core/routing/route_name.dart';
-import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
 import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+import 'package:movify/features/profile/presentation/widgets/delete_show_dialoge.dart';
 import 'package:movify/features/profile/presentation/widgets/profile_list_tile.dart';
 import 'package:movify/l10n/app_localizations.dart';
 import 'package:movify/shared/presentation/utils/show_snack_bar.dart';
@@ -40,38 +40,7 @@ class ProfileListTileBlocBuilder extends StatelessWidget {
                   onDeleteButtonPressed: () {
                     showDialog<void>(
                       context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: Text(l10n.deleteAccount),
-                        content: Text(
-                          "${l10n.areYouSureYouWantToDelete} ${l10n.thisActionCannotBeUndone}",
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(ctx),
-                            child: Text(
-                              l10n.cancel,
-                              style: AppStyles.textStyle14(context),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(ctx);
-                              context.read<SessionCubit>().deleteAccount();
-                              showSnackBar(
-                                context,
-                                color: Colors.red,
-                                text: l10n.accountDeleted,
-                              );
-                            },
-                            child: Text(
-                              l10n.delete,
-                              style: AppStyles.textStyle14(
-                                context,
-                              ).copyWith(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
+                      builder: (ctx) => const DeleteShowDialoge(),
                     );
                   },
                 ),

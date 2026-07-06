@@ -596,9 +596,9 @@
   "@continueButton": {},
   "deleteAccount": "Delete Account",
   "@deleteAccount": {},
-  "areYouSureYouWantToDelete": "Are you sure you want to delete your account?",
+  "areYouSureYouWantToDelete": "Delete Your Account ?",
   "@areYouSureYouWantToDelete": {},
-  "thisActionCannotBeUndone": "This action cannot be undone",
+  "thisActionCannotBeUndone": "Your Favorites Will Be Deleted Permanently",
   "@thisActionCannotBeUndone": {},
   "loginAgainToContinue": "Please login again to continue",
   "@loginAgainToContinue": {},
@@ -607,5 +607,7 @@
   "accountDeleted": "Account deleted successfully",
   "@accountDeleted": {},
   "delete": "Delete",
-  "@delete": {}
+  "@delete": {},
+  "privacySettings": "Privacy Settings",
+  "@privacySettings": {}
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movify/core/routing/route_name.dart';
 import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/core/routing/screens/force_update_screen.dart';
+import 'package:movify/core/routing/screens/maintenance_screen.dart';
 import 'package:movify/features/discover/presentation/views/discover_view.dart';
 import 'package:movify/features/favorite/presentation/views/favorite_view.dart';
 import 'package:movify/features/home/presentation/views/home_view.dart';
@@ -15,6 +17,16 @@ class MainRoutes {
       name: RouteName.root,
       builder: (context, state) =>
           const Center(child: CircularProgressIndicator()),
+    ),
+    GoRoute(
+      path: RoutePaths.maintenance,
+      name: RouteName.maintenanceScreen,
+      builder: (context, state) => const MaintenanceScreen(),
+    ),
+    GoRoute(
+      path: RoutePaths.forceUpdate,
+      name: RouteName.forceUpdateScreen,
+      builder: (context, state) => const ForceUpdateScreen(),
     ),
 
     StatefulShellRoute.indexedStack(

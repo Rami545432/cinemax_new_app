@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movify/config/env/app_config.dart';
 import 'package:movify/core/ads/cubits/interstitial_ad_cubit.dart';
+import 'package:movify/core/ads/cubits/privacy_options_cubit.dart';
 import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
 import 'package:movify/core/network/api/services/api_service.dart';
 import 'package:movify/core/network/client/dio_client.dart';
@@ -18,6 +19,7 @@ import 'package:movify/core/notification/settings/domain/usecases/check_notifica
 import 'package:movify/core/notification/settings/domain/usecases/get_notification_status_usecase.dart';
 import 'package:movify/core/notification/settings/domain/usecases/open_notification_settings_usecase.dart';
 import 'package:movify/core/notification/settings/domain/usecases/request_notification_permission_usecase.dart';
+import 'package:movify/core/notification/settings/presentation/notification_settings/notification_settings_cubit.dart';
 import 'package:movify/core/routing/app_router.dart';
 import 'package:movify/core/theme/cubit/theme_cubit.dart';
 import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source.dart';
@@ -82,7 +84,6 @@ import 'package:movify/features/home/domian/use_cases/get_movies_use_case.dart';
 import 'package:movify/features/home/domian/use_cases/get_series_use_case.dart';
 import 'package:movify/features/home/presentation/blocs/movie_bloc.dart';
 import 'package:movify/features/home/presentation/blocs/series_bloc.dart';
-import 'package:movify/features/profile/presentation/cubits/notification_settings/notification_settings_cubit.dart';
 import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source.dart';
 import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source_impl.dart';
 import 'package:movify/features/search/data/data_sources/remote/remote_search_data_source.dart';
@@ -411,6 +412,7 @@ void _registerFavoriteUseCases() {
 // ── 7. Feature cubits ─────────────────────────────────────────────────────
 
 void _registerCubits() {
+  getIt.registerFactory<PrivacyOptionsCubit>(() => PrivacyOptionsCubit());
   getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
 
   getIt.registerLazySingleton<MovieBloc>(

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movify/core/notification/settings/presentation/notification_settings/notification_settings_cubit.dart';
 import 'package:movify/core/utils/app_styles.dart';
-import 'package:movify/features/profile/presentation/cubits/notification_settings/notification_settings_cubit.dart';
 import 'package:movify/l10n/app_localizations.dart';
 
 class NotificationSwitchTile extends StatefulWidget {

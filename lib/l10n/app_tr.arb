@@ -596,9 +596,9 @@
   "@continueButton": {},
   "deleteAccount": "Hesabı Sil",
   "@deleteAccount": {},
-  "areYouSureYouWantToDelete": "Hesabınızı silmek istediğinizden emin misiniz?",
+  "areYouSureYouWantToDelete": "Hesabınızı Silmek istiyorsunuz?",
   "@areYouSureYouWantToDelete": {},
-  "thisActionCannotBeUndone": "Bu işlem geri alınamaz",
+  "thisActionCannotBeUndone": "Sileceksiniz! Tüm favori film ve dizilerinizi kalıcı olarak sileceksiniz.",
   "@thisActionCannotBeUndone": {},
   "loginAgainToContinue": "İşleme devam etmek için lütfen tekrar giriş yapın",
   "@loginAgainToContinue": {},
@@ -607,5 +607,7 @@
   "accountDeleted": "Hesap başarıyla silindi",
   "@accountDeleted": {},
   "delete": "Sil",
-  "@delete": {}
+  "@delete": {},
+  "privacySettings": "Gizlilik Ayarları",
+  "@privacySettings": {}
 }

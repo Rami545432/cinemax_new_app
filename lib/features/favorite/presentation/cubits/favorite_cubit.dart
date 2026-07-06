@@ -191,7 +191,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
           currentUserId: _currentUserId,
         ),
       );
-    }, (_) => debugPrint('✅ Toggle persisted'),);
+    }, (_) => debugPrint('✅ Toggle persisted'));
   }
 
   // ═══════════════════════════════════════════════════════════════════
@@ -228,6 +228,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   @override
   Future<void> close() {
     _sessionSub.cancel();
+
     return super.close();
   }
   // ═══════════════════════════════════════════════════════════════════

@@ -1,6 +1,8 @@
 import 'package:async/async.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/remote_config/remote_config_service.dart';
 import 'package:movify/core/routing/core/refresh_stream.dart';
 import 'package:movify/core/routing/route_paths.dart';
 import 'package:movify/core/utils/app_logger.dart';
@@ -45,6 +47,20 @@ class AppRouters {
     AppLogger.log(
       '🔄 Redirect | Session: ${sessionState.runtimeType} | Settings: ${settingsState.runtimeType} | Path: $currentPath',
     );
+
+    // Set current route for Crashlytics context
+    FirebaseCrashlytics.instance.setCustomKey('current_route', currentPath);
+
+    // 0️⃣ Check Remote Config Blocks First (Highest Priority)
+    final remoteConfig = RemoteConfigService.instance;
+    if (remoteConfig.isMaintenanceMode &&
+        currentPath != RoutePaths.maintenance) {
+      return RoutePaths.maintenance;
+    }
+    if (remoteConfig.isUpdateRequired &&
+        currentPath != RoutePaths.forceUpdate) {
+      return RoutePaths.forceUpdate;
+    }
 
     // 1️⃣ App just started – wait (splash decides)
     if (sessionState is SessionUnknown || settingsState is SettingsUnknown) {

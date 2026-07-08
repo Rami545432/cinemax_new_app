@@ -1177,6 +1177,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy Settings'**
   String get privacySettings;
+
+  /// No description provided for @byContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing, you agree to our '**
+  String get byContinue;
+
+  /// No description provided for @terms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get terms;
+
+  /// No description provided for @and.
+  ///
+  /// In en, this message translates to:
+  /// **'And'**
+  String get and;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @lightOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Out'**
+  String get lightOut;
+
+  /// No description provided for @dim.
+  ///
+  /// In en, this message translates to:
+  /// **'Dim'**
+  String get dim;
 }
 
 class _AppLocalizationsDelegate

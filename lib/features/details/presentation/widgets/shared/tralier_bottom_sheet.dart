@@ -3,7 +3,7 @@ import 'package:movify/core/ads/banner_ad_widget.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
 
-class TrailersBottomSheet extends StatelessWidget {
+class TrailersBottomSheet extends StatefulWidget {
   const TrailersBottomSheet({
     super.key,
     required this.videoKey,
@@ -16,13 +16,32 @@ class TrailersBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
 
   @override
+  State<TrailersBottomSheet> createState() => _TrailersBottomSheetState();
+}
+
+class _TrailersBottomSheetState extends State<TrailersBottomSheet> {
+  bool _showContent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() {
+          _showContent = true;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
       color: Theme.of(context).scaffoldBackgroundColor,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
     ),
     child: ListView(
-      controller: scrollController,
+      controller: widget.scrollController,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
         // Top Drag Handle & Close Button Row
@@ -55,7 +74,7 @@ class TrailersBottomSheet extends StatelessWidget {
 
         // Trailer Title
         Text(
-          name,
+          widget.name,
           style: AppStyles.textStyle18(
             context,
           ).copyWith(fontWeight: FontWeight.bold, letterSpacing: 0.5),
@@ -68,16 +87,26 @@ class TrailersBottomSheet extends StatelessWidget {
         const Divider(height: 1, thickness: 1),
         const SizedBox(height: 24),
 
-        // YouTube Player
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: YoutubeTrailerBottomSheet(videoKey: videoKey),
-        ),
+        if (_showContent) ...[
+          // YouTube Player
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: YoutubeTrailerBottomSheet(videoKey: widget.videoKey),
+          ),
 
-        const SizedBox(height: 32),
+          const SizedBox(height: 32),
 
-        // Banner Ad
-        const Center(child: BannerAdWidget()),
+          // Banner Ad
+          const Center(child: BannerAdWidget()),
+        ] else ...[
+          // Loading Skeleton / Spinner
+          const SizedBox(
+            height: 250,
+            child: Center(
+              child: CircularProgressIndicator(color: Colors.red),
+            ),
+          ),
+        ],
       ],
     ),
   );

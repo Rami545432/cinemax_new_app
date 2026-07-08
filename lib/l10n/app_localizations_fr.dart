@@ -576,4 +576,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get privacySettings => 'Paramètres de confidentialité';
+
+  @override
+  String get byContinue => 'En continuant, vous acceptez nos ';
+
+  @override
+  String get terms => 'Conditions';
+
+  @override
+  String get and => 'et';
+
+  @override
+  String get privacyPolicy => 'Politique de Privacité';
+
+  @override
+  String get lightOut => 'Light Out';
+
+  @override
+  String get dim => 'Dim';
 }

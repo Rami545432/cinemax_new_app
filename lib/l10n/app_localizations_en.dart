@@ -572,4 +572,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacySettings => 'Privacy Settings';
+
+  @override
+  String get byContinue => 'By continuing, you agree to our ';
+
+  @override
+  String get terms => 'Terms';
+
+  @override
+  String get and => 'And';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get lightOut => 'Light Out';
+
+  @override
+  String get dim => 'Dim';
 }

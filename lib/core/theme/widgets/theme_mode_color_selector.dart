@@ -42,14 +42,14 @@ class ThemeModeColorSelector extends StatelessWidget {
                   controlAffinity: ListTileControlAffinity.trailing,
                   activeColor: Colors.lightBlueAccent,
                   checkColor: Colors.white,
-                  title: Text('Dim', style: style16),
+                  title: Text(l10n.dim, style: style16),
                 ),
                 CheckboxListTile(
                   value: state.accentColor == Colors.black,
                   onChanged: (value) {
                     context.read<ThemeCubit>().setAccentColor(Colors.black);
                   },
-                  title: Text('Lights Out', style: style16),
+                  title: Text(l10n.lightOut, style: style16),
                   activeColor: Colors.lightBlueAccent,
                   checkColor: Colors.white,
                   checkboxShape: const CircleBorder(),

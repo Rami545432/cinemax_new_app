@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/expections.dart';
 import 'package:movify/core/errors/failure.dart';
 import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
@@ -21,6 +22,8 @@ class AuthRepoImpl implements AuthRepo {
       return right(user.toEntity());
     } on ServerFailure catch (e) {
       return left(e);
+    } on CancelledException {
+      return left(const CancelledFailure());
     } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }

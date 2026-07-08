@@ -28,19 +28,19 @@ class ProfileListTileBlocBuilder extends StatelessWidget {
                   subtitle: state.user.email ?? '',
                   avatarImage: state.user.photoUrl ?? '',
                   authButtonText: l10n.authLogout,
+                  deleteButtonText: l10n.deleteAccount,
+                  onDeleteButtonPressed: () {
+                    showDialog<void>(
+                      context: context,
+                      builder: (ctx) => const DeleteShowDialoge(),
+                    );
+                  },
                   onAuthButtonPressed: () {
                     context.read<SessionCubit>().signOut();
                     showSnackBar(
                       context,
                       color: Colors.green,
                       text: l10n.logoutSuccessfully,
-                    );
-                  },
-                  deleteButtonText: l10n.deleteAccount,
-                  onDeleteButtonPressed: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (ctx) => const DeleteShowDialoge(),
                     );
                   },
                 ),

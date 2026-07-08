@@ -1,10 +1,11 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -15,7 +16,6 @@ import 'package:movify/core/observer/bloc_observer.dart';
 import 'package:movify/core/remote_config/remote_config_service.dart';
 import 'package:movify/core/storage/hive/hive_adapters_registers.dart';
 import 'package:movify/main_widgets/main_multi_bloc_providers.dart';
-import 'package:movify/shared/presentation/utils/statues_bar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
@@ -49,9 +49,11 @@ Future<void> bootApp(AppConfig config) async {
       name: config.environmentName,
     );
   }
-  if (kDebugMode) {
-    await ConsentInformation.instance.reset();
-  }
+  await FirebaseAppCheck.instance.activate(
+    providerAndroid: kDebugMode
+        ? const AndroidDebugProvider()
+        : const AndroidPlayIntegrityProvider(),
+  );
   final patch = await ShorebirdUpdater().readCurrentPatch();
   FirebaseCrashlytics.instance.setCustomKey(
     'shorebird_patch_number',
@@ -75,7 +77,6 @@ Future<void> bootApp(AppConfig config) async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await Hive.initFlutter();
   hiveAdapterRegisters();
-  setStatuesBarColor();
   Bloc.observer = SimpleBlocObserver();
 
   // ── DI ──────────────────────────────────────────────────────────────────
@@ -89,7 +90,7 @@ Future<void> bootApp(AppConfig config) async {
   await NotificationService.instance.init();
 
   FlutterNativeSplash.remove();
-  runApp(const MyApp());
+  runApp(DevicePreview(builder: (_) => const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

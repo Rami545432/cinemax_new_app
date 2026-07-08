@@ -609,5 +609,17 @@
   "delete": "Sil",
   "@delete": {},
   "privacySettings": "Gizlilik Ayarları",
-  "@privacySettings": {}
+  "@privacySettings": {},
+  "byContinue": "Devam ederek, kabul etmiş olursunuz ",
+  "@byContinue": {},
+  "terms": "Şartlar",
+  "@terms": {},
+  "and": "ve",
+  "@and": {},
+  "privacyPolicy": "Gizlilik Politikası",
+  "@privacyPolicy": {},
+  "lightOut": "Karanlık",
+  "@lightOut": {},
+  "dim": "Loş",
+  "@dim": {}
 }

@@ -17,36 +17,22 @@ class _YoutubeTrailerBottomSheetState extends State<YoutubeTrailerBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _controller = YoutubePlayerController(initialVideoId: widget.videoKey);
+    _controller = YoutubePlayerController.fromVideoId(
+      autoPlay: true,
+      videoId: widget.videoKey,
+      params: const YoutubePlayerParams(showFullscreenButton: true),
+    );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => Padding(
     padding: EdgeInsets.zero,
-    child: YoutubePlayer(
-      controller: _controller,
-      bottomActions: const [
-        CurrentPosition(),
-        ProgressBar(isExpanded: true),
-        RemainingDuration(),
-        FullScreenButton(),
-      ],
-
-      onEnded: (metaData) {
-        Navigator.of(context).maybePop();
-      },
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.red,
-      progressColors: const ProgressBarColors(
-        playedColor: Colors.red,
-        handleColor: Colors.redAccent,
-      ),
-    ),
+    child: YoutubePlayer(controller: _controller),
   );
 }

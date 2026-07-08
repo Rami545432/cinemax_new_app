@@ -609,5 +609,17 @@
   "delete": "Eliminar",
   "@delete": {},
   "privacySettings": "Ajustes de privacidad",
-  "@privacySettings": {}
+  "@privacySettings": {},
+  "byContinue": "Al continuar, aceptas nuestros ",
+  "@byContinue": {},
+  "terms": "Términos",
+  "@terms": {},
+  "and": "y",
+  "@and": {},
+  "privacyPolicy": "Política de Privacidad",
+  "@privacyPolicy": {},
+  "lightOut": "Light Out",
+  "@lightOut": {},
+  "dim": "Dim",
+  "@dim": {}
 }

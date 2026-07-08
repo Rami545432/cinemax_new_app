@@ -23,8 +23,8 @@ class ConsentManager {
 
     final params = ConsentRequestParameters(
       consentDebugSettings: debugSettings,
+
       // Set true if your app is child-directed (COPPA)
-      tagForUnderAgeOfConsent: false,
     );
 
     ConsentInformation.instance.requestConsentInfoUpdate(

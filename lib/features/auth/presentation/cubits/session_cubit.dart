@@ -1,6 +1,7 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/analytics/firebase_analytics_service.dart';
 import 'package:movify/core/domain/use_cases/no_params.dart';
 import 'package:movify/core/utils/app_logger.dart';
 import 'package:movify/features/auth/domain/entities/user_entity.dart';
@@ -10,7 +11,6 @@ import 'package:movify/features/auth/domain/use_cases/enable_guest_mode_use_case
 import 'package:movify/features/auth/domain/use_cases/get_current_user_use_case.dart';
 import 'package:movify/features/auth/domain/use_cases/sign_out_use_case.dart';
 import 'package:movify/features/auth/presentation/cubits/session_state.dart';
-import 'package:movify/core/analytics/firebase_analytics_service.dart';
 
 class SessionCubit extends Cubit<SessionState> {
   final GetCurrentUserUseCase getCurrentUserUseCase;
@@ -32,7 +32,10 @@ class SessionCubit extends Cubit<SessionState> {
     if (user.uid != null) {
       FirebaseCrashlytics.instance.setUserIdentifier(user.uid!);
       FirebaseCrashlytics.instance.setCustomKey('is_guest_mode', false);
-      FirebaseAnalyticsService.instance.setUserProperty(name: 'is_guest_mode', value: 'false');
+      FirebaseAnalyticsService.instance.setUserProperty(
+        name: 'is_guest_mode',
+        value: 'false',
+      );
     }
     emit(SessionAuthenticated(user: user, isExplicitSignIn: true));
   }
@@ -47,13 +50,19 @@ class SessionCubit extends Cubit<SessionState> {
       } else if (user.isGuest) {
         FirebaseCrashlytics.instance.setUserIdentifier('');
         FirebaseCrashlytics.instance.setCustomKey('is_guest_mode', true);
-        FirebaseAnalyticsService.instance.setUserProperty(name: 'is_guest_mode', value: 'true');
+        FirebaseAnalyticsService.instance.setUserProperty(
+          name: 'is_guest_mode',
+          value: 'true',
+        );
         emit(SessionGuest(user: user));
       } else {
         if (user.uid != null) {
           FirebaseCrashlytics.instance.setUserIdentifier(user.uid!);
           FirebaseCrashlytics.instance.setCustomKey('is_guest_mode', false);
-          FirebaseAnalyticsService.instance.setUserProperty(name: 'is_guest_mode', value: 'false');
+          FirebaseAnalyticsService.instance.setUserProperty(
+            name: 'is_guest_mode',
+            value: 'false',
+          );
         }
         emit(
           SessionAuthenticated(user: user, isExplicitSignIn: isExplicitSignIn),

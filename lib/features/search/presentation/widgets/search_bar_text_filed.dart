@@ -25,7 +25,6 @@ class SearchBarTextFiled extends HookWidget {
           Theme.of(context).colorScheme.primary,
         ),
         onChanged: onChangedQuery,
-
         controller: searchController,
         hintText: l10n.searchHint,
 

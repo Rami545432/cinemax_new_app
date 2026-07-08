@@ -48,6 +48,10 @@ class ServerFailure extends Failure {
         return const ServerFailure(
           errorMessage: 'Oops there is an error please try again',
         );
+      case DioExceptionType.transformTimeout:
+        return const ServerFailure(
+          errorMessage: 'Oops something went wrong please try again',
+        );
     }
   }
 

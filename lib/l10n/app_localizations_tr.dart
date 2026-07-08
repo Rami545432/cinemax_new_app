@@ -573,4 +573,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get privacySettings => 'Gizlilik Ayarları';
+
+  @override
+  String get byContinue => 'Devam ederek, kabul etmiş olursunuz ';
+
+  @override
+  String get terms => 'Şartlar';
+
+  @override
+  String get and => 've';
+
+  @override
+  String get privacyPolicy => 'Gizlilik Politikası';
+
+  @override
+  String get lightOut => 'Karanlık';
+
+  @override
+  String get dim => 'Loş';
 }

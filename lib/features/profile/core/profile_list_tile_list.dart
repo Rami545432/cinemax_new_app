@@ -14,7 +14,7 @@ List<ProfileIstTileModel> profileListTileList(BuildContext context) {
       title: l10n.favorites,
       icon: const FaIcon(FontAwesomeIcons.heart),
       onTap: () {
-        context.pushNamed(RouteName.favorite);
+        context.goNamed(RouteName.favorite);
       },
     ),
     ProfileIstTileModel(

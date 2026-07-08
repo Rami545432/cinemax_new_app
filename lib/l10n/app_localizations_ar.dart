@@ -569,4 +569,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get privacySettings => 'إعدادات الخصوصية';
+
+  @override
+  String get byContinue => 'بالاستمرار، أنت توافق على ';
+
+  @override
+  String get terms => 'الشروط';
+
+  @override
+  String get and => 'و';
+
+  @override
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get lightOut => 'تفتيح';
+
+  @override
+  String get dim => 'تعتيم';
 }

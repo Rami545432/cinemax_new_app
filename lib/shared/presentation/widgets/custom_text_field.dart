@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/core/utils/app_styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -23,7 +22,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextFormField(
     controller: controller,
-    cursorColor: AppPrimaryColors.blueAccent,
+    cursorColor: Colors.amber,
+
     validator: (value) {
       if (value == null || value.isEmpty) {
         return 'This Field is  Required ';

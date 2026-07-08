@@ -611,5 +611,17 @@
   "privacySettings": "إعدادات الخصوصية",
   "@privacySettings": {},
   "privacyOptions": "خيارات الخصوصية",
-  "@privacyOptions": {}
+  "@privacyOptions": {},
+  "byContinue": "بالاستمرار، أنت توافق على ",
+  "@byContinue": {},
+  "terms": "الشروط",
+  "@terms": {},
+  "and": "و",
+  "@and": {},
+  "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {},
+  "lightOut": "تفتيح",
+  "@lightOut": {},
+  "dim": "تعتيم",
+  "@dim": {}
 }

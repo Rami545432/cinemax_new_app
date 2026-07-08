@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -10,9 +11,9 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(title, style: Theme.of(context).textTheme.titleSmall),
+      Text(title, style: AppStyles.textStyle16(context)),
       if (trailing != null)
-        Text(trailing!, style: Theme.of(context).textTheme.bodySmall),
+        Text(trailing!, style: AppStyles.textStyle14(context)),
     ],
   );
 }

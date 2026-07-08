@@ -13,6 +13,7 @@ class SearchBarButton extends StatelessWidget {
     closedElevation: 0,
     openColor: Theme.of(context).colorScheme.primary,
     useRootNavigator: true,
+
     closedColor: Theme.of(context).colorScheme.primary,
     closedBuilder: (context, action) => const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),

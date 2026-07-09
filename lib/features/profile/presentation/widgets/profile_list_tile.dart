@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movify/core/utils/app_colors.dart';
 import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/profile/presentation/widgets/profile_auth_action_button.dart';
 
 class ProfileListTile extends StatelessWidget {
   const ProfileListTile({
@@ -25,6 +26,7 @@ class ProfileListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = AppStyles.textStyle16(context);
+
     return Column(
       spacing: 20,
       children: [
@@ -37,48 +39,16 @@ class ProfileListTile extends StatelessWidget {
           title: Text(title, style: style),
           subtitle: Text(subtitle, style: style),
         ),
-        GestureDetector(
-          onTap: onAuthButtonPressed,
-          child: SizedBox(
-            height: 40,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppPrimaryColors.blueAccent),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    authButtonText,
-                    style: style.copyWith(color: AppPrimaryColors.blueAccent),
-                  ),
-                ),
-              ),
-            ),
-          ),
+        ProfileAuthActionButton(
+          onAuthButtonPressed: onAuthButtonPressed,
+          authButtonText: authButtonText,
+          buttonColor: AppPrimaryColors.blueAccent,
         ),
         if (deleteButtonText != null && onDeleteButtonPressed != null)
-          GestureDetector(
-            onTap: onDeleteButtonPressed,
-            child: SizedBox(
-              height: 40,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.red),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      deleteButtonText!,
-                      style: style.copyWith(color: Colors.red),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          ProfileAuthActionButton(
+            onAuthButtonPressed: onDeleteButtonPressed!,
+            authButtonText: deleteButtonText!,
+            buttonColor: Colors.red,
           ),
       ],
     );

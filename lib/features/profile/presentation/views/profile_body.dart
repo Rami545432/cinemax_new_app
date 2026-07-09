@@ -16,7 +16,7 @@ class ProfileViewBody extends StatelessWidget {
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        spacing: 15,
+        spacing: 30,
         children: [
           const SizedBox(height: 12),
           const ProfileListTileBlocBuilder(),

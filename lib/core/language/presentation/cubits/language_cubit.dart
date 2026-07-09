@@ -80,6 +80,8 @@ class LanguageCubit extends HydratedCubit<LanguageState>
         return 'Français';
       case 'es':
         return 'Español';
+      case 'de':
+        return 'Deutsch';
       default:
         return 'English';
     }

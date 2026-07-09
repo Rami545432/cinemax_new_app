@@ -29,9 +29,9 @@ class FavoriteBody extends HookWidget {
                 context,
               ).copyWith(fontWeight: FontWeight.bold),
             ),
-
             pinned: true,
           ),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
           CustomTabBar(
             tabs: ContentType.values
                 .map((e) => e.localizedTab(context))

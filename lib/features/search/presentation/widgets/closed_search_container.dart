@@ -21,10 +21,14 @@ class ClosedSearchContainer extends StatelessWidget {
           const SizedBox(width: 16),
           const Icon(Icons.search),
           const SizedBox(width: 12),
-          Text(
-            l10n.searchHint,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+          Flexible(
+            child: Text(
+              l10n.searchHint,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
         ],

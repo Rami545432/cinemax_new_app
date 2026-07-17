@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/ads/mrec_ad_widget.dart';
 import 'package:movify/features/details/domain/entites/series_details_entity.dart';
 import 'package:movify/features/details/presentation/extensions/episode_to_air_extension.dart';
 import 'package:movify/features/details/presentation/widgets/shared/about_tab_view_branch.dart';
@@ -36,6 +37,8 @@ class SeriesAboutTabBarView extends StatelessWidget {
           child: SeriesDataTable(seriesDetailsEntity: seriesDetailsEntity),
         ),
         const Divider(),
+        const SizedBox(height: 20),
+        const Center(child: MrecAdWidget()),
         AboutTabViewBranch(
           title: l10n.trailers,
           child: TrailersImageListViewBuilder(

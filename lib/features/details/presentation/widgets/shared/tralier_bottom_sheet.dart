@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movify/core/ads/banner_ad_widget.dart';
 import 'package:movify/core/utils/app_styles.dart';
 import 'package:movify/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
 
@@ -93,18 +92,11 @@ class _TrailersBottomSheetState extends State<TrailersBottomSheet> {
             borderRadius: BorderRadius.circular(12),
             child: YoutubeTrailerBottomSheet(videoKey: widget.videoKey),
           ),
-
-          const SizedBox(height: 32),
-
-          // Banner Ad
-          const Center(child: BannerAdWidget()),
         ] else ...[
           // Loading Skeleton / Spinner
           const SizedBox(
             height: 250,
-            child: Center(
-              child: CircularProgressIndicator(color: Colors.red),
-            ),
+            child: Center(child: CircularProgressIndicator(color: Colors.red)),
           ),
         ],
       ],

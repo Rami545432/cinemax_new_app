@@ -25,6 +25,8 @@ abstract class BaseBrowseView<
 
   // ── Optional overrides ────────────────────────────────────────────
 
+  Widget? get bottomWidget => null;
+
   String get screenTitle => 'Browse';
 
   SliverGridDelegate? get gridDelegate => null;
@@ -44,6 +46,7 @@ abstract class BaseBrowseView<
       gridItemBuilder: buildGridItem,
       gridDelegate: gridDelegate,
       buildActions: buildActions,
+      bottomWidget: bottomWidget,
     ),
   );
 }
@@ -59,6 +62,7 @@ class _BrowseShell<B extends CategoryPaginationBloc<CAT, T, P>, CAT, T, P>
     required this.gridItemBuilder,
     required this.gridDelegate,
     required this.buildActions,
+    this.bottomWidget,
   });
 
   final String screenTitle;
@@ -68,6 +72,7 @@ class _BrowseShell<B extends CategoryPaginationBloc<CAT, T, P>, CAT, T, P>
   final Widget Function(BuildContext context, T item) gridItemBuilder;
   final SliverGridDelegate? gridDelegate;
   final List<Widget> Function(BuildContext, B, CAT) buildActions;
+  final Widget? bottomWidget;
   @override
   State<_BrowseShell<B, CAT, T, P>> createState() =>
       _BrowseShellState<B, CAT, T, P>();
@@ -111,6 +116,7 @@ class _BrowseShellState<B extends CategoryPaginationBloc<CAT, T, P>, CAT, T, P>
             gridDelegate: widget.gridDelegate,
           ),
         ),
+        if (widget.bottomWidget != null) widget.bottomWidget!,
       ],
     ),
   );

@@ -15,7 +15,6 @@ class NavigationViews extends HookWidget {
   Widget build(BuildContext context) {
     useMemoized(() async {
       ConsentManager.initialize(
-        debugMode: true,
         onConsentGathered: () async {
           final canRequestAds = await ConsentManager.canRequestAds();
           if (canRequestAds) {

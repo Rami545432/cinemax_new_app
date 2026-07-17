@@ -9,7 +9,11 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
 
   void toggleTheme() => emit(
     state.copyWith(
-      mode: state.mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+      mode: switch (state.mode) {
+        ThemeMode.light => ThemeMode.dark,
+        ThemeMode.dark => ThemeMode.light,
+        ThemeMode.system => ThemeMode.system,
+      },
     ),
   );
 

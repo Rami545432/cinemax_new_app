@@ -17,7 +17,6 @@ class ConsentManager {
       debugSettings = ConsentDebugSettings(
         debugGeography: DebugGeography.debugGeographyEea,
         // Add your test device ID here (shown in logcat/console when running debug)
-        testIdentifiers: ['0F05664F1841D3BE578CF9AE476227DE'],
       );
     }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/ads/banner_ad_widget.dart';
 import 'package:movify/core/utils/enums/content_type.dart';
 import 'package:movify/features/details/domain/enums/tabs_enums.dart';
 import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
@@ -86,25 +87,32 @@ class DetailsBody extends HookWidget {
       [navigationData, isCollapsedNotifier, expandedHeight, exactCacheWidth],
     );
 
-    return DefaultTabController(
-      length: tabs.length,
-      child: CustomNotificationListener(
-        collapseThreshold: collapseThreshold,
-        isCollapsedNotifier: isCollapsedNotifier,
-        child: NestedScrollView(
-          headerSliverBuilder: (_, _) => [
-            sliverAppBar,
-            CustomTabBar(tabs: tabs),
-          ],
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: BuildDetailsBodyContent(
-              id: navigationData.tmdbId,
-              contentType: contentType,
+    return Column(
+      children: [
+        Expanded(
+          child: DefaultTabController(
+            length: tabs.length,
+            child: CustomNotificationListener(
+              collapseThreshold: collapseThreshold,
+              isCollapsedNotifier: isCollapsedNotifier,
+              child: NestedScrollView(
+                headerSliverBuilder: (_, _) => [
+                  sliverAppBar,
+                  CustomTabBar(tabs: tabs),
+                ],
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: BuildDetailsBodyContent(
+                    id: navigationData.tmdbId,
+                    contentType: contentType,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        const SafeArea(top: false, child: BannerAdWidget()),
+      ],
     );
   }
 }

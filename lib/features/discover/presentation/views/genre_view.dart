@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movify/core/ads/banner_ad_widget.dart';
 import 'package:movify/core/di/service_locator.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
 import 'package:movify/core/pagination/presentation/bloc/category_pagination_state.dart';
@@ -66,6 +67,10 @@ class GenreView
       onPressed: () => _openFilterSheet(context, bloc, selectedCategory),
     ),
   ];
+
+  @override
+  Widget? get bottomWidget =>
+      const SafeArea(top: false, child: BannerAdWidget());
 
   Future<void> _openFilterSheet(
     BuildContext context,

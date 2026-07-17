@@ -13,7 +13,10 @@ class MrecAdWidget extends StatefulWidget {
   State<MrecAdWidget> createState() => _MrecAdWidgetState();
 }
 
-class _MrecAdWidgetState extends State<MrecAdWidget> {
+class _MrecAdWidgetState extends State<MrecAdWidget>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   BannerAd? _mrecAd;
   bool _isLoaded = false;
   bool _isLoading = false;
@@ -83,8 +86,9 @@ class _MrecAdWidgetState extends State<MrecAdWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<ConnectivityCubit, NetworkStatus>(
+  Widget build(BuildContext context) {
+    super.build(context);
+    return BlocListener<ConnectivityCubit, NetworkStatus>(
         listenWhen: (previous, current) => current == NetworkStatus.connected,
         listener: (context, state) {
           if (!_isLoaded && !_isLoading) {
@@ -97,6 +101,7 @@ class _MrecAdWidgetState extends State<MrecAdWidget> {
           adSize: _adSize,
         ),
       );
+  }
 }
 
 class BuildMrecAdWidget extends StatelessWidget {
@@ -126,7 +131,22 @@ class BuildMrecAdWidget extends StatelessWidget {
         child: AdWidget(ad: mrecAd!),
       );
     }
-    // Return an empty box while loading or if it fails
-    return const SizedBox.shrink();
+    // Return a placeholder box while loading to prevent layout shift (CLS)
+    return Container(
+      width: 300,
+      height: 250,
+      margin: const EdgeInsets.symmetric(vertical: 24),
+      decoration: BoxDecoration(
+        color: AppPrimaryColors.dark.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Center(
+        child: SizedBox(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+      ),
+    );
   }
 }

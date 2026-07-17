@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/boarding_one_poster_card.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/features/onboarding/presentation/widgets/boarding_one_poster_card.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class OnboardingOneUpperSection extends StatelessWidget {
   const OnboardingOneUpperSection({super.key, required this.images});
@@ -9,7 +9,7 @@ class OnboardingOneUpperSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final posterHeight = width < SizeConfig.mobile ? 224.0 : 280.0;
     final posterWidth = width < SizeConfig.mobile ? 160.0 : 200.0;
     return Center(

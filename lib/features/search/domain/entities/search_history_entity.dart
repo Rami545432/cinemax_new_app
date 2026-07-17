@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
 
 class SearchHistoryEntity {
   final int id;

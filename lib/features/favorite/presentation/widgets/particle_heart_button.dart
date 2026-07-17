@@ -43,7 +43,7 @@ class ParticleHeartButton extends HookWidget {
         particleController.forward(from: 0);
       }
       return null;
-    }, [isFavorited]);
+    }, [isFavorited],);
 
     return GestureDetector(
       onTap: onTap,
@@ -87,7 +87,7 @@ class ParticleHeartButton extends HookWidget {
               scale: scaleAnimation,
               child: Icon(
                 isFavorited ? Icons.favorite : Icons.favorite_border,
-                color: isFavorited ? Colors.red : Colors.grey,
+                color: isFavorited ? Colors.red : null,
                 size: size,
               ),
             ),

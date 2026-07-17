@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 sealed class SearchResult {}
 

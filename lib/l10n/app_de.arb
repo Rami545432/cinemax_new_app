@@ -1,0 +1,627 @@
+{
+  "@@locale": "de",
+  "welcomeUser": "Willkommen, {username}!",
+  "@welcomeUser": {
+    "description": "Willkommensnachricht für den Benutzer nach der Anmeldung",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "Rami"
+      }
+    }
+  },
+  "authLogin": "Anmelden",
+  "@authLogin": {
+    "description": "Anmelde-Button"
+  },
+  "authRegister": "Konto erstellen",
+  "@authRegister": {
+    "description": "Button zum Erstellen eines neuen Kontos"
+  },
+  "authEmail": "E-Mail-Adresse",
+  "@authEmail": {
+    "description": "Eingabefeld für die E-Mail-Adresse"
+  },
+  "authPassword": "Passwort",
+  "@authPassword": {
+    "description": "Eingabefeld für das Passwort"
+  },
+  "authForgotPassword": "Passwort vergessen?",
+  "@authForgotPassword": {
+    "description": "Link zur Passwortwiederherstellung"
+  },
+  "authResetPassword": "Passwort zurücksetzen",
+  "@authResetPassword": {
+    "description": "Button zur Bestätigung des Zurücksetzens des Passworts"
+  },
+  "authResetPasswordSuccess": "Passwort wurde erfolgreich zurückgesetzt",
+  "@authResetPasswordSuccess": {
+    "description": "Erfolgsmeldung beim Zurücksetzen des Passworts"
+  },
+  "authResetPasswordError": "Zurücksetzen des Passworts fehlgeschlagen",
+  "@authResetPasswordError": {
+    "description": "Fehlermeldung bei fehlgeschlagenem Zurücksetzen"
+  },
+  "authSignInWith": "Oder anmelden mit",
+  "@authSignInWith": {
+    "description": "Text für alternative Anmeldeoptionen"
+  },
+  "authLogout": "Abmelden",
+  "@authLogout": {
+    "description": "Abmelde-Button"
+  },
+  "popular": "Am beliebtesten",
+  "@popular": {
+    "description": "Bereich für die beliebtesten Filme oder Serien"
+  },
+  "nowPlaying": "Jetzt im Kino",
+  "@nowPlaying": {
+    "description": "Aktuell laufende Filme oder Serien"
+  },
+  "topRated": "Bestbewertet",
+  "@topRated": {
+    "description": "Am besten bewertete Filme oder Serien"
+  },
+  "upcoming": "Demnächst",
+  "@upcoming": {
+    "description": "Kommende Filme oder Serien"
+  },
+  "trending": "Im Trend",
+  "@trending": {
+    "description": "Derzeit angesagte Inhalte"
+  },
+  "search": "Suche",
+  "@search": {
+    "description": "Such-Button oder -Titel"
+  },
+  "searchHint": "Nach einem Film oder einer Serie suchen...",
+  "@searchHint": {
+    "description": "Platzhaltertext im Suchfeld"
+  },
+  "searchHistory": "Suchverlauf",
+  "@searchHistory": {
+    "description": "Titel des Suchverlaufs"
+  },
+  "clearHistory": "Verlauf löschen",
+  "@clearHistory": {
+    "description": "Button zum Löschen des Suchverlaufs"
+  },
+  "about": "Über",
+  "@about": {
+    "description": "Seite über die App"
+  },
+  "cast": "Besetzung",
+  "@cast": {
+    "description": "Liste der Schauspieler"
+  },
+  "similar": "Ähnliche Titel",
+  "@similar": {
+    "description": "Ähnliche oder vorgeschlagene Inhalte"
+  },
+  "recommended": "Empfohlen",
+  "@recommended": {
+    "description": "Bereich für empfohlene Inhalte"
+  },
+  "reviews": "Rezensionen",
+  "@reviews": {
+    "description": "Bereich für Nutzerbewertungen"
+  },
+  "seasons": "Staffeln",
+  "@seasons": {
+    "description": "Anzahl der Staffeln einer Serie"
+  },
+  "episodes": "Folgen",
+  "@episodes": {
+    "description": "Anzahl der Folgen in der Staffel"
+  },
+  "network": "Sender",
+  "@network": {
+    "description": "Produzierender Sender oder Kanal"
+  },
+  "productionCompany": "Produktionsfirma",
+  "@productionCompany": {
+    "description": "Produzierende Firma des Werks"
+  },
+  "movieGenres": "Filmgenres",
+  "@movieGenres": {
+    "description": "Filmkategorien"
+  },
+  "tvGenres": "Seriengenres",
+  "@tvGenres": {
+    "description": "Seriekategorien"
+  },
+  "all": "Alle",
+  "@all": {
+    "description": "Allgemeiner Text für alle Elemente"
+  },
+  "movies": "Filme",
+  "@movies": {
+    "description": "Bereich für Filme"
+  },
+  "tvShows": "Serien",
+  "@tvShows": {
+    "description": "Bereich für Fernsehserien"
+  },
+  "originalTitle": "Originaltitel",
+  "@originalTitle": {
+    "description": "Originaltitel des Werks"
+  },
+  "releaseDate": "Erscheinungsdatum",
+  "@releaseDate": {
+    "description": "Erscheinungsdatum des Films oder der Folge"
+  },
+  "runtime": "Laufzeit",
+  "@runtime": {
+    "description": "Laufzeit des Werks"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status des Werks (laufend - abgeschlossen - kommend...)"
+  },
+  "language": "Sprache",
+  "@language": {
+    "description": "Sprache des Inhalts"
+  },
+  "budget": "Budget",
+  "@budget": {
+    "description": "Produktionskosten des Werks"
+  },
+  "revenue": "Einnahmen",
+  "@revenue": {
+    "description": "Einnahmen des Werks"
+  },
+  "overview": "Beschreibung",
+  "@overview": {
+    "description": "Zusammenfassung des Werks"
+  },
+  "storyLine": "Handlung",
+  "@storyLine": {
+    "description": "Haupthandlung des Werks"
+  },
+  "noDescriptionAvailable": "Keine Beschreibung verfügbar",
+  "@noDescriptionAvailable": {
+    "description": "Text bei fehlender Beschreibung"
+  },
+  "less": "Weniger",
+  "@less": {
+    "description": "Button zum Anzeigen von weniger Text"
+  },
+  "more": "Mehr",
+  "@more": {
+    "description": "Button zum Anzeigen von mehr Text"
+  },
+  "geners": "Kategorien",
+  "@geners": {
+    "description": "Verfügbare Kategorien des Werks"
+  },
+  "countries": "Produktionsländer",
+  "@countries": {
+    "description": "Produktionsländer des Werks"
+  },
+  "informations": "Informationen",
+  "@informations": {
+    "description": "Verfügbare Informationen zum Werk"
+  },
+  "trailers": "Trailer",
+  "@trailers": {
+    "description": "Verfügbare Trailer zum Werk"
+  },
+  "theme": "Design",
+  "@theme": {
+    "description": "Verfügbares Design der App"
+  },
+  "system": "System",
+  "@system": {
+    "description": "Verfügbares Systemdesign der App"
+  },
+  "light": "Heller Modus",
+  "@light": {
+    "description": "Verfügbarer heller Modus der App"
+  },
+  "dark": "Dunkler Modus",
+  "@dark": {
+    "description": "Verfügbarer dunkler Modus der App"
+  },
+  "favorites": "Favoriten",
+  "@favorites": {
+    "description": "Verfügbare Favoriten der App"
+  },
+  "profile": "Konto",
+  "@profile": {
+    "description": "Verfügbares Konto der App"
+  },
+  "myProfile": "Mein Konto",
+  "@myProfile": {
+    "description": "Mein Konto in der App"
+  },
+  "noItemsFound": "Keine Elemente verfügbar",
+  "@noItemsFound": {
+    "description": "Text bei fehlenden Elementen"
+  },
+  "retry": "Erneut versuchen",
+  "@retry": {
+    "description": "Button zum erneuten Versuchen"
+  },
+  "noInternetConnection": "Keine Internetverbindung",
+  "@noInternetConnection": {
+    "description": "Text bei fehlender Internetverbindung"
+  },
+  "nofavorites": "Keine {type} in den Favoriten",
+  "@nofavorites": {
+    "description": "Text bei fehlenden {type} in den Favoriten",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "Film"
+      }
+    }
+  },
+  "startAddingYourFavorite": "Füge deine bevorzugten {type} hinzu",
+  "@startAddingYourFavorite": {
+    "description": "Text bei fehlenden bevorzugten {type}",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "Film"
+      }
+    }
+  },
+  "noTrailersAvailable": "Keine Trailer verfügbar",
+  "@noTrailersAvailable": {
+    "description": "Text bei fehlenden Trailern"
+  },
+  "noSeasonsAvailable": "Keine Staffeln verfügbar",
+  "@noSeasonsAvailable": {
+    "description": "Text bei fehlenden Staffeln"
+  },
+  "noEpisodesAvailable": "Keine Folgen verfügbar",
+  "@noEpisodesAvailable": {
+    "description": "Text bei fehlenden Folgen"
+  },
+  "noReviewsAvailable": "Keine Rezensionen verfügbar",
+  "@noReviewsAvailable": {
+    "description": "Text bei fehlenden Rezensionen"
+  },
+  "signInHint": "Melde dich an, um Favoriten und Serien zu synchronisieren und weitere Funktionen zu nutzen",
+  "@signInHint": {
+    "description": "Text bei fehlender Anmeldung zur Synchronisierung von Favoriten, Serien und weiteren Funktionen"
+  },
+  "airingToday": "Heute im Programm",
+  "@airingToday": {
+    "description": "Text für heute ausgestrahlte Serien"
+  },
+  "discover": "Entdecken",
+  "@discover": {
+    "description": "Text für den Entdecken-Bereich"
+  },
+  "genreAction": "Action",
+  "@genreAction": {},
+  "genreAdventure": "Abenteuer",
+  "@genreAdventure": {},
+  "genreAnimation": "Animation",
+  "@genreAnimation": {},
+  "genreComedy": "Komödie",
+  "@genreComedy": {},
+  "genreCrime": "Krimi",
+  "@genreCrime": {},
+  "genreDocumentary": "Dokumentarfilm",
+  "@genreDocumentary": {},
+  "genreDrama": "Drama",
+  "@genreDrama": {},
+  "genreFamily": "Familie",
+  "@genreFamily": {},
+  "genreFantasy": "Fantasy",
+  "@genreFantasy": {},
+  "genreHistory": "Historie",
+  "@genreHistory": {},
+  "genreHorror": "Horror",
+  "@genreHorror": {},
+  "genreMusic": "Musik",
+  "@genreMusic": {},
+  "genreMystery": "Mystery",
+  "@genreMystery": {},
+  "genreRomance": "Romantik",
+  "@genreRomance": {},
+  "genreSciFi": "Science-Fiction",
+  "@genreSciFi": {},
+  "genreTvMovie": "TV-Film",
+  "@genreTvMovie": {},
+  "genreThriller": "Thriller",
+  "@genreThriller": {},
+  "genreWar": "Krieg",
+  "@genreWar": {},
+  "genreWestern": "Western",
+  "@genreWestern": {},
+  "genreActionAdventure": "Action & Abenteuer",
+  "@genreActionAdventure": {},
+  "genreKids": "Kinder",
+  "@genreKids": {},
+  "genreNews": "Nachrichten",
+  "@genreNews": {},
+  "genreReality": "Reality",
+  "@genreReality": {},
+  "genreSciFiFantasy": "Science-Fiction & Fantasy",
+  "@genreSciFiFantasy": {},
+  "genreSoap": "Soap",
+  "@genreSoap": {},
+  "genreTalk": "Talk",
+  "@genreTalk": {},
+  "genreWarPolitics": "Krieg & Politik",
+  "@genreWarPolitics": {},
+  "parts": "Teile",
+  "@parts": {
+    "description": "Verfügbare Teile des Werks"
+  },
+  "seeAll": "Alle anzeigen",
+  "@seeAll": {
+    "description": "Button zum Anzeigen aller Elemente"
+  },
+  "sortBy": "Sortieren nach",
+  "@sortBy": {
+    "description": "Button zum Sortieren"
+  },
+  "sortPopularityDesc": "Am beliebtesten",
+  "@sortPopularityDesc": {
+    "description": "Sortierung nach Beliebtheit absteigend"
+  },
+  "sortPopularityAsc": "Am wenigsten beliebt",
+  "@sortPopularityAsc": {
+    "description": "Sortierung nach Beliebtheit aufsteigend"
+  },
+  "sortRatingDesc": "Bestbewertet",
+  "@sortRatingDesc": {
+    "description": "Sortierung nach Bewertung absteigend"
+  },
+  "sortRatingAsc": "Am niedrigsten bewertet",
+  "@sortRatingAsc": {
+    "description": "Sortierung nach Bewertung aufsteigend"
+  },
+  "sortReleaseDateDesc": "Neueste",
+  "@sortReleaseDateDesc": {
+    "description": "Sortierung nach neuestem Erscheinungsdatum"
+  },
+  "sortReleaseDateAsc": "Älteste",
+  "@sortReleaseDateAsc": {
+    "description": "Sortierung nach ältestem Erscheinungsdatum"
+  },
+  "sortRevenueDesc": "Höchste Einnahmen",
+  "@sortRevenueDesc": {
+    "description": "Sortierung nach höchsten Einnahmen"
+  },
+  "sortRevenueAsc": "Niedrigste Einnahmen",
+  "@sortRevenueAsc": {
+    "description": "Sortierung nach niedrigsten Einnahmen"
+  },
+  "sortVoteCountDesc": "Meiste Stimmen",
+  "@sortVoteCountDesc": {
+    "description": "Sortierung nach meisten Stimmen"
+  },
+  "sortVoteCountAsc": "Wenigste Stimmen",
+  "@sortVoteCountAsc": {
+    "description": "Sortierung nach wenigsten Stimmen"
+  },
+  "sortFirstAirDateDesc": "Neueste",
+  "@sortFirstAirDateDesc": {
+    "description": "Sortierung nach neuestem Erstausstrahlungsdatum"
+  },
+  "sortFirstAirDateAsc": "Älteste",
+  "@sortFirstAirDateAsc": {
+    "description": "Sortierung nach ältestem Erstausstrahlungsdatum"
+  },
+  "sortVoteAverageDesc": "Bestbewertet",
+  "@sortVoteAverageDesc": {
+    "description": "Sortierung nach durchschnittlicher Bewertung absteigend"
+  },
+  "sortVoteAverageAsc": "Am niedrigsten bewertet",
+  "@sortVoteAverageAsc": {
+    "description": "Sortierung nach durchschnittlicher Bewertung aufsteigend"
+  },
+  "home": "Startseite",
+  "@home": {
+    "description": "Startseite"
+  },
+  "applyFilters": "Anwenden",
+  "@applyFilters": {
+    "description": "Anwenden"
+  },
+  "clearFilters": "Zurücksetzen",
+  "@clearFilters": {
+    "description": "Zurücksetzen"
+  },
+  "collections": "Sammlungen",
+  "@collections": {
+    "description": "Sammlungen"
+  },
+  "cartoons": "Zeichentrick",
+  "@cartoons": {
+    "description": "Zeichentrick"
+  },
+  "anime": "Anime",
+  "@anime": {
+    "description": "Anime"
+  },
+  "maifa": "Mafia",
+  "@maifa": {
+    "description": "Mafia"
+  },
+  "marvel": "Marvel",
+  "@marvel": {
+    "description": "Marvel"
+  },
+  "year": "Jahr",
+  "@year": {
+    "description": "Jahr"
+  },
+  "rating": "Bewertung",
+  "@rating": {
+    "description": "Bewertung"
+  },
+  "min": "Min.",
+  "@min": {
+    "description": "Minute"
+  },
+  "cartoonDescreption": "Bunter Spaß, entspanntes Lachen und fröhliche Stimmung",
+  "@cartoonDescreption": {
+    "description": "Beschreibung für Zeichentrick"
+  },
+  "mafiaDescreption": "Macht, Loyalität und Verrat – Geschichten aus der Unterwelt.",
+  "@mafiaDescreption": {
+    "description": "Beschreibung für Mafia"
+  },
+  "animeDescreption": "Epische Welten, tiefe Emotionen und unvergessliche Kämpfe.",
+  "@animeDescreption": {
+    "description": "Beschreibung für Anime"
+  },
+  "marvelDescreption": "Helden, Schurken und der Wahnsinn des Multiversums – alles an einem Ort.",
+  "@marvelDescreption": {
+    "description": "Beschreibung für Marvel"
+  },
+  "logoutSuccessfully": "Erfolgreich abgemeldet",
+  "@logoutSuccessfully": {
+    "description": "Erfolgreich abgemeldet"
+  },
+  "backOnline": "Wieder online",
+  "@backOnline": {
+    "description": "Wieder online"
+  },
+  "durationFormat": "{hours}Std {minutes}Min",
+  "@durationFormat": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "Dauer",
+  "@duration": {
+    "description": "Dauer"
+  },
+  "noFavoritesContentType": "Keine {type} in den Favoriten",
+  "@noFavoritesContentType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "statusReleased": "Veröffentlicht",
+  "@statusReleased": {},
+  "statusEnded": "Beendet",
+  "@statusEnded": {},
+  "statusReturningSeries": "Läuft derzeit",
+  "@statusReturningSeries": {},
+  "statusInProduction": "In Produktion",
+  "@statusInProduction": {},
+  "statusCanceled": "Abgesetzt",
+  "@statusCanceled": {},
+  "statusUnknown": "Unbekannt",
+  "@statusUnknown": {},
+  "numberFormat": "{number}",
+  "@numberFormat": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "format": "currency",
+        "optionalParameters": {
+          "decimalDigits": 0,
+          "symbol": "$"
+        }
+      }
+    }
+  },
+  "onboardingTitle1": "Entdecke deine nächste Leidenschaft",
+  "@onboardingTitle1": {},
+  "onboardingDesc1": "Entdecke angesagte Filme und sehenswerte Serien in Sekunden.",
+  "@onboardingDesc1": {},
+  "onboardingTitle2": "Bewahre deine Favoriten griffbereit",
+  "@onboardingTitle2": {},
+  "onboardingDesc2": "Speichere Filme und Serien, die du liebst, in deiner Watchlist.",
+  "@onboardingDesc2": {},
+  "onboardingTitle3": "Erst ansehen, dann entscheiden",
+  "@onboardingTitle3": {},
+  "onboardingDesc3": "Sieh dir Trailer, Bewertungen und Rezensionen an, bevor du mit dem Anschauen beginnst.",
+  "@onboardingDesc3": {},
+  "onboardingTitle0": "Deine nächste filmische Leidenschaft beginnt hier",
+  "@onboardingTitle0": {},
+  "loginSuccessfully": "Erfolgreich angemeldet",
+  "@loginSuccessfully": {},
+  "loginFailed": "Anmeldung fehlgeschlagen",
+  "@loginFailed": {},
+  "loginTagline": "Melde dich an, um deine Favoritenliste zu behalten",
+  "@loginTagline": {},
+  "signWithGoogle": "Mit Google anmelden",
+  "@signWithGoogle": {},
+  "noResultsFound": "Keine Ergebnisse gefunden",
+  "@noResultsFound": {},
+  "somethingWentWrong": "Etwas ist schiefgelaufen",
+  "@somethingWentWrong": {},
+  "removeFromFavorites": "Aus Favoriten entfernen",
+  "@removeFromFavorites": {},
+  "share": "Teilen",
+  "@share": {},
+  "unknown": "Unbekannt",
+  "@unknown": {},
+  "guestStars": "Gaststars",
+  "@guestStars": {},
+  "lastEpisode": "Letzte Folge",
+  "@lastEpisode": {},
+  "nextEpisode": "Nächste Folge",
+  "@nextEpisode": {},
+  "firstAirDate": "Erste Ausstrahlung",
+  "@firstAirDate": {},
+  "lastAirDate": "Letzte Ausstrahlung",
+  "@lastAirDate": {},
+  "totalTime": "Gesamtzeit",
+  "@totalTime": {},
+  "noHistoryFound": "Kein Verlauf gefunden",
+  "@noHistoryFound": {},
+  "noActors": "Keine Schauspieler",
+  "@noActors": {},
+  "noEpisodes": "Keine Folgen",
+  "@noEpisodes": {},
+  "noSeasons": "Keine Staffeln",
+  "@noSeasons": {},
+  "episode": "Folge",
+  "@episode": {},
+  "pushNotifications": "Benachrichtigungen aktivieren",
+  "@pushNotifications": {},
+  "getStarted": "Loslegen",
+  "@getStarted": {},
+  "startExplore": "Erkundung starten",
+  "@startExplore": {},
+  "continueButton": "Weiter",
+  "@continueButton": {},
+  "deleteAccount": "Konto löschen",
+  "@deleteAccount": {},
+  "areYouSureYouWantToDelete": "Konto löschen?",
+  "@areYouSureYouWantToDelete": {},
+  "thisActionCannotBeUndone": "Alle deine Favoriten gehen verloren",
+  "@thisActionCannotBeUndone": {},
+  "loginAgainToContinue": "Bitte melde dich erneut an, um fortzufahren",
+  "@loginAgainToContinue": {},
+  "cancel": "Abbrechen",
+  "@cancel": {},
+  "accountDeleted": "Konto erfolgreich gelöscht",
+  "@accountDeleted": {},
+  "delete": "Löschen",
+  "@delete": {},
+  "privacySettings": "Datenschutzeinstellungen",
+  "@privacySettings": {},
+  "privacyOptions": "Datenschutzoptionen",
+  "@privacyOptions": {},
+  "byContinue": "Indem du fortfährst, stimmst du den ",
+  "@byContinue": {},
+  "terms": "Nutzungsbedingungen",
+  "@terms": {},
+  "and": "und",
+  "@and": {},
+  "privacyPolicy": "der Datenschutzrichtlinie zu",
+  "@privacyPolicy": {},
+  "lightOut": "Aufhellen",
+  "@lightOut": {},
+  "dim": "Abdunkeln",
+  "@dim": {}
+}

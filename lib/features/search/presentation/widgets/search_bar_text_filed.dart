@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/features/search/presentation/blocs/search_bloc.dart';
-import 'package:cinemax_app_new/features/search/presentation/blocs/search_events.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/features/search/presentation/blocs/search_bloc.dart';
+import 'package:movify/features/search/presentation/blocs/search_events.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class SearchBarTextFiled extends HookWidget {
   const SearchBarTextFiled({super.key});
@@ -25,7 +25,6 @@ class SearchBarTextFiled extends HookWidget {
           Theme.of(context).colorScheme.primary,
         ),
         onChanged: onChangedQuery,
-
         controller: searchController,
         hintText: l10n.searchHint,
 

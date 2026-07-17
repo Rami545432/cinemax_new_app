@@ -1,12 +1,12 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_cubit.dart';
 
 class NextButton extends StatelessWidget {
   const NextButton({

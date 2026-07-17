@@ -1,11 +1,12 @@
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_event.dart';
-import 'package:cinemax_app_new/core/utils/pagination/widgets/sliver_paginated_grid_view.dart';
-import 'package:cinemax_app_new/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/cubits/fetch_items_by_keywords_states.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/main_vertical_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
+import 'package:movify/core/pagination/widgets/sliver_paginated_grid_view.dart';
+import 'package:movify/core/utils/app_colors.dart';
+import 'package:movify/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/cubits/fetch_items_by_keywords_states.dart';
+import 'package:movify/features/home/presentation/widgets/main_vertical_card.dart';
 
 class ModeViewBodyBlocBuilder extends StatelessWidget {
   const ModeViewBodyBlocBuilder({
@@ -24,7 +25,6 @@ class ModeViewBodyBlocBuilder extends StatelessWidget {
           if (state is FetchItemsByKeywordsLoaded) {
             final data = state.getPaginationInfo(modeModel.type);
             return SliverPaginatedGridView(
-              externalScrollController: scrollController,
               info: data,
               itemBuilder: (context, cardData) =>
                   MainVerticalCard(cardData: cardData),
@@ -37,8 +37,12 @@ class ModeViewBodyBlocBuilder extends StatelessWidget {
             );
           }
 
-          return const SliverToBoxAdapter(
-            child: Center(child: CircularProgressIndicator(color: Colors.blue)),
+          return SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppPrimaryColors.blueAccent,
+              ),
+            ),
           );
         },
       );

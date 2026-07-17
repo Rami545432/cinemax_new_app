@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/infinite_scrolling_list_view.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/adaptive_layout_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/infinite_scrolling_list_view.dart';
+import 'package:movify/shared/presentation/widgets/adaptive_layout_widget.dart';
 
 class PostersCoulmns extends StatelessWidget {
   final List<String> column1Posters;

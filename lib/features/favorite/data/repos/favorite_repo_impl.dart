@@ -1,16 +1,15 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/errors/expections.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
-import 'package:cinemax_app_new/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
-import 'package:cinemax_app_new/features/favorite/data/models/favorite_model.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/domain/repos/favorite_repo.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
+// ignore_for_file: empty_catches
 
-@LazySingleton(as: FavoriteRepo)
+import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/expections.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/data/data_sources/local/local_favorite_data_source.dart';
+import 'package:movify/features/favorite/data/data_sources/remote/remote_favorite_data_source.dart';
+import 'package:movify/features/favorite/data/models/favorite_model.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/domain/repos/favorite_repo.dart';
+
 class FavoritesRepositoryImpl implements FavoriteRepo {
   final LocalFavoriteDataSource localDataSource;
   final RemoteFavoriteDataSource remoteDataSource;
@@ -51,7 +50,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
 
       // 1. Save to Hive immediately
       await localDataSource.addFavorite(model);
-      debugPrint('✅ Added to Hive: ${model.title}');
 
       // 2. Fire-and-forget to Firestore (if signed in)
       if (favorite.userId != 'guest') {
@@ -73,7 +71,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
     try {
       // 1. Remove from Hive immediately
       await localDataSource.removeFavorite(specificId, contentType, userId);
-      debugPrint('🗑️ Removed from Hive: $specificId');
 
       // 2. Fire-and-forget to Firestore (if signed in)
       if (userId != 'guest') {
@@ -99,20 +96,16 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
       // 1. Get guest favorites from Hive
       final guestFavs = await localDataSource.getGuestFavorites();
       if (guestFavs.isEmpty) {
-        debugPrint('ℹ️ No guest favorites to merge');
-        // Still pull cloud data even if no guest favorites
         await _pullCloud(newUserId);
+
         return const Right(unit);
       }
-      debugPrint('📦 Found ${guestFavs.length} guest favorites to merge');
 
       // 2. Get cloud favorites (ONE Firestore read)
       List<FavoriteModel> cloudFavs = [];
       try {
         cloudFavs = await remoteDataSource.getFavorites(newUserId);
-      } catch (e) {
-        debugPrint('⚠️ Could not read cloud (offline?): $e');
-      }
+      } catch (e) {}
 
       // 3. Build cloud lookup set
       final cloudKeys = <String>{};
@@ -132,10 +125,7 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
             .toList();
         try {
           await remoteDataSource.batchSaveFavorites(toUpload);
-          debugPrint('☁️ Uploaded ${toUpload.length} new items to cloud');
-        } catch (e) {
-          debugPrint('⚠️ Upload failed (offline?): $e');
-        }
+        } catch (e) {}
       }
 
       // 5. Re-key guest favorites in Hive (guest → userId)
@@ -144,7 +134,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
         'guest',
         newUserId,
       );
-      debugPrint('💾 Migrated Hive data: guest → $newUserId');
 
       // 6. Download cloud-only favorites to Hive
       final localKeys = <String>{};
@@ -161,12 +150,10 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
             .map((f) => f.copyWith(userId: newUserId))
             .toList();
         await localDataSource.batchSaveFavorites(toSave);
-        debugPrint('📥 Downloaded ${toSave.length} cloud-only favorites');
       }
 
       // 7. Clear remaining guest data
       await localDataSource.clearGuestFavorites();
-      debugPrint('✅ Merge complete');
 
       return const Right(unit);
     } on FirebaseException catch (e) {
@@ -222,9 +209,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
 
     if (toAdd.isNotEmpty) {
       await localDataSource.batchSaveFavorites(toAdd);
-      debugPrint('📥 Pulled ${toAdd.length} items from cloud');
-    } else {
-      debugPrint('✅ Hive already in sync with cloud');
     }
   }
 
@@ -232,8 +216,6 @@ class FavoritesRepositoryImpl implements FavoriteRepo {
   void _fireAndForget(Future<void> Function() operation) async {
     try {
       await operation();
-    } catch (e) {
-      debugPrint('⚠️ Background Firestore operation failed: $e');
-    }
+    } catch (e) {}
   }
 }

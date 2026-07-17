@@ -1,10 +1,10 @@
 // lib/core/network/api/services/tmdb/tmdb_base_client.dart
-import 'package:cinemax_app_new/core/network/api/base/base_api_client.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_configration.dart';
+import 'package:movify/core/network/api/base/base_api_client.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
 
 /// TMDB-specific API client extending the base client
 class TmdbBaseClient extends BaseApiClient {
-  TmdbBaseClient({required super.dio, required super.language})
+  TmdbBaseClient({required super.dioClient, required super.language})
     : super(baseUrl: TmdbConfig.baseUrl);
 
   @override

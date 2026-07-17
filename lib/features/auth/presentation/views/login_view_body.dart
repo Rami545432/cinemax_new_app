@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/constants/assets.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/login_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/widgets/build_footer.dart';
-import 'package:cinemax_app_new/features/auth/presentation/widgets/build_logo.dart';
-import 'package:cinemax_app_new/features/auth/presentation/widgets/login_tagline.dart';
-import 'package:cinemax_app_new/features/auth/presentation/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/constants/assets.dart';
+import 'package:movify/features/auth/presentation/cubits/login_cubit.dart';
+import 'package:movify/features/auth/presentation/widgets/build_footer.dart';
+import 'package:movify/features/auth/presentation/widgets/build_logo.dart';
+import 'package:movify/features/auth/presentation/widgets/login_tagline.dart';
+import 'package:movify/features/auth/presentation/widgets/social_login_button.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
 
 sealed class SessionState extends Equatable {
   const SessionState();
@@ -23,9 +23,13 @@ class SessionGuest extends SessionState {
 
 class SessionAuthenticated extends SessionState {
   final UserEntity user;
+  final bool isExplicitSignIn;
 
-  const SessionAuthenticated({required this.user});
+  const SessionAuthenticated({
+    required this.user,
+    this.isExplicitSignIn = false,
+  });
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, isExplicitSignIn];
 }

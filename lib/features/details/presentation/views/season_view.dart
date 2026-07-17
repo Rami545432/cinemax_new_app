@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/views/season_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_series_season_details_cubit/fetch_series_season_details_cubit.dart';
+import 'package:movify/features/details/presentation/views/season_view_body.dart';
 import 'package:provider/provider.dart';
 
 class SeasonView extends StatefulWidget {

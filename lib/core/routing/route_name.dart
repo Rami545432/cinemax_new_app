@@ -35,4 +35,6 @@ class RouteName {
   static const String login = 'login';
   static const String modeView = 'modeView';
   static const String notificationTesting = 'notificationTesting';
+  static const String maintenanceScreen = 'maintenanceScreen';
+  static const String forceUpdateScreen = 'forceUpdateScreen';
 }

@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/discover/domain/enums/sort_by_enum.dart';
+import 'package:movify/features/discover/domain/enums/sort_by_enum.dart';
 
 class GenreFilterParams {
   final int? genreId; // Movie or TV genre ID (same field)

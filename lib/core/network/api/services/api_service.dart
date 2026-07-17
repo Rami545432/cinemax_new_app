@@ -1,22 +1,21 @@
-// api_service.dart (update constructor)
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_api_service.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_configration.dart';
-import 'package:dio/dio.dart';
+// api_service.dart
+import 'package:movify/core/network/api/services/tmdb/tmdb_api_service.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
+import 'package:movify/core/network/client/dio_client.dart';
 
 class ApiService {
-  final Dio dio;
+  final DioClient dioClient;
   final String _language;
   late final TmdbApiService tmdb;
 
-  ApiService({required this.dio, required String language})
+  ApiService({required this.dioClient, required String language})
     : _language = language {
-    tmdb = TmdbApiService(dio: dio, language: _language);
+    tmdb = TmdbApiService(dioClient: dioClient, language: _language);
   }
 
   String get language => _language;
 
   void updateLanguage(String language) {
-    // optional: keep for backward compatibility, but prefer provider usage
     tmdb.updateLanguage(language);
   }
 

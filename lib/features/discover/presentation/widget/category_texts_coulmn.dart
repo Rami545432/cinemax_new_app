@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/language/presentation/cubits/language_cubit.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
 
 class CategoryTextsColumn extends StatelessWidget {
   const CategoryTextsColumn({super.key, required this.modeModel});

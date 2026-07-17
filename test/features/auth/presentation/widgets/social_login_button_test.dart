@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/auth/presentation/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:movify/features/auth/presentation/widgets/social_login_button.dart';
 
 void main() {
   // Rather than test(), we use testWidgets() to simulate rendering UI!

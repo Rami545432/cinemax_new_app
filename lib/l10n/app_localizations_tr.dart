@@ -487,4 +487,108 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Google ile giriş yap';
+
+  @override
+  String get noResultsFound => 'Sonuc bulunamadi';
+
+  @override
+  String get somethingWentWrong => 'Birseyler ters gitti';
+
+  @override
+  String get removeFromFavorites => 'Favorilerden Çıkar';
+
+  @override
+  String get share => 'Paylaş';
+
+  @override
+  String get unknown => 'Bilinmeyen';
+
+  @override
+  String get guestStars => 'Konuk Oyuncular';
+
+  @override
+  String get lastEpisode => 'Son Bölüm';
+
+  @override
+  String get nextEpisode => 'Sonraki Bölüm';
+
+  @override
+  String get firstAirDate => 'İlk Yayın Tarihi';
+
+  @override
+  String get lastAirDate => 'Son Yayın Tarihi';
+
+  @override
+  String get totalTime => 'Toplam Süre';
+
+  @override
+  String get noHistoryFound => 'Hiçbir tarih bulunamadı';
+
+  @override
+  String get noActors => 'Hiçbir aktör bulunamadı';
+
+  @override
+  String get noEpisodes => 'Hiçbir bölüm bulunamadı';
+
+  @override
+  String get noSeasons => 'Hiçbir sezon bulunamadı';
+
+  @override
+  String get episode => 'Bölüm';
+
+  @override
+  String get pushNotifications => 'Push Bildirimleri';
+
+  @override
+  String get getStarted => 'Başla';
+
+  @override
+  String get startExplore => 'Keşfetmeye Başla';
+
+  @override
+  String get continueButton => 'Devam Et';
+
+  @override
+  String get deleteAccount => 'Hesabı Sil';
+
+  @override
+  String get areYouSureYouWantToDelete => 'Hesabınızı Silmek istiyorsunuz?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'Sileceksiniz! Tüm favori film ve dizilerinizi kalıcı olarak sileceksiniz.';
+
+  @override
+  String get loginAgainToContinue =>
+      'İşleme devam etmek için lütfen tekrar giriş yapın';
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get accountDeleted => 'Hesap başarıyla silindi';
+
+  @override
+  String get delete => 'Sil';
+
+  @override
+  String get privacySettings => 'Gizlilik Ayarları';
+
+  @override
+  String get byContinue => 'Devam ederek, kabul etmiş olursunuz ';
+
+  @override
+  String get terms => 'Şartlar';
+
+  @override
+  String get and => 've';
+
+  @override
+  String get privacyPolicy => 'Gizlilik Politikası';
+
+  @override
+  String get lightOut => 'Karanlık';
+
+  @override
+  String get dim => 'Loş';
 }

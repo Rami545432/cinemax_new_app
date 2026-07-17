@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/constants/assets.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/constants/assets.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class BuildLogo extends StatelessWidget {
   const BuildLogo({super.key});

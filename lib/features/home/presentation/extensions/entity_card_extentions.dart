@@ -1,8 +1,8 @@
 // home/presentation/extensions/entity_card_extensions.dart
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 extension MovieEntityToDisplay on MovieEntity {
   CardDisplayModel toCardDisplay() => CardDisplayModel(

@@ -1,17 +1,15 @@
 // movie_details_repo_impl.dart
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/types/domain_types.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/features/details/data/data_sources/remote/movies/remote_movie_details_data_source.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/collection_entity.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/movie_details_entity.dart';
-import 'package:cinemax_app_new/features/details/domain/repo/movie_details_repo.dart';
-import 'package:cinemax_app_new/shared/data/cache/in_memory_cache.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/core/types/domain_types.dart';
+import 'package:movify/features/details/data/data_sources/remote/movies/remote_movie_details_data_source.dart';
+import 'package:movify/features/details/domain/entites/collection_entity.dart';
+import 'package:movify/features/details/domain/entites/movie_details_entity.dart';
+import 'package:movify/features/details/domain/repo/movie_details_repo.dart';
+import 'package:movify/shared/data/cache/in_memory_cache.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
 
-@LazySingleton(as: MovieDetailsRepo)
 class MovieDetailsRepoImpl implements MovieDetailsRepo {
   final RemoteMovieDetailsDataSource remoteDataSource;
 

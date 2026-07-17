@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/routing/route_paths.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_one_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_three_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_two_view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/views/boarding_zero.view.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/onboarding_page_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/routing/route_paths.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_one_view.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_three_view.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_two_view.dart';
+import 'package:movify/features/onboarding/presentation/views/boarding_zero.view.dart';
+import 'package:movify/features/onboarding/presentation/widgets/onboarding_page_view.dart';
 
 class OnBoardingRoutes {
   static List<RouteBase> get routes => [

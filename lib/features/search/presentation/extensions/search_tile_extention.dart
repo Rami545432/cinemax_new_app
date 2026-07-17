@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
+import 'package:movify/features/search/domain/entities/search_history_entity.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 extension SearchTileExtensionX on SearchHistoryEntity {
   CardDisplayModel toCardDisplay() => CardDisplayModel(

@@ -1,0 +1,130 @@
+// core/pagination/widgets/paginated_grid_view.dart
+
+import 'package:flutter/material.dart';
+import 'package:movify/constant.dart';
+import 'package:movify/core/pagination/presentation/bloc/new_pagination_info.dart';
+import 'package:movify/core/pagination/widgets/pagination_bottom_slot.dart';
+
+class SliverPaginatedGridView<T> extends StatefulWidget {
+  final PaginationInfo<T, dynamic> info;
+  final Widget Function(BuildContext context, T item) itemBuilder;
+  final VoidCallback onScrollEnd;
+  final VoidCallback onRetry;
+  final SliverGridDelegate gridDelegate;
+  final double scrollThreshold;
+  final EdgeInsets padding;
+  final Widget? loadingWidget;
+  final Widget? emptyWidget;
+  final Widget Function(String message)? errorBuilder;
+
+  const SliverPaginatedGridView({
+    super.key,
+    required this.info,
+    required this.itemBuilder,
+    required this.onScrollEnd,
+    required this.onRetry,
+    this.gridDelegate = const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      mainAxisSpacing: 12,
+      crossAxisSpacing: 12,
+      childAspectRatio: 0.65,
+    ),
+    this.scrollThreshold = 300,
+    this.padding = const EdgeInsets.all(16),
+    this.loadingWidget,
+    this.emptyWidget,
+    this.errorBuilder,
+  });
+
+  @override
+  State<SliverPaginatedGridView<T>> createState() =>
+      _PaginatedGridViewState<T>();
+}
+
+class _PaginatedGridViewState<T> extends State<SliverPaginatedGridView<T>> {
+  int _lastFetchCount = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final info = widget.info;
+    final width = MediaQuery.widthOf(context);
+
+    if (info.isFirstLoad) {
+      return SliverToBoxAdapter(
+        child:
+            widget.loadingWidget ??
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 60),
+              child: Center(
+                child: CircularProgressIndicator(color: Colors.blue),
+              ),
+            ),
+      );
+    }
+
+    if (info.hasError && info.items.isEmpty) {
+      return SliverToBoxAdapter(
+        child:
+            widget.errorBuilder?.call(info.firstPageError ?? 'Error') ??
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 60),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(info.firstPageError ?? 'Something went wrong'),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: widget.onRetry,
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+      );
+    }
+
+    if (info.items.isEmpty && !info.isFetchingFirstPage) {
+      return SliverToBoxAdapter(
+        child:
+            widget.emptyWidget ??
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 60),
+              child: Center(child: Text('No results found')),
+            ),
+      );
+    }
+
+    return SliverPadding(
+      padding: widget.padding,
+      sliver: SliverGrid.builder(
+        gridDelegate: Constants.sliverGridDelegate(width),
+        // +1 for end slot — spans full width via SliverGridDelegate trick
+        itemCount: info.items.length + 1,
+        itemBuilder: (context, index) {
+          final thresholdIndex = (info.items.length * 0.7).round();
+          if (index >= thresholdIndex &&
+              info.canLoadMore &&
+              !info.isFetchingMore) {
+            if (_lastFetchCount != info.items.length) {
+              _lastFetchCount = info.items.length;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                widget.onScrollEnd();
+              });
+            }
+          }
+          if (index == info.items.length) {
+            return PaginationBottomSlot(
+              isFetchingMore: info.isFetchingMore,
+              fetchMoreError: info.fetchMoreError,
+              hasMore: info.canLoadMore,
+              onRetry: widget.onRetry,
+            );
+          }
+          return widget.itemBuilder(context, info.items[index]);
+        },
+      ),
+    );
+  }
+}

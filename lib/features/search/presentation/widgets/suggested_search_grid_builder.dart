@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/animated_search_result_item.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/custom_grid_config.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_animation_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/presentation/widgets/animated_search_result_item.dart';
+import 'package:movify/features/search/presentation/widgets/custom_grid_config.dart';
+import 'package:movify/features/search/presentation/widgets/search_animation_controller.dart';
 
 class SuggestedSearchGridBuilder extends StatefulWidget {
   const SuggestedSearchGridBuilder({super.key, required this.results});
@@ -46,24 +46,19 @@ class _SuggestedSearchGridBuilderState
         itemCount: widget.results.length,
         itemBuilder: (context, index) {
           final result = widget.results[index];
-          return _buildAnimatedItem(result, index);
+          final isFirstSearch = _animationController.isFirstSearch;
+          final shouldAnimate =
+              isFirstSearch || _animationController.isNewItem(result);
+          return AnimatedSearchResultItem(
+            result: result,
+            index: index,
+
+            shouldAnimate: shouldAnimate,
+            isFirstSearch: isFirstSearch,
+          );
         },
         gridDelegate: CustomGridConfig.getDelegate(context),
       ),
     ),
   );
-
-  Widget _buildAnimatedItem(SearchResult result, int index) {
-    final isFirstSearch = _animationController.isFirstSearch;
-    final shouldAnimate =
-        isFirstSearch || _animationController.isNewItem(result);
-
-    return AnimatedSearchResultItem(
-      result: result,
-      index: index,
-
-      shouldAnimate: shouldAnimate,
-      isFirstSearch: isFirstSearch,
-    );
-  }
 }

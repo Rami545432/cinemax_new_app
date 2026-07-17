@@ -5,10 +5,11 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   cloud_firestore
   connectivity_plus
+  firebase_app_check
   firebase_auth
   firebase_core
-  flutter_inappwebview_windows
-  flutter_secure_storage_windows
+  firebase_remote_config
+  permission_handler_windows
   share_plus
   url_launcher_windows
 )

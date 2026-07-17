@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "502150476162",
+    "project_id": "movify-dev",
+    "storage_bucket": "movify-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502150476162:android:f5a7f91d3359be94ac5f9b",
+        "android_client_info": {
+          "package_name": "com.rami.movify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502150476162-qag63bd0k1a1c8opf1cnd6e97h6ki8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3fyGezIxkXT8WTb_lYOnp7-mu0iJBfGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502150476162-qag63bd0k1a1c8opf1cnd6e97h6ki8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502150476162-lo62dhh3c4fgeve8c5rmnfnomlt5epj8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rami.movify"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502150476162:android:a0e6c0db250de5edac5f9b",
+        "android_client_info": {
+          "package_name": "com.rami.movify.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502150476162-he9n9nvj2c286omsv83osc1ph5hkqf4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rami.movify.dev",
+            "certificate_hash": "c04b66c1f67c7bc04f0baf19409270edc2524e6c"
+          }
+        },
+        {
+          "client_id": "502150476162-qag63bd0k1a1c8opf1cnd6e97h6ki8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3fyGezIxkXT8WTb_lYOnp7-mu0iJBfGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502150476162-qag63bd0k1a1c8opf1cnd6e97h6ki8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502150476162-lo62dhh3c4fgeve8c5rmnfnomlt5epj8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rami.movify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

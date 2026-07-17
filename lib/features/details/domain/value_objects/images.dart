@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/poster.dart';
+import 'package:movify/features/details/domain/value_objects/poster.dart';
 
 class Images {
   List<Poster>? posters;

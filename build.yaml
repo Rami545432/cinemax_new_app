@@ -1,6 +1,11 @@
 targets:
   $default:
     builders:
+      envied_generator|envied:
+        generate_for:
+          include:
+            - lib/config/env/*.dart
+
       freezed:
         generate_for:
           include:

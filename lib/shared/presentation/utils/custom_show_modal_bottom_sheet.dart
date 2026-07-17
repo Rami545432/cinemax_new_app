@@ -16,7 +16,7 @@ Future<void> customShowModalBottomSheet({
     useSafeArea: true,
     context: context,
     constraints: BoxConstraints(
-      maxWidth: maxWidth ?? MediaQuery.sizeOf(context).width * 0.95,
+      maxWidth: maxWidth ?? MediaQuery.widthOf(context) * 0.95,
     ),
     builder: (context) => DraggableScrollableSheet(
       snap: true,

@@ -1,11 +1,14 @@
-import 'package:cinemax_app_new/config/animations/animation_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/config/animations/animation_config.dart';
 
 extension AnimatedWidgetX on Widget {
   // Quick fade in from bottom
-  Widget fadeInFromBottom({int delay = 0}) =>
-      animate(delay: Duration(milliseconds: delay))
+  Widget fadeInFromBottom({int delay = 0, AnimationController? controller}) =>
+      animate(
+            delay: Duration(milliseconds: delay),
+            controller: controller,
+          )
           .fadeIn(duration: AppAnimations.normal)
           .slideY(
             begin: 0.3,
@@ -50,13 +53,4 @@ extension AnimatedWidgetX on Widget {
             duration: AppAnimations.normal,
             curve: AppAnimations.emphasizedCurve,
           );
-}
-
-extension ListWidgetX on List<Widget> {
-  List<Widget> animateList() => map(
-    (widget) => widget
-        .animate(delay: 100.ms)
-        .fadeIn(duration: 280.ms)
-        .slideY(begin: 0.08),
-  ).toList();
 }

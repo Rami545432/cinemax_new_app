@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/discover/presentation/widget/custom_range_slider.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/sub_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/presentation/widget/custom_range_slider.dart';
+import 'package:movify/shared/presentation/widgets/sub_bar.dart';
 
 class RatingFilter extends StatelessWidget {
   const RatingFilter({super.key, required this.rating});

@@ -1,16 +1,16 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/belongs_to_collection.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/cast.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/external_ids.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/genre.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/images.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/keywords.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/production_company.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/production_country.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/reviews.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/translations.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/watch_providers.dart';
+import 'package:movify/features/details/domain/value_objects/belongs_to_collection.dart';
+import 'package:movify/features/details/domain/value_objects/cast.dart';
+import 'package:movify/features/details/domain/value_objects/credits.dart';
+import 'package:movify/features/details/domain/value_objects/external_ids.dart';
+import 'package:movify/features/details/domain/value_objects/genre.dart';
+import 'package:movify/features/details/domain/value_objects/images.dart';
+import 'package:movify/features/details/domain/value_objects/keywords.dart';
+import 'package:movify/features/details/domain/value_objects/production_company.dart';
+import 'package:movify/features/details/domain/value_objects/production_country.dart';
+import 'package:movify/features/details/domain/value_objects/reviews.dart';
+import 'package:movify/features/details/domain/value_objects/translations.dart';
+import 'package:movify/features/details/domain/value_objects/videos.dart';
+import 'package:movify/features/details/domain/value_objects/watch_providers.dart';
 
 class MovieDetailsEntity {
   final int movieId;

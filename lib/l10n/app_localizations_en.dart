@@ -487,4 +487,107 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Sign in with Google';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get removeFromFavorites => 'Remove From Favorites';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get guestStars => 'Guest Stars';
+
+  @override
+  String get lastEpisode => 'Last Episode';
+
+  @override
+  String get nextEpisode => 'Next Episode';
+
+  @override
+  String get firstAirDate => 'First Air Date';
+
+  @override
+  String get lastAirDate => 'Last Air Date';
+
+  @override
+  String get totalTime => 'Total Time';
+
+  @override
+  String get noHistoryFound => 'No History Found';
+
+  @override
+  String get noActors => 'No Actors';
+
+  @override
+  String get noEpisodes => 'No Episodes';
+
+  @override
+  String get noSeasons => 'No Seasons';
+
+  @override
+  String get episode => 'Episode';
+
+  @override
+  String get pushNotifications => 'Push Notifications';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get startExplore => 'Start Explore';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get areYouSureYouWantToDelete => 'Delete Your Account ?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'Your Favorites Will Be Deleted Permanently';
+
+  @override
+  String get loginAgainToContinue => 'Please login again to continue';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get accountDeleted => 'Account deleted successfully';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get privacySettings => 'Privacy Settings';
+
+  @override
+  String get byContinue => 'By continuing, you agree to our ';
+
+  @override
+  String get terms => 'Terms';
+
+  @override
+  String get and => 'And';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get lightOut => 'Light Out';
+
+  @override
+  String get dim => 'Dim';
 }

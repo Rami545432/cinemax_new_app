@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
 
 class EpisodeListTile extends StatelessWidget {
   const EpisodeListTile({

@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
-import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
+import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/sign_in_with_google_use_case.dart';
 
 class MockAuthRepo extends Mock implements AuthRepo {}
 
@@ -37,7 +37,7 @@ void main() {
     final result = await useCase();
 
     // Assert — check what came back
-    // ignore: inference_failure_on_instance_creation
+    // ignore: strict_raw_type, inference_failure_on_instance_creation
     expect(result, isA<Right>());
   });
 
@@ -46,13 +46,13 @@ void main() {
 
     when(
       () => mockRepo.signInWithGoogle(),
-    ).thenAnswer((_) async => Left(ServerFailure(errorMessage: '')));
+    ).thenAnswer((_) async => const Left(ServerFailure(errorMessage: '')));
 
     // Act — call the use case
     final result = await useCase();
 
     // Assert — check what came back
-    // ignore: inference_failure_on_instance_creation
+    // ignore: strict_raw_type, inference_failure_on_instance_creation
     expect(result, isA<Left>());
   });
 }

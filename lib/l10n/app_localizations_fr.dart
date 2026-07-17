@@ -491,4 +491,107 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get signWithGoogle => 'Se connecter avec Google';
+
+  @override
+  String get noResultsFound => 'Aucun résultat trouvé';
+
+  @override
+  String get somethingWentWrong => 'Une erreur s\'est produite';
+
+  @override
+  String get removeFromFavorites => 'Supprimer des favoris';
+
+  @override
+  String get share => 'Partager';
+
+  @override
+  String get unknown => 'Inconnu';
+
+  @override
+  String get guestStars => 'Invités';
+
+  @override
+  String get lastEpisode => 'Dernier épisode';
+
+  @override
+  String get nextEpisode => 'Prochain épisode';
+
+  @override
+  String get firstAirDate => 'Date de Première Diffusion';
+
+  @override
+  String get lastAirDate => 'Date de Dernière Diffusion';
+
+  @override
+  String get totalTime => 'Durée Totale';
+
+  @override
+  String get noHistoryFound => 'Aucun historique trouvé';
+
+  @override
+  String get noActors => 'Aucun acteur';
+
+  @override
+  String get noEpisodes => 'Aucun épisode';
+
+  @override
+  String get noSeasons => 'Aucune saison';
+
+  @override
+  String get episode => 'Épisode';
+
+  @override
+  String get pushNotifications => 'Notifications Push';
+
+  @override
+  String get getStarted => 'Commencer';
+
+  @override
+  String get startExplore => 'Explorer';
+
+  @override
+  String get continueButton => 'Continuer';
+
+  @override
+  String get deleteAccount => 'Supprimer le compte';
+
+  @override
+  String get areYouSureYouWantToDelete => 'Supprimer le compte?';
+
+  @override
+  String get thisActionCannotBeUndone =>
+      'Vos favoris seront supprimés définitivement';
+
+  @override
+  String get loginAgainToContinue => 'Veuillez vous reconnecter pour continuer';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get accountDeleted => 'Compte supprimé avec succès';
+
+  @override
+  String get delete => 'Supprimer';
+
+  @override
+  String get privacySettings => 'Paramètres de confidentialité';
+
+  @override
+  String get byContinue => 'En continuant, vous acceptez nos ';
+
+  @override
+  String get terms => 'Conditions';
+
+  @override
+  String get and => 'et';
+
+  @override
+  String get privacyPolicy => 'Politique de Privacité';
+
+  @override
+  String get lightOut => 'Light Out';
+
+  @override
+  String get dim => 'Dim';
 }

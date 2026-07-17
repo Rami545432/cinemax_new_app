@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class InfiniteScrollingListView extends StatefulWidget {
   final List<String> posters;
@@ -57,7 +58,9 @@ class _InfiniteScrollingListViewState extends State<InfiniteScrollingListView> {
     itemCount: 10000,
     padding: EdgeInsets.only(top: widget.topPadding),
     itemExtent: widget.itemExtent, // ✅ Performance optimization
-    cacheExtent: widget.itemExtent * 3, // Cache 3 items ahead/behind
+    scrollCacheExtent: ScrollCacheExtent.viewport(
+      widget.itemExtent,
+    ), // Cache 3 items ahead/behind
     itemBuilder: (context, index) {
       final posterUrl = widget.posters[index % widget.posters.length];
       return Padding(

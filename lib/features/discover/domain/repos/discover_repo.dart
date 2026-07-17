@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/core/utils/pagination/domain/entites/page_result.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/core/pagination/domain/entites/page_result.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 abstract interface class DiscoverRepo {
   Future<Either<Failure, PageResult<MovieEntity>>> fetchMoviesByGenre(

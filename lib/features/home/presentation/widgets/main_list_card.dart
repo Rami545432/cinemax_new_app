@@ -1,15 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/favorite_button.dart';
-import 'package:cinemax_app_new/features/home/presentation/extensions/main_vertical_card_extention.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/simple_animated_card.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/widgets/shared/safe_hero_card.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/presentation/widgets/favorite_button.dart';
+import 'package:movify/features/home/presentation/extensions/main_vertical_card_extention.dart';
+import 'package:movify/features/home/presentation/widgets/main_list_card_metadata.dart';
+import 'package:movify/features/home/presentation/widgets/main_list_image.dart';
+import 'package:movify/features/search/presentation/widgets/simple_animated_card.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class MainListCard extends StatelessWidget {
   const MainListCard({
@@ -37,6 +37,17 @@ class MainListCard extends StatelessWidget {
         : 'NR';
     final subtitle =
         '⭐ $rating ${releaseYear.isNotEmpty ? " • $releaseYear" : ""}';
+    final favoriteEntity = FavoriteEntity(
+      tmbdId: cardData.id,
+      title: cardData.title,
+      posterImage: cardData.posterPath,
+      contentType: cardData.contentType,
+      date: cardData.date ?? '_',
+      rating: cardData.rating ?? 0.0,
+      specificId: cardData.id,
+      backdropImage: cardData.backdropPath ?? '',
+      genres: cardData.genreIds ?? [],
+    );
 
     return SimpleAnimatedCard(
       child: GestureDetector(
@@ -61,37 +72,26 @@ class MainListCard extends StatelessWidget {
             ),
           ),
           child: Row(
+            spacing: 16,
             children: [
               // Poster
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: enableHero
-                    ? Hero(tag: heroTag, child: _buildImage())
-                    : _buildImage(),
+                    ? SafeHeroCard(
+                        heroTag: heroTag,
+                        child: MainListImage(posterPath: cardData.posterPath),
+                      )
+                    : MainListImage(posterPath: cardData.posterPath),
               ),
-              const SizedBox(width: 16),
+
               // Text Content
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      cardData.title,
-                      style: AppStyles.textStyle16(
-                        context,
-                      ).copyWith(fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      subtitle,
-                      style: AppStyles.textStyle14(context).copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
+                child: MainListCardMetaData(
+                  title: cardData.title,
+                  subtitle: subtitle,
                 ),
               ),
               // Play/Action Button
@@ -99,19 +99,7 @@ class MainListCard extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 8, left: 8),
                 padding: const EdgeInsets.all(8),
 
-                child: FavoriteButton(
-                  favoriteEntity: FavoriteEntity(
-                    tmbdId: cardData.id,
-                    title: cardData.title,
-                    posterImage: cardData.posterPath,
-                    contentType: cardData.contentType,
-                    date: cardData.date ?? '_',
-                    rating: cardData.rating ?? 0.0,
-                    specificId: cardData.id,
-                    backdropImage: cardData.backdropPath ?? '',
-                    genres: cardData.genreIds ?? [],
-                  ),
-                ),
+                child: FavoriteButton(favoriteEntity: favoriteEntity),
               ),
             ],
           ),
@@ -119,17 +107,4 @@ class MainListCard extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildImage() => CachedNetworkImage(
-    imageUrl: tmdbImageSize(.w300, cardData.posterPath),
-    width: 60,
-    height: 80,
-    fit: BoxFit.cover,
-    errorWidget: (context, url, error) => Container(
-      width: 60,
-      height: 80,
-      color: Colors.grey.withValues(alpha: 0.2),
-      child: const Icon(Icons.broken_image, color: Colors.grey),
-    ),
-  );
 }

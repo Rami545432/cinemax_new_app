@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_base_client.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_configration.dart';
-import 'package:cinemax_app_new/core/types/api_types.dart';
 import 'package:dio/dio.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_base_client.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_configration.dart';
+import 'package:movify/core/types/api_types.dart';
 
 /// Details, recommendations, and similar content API
 /// Works for both movies and TV with type parameter

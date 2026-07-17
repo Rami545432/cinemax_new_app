@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_episode_season_function.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/formatters/formatted_episode_season_function.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class EpisodeDetails extends StatelessWidget {
   const EpisodeDetails({

@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/search/presentation/views/search_view_body.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/search_bar_text_filed.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/search/presentation/views/search_view_body.dart';
+import 'package:movify/features/search/presentation/widgets/search_bar_text_filed.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});

@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
 import 'package:hive/hive.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/search/domain/entities/search_history_entity.dart';
 
 part 'search_history_model.g.dart';
 

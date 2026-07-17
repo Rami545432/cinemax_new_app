@@ -33,7 +33,7 @@ TabControllerHookResult useTabControllerAnimation({
     return () {
       tabController.animation?.removeListener(handleTabAnimation);
     };
-  }, [tabController.animation]);
+  }, [tabController.animation],);
   return TabControllerHookResult(
     controller: tabController,
     currentPage: tabController.index.toDouble(),

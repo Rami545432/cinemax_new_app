@@ -290,6 +290,7 @@ class AppTransitions {
   }) => CustomTransitionPage(
     key: state.pageKey,
     child: child,
+
     transitionDuration: duration,
     transitionsBuilder: (context, animation, secondaryAnimation, child) =>
         FadeScaleTransition(animation: animation, child: child),

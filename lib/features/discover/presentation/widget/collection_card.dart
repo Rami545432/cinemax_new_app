@@ -1,37 +1,29 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/gradient_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/onboarding/presentation/widgets/gradient_overlay.dart';
 
 class CollectionCard extends StatelessWidget {
   const CollectionCard({super.key, required this.colllectionModel});
   final CollectionModel colllectionModel;
   @override
-  Widget build(BuildContext context) {
-    log(colllectionModel.imageUrl);
-    return GestureDetector(
-      onTap: () {
-        context.pushNamed(RouteName.modeView, extra: colllectionModel);
-      },
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: () {
+      context.pushNamed(RouteName.modeView, extra: colllectionModel);
+    },
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(16),
       child: Stack(
         fit: StackFit.expand,
         alignment: Alignment.bottomLeft,
         children: [
           CachedNetworkImage(
-            imageUrl: tmdbImageSize(.w500, colllectionModel.imageUrl),
+            imageUrl: tmdbImageSize(.w300, colllectionModel.imageUrl),
             fit: BoxFit.fill,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(image: imageProvider, fit: .fill),
-              ),
-            ),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           const Positioned.fill(child: GradientOverlay()),
@@ -44,7 +36,9 @@ class CollectionCard extends StatelessWidget {
                 children: [
                   Text(
                     colllectionModel.name,
-                    style: AppStyles.textStyle20(context),
+                    style: AppStyles.textStyle20(
+                      context,
+                    ).copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -52,6 +46,6 @@ class CollectionCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
 }

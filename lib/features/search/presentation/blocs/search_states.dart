@@ -1,7 +1,7 @@
 // lib/features/search/cubit/search_state.dart
 
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
 
 sealed class SearchState extends Equatable {
   const SearchState();

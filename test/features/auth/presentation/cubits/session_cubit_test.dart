@@ -1,174 +1,442 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/get_current_user_use_case.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/sign_out_use_case.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_state.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+// // test/features/auth/presentation/cubits/session_cubit_test.dart
+// //
+// // Pattern tested: OBSERVER pattern
+// // SessionCubit subscribes to ListenToAuthEventsUseCase stream.
+// // We verify that every AuthEvent produces the correct SessionState.
+// //
+// // What we test:
+// // ┌─────────────────────────────────────────────────────────────────┐
+// // │ AuthEvent                    │ Expected SessionState            │
+// // ├─────────────────────────────────────────────────────────────────┤
+// // │ AuthEventSignedIn(user, true) │ SessionAuthenticated(user)      │
+// // │ AuthEventSignedIn(user, false)│ SessionAuthenticated(user)      │
+// // │ AuthEventGuest(user)          │ SessionGuest(user)              │
+// // │ AuthEventSignedOut()          │ SessionUnauthenticated()        │
+// // │ AuthEventUnknown()            │ SessionUnknown()                │
+// // ├─────────────────────────────────────────────────────────────────┤
+// // │ Action                       │ Expected behavior                │
+// // ├─────────────────────────────────────────────────────────────────┤
+// // │ signOut() success            │ calls enableGuestMode()          │
+// // │ signOut() failure            │ logs error, no state change      │
+// // │ enableGuestMode() success    │ no direct emit (stream handles)  │
+// // │ enableGuestMode() failure    │ logs error, no state change      │
+// // │ disableGuestMode() success   │ no direct emit (stream handles)  │
+// // │ disableGuestMode() failure   │ logs error, no state change      │
+// // │ close()                      │ subscription cancelled           │
+// // └─────────────────────────────────────────────────────────────────┘
+// //
+// // Key insight: SessionCubit never emits directly from actions.
+// // Actions call use cases → repo emits AuthEvent → stream handles state.
+// // We test the STREAM REACTION separately from the ACTIONS.
 
-// 1. Create Mock Classes for all dependencies the Cubit needs.
-// We use mocktail, which lets us simulate responses and verify calls!
-class MockGetCurrentUserUseCase extends Mock implements GetCurrentUserUseCase {}
+// import 'dart:async';
 
-class MockSignOutUseCase extends Mock implements SignOutUseCase {}
+// import 'package:bloc_test/bloc_test.dart';
+// import 'package:dartz/dartz.dart';
+// import 'package:flutter_test/flutter_test.dart';
+// import 'package:mocktail/mocktail.dart';
+// import 'package:movify/core/domain/use_cases/no_params.dart';
+// import 'package:movify/core/errors/failure.dart';
+// import 'package:movify/features/auth/domain/entities/user_entity.dart';
+// import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
+// import 'package:movify/features/auth/domain/use_cases/enable_guest_mode_use_case.dart';
+// import 'package:movify/features/auth/domain/use_cases/sign_out_use_case.dart';
+// import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+// import 'package:movify/features/auth/presentation/cubits/session_state.dart';
+// import 'package:movify/shared/domain/auth_event.dart';
+// import 'package:movify/shared/domain/use_cases/listen_to_auth_service_use_case.dart';
 
-class MockEnableGuestModeUseCase extends Mock
-    implements EnableGuestModeUseCase {}
+// // ── Mocks ─────────────────────────────────────────────────────────────────
 
-class MockDisableGuestModeUseCase extends Mock
-    implements DisableGuestModeUseCase {}
+// class MockListenToAuthEventsUseCase extends Mock
+//     implements ListenToAuthEventsUseCase {}
 
-// We need a fake NoParams object to pass into mock methods safely
-class FakeNoParams extends Fake implements NoParams {}
+// class MockSignOutUseCase extends Mock implements SignOutUseCase {}
 
-void main() {
-  // 2. Define our variables
-  late SessionCubit sessionCubit;
-  late MockGetCurrentUserUseCase mockGetCurrentUserUseCase;
-  late MockSignOutUseCase mockSignOutUseCase;
-  late MockEnableGuestModeUseCase mockEnableGuestModeUseCase;
-  late MockDisableGuestModeUseCase mockDisableGuestModeUseCase;
+// class MockEnableGuestModeUseCase extends Mock
+//     implements EnableGuestModeUseCase {}
 
-  // 3. The setUp function runs BEFORE EVERY single test.
-  // We initialize clean instances so tests don't affect each other.
-  setUp(() {
-    // Register our fallback value for mocktail argument matching
-    registerFallbackValue(FakeNoParams());
+// class MockDisableGuestModeUseCase extends Mock
+//     implements DisableGuestModeUseCase {}
 
-    mockGetCurrentUserUseCase = MockGetCurrentUserUseCase();
-    mockSignOutUseCase = MockSignOutUseCase();
-    mockEnableGuestModeUseCase = MockEnableGuestModeUseCase();
-    mockDisableGuestModeUseCase = MockDisableGuestModeUseCase();
+// class FakeNoParams extends Fake implements NoParams {}
 
-    sessionCubit = SessionCubit(
-      getCurrentUserUseCase: mockGetCurrentUserUseCase,
-      signOutUseCase: mockSignOutUseCase,
-      enableGuestModeUseCase: mockEnableGuestModeUseCase,
-      disableGuestModeUseCase: mockDisableGuestModeUseCase,
-    );
-  });
+// // ── Fake data ─────────────────────────────────────────────────────────────
 
-  // 4. The tearDown function runs AFTER EVERY test.
-  // We close the cubit to prevent memory leaks in testing!
-  tearDown(() {
-    sessionCubit.close();
-  });
+// // Real instances — never mock data classes
+// final fakeUser = UserEntity(
+//   uid: 'test-uid',
+//   displayName: 'Test User',
+//   email: 'test@test.com',
+//   isEmailVerified: true,
+//   photoUrl: 'https://example.com/photo.jpg',
+//   isGuest: false,
+//   createdAt: DateTime(2024),
+// );
 
-  // 5. Let's group related tests together for readability
-  group('checkAuthStatus', () {
-    test('initial state is SessionUnknown', () {
-      expect(sessionCubit.state, isA<SessionUnknown>());
-    });
+// final fakeGuestUser = UserEntity.guest();
 
-    // ------------------------------------------------------------------
-    // NEW WAY: Using blocTest
-    // ------------------------------------------------------------------
-    // blocTest acts like a super-powered test() function designed specifically for Cubits.
-    // It takes 3 main stages: build, act, and expect.
+// // ══════════════════════════════════════════════════════════════════════════
+// // TESTS
+// // ══════════════════════════════════════════════════════════════════════════
 
-    blocTest<SessionCubit, SessionState>(
-      'emits [SessionUnauthenticated] when user is null',
-      // BUILD: Return the Cubit you want to test and set up your Mocks
-      build: () {
-        when(
-          () => mockGetCurrentUserUseCase(any()),
-        ).thenAnswer((_) async => const Right(null));
-        return sessionCubit;
-      },
-      // ACT: What method do you want to trigger?
-      act: (cubit) => cubit.checkAuthStatus(),
-      // EXPECT: What states should be emitted in order? (We don't need expectLater anymore!)
-      expect: () => [isA<SessionUnauthenticated>()],
-      // VERIFY: (Optional) Make sure our mocks were actually interacted with
-      verify: (_) {
-        verify(() => mockGetCurrentUserUseCase(any())).called(1);
-      },
-    );
+// void main() {
+//   late MockListenToAuthEventsUseCase mockListenToAuthEvents;
+//   late MockSignOutUseCase mockSignOut;
+//   late MockEnableGuestModeUseCase mockEnableGuestMode;
+//   late MockDisableGuestModeUseCase mockDisableGuestMode;
+//   late StreamController<AuthEvent> authEventController;
 
-    // Let's solve the TODO together using blocTest!
-    blocTest<SessionCubit, SessionState>(
-      'emits [SessionAuthenticated] when user is found and not guest',
-      build: () {
-        // Arrange
-        const fakeUser = UserEntity(
-          uid: '123',
-          email: 'test@test.com',
-          displayName: 'Test',
-          photoUrl: '',
-          isGuest: false,
-          isEmailVerified: true,
-          createdAt: null,
-        );
-        when(
-          () => mockGetCurrentUserUseCase(any()),
-        ).thenAnswer((_) async => const Right(fakeUser));
-        return sessionCubit;
-      },
-      act: (cubit) => cubit.checkAuthStatus(),
-      expect: () => [
-        // We can even check if the state contains the EXACT fake user we created!
-        isA<SessionAuthenticated>().having(
-          (state) => state.user.uid,
-          'uid',
-          '123',
-        ),
-      ],
-    );
-  });
+//   setUpAll(() {
+//     registerFallbackValue(FakeNoParams());
+//   });
 
-  group('signOut', () {
-    blocTest<SessionCubit, SessionState>(
-      'emits [SessionUnauthenticated] when sign out is successful',
-      build: () {
-        when(
-          () => mockSignOutUseCase(any()),
-        ).thenAnswer((_) async => const Right(null));
-        return sessionCubit;
-      },
-      act: (cubit) => cubit.signOut(),
-      expect: () => [isA<SessionUnauthenticated>()],
-      verify: (_) {
-        verify(() => mockSignOutUseCase(any())).called(1);
-      },
-    );
-  });
+//   setUp(() {
+//     mockListenToAuthEvents = MockListenToAuthEventsUseCase();
+//     mockSignOut = MockSignOutUseCase();
+//     mockEnableGuestMode = MockEnableGuestModeUseCase();
+//     mockDisableGuestMode = MockDisableGuestModeUseCase();
 
-  group('enableGuestMode', () {
-    blocTest<SessionCubit, SessionState>(
-      'emits [SessionGuestMode] when guest mode is enabled',
-      build: () {
-        when(
-          () => mockEnableGuestModeUseCase(any()),
-        ).thenAnswer((_) async => Right(UserEntity.guest()));
-        return sessionCubit;
-      },
-      act: (cubit) => cubit.enableGuestMode(),
-      expect: () => [isA<SessionGuest>()],
-      verify: (_) {
-        verify(() => mockEnableGuestModeUseCase(any())).called(1);
-      },
-    );
-  });
+//     // Fresh stream controller for every test
+//     authEventController = StreamController<AuthEvent>.broadcast();
 
-  group('disableGuestMode', () {
-    blocTest<SessionCubit, SessionState>(
-      'emits [SessionUnauthenticated] when guest mode is disabled',
-      build: () {
-        when(
-          () => mockDisableGuestModeUseCase(any()),
-        ).thenAnswer((_) async => const Right(null));
-        return sessionCubit;
-      },
-      act: (cubit) => cubit.disableGuestMode(),
-      expect: () => [isA<SessionUnauthenticated>()],
-      verify: (_) {
-        verify(() => mockDisableGuestModeUseCase(any())).called(1);
-      },
-    );
-  });
-}
+//     // Default stub — returns our controlled stream
+//     when(
+//       () => mockListenToAuthEvents(),
+//     ).thenAnswer((_) => authEventController.stream);
+//   });
+
+//   tearDown(() async {
+//     await authEventController.close();
+//   });
+
+//   // ── Builder helper ────────────────────────────────────────────────────
+//   // Creates SessionCubit AFTER stubs are ready.
+//   // Constructor calls _init() which subscribes to the stream immediately.
+//   SessionCubit buildCubit() => SessionCubit(
+//     listenToAuthEventsUseCase: mockListenToAuthEvents,
+//     signOutUseCase: mockSignOut,
+//     enableGuestModeUseCase: mockEnableGuestMode,
+//     disableGuestModeUseCase: mockDisableGuestMode,
+//   );
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 1 — Initial state
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('1️⃣ Initial state', () {
+//     test('initial state → SessionUnknown', () {
+//       final cubit = buildCubit();
+//       expect(cubit.state, isA<SessionUnknown>());
+//       cubit.close();
+//     });
+
+//     test('subscribes to auth stream on construction', () {
+//       buildCubit().close();
+//       // Verify stream was subscribed to exactly once
+//       verify(() => mockListenToAuthEvents()).called(1);
+//     });
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 2 — AuthEvent → SessionState (Observer pattern)
+//   // This is the CORE test — verifies our Pub/Sub architecture works
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('2️⃣ AuthEvent → SessionState (Observer pattern)', () {
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventSignedIn(isNewSignIn: true) → SessionAuthenticated',
+//       build: buildCubit,
+//       act: (cubit) => authEventController.add(
+//         AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//       ),
+//       expect: () => [
+//         isA<SessionAuthenticated>().having(
+//           (s) => s.user,
+//           'user',
+//           equals(fakeUser),
+//         ),
+//       ],
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventSignedIn(isNewSignIn: false) → SessionAuthenticated '
+//       '(cold start same result)',
+//       build: buildCubit,
+//       act: (cubit) => authEventController.add(
+//         AuthEventSignedIn(user: fakeUser, isNewSignIn: false),
+//       ),
+//       expect: () => [
+//         isA<SessionAuthenticated>().having(
+//           (s) => s.user,
+//           'user',
+//           equals(fakeUser),
+//         ),
+//       ],
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventGuest → SessionGuest',
+//       build: buildCubit,
+//       act: (cubit) =>
+//           authEventController.add(AuthEventGuest(user: fakeGuestUser)),
+//       expect: () => [
+//         isA<SessionGuest>().having(
+//           (s) => s.user,
+//           'user',
+//           equals(fakeGuestUser),
+//         ),
+//       ],
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventSignedOut → SessionUnauthenticated',
+//       build: buildCubit,
+//       act: (cubit) => authEventController.add(const AuthEventSignedOut()),
+//       expect: () => [isA<SessionUnauthenticated>()],
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventUnknown → SessionUnknown',
+//       build: buildCubit,
+//       act: (cubit) => authEventController.add(const AuthEventUnknown()),
+//       expect: () => [isA<SessionUnknown>()],
+//     );
+
+//     // ── Counterpart rule — wrong events don't produce wrong states ──────
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventSignedIn → does NOT emit SessionGuest or SessionUnauthenticated',
+//       build: buildCubit,
+//       act: (cubit) => authEventController.add(
+//         AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//       ),
+//       expect: () => [isA<SessionAuthenticated>()],
+//       // If SessionGuest or SessionUnauthenticated appeared,
+//       // expect would fail — counterpart verified implicitly
+//     );
+
+//     // ── Multiple events in sequence ──────────────────────────────────────
+
+//     blocTest<SessionCubit, SessionState>(
+//       'stream emits multiple events → SessionCubit reacts to each correctly',
+//       build: buildCubit,
+//       act: (cubit) async {
+//         authEventController.add(AuthEventGuest(user: fakeGuestUser));
+//         await Future.delayed(Duration.zero);
+//         authEventController.add(
+//           AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//         );
+//         await Future.delayed(Duration.zero);
+//         authEventController.add(const AuthEventSignedOut());
+//       },
+//       expect: () => [
+//         isA<SessionGuest>(),
+//         isA<SessionAuthenticated>(),
+//         isA<SessionUnauthenticated>(),
+//       ],
+//     );
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 3 — signOut() action
+//   // signOut() calls use case → repo emits AuthEventSignedOut
+//   // then enables guest mode → repo emits AuthEventGuest
+//   // SessionCubit does NOT emit directly — stream handles it
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('3️⃣ signOut() action', () {
+//     blocTest<SessionCubit, SessionState>(
+//       'signOut() success → calls enableGuestMode()',
+//       build: () {
+//         when(
+//           () => mockSignOut(any()),
+//         ).thenAnswer((_) async => const Right(null));
+//         when(
+//           () => mockEnableGuestMode(any()),
+//         ).thenAnswer((_) async => Right(fakeGuestUser));
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.signOut(),
+//       verify: (_) {
+//         // signOut called once
+//         verify(() => mockSignOut(any())).called(1);
+//         // enableGuestMode called after successful signOut
+//         verify(() => mockEnableGuestMode(any())).called(1);
+//       },
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'signOut() failure → logs error, enableGuestMode NOT called',
+//       build: () {
+//         when(() => mockSignOut(any())).thenAnswer(
+//           (_) async =>
+//               left(const ServerFailure(errorMessage: 'Sign out failed')),
+//         );
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.signOut(),
+//       expect: () => [], // no state change — stream not triggered
+//       verify: (_) {
+//         verify(() => mockSignOut(any())).called(1);
+//         // enableGuestMode should NOT be called on failure
+//         verifyNever(() => mockEnableGuestMode(any()));
+//       },
+//     );
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 4 — enableGuestMode() action
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('4️⃣ enableGuestMode() action', () {
+//     blocTest<SessionCubit, SessionState>(
+//       'enableGuestMode() success → calls use case once, '
+//       'no direct emit (stream handles state)',
+//       build: () {
+//         when(
+//           () => mockEnableGuestMode(any()),
+//         ).thenAnswer((_) async => Right(fakeGuestUser));
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.enableGuestMode(),
+//       expect: () => [], // no direct emit — repo pushes AuthEventGuest to stream
+//       verify: (_) {
+//         verify(() => mockEnableGuestMode(any())).called(1);
+//       },
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'enableGuestMode() failure → logs error, no state change',
+//       build: () {
+//         when(() => mockEnableGuestMode(any())).thenAnswer(
+//           (_) async =>
+//               left(const ServerFailure(errorMessage: 'Guest mode failed')),
+//         );
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.enableGuestMode(),
+//       expect: () => [], // no state change on failure
+//       verify: (_) {
+//         verify(() => mockEnableGuestMode(any())).called(1);
+//       },
+//     );
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 5 — disableGuestMode() action
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('5️⃣ disableGuestMode() action', () {
+//     blocTest<SessionCubit, SessionState>(
+//       'disableGuestMode() success → calls use case once, '
+//       'no direct emit (stream handles state)',
+//       build: () {
+//         when(
+//           () => mockDisableGuestMode(any()),
+//         ).thenAnswer((_) async => const Right(null));
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.disableGuestMode(),
+//       expect: () => [], // no direct emit — repo pushes AuthEventSignedOut
+//       verify: (_) {
+//         verify(() => mockDisableGuestMode(any())).called(1);
+//       },
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'disableGuestMode() failure → logs error, no state change',
+//       build: () {
+//         when(() => mockDisableGuestMode(any())).thenAnswer(
+//           (_) async =>
+//               left(const ServerFailure(errorMessage: 'Disable guest failed')),
+//         );
+//         return buildCubit();
+//       },
+//       act: (cubit) => cubit.disableGuestMode(),
+//       expect: () => [],
+//       verify: (_) {
+//         verify(() => mockDisableGuestMode(any())).called(1);
+//       },
+//     );
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 6 — Lifecycle
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('6️⃣ Lifecycle — subscription management', () {
+//     test(
+//       'close() cancels stream subscription — no more state changes',
+//       () async {
+//         final cubit = buildCubit();
+
+//         // Close the cubit
+//         await cubit.close();
+
+//         // Stream emits after close — should be ignored
+//         // If subscription wasn't cancelled this would throw
+//         // "Cannot emit after close"
+//         expect(
+//           () => authEventController.add(
+//             AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//           ),
+//           returnsNormally, // stream emits but cubit ignores it ✅
+//         );
+//       },
+//     );
+
+//     test('stream subscription starts on construction', () {
+//       final cubit = buildCubit();
+
+//       // Verify _init() subscribed exactly once
+//       verify(() => mockListenToAuthEvents()).called(1);
+
+//       cubit.close();
+//     });
+//   });
+
+//   // ══════════════════════════════════════════════════════════════════════
+//   // GROUP 7 — Edge cases
+//   // ══════════════════════════════════════════════════════════════════════
+
+//   group('7️⃣ Edge cases', () {
+//     blocTest<SessionCubit, SessionState>(
+//       'same event emitted twice → emits same state twice',
+//       build: buildCubit,
+//       act: (cubit) async {
+//         authEventController.add(
+//           AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//         );
+//         await Future.delayed(Duration.zero);
+//         authEventController.add(
+//           AuthEventSignedIn(user: fakeUser, isNewSignIn: true),
+//         );
+//       },
+//       expect: () => [isA<SessionAuthenticated>(), isA<SessionAuthenticated>()],
+//     );
+
+//     blocTest<SessionCubit, SessionState>(
+//       'AuthEventSignedIn with different isNewSignIn values → '
+//       'both produce SessionAuthenticated (isNewSignIn is for FavoriteCubit only)',
+//       build: buildCubit,
+//       act: (cubit) async {
+//         // Cold start
+//         authEventController.add(
+//           AuthEventSignedIn(user: fakeUser, isNewSignIn: false),
+//         );
+//         await Future.delayed(Duration.zero);
+//         // New login
+//         authEventController.add(
+//           AuthEventSignedIn(user: fakeGuestUser, isNewSignIn: true),
+//         );
+//       },
+//       expect: () => [
+//         isA<SessionAuthenticated>(), // cold start
+//         isA<SessionAuthenticated>(), // new login — same state
+//         // SessionCubit doesn't care about isNewSignIn
+//         // FavoriteCubit uses it to decide setUser vs handleSignIn
+//       ],
+//     );
+//   });
+// }

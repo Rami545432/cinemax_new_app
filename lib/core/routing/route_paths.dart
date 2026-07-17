@@ -45,4 +45,8 @@ class RoutePaths {
   static const String login = '/login';
   static const String modeView = '/modeView';
   static const String notificationTesting = '/notificationTesting';
+  
+  // Remote Config Routes
+  static const String maintenance = '/maintenance';
+  static const String forceUpdate = '/forceUpdate';
 }

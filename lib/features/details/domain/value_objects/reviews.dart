@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/review_results.dart';
+import 'package:movify/features/details/domain/value_objects/review_results.dart';
 
 class Reviews {
   int? page;

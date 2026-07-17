@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/rating.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/home/presentation/widgets/card_image.dart';
+import 'package:movify/shared/presentation/widgets/rating.dart';
 
 class CardImageAndRating extends StatelessWidget {
   const CardImageAndRating({

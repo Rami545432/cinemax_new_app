@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 class SeriesModel {
   String? backdropPath;

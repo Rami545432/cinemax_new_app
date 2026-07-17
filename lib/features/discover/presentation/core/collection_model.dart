@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/discover/presentation/core/enums/type_enum.dart';
+import 'package:movify/features/discover/presentation/core/enums/type_enum.dart';
 
 class CollectionModel {
   final String name;

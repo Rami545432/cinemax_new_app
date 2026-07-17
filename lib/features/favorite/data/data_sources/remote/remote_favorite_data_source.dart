@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/favorite/data/models/favorite_model.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/favorite/data/models/favorite_model.dart';
 
 abstract class RemoteFavoriteDataSource {
   Future<List<FavoriteModel>> getFavorites(String userId);

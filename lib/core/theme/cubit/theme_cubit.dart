@@ -1,17 +1,19 @@
 // lib/features/theme/cubit/theme_cubit.dart
 
-import 'package:cinemax_app_new/core/theme/cubit/theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:movify/core/theme/cubit/theme_state.dart';
 
-@lazySingleton
 class ThemeCubit extends HydratedCubit<ThemeState> {
   ThemeCubit() : super(ThemeState.initial());
 
   void toggleTheme() => emit(
     state.copyWith(
-      mode: state.mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+      mode: switch (state.mode) {
+        ThemeMode.light => ThemeMode.dark,
+        ThemeMode.dark => ThemeMode.light,
+        ThemeMode.system => ThemeMode.system,
+      },
     ),
   );
 

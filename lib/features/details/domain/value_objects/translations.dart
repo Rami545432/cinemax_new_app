@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/translation.dart';
+import 'package:movify/features/details/domain/value_objects/translation.dart';
 
 class Translations {
   List<Translation>? translations;

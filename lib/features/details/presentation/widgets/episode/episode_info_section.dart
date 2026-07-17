@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/icon_text_row.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/search/presentation/widgets/icon_text_row.dart';
 
 class EpisodeInfoSection extends StatelessWidget {
   const EpisodeInfoSection({super.key, required this.episode});
@@ -11,11 +11,14 @@ class EpisodeInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
+    spacing: 12,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(
-        'Episode ${episode.episodeNumber}',
-        style: AppStyles.textStyle16(context),
+      Flexible(
+        child: Text(
+          '${episode.name} ${episode.episodeNumber}',
+          style: AppStyles.textStyle16(context),
+        ),
       ),
       IconTextRow(
         iconData: Icons.calendar_month,

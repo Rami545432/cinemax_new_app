@@ -1,4 +1,4 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/author_details.dart';
+import 'package:movify/features/details/domain/value_objects/author_details.dart';
 
 class ReviewResults {
   String? author;

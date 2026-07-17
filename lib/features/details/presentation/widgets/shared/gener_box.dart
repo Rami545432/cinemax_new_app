@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class GenerBox extends StatelessWidget {
   const GenerBox({super.key, required this.gener});
@@ -12,12 +12,10 @@ class GenerBox extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       border: Border.all(color: Colors.grey.shade700),
     ),
-    child: Padding(
-      padding: const EdgeInsets.all(12),
-      child: Text(
-        gener ?? '',
-        textAlign: TextAlign.center,
-        style: AppStyles.textStyle18(context),
+    child: Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Text(gener ?? '', style: AppStyles.textStyle18(context)),
       ),
     ),
   );

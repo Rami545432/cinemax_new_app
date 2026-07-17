@@ -1,13 +1,3 @@
-import 'package:flutter/widgets.dart';
-
-class OrbitCard {
-  final int id;
-  final OrbitSlot slot;
-  final Widget widget;
-
-  const OrbitCard({required this.id, required this.slot, required this.widget});
-}
-
 class OrbitSlot {
   final int offset; // -half..half
   final double x;
@@ -26,10 +16,4 @@ class OrbitSlot {
     required this.opacity,
     required this.z,
   });
-}
-
-class ZLayer {
-  final double z;
-  final Widget child;
-  const ZLayer({required this.z, required this.child});
 }

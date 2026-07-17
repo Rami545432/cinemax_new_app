@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/trailer_thumbnail.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/youtube_trailer_bottom_sheet.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
-import 'package:cinemax_app_new/shared/presentation/utils/custom_show_modal_bottom_sheet.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/domain/value_objects/videos.dart';
+import 'package:movify/features/details/presentation/widgets/shared/trailer_thumbnail.dart';
+import 'package:movify/features/details/presentation/widgets/shared/tralier_bottom_sheet.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/utils/custom_show_modal_bottom_sheet.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class TrailersImageListViewBuilder extends StatelessWidget {
   const TrailersImageListViewBuilder({super.key, required this.videos});
@@ -17,7 +17,7 @@ class TrailersImageListViewBuilder extends StatelessWidget {
         ? CrossAxisAlignment.end
         : CrossAxisAlignment.start;
     final l10n = AppLocalizations.of(context)!;
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final videoKey = videos.results?.map((e) => e.key).toList() ?? [];
     final style = AppStyles.textStyle14(
       context,
@@ -66,37 +66,4 @@ class TrailersImageListViewBuilder extends StatelessWidget {
       ),
     );
   }
-}
-
-class TrailersBottomSheet extends StatelessWidget {
-  const TrailersBottomSheet({
-    super.key,
-    required this.videoKey,
-    required this.name,
-    required this.scrollController,
-  });
-
-  final String videoKey;
-  final String name;
-  final ScrollController scrollController;
-
-  @override
-  Widget build(BuildContext context) => ListView(
-    controller: scrollController,
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    children: [
-      const SizedBox(height: 10),
-      Text(
-        name,
-        style: AppStyles.textStyle18(
-          context,
-        ).copyWith(fontWeight: FontWeight.w600),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-      ),
-
-      const SizedBox(height: 10),
-      YoutubeTrailerBottomSheet(videoKey: videoKey),
-    ],
-  );
 }

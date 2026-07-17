@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_actor_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
-import 'package:cinemax_app_new/shared/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/search/domain/entities/search_actor_entity.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/series_entity.dart';
 
 abstract interface class SearchRepo {
   Future<Either<Failure, List<MovieEntity>>> searchMovies(String query);

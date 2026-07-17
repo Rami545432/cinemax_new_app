@@ -1,6 +1,6 @@
 // data/models/movie_model.dart
 
-import 'package:cinemax_app_new/shared/domain/entites/movie_entity.dart';
+import 'package:movify/shared/domain/entites/movie_entity.dart';
 
 class MovieModel {
   final bool? adult;

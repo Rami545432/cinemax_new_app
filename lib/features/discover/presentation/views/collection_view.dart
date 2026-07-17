@@ -1,9 +1,9 @@
-import 'package:cinemax_app_new/core/utils/pagination/presentation/bloc/category_pagination_event.dart';
-import 'package:cinemax_app_new/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/views/collection_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/pagination/presentation/bloc/category_pagination_event.dart';
+import 'package:movify/features/discover/presentation/blocs/fetch_items_by_keywords_bloc.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/views/collection_view_body.dart';
 
 class CollectionView extends StatefulWidget {
   const CollectionView({super.key, required this.collectionModel});

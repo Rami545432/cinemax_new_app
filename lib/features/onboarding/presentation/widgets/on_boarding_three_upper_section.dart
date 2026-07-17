@@ -1,19 +1,20 @@
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/gradient_overlay.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/insight_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/features/home/presentation/widgets/card_image.dart';
+import 'package:movify/features/onboarding/presentation/widgets/gradient_overlay.dart';
+import 'package:movify/features/onboarding/presentation/widgets/insight_chip.dart';
 
 class OnBoardingThreeUpperSection extends StatelessWidget {
   const OnBoardingThreeUpperSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
+    final width = MediaQuery.widthOf(context);
+    final height = MediaQuery.heightOf(context);
     const image =
-        'https://image.tmdb.org/t/p/w500/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg';
+        'https://image.tmdb.org/t/p/w300/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg';
     return SizedBox(
-      height: size.height * 0.6,
+      height: height * 0.6,
       child: Center(
         child: Animate(
           effects: const [
@@ -29,8 +30,8 @@ class OnBoardingThreeUpperSection extends StatelessWidget {
             children: [
               // Movie Card
               Container(
-                width: size.width * 0.7,
-                height: size.height * 0.42,
+                width: width * 0.7,
+                height: height * 0.42,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [

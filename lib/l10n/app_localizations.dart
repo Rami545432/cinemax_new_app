@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
@@ -98,6 +99,7 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
+    Locale('de'),
     Locale('en'),
     Locale('es'),
     Locale('fr'),
@@ -1009,6 +1011,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign in with Google'**
   String get signWithGoogle;
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
+
+  /// No description provided for @removeFromFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove From Favorites'**
+  String get removeFromFavorites;
+
+  /// No description provided for @share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get share;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @guestStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest Stars'**
+  String get guestStars;
+
+  /// No description provided for @lastEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Episode'**
+  String get lastEpisode;
+
+  /// No description provided for @nextEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Episode'**
+  String get nextEpisode;
+
+  /// No description provided for @firstAirDate.
+  ///
+  /// In en, this message translates to:
+  /// **'First Air Date'**
+  String get firstAirDate;
+
+  /// No description provided for @lastAirDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Air Date'**
+  String get lastAirDate;
+
+  /// No description provided for @totalTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Time'**
+  String get totalTime;
+
+  /// No description provided for @noHistoryFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No History Found'**
+  String get noHistoryFound;
+
+  /// No description provided for @noActors.
+  ///
+  /// In en, this message translates to:
+  /// **'No Actors'**
+  String get noActors;
+
+  /// No description provided for @noEpisodes.
+  ///
+  /// In en, this message translates to:
+  /// **'No Episodes'**
+  String get noEpisodes;
+
+  /// No description provided for @noSeasons.
+  ///
+  /// In en, this message translates to:
+  /// **'No Seasons'**
+  String get noSeasons;
+
+  /// No description provided for @episode.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode'**
+  String get episode;
+
+  /// No description provided for @pushNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Push Notifications'**
+  String get pushNotifications;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @startExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Explore'**
+  String get startExplore;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @areYouSureYouWantToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Your Account ?'**
+  String get areYouSureYouWantToDelete;
+
+  /// No description provided for @thisActionCannotBeUndone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Favorites Will Be Deleted Permanently'**
+  String get thisActionCannotBeUndone;
+
+  /// No description provided for @loginAgainToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login again to continue'**
+  String get loginAgainToContinue;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @accountDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get accountDeleted;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @privacySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Settings'**
+  String get privacySettings;
+
+  /// No description provided for @byContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing, you agree to our '**
+  String get byContinue;
+
+  /// No description provided for @terms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get terms;
+
+  /// No description provided for @and.
+  ///
+  /// In en, this message translates to:
+  /// **'And'**
+  String get and;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @lightOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Out'**
+  String get lightOut;
+
+  /// No description provided for @dim.
+  ///
+  /// In en, this message translates to:
+  /// **'Dim'**
+  String get dim;
 }
 
 class _AppLocalizationsDelegate
@@ -1021,8 +1227,14 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en', 'es', 'fr', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'ar',
+    'de',
+    'en',
+    'es',
+    'fr',
+    'tr',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1033,6 +1245,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'ar':
       return AppLocalizationsAr();
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
     case 'es':

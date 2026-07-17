@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/last_episode_to_air.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/next_episode_to_air.dart';
-import 'package:cinemax_app_new/features/details/presentation/models/episode_to_air_model.dart';
+import 'package:movify/features/details/domain/value_objects/last_episode_to_air.dart';
+import 'package:movify/features/details/domain/value_objects/next_episode_to_air.dart';
+import 'package:movify/features/details/presentation/models/episode_to_air_model.dart';
 
 extension NextEpisodeToAirExtension on NextEpisodeToAir {
   EpisodeToAirModel toEpisodeToAirModel() => EpisodeToAirModel(

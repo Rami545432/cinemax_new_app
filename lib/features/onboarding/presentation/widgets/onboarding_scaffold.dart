@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/call_to_action_button.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/progress_dot.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/call_to_action_button.dart';
+import 'package:movify/features/onboarding/presentation/widgets/progress_dot.dart';
 
 class OnboardingScaffold extends StatelessWidget {
   const OnboardingScaffold({

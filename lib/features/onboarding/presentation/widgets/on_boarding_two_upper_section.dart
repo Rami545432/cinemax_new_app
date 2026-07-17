@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/build_grid_card.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/build_grid_card.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class OnBoardingTwoUpperSection extends StatelessWidget {
   const OnBoardingTwoUpperSection({super.key, required this.posters});
@@ -8,7 +8,7 @@ class OnBoardingTwoUpperSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.widthOf(context);
     final crossAxisCount = (width < SizeConfig.tablet) ? 2 : 3;
     final gridSpacing = (width < SizeConfig.tablet) ? 16.0 : 24.0;
     final mainAxisSpacing = (width < SizeConfig.tablet) ? 16.0 : 24.0;

@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class InsightChip extends StatelessWidget {
   const InsightChip({
@@ -23,9 +23,7 @@ class InsightChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: 12),
-        ],
+        boxShadow: [BoxShadow(color: color.withValues(alpha: 0.4))],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

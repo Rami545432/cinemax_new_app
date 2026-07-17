@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/genre_container_list_view_builder.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/sub_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/presentation/widget/genre_container_list_view_builder.dart';
+import 'package:movify/shared/presentation/widgets/sub_bar.dart';
 
 class GenreTabSection extends StatelessWidget {
   const GenreTabSection({

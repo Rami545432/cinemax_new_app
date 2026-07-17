@@ -1,15 +1,15 @@
-import 'package:cinemax_app_new/core/network/utils/safe_emit_state.dart';
-import 'package:cinemax_app_new/core/utils/sorting_methods.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/add_to_history_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/clear_search_history_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/delete_from_search_history_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/get_search_history_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/search_movie_use_case.dart';
-import 'package:cinemax_app_new/features/search/domain/use_cases/search_tv_show_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movify/core/network/utils/safe_emit_state.dart';
+import 'package:movify/core/utils/sorting_methods.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/domain/entities/search_history_entity.dart';
+import 'package:movify/features/search/domain/use_cases/add_to_history_use_case.dart';
+import 'package:movify/features/search/domain/use_cases/clear_search_history_use_case.dart';
+import 'package:movify/features/search/domain/use_cases/delete_from_search_history_use_case.dart';
+import 'package:movify/features/search/domain/use_cases/get_search_history_use_case.dart';
+import 'package:movify/features/search/domain/use_cases/search_movie_use_case.dart';
+import 'package:movify/features/search/domain/use_cases/search_tv_show_use_case.dart';
 
 part 'search_state.dart';
 

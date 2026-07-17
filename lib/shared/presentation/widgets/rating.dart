@@ -1,10 +1,11 @@
-import 'package:cinemax_app_new/shared/presentation/widgets/formmatted_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/shared/presentation/widgets/formmatted_rating.dart';
 
 class Rating extends StatelessWidget {
   const Rating({super.key, required this.rating});
 
   final num rating;
+
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -13,17 +14,19 @@ class Rating extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         const SizedBox(),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: Container(
-            height: 24,
-            width: 40,
-            color: Colors.black.withValues(
-              alpha: 0.3,
-            ), // Semi-transparent background
-            alignment: Alignment.center,
-            child: FormattedRating(rating: rating),
+        // ⚡ Fix: Removed ClipRRect entirely.
+        // Decorated the Container natively instead.
+        Container(
+          height: 24,
+          width: 40,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(
+              6,
+            ), // Standard rounding without layer context switches
           ),
+          child: FormattedRating(rating: rating),
         ),
       ],
     ),

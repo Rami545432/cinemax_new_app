@@ -1,9 +1,11 @@
-import 'package:cinemax_app_new/features/details/presentation/widgets/shared/custom_tab_bar.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_result.dart';
-import 'package:cinemax_app_new/features/search/presentation/widgets/suggested_search_grid_builder.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/presentation/widgets/shared/custom_tab_bar.dart';
+import 'package:movify/features/search/data/models/search_result.dart';
+import 'package:movify/features/search/presentation/widgets/suggested_search_grid_builder.dart';
+import 'package:movify/l10n/app_localizations.dart';
+import 'package:movify/shared/presentation/widgets/keep_alive_wrapper.dart';
 
 class SearchTabBarViews extends HookWidget {
   const SearchTabBarViews({
@@ -28,18 +30,32 @@ class SearchTabBarViews extends HookWidget {
       initialLength: 3,
       vsync: useSingleTickerProvider(),
     );
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
-        CustomTabBar(tabs: searchTabs, controller: tabController),
-      ],
-      body: TabBarView(
-        controller: tabController,
-        children: [
-          SuggestedSearchGridBuilder(results: results),
-          SuggestedSearchGridBuilder(results: movies),
-          SuggestedSearchGridBuilder(results: tvShows),
-        ],
-      ),
-    );
+    final isResultEmpty = results.isEmpty;
+    return isResultEmpty
+        ? Center(
+            child: Text(
+              l10n.noItemsFound,
+              style: AppStyles.textStyle16(context),
+            ),
+          )
+        : NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              CustomTabBar(tabs: searchTabs, controller: tabController),
+            ],
+            body: TabBarView(
+              controller: tabController,
+              children: [
+                KeepAliveWrapper(
+                  child: SuggestedSearchGridBuilder(results: results),
+                ),
+                KeepAliveWrapper(
+                  child: SuggestedSearchGridBuilder(results: movies),
+                ),
+                KeepAliveWrapper(
+                  child: SuggestedSearchGridBuilder(results: tvShows),
+                ),
+              ],
+            ),
+          );
   }
 }

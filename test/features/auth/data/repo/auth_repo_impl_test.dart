@@ -1,12 +1,14 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/data/data_sources/local/auth_local_data_source.dart';
-import 'package:cinemax_app_new/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
-import 'package:cinemax_app_new/features/auth/data/models/user_model.dart';
-import 'package:cinemax_app_new/features/auth/data/repos/auth_repo_impl.dart';
-import 'package:cinemax_app_new/features/auth/domain/entities/user_entity.dart';
+// ignore_for_file: inference_failure_on_instance_creation
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/data/data_sources/local/auth_local_data_source.dart';
+import 'package:movify/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:movify/features/auth/data/models/user_model.dart';
+import 'package:movify/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:movify/features/auth/domain/entities/user_entity.dart';
 
 class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
@@ -19,13 +21,27 @@ void main() {
   late MockAuthLocalDataSource mockLocalDataSource;
   late MockAuthRemoteDataSource mockRemoteDataSource;
 
-  setUp(() {
+  setUp(() async {
     mockLocalDataSource = MockAuthLocalDataSource();
     mockRemoteDataSource = MockAuthRemoteDataSource();
+
+    // Stub for the constructor's _initAuthState
+    when(
+      () => mockLocalDataSource.getGuestMode(),
+    ).thenAnswer((_) async => false);
+    when(
+      () => mockRemoteDataSource.getCurrentUser(),
+    ).thenAnswer((_) async => null);
+
     repo = AuthRepoImpl(
       localDataSource: mockLocalDataSource,
       remoteDataSource: mockRemoteDataSource,
     );
+
+    // Let the async _initAuthState complete
+    await Future.delayed(Duration.zero);
+    clearInteractions(mockLocalDataSource);
+    clearInteractions(mockRemoteDataSource);
   });
 
   group('Sign in with Google', () {

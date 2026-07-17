@@ -1,5 +1,6 @@
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+
 part 'fetch_series_season_details_state.freezed.dart';
 
 @freezed

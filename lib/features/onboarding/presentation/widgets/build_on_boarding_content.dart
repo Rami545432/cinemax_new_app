@@ -1,8 +1,8 @@
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/floating_particles_effect.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/gradient_overlay.dart';
-import 'package:cinemax_app_new/features/onboarding/presentation/widgets/on_boarding_bottom_section.dart';
-import 'package:cinemax_app_new/shared/presentation/widgets/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/onboarding/presentation/widgets/floating_particles_effect.dart';
+import 'package:movify/features/onboarding/presentation/widgets/gradient_overlay.dart';
+import 'package:movify/features/onboarding/presentation/widgets/on_boarding_bottom_section.dart';
+import 'package:movify/shared/presentation/widgets/size_config.dart';
 
 class BuildOnBoardingContent extends StatelessWidget {
   const BuildOnBoardingContent({
@@ -21,7 +21,7 @@ class BuildOnBoardingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.widthOf(context);
     final horizontalPadding = width < SizeConfig.tablet ? 24.0 : 48.0;
     return Stack(
       children: [
@@ -34,7 +34,7 @@ class BuildOnBoardingContent extends StatelessWidget {
                   ...List.generate(15, (index) {
                     final random = index * 0.1;
                     return Positioned(
-                      left: (index * 25.0) % MediaQuery.of(context).size.width,
+                      left: (index * 25.0) % width,
                       top: (index * 40.0) % 400,
                       child: FloatingParticlesEffect(random: random),
                     );

@@ -1,12 +1,10 @@
-import 'package:cinemax_app_new/core/network/api/services/api_service.dart';
-import 'package:cinemax_app_new/features/home/data/models/movie_model.dart';
-import 'package:cinemax_app_new/features/home/data/models/series_model.dart';
-import 'package:cinemax_app_new/features/search/data/data_sources/remote/remote_search_data_source.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_actor_model/search_actor_model.dart';
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:movify/core/network/api/services/api_service.dart';
+import 'package:movify/features/home/data/models/movie_model.dart';
+import 'package:movify/features/home/data/models/series_model.dart';
+import 'package:movify/features/search/data/data_sources/remote/remote_search_data_source.dart';
+import 'package:movify/features/search/data/models/search_actor_model/search_actor_model.dart';
 
-@LazySingleton(as: RemoteSearchDataSource)
 class RemoteSearchDataSourceImpl implements RemoteSearchDataSource {
   final ApiService apiService;
   final Map<String, CancelToken> _tokens = {};

@@ -1,10 +1,8 @@
-import 'package:cinemax_app_new/features/search/data/data_sources/local/local_search_history_data_source.dart';
-import 'package:cinemax_app_new/features/search/data/models/search_history_model.dart';
-import 'package:cinemax_app_new/features/search/domain/entities/search_history_entity.dart';
-import 'package:cinemax_app_new/features/search/domain/repo/search_history.dart';
-import 'package:injectable/injectable.dart';
+import 'package:movify/features/search/data/data_sources/local/local_search_history_data_source.dart';
+import 'package:movify/features/search/data/models/search_history_model.dart';
+import 'package:movify/features/search/domain/entities/search_history_entity.dart';
+import 'package:movify/features/search/domain/repo/search_history.dart';
 
-@LazySingleton(as: SearchHistoryRepo)
 class SearchHistoryRepoImpl implements SearchHistoryRepo {
   final LocalSearchHistoryDataSource localSearchDataSource;
 

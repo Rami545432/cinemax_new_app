@@ -1,12 +1,12 @@
 // features/genre/widgets/genre_filter_sheet.dart
 
-import 'package:cinemax_app_new/core/utils/app_colors.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/discover/domain/entities/genre_filter.dart';
-import 'package:cinemax_app_new/features/discover/domain/enums/sort_by_enum.dart';
-import 'package:cinemax_app_new/features/discover/presentation/widget/section_title.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/discover/domain/entities/genre_filter.dart';
+import 'package:movify/features/discover/domain/enums/sort_by_enum.dart';
+import 'package:movify/features/discover/presentation/widget/range_columns.dart';
+import 'package:movify/features/discover/presentation/widget/section_title.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class GenreFilterSheet extends StatefulWidget {
   final GenreFilterParams currentParams;
@@ -19,6 +19,10 @@ class GenreFilterSheet extends StatefulWidget {
   }) => showModalBottomSheet<GenreFilterParams>(
     context: context,
     isScrollControlled: true,
+    showDragHandle: true,
+
+    useSafeArea: true,
+    constraints: BoxConstraints(maxWidth: MediaQuery.widthOf(context) * 0.95),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -93,7 +97,10 @@ class _GenreFilterSheetState extends State<GenreFilterSheet> {
                   children: _relevantSortOptions
                       .map(
                         (sort) => ChoiceChip(
-                          label: Text(sort.localizedName(context)),
+                          label: Text(
+                            sort.localizedName(context),
+                            style: AppStyles.textStyle14(context),
+                          ),
                           selectedColor: Colors.blue,
                           selected: _sortBy == sort,
                           onSelected: (_) => setState(() => _sortBy = sort),
@@ -111,7 +118,7 @@ class _GenreFilterSheetState extends State<GenreFilterSheet> {
                   min: 1990,
                   max: _currentYear.toDouble(),
                   divisions: _currentYear - 1990,
-                  label: 'Year',
+                  label: l10n.year,
                   trailing:
                       '${_yearRange.start.toInt()} — ${_yearRange.end.toInt()}',
                 ),
@@ -123,7 +130,7 @@ class _GenreFilterSheetState extends State<GenreFilterSheet> {
                   min: 0,
                   max: 10,
                   divisions: 20,
-                  label: 'Rating',
+                  label: l10n.rating,
                   trailing:
                       '${_ratingRange.start.toStringAsFixed(1)} — ${_ratingRange.end.toStringAsFixed(1)}',
                 ),
@@ -135,7 +142,7 @@ class _GenreFilterSheetState extends State<GenreFilterSheet> {
                   min: 0,
                   max: 300,
                   divisions: 30,
-                  label: 'Runtime (min)',
+                  label: '${l10n.runtime} (${l10n.min})',
                   trailing:
                       '${_runtimeRange.start.toInt()} — ${_runtimeRange.end.toInt()}',
                 ),
@@ -211,65 +218,3 @@ class _GenreFilterSheetState extends State<GenreFilterSheet> {
 }
 
 // ── Section title helper ──────────────────────────────────────────
-
-// class CustomRangeSlider extends StatelessWidget {
-//   const CustomRangeSlider({
-//     super.key,
-//     required this.values,
-//     required this.onChanged,
-//     required this.min,
-//     required this.max,
-//     required this.divisions,
-//   });
-//   final RangeValues values;
-//   final void Function(RangeValues) onChanged;
-//   final double min;
-//   final double max;
-//   final int divisions;
-
-//   @override
-//   Widget build(BuildContext context) => RangeSlider(
-//     values: values,
-//     min: min,
-//     max: max,
-//     divisions: divisions,
-//     onChanged: onChanged,
-//     activeColor: AppPrimaryColors.blueAccent,
-//   );
-// }
-
-class RangeColumns extends StatelessWidget {
-  const RangeColumns({
-    super.key,
-    required this.values,
-    required this.onChanged,
-    required this.min,
-    required this.max,
-    required this.divisions,
-    required this.label,
-    required this.trailing,
-  });
-  final RangeValues values;
-  final void Function(RangeValues) onChanged;
-  final double min;
-  final double max;
-  final int divisions;
-  final String label;
-  final String? trailing;
-  @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      SectionTitle(label, trailing: trailing),
-
-      RangeSlider(
-        values: values,
-        min: min,
-        max: max,
-        divisions: divisions,
-        onChanged: onChanged,
-        activeColor: AppPrimaryColors.blueAccent,
-      ),
-      const SizedBox(height: 24),
-    ],
-  );
-}

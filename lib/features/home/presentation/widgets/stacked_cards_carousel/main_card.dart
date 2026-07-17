@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/core/utils/formatters/formatted_date_method.dart';
-import 'package:cinemax_app_new/core/utils/helper/get_gener_name.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/empty_image.dart';
-import 'package:cinemax_app_new/shared/presentation/models/card_display_model.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/formatters/formatted_date_method.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/core/utils/helper/get_gener_name.dart';
+import 'package:movify/features/home/presentation/widgets/empty_image.dart';
+import 'package:movify/shared/presentation/models/card_display_model.dart';
 
 class MainCard extends StatelessWidget {
   final CardDisplayModel cardModel;
@@ -17,25 +17,19 @@ class MainCard extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Hero(
-          tag: 'trending-${cardModel.id}',
-          child: Container(
-            height: 250,
-            width: 175,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: CachedNetworkImage(
-                imageUrl: tmdbImageSize(
-                  TmdbImageSize.w780,
-                  cardModel.posterPath,
-                ),
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    const Center(child: EmptyImage()),
-              ),
+        SizedBox(
+          height: 250,
+          width: 175,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: CachedNetworkImage(
+              imageUrl: tmdbImageSize(TmdbImageSize.w500, cardModel.posterPath),
+              filterQuality: .high,
+              fit: BoxFit.cover,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  const Center(child: EmptyImage()),
             ),
           ),
         ),

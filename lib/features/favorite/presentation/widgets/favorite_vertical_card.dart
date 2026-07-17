@@ -1,12 +1,12 @@
-import 'package:cinemax_app_new/core/network/api/services/tmdb/tmdb_image_size.dart';
-import 'package:cinemax_app_new/core/routing/route_name.dart';
-import 'package:cinemax_app_new/core/utils/enums/content_type.dart';
-import 'package:cinemax_app_new/features/details/presentation/core/details_data_navigation.dart';
-import 'package:cinemax_app_new/features/favorite/domain/entities/favorite_entity.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/widgets/card_title_and_popup_menu.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/card_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movify/core/network/api/services/tmdb/tmdb_image_size.dart';
+import 'package:movify/core/routing/route_name.dart';
+import 'package:movify/core/utils/enums/content_type.dart';
+import 'package:movify/features/details/presentation/core/details_data_navigation.dart';
+import 'package:movify/features/favorite/domain/entities/favorite_entity.dart';
+import 'package:movify/features/favorite/presentation/widgets/card_title_and_popup_menu.dart';
+import 'package:movify/features/home/presentation/widgets/card_image.dart';
 
 class FavoriteVerticalCard extends StatelessWidget {
   const FavoriteVerticalCard({

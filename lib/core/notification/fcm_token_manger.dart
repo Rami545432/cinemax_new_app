@@ -1,7 +1,8 @@
+// ignore_for_file: empty_catches
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 
 typedef UidProvider = String? Function();
 
@@ -42,8 +43,6 @@ class FcmTokenManager {
     await syncToken();
 
     _messaging.onTokenRefresh.listen((newToken) async {
-      debugPrint('🔄 FCM token refreshed: $newToken');
-
       await _saveTokenToFirestore(newToken);
 
       // Important: token refresh can lose topic subscriptions in edge cases,
@@ -56,17 +55,13 @@ class FcmTokenManager {
   Future<void> syncToken() async {
     try {
       final token = await _messaging.getToken();
-      debugPrint('📌 Current FCM token: $token');
 
       if (token == null) {
         return;
       }
 
       await _saveTokenToFirestore(token);
-    } catch (e, st) {
-      debugPrint('❌ Error syncing FCM token: $e');
-      debugPrintStack(stackTrace: st);
-    }
+    } catch (e) {}
   }
 
   /// Call on logout if you want to detach token from the user
@@ -90,18 +85,13 @@ class FcmTokenManager {
           .doc(token);
 
       await doc.delete();
-      debugPrint('🗑️ Removed FCM token doc for user=$uid');
 
       if (deleteTokenOnLogout) {
         // This makes Firebase generate a new token next time,
         // good for privacy / shared devices.
         await _messaging.deleteToken();
-        debugPrint('🧨 Device token deleted (will regenerate later)');
       }
-    } catch (e, st) {
-      debugPrint('❌ Error during logout cleanup: $e');
-      debugPrintStack(stackTrace: st);
-    }
+    } catch (e) {}
   }
 
   /// Optional: run on login/startup occasionally to clean stale tokens
@@ -134,14 +124,7 @@ class FcmTokenManager {
       }
 
       await batch.commit();
-
-      debugPrint(
-        '🧹 Cleaned ${snapshot.docs.length} stale tokens for user=$uid',
-      );
-    } catch (e, st) {
-      debugPrint('❌ Error cleaning stale tokens: $e');
-      debugPrintStack(stackTrace: st);
-    }
+    } catch (e) {}
   }
 
   // ---------------------------
@@ -152,7 +135,6 @@ class FcmTokenManager {
     try {
       final uid = _uidProvider();
       if (uid == null) {
-        debugPrint('ℹ️ Guest mode: token not saved to Firestore.');
         return;
       }
 
@@ -166,12 +148,7 @@ class FcmTokenManager {
         "token": token,
         "platform": Platform.isAndroid ? "android" : "ios",
         "lastSeenAt": FieldValue.serverTimestamp(),
-      }, SetOptions(merge: true));
-
-      debugPrint('✅ FCM token saved/updated for user=$uid');
-    } catch (e, st) {
-      debugPrint('❌ Error saving token to Firestore: $e');
-      debugPrintStack(stackTrace: st);
-    }
+      }, SetOptions(merge: true),);
+    } catch (e) {}
   }
 }

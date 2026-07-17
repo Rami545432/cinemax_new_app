@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/features/discover/presentation/core/collection_model.dart';
-import 'package:cinemax_app_new/features/discover/presentation/core/enums/type_enum.dart';
-import 'package:cinemax_app_new/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/features/discover/presentation/core/collection_model.dart';
+import 'package:movify/features/discover/presentation/core/enums/type_enum.dart';
+import 'package:movify/l10n/app_localizations.dart';
 
 class CollectionListModel {
   static List<CollectionModel> movieCollections(BuildContext context) {
@@ -16,7 +16,7 @@ class CollectionListModel {
       ),
       CollectionModel(
         name: l10n.maifa,
-        imageUrl: '/3bhkrj58Vtu7enYsRolD1fZdja1.jpg', // the godfather
+        imageUrl: '/loSpBeirRfTPJ3cMIqpQArstGhh.jpg', // the godfather
         description: l10n.mafiaDescreption,
         type: TypeEnum.movie,
         keyword: 10391,
@@ -29,7 +29,7 @@ class CollectionListModel {
         keyword: 210024,
       ),
       CollectionModel(
-        name: 'MARVEL',
+        name: l10n.marvel,
         imageUrl: '/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg', // avengers
         description: l10n.marvelDescreption,
         type: TypeEnum.movie,

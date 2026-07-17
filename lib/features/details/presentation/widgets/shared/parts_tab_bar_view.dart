@@ -1,11 +1,11 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_cubit.dart';
-import 'package:cinemax_app_new/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_states.dart';
-import 'package:cinemax_app_new/features/details/presentation/extensions/part_extension.dart';
-import 'package:cinemax_app_new/features/home/presentation/widgets/main_vertical_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/utils/app_styles.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_cubit.dart';
+import 'package:movify/features/details/presentation/cubits/fetch_collection_cubit/fetch_collection_states.dart';
+import 'package:movify/features/details/presentation/extensions/part_extension.dart';
+import 'package:movify/features/home/presentation/widgets/main_vertical_card.dart';
 
 class PartsTabBarView extends StatelessWidget {
   const PartsTabBarView({
@@ -41,7 +41,11 @@ class PartsTabBarView extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final item = state.collection.parts[index];
-                return MainVerticalCard(cardData: item.toCardDisplay());
+                return MainVerticalCard(
+                  category: 'parts-$collectionId',
+                  cardData: item.toCardDisplay(),
+                  imageSize: .w185,
+                );
               },
             );
           }
@@ -50,7 +54,12 @@ class PartsTabBarView extends StatelessWidget {
               child: Text(state.message, style: AppStyles.textStyle18(context)),
             );
           }
-          return const SizedBox.shrink();
+          return Center(
+            child: Text(
+              'No Collection Found',
+              style: AppStyles.textStyle18(context),
+            ),
+          );
         },
       ),
     );

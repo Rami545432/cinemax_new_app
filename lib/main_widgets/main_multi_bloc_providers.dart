@@ -1,14 +1,14 @@
-import 'package:cinemax_app_new/core/di/service_locator.dart';
-import 'package:cinemax_app_new/core/language/presentation/cubits/language_cubit.dart';
-import 'package:cinemax_app_new/core/network/presentation/cubit/connectivity_cubit.dart';
-import 'package:cinemax_app_new/core/notification/auth_notification_binder.dart';
-import 'package:cinemax_app_new/core/theme/cubit/theme_cubit.dart';
-import 'package:cinemax_app_new/features/auth/presentation/cubits/session_cubit.dart';
-import 'package:cinemax_app_new/features/favorite/presentation/cubits/favorite_cubit.dart';
-import 'package:cinemax_app_new/features/settings/presentation/cubits/settings_cubit.dart';
-import 'package:cinemax_app_new/main_widgets/custom_material_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movify/core/ads/cubits/interstitial_ad_cubit.dart';
+import 'package:movify/core/di/service_locator.dart';
+import 'package:movify/core/language/presentation/cubits/language_cubit.dart';
+import 'package:movify/core/network/connectivity/connectivity_cubit.dart';
+import 'package:movify/core/theme/cubit/theme_cubit.dart';
+import 'package:movify/features/auth/presentation/cubits/session_cubit.dart';
+import 'package:movify/features/favorite/presentation/cubits/favorite_cubit.dart';
+import 'package:movify/features/settings/presentation/cubits/settings_cubit.dart';
+import 'package:movify/main_widgets/custom_material_app.dart';
 
 class MainMultiProvieders extends StatelessWidget {
   const MainMultiProvieders({super.key});
@@ -16,15 +16,17 @@ class MainMultiProvieders extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
-      BlocProvider<ConnectivityCubit>.value(
-        value: getIt.get<ConnectivityCubit>(),
-      ),
+      BlocProvider(create: (_) => getIt.get<ConnectivityCubit>()),
       BlocProvider.value(value: getIt.get<ThemeCubit>()),
-      BlocProvider.value(value: getIt.get<SessionCubit>()),
-      BlocProvider.value(value: getIt.get<SettingsCubit>()),
+      BlocProvider.value(value: getIt.get<SessionCubit>()..checkAuthStatus()),
+      BlocProvider.value(value: getIt.get<SettingsCubit>()..checkSettings()),
       BlocProvider.value(value: getIt.get<LanguageCubit>()),
-      BlocProvider.value(value: getIt.get<FavoriteCubit>()),
+      BlocProvider(create: (_) => getIt.get<FavoriteCubit>(), lazy: false),
+      BlocProvider(
+        create: (_) => getIt.get<InterstitialAdCubit>()..loadAd(),
+        lazy: false,
+      ),
     ],
-    child: const AuthNotificationBinder(child: CustomMaterialApp()),
+    child: const CustomMaterialApp(),
   );
 }

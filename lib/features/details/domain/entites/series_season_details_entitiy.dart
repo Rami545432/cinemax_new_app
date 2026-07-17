@@ -1,6 +1,6 @@
-import 'package:cinemax_app_new/features/details/domain/value_objects/credits.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/episode.dart';
-import 'package:cinemax_app_new/features/details/domain/value_objects/videos.dart';
+import 'package:movify/features/details/domain/value_objects/credits.dart';
+import 'package:movify/features/details/domain/value_objects/episode.dart';
+import 'package:movify/features/details/domain/value_objects/videos.dart';
 
 final class SeriesSeasonDetailsEntity {
   final String seasonName;

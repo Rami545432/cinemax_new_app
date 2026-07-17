@@ -1,10 +1,10 @@
-import 'package:cinemax_app_new/core/errors/errors.dart';
-import 'package:cinemax_app_new/features/auth/domain/repos/auth_repo.dart';
-import 'package:cinemax_app_new/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
-import 'package:cinemax_app_new/shared/domain/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movify/core/domain/use_cases/no_params.dart';
+import 'package:movify/core/errors/failure.dart';
+import 'package:movify/features/auth/domain/repos/auth_repo.dart';
+import 'package:movify/features/auth/domain/use_cases/disable_guest_mode_use_case.dart';
 
 class MockAuthRepo extends Mock implements AuthRepo {}
 
@@ -28,6 +28,7 @@ void main() {
       final result = await useCase(NoParams());
 
       // Assert
+      // ignore: inference_failure_on_instance_creation
       expect(result, const Right(null));
       verify(() => mockAuthRepo.disableGuestMode()).called(1);
       verifyNoMoreInteractions(mockAuthRepo);
@@ -35,16 +36,16 @@ void main() {
 
     test('should return failure when guest mode is not disabled', () async {
       // Arrange
-      final failure = ServerFailure(errorMessage: '');
+      const failure = ServerFailure(errorMessage: '');
       when(
         () => mockAuthRepo.disableGuestMode(),
-      ).thenAnswer((_) async => Left(failure));
+      ).thenAnswer((_) async => const Left(failure));
 
       // Act
       final result = await useCase(NoParams());
 
       // Assert
-      expect(result, Left<Failure, void>(failure));
+      expect(result, const Left<Failure, void>(failure));
       verify(() => mockAuthRepo.disableGuestMode()).called(1);
       verifyNoMoreInteractions(mockAuthRepo);
     });

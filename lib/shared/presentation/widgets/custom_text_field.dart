@@ -1,5 +1,5 @@
-import 'package:cinemax_app_new/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:movify/core/utils/app_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -22,6 +22,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextFormField(
     controller: controller,
+    cursorColor: Colors.amber,
+
     validator: (value) {
       if (value == null || value.isEmpty) {
         return 'This Field is  Required ';

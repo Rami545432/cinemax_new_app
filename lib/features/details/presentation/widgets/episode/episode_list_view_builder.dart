@@ -1,7 +1,7 @@
-import 'package:cinemax_app_new/config/animations/widgets/animated_list_item.dart';
-import 'package:cinemax_app_new/features/details/domain/entites/series_season_details_entitiy.dart';
-import 'package:cinemax_app_new/features/details/presentation/widgets/episode/episode_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:movify/features/details/domain/entites/series_season_details_entitiy.dart';
+import 'package:movify/features/details/presentation/widgets/episode/episode_list_tile.dart';
 
 class EpisodesListViewBuilder extends StatelessWidget {
   const EpisodesListViewBuilder({
@@ -21,15 +21,15 @@ class EpisodesListViewBuilder extends StatelessWidget {
           return const Text("No Episodes Available");
         }
 
-        return AnimatedListItem(
-          index: index,
-          child: EpisodeListTile(
-            episode: data.seasonEpisodes[index],
-            seiresPosterPath: seiresPosterPath,
-            seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
-            preloadedSeasonDetails: data,
-          ),
-        );
+        return EpisodeListTile(
+              episode: data.seasonEpisodes[index],
+              seiresPosterPath: seiresPosterPath,
+              seasonPosterPath: data.seasonPosterPath ?? seiresPosterPath,
+              preloadedSeasonDetails: data,
+            )
+            .animate()
+            .fade(duration: 400.ms, delay: (index * 100).ms) // <-- The secret!
+            .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad);
       },
       separatorBuilder: (context, index) => const Divider(),
       itemCount: data.seasonEpisodes.length,
